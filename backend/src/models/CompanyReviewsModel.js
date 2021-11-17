@@ -1,24 +1,20 @@
-const mongoose = require("mongoose");
-const schema = mongoose.Schema;
+const { DataTypes } = require("sequelize");
 
-let companyReviewsSchema = new mongoose.Schema({
-  reviewUserId: { type: schema.ObjectId, required: true },
-  reviewCompanyId: { type: schema.ObjectId, required: true },
-  reviewIsFeatured: { type: Boolean, required: false },
-  reviewCompanyRating: { type: Number, required: false },
-  reviewDate: { type: Date, required: true },
-  reviewTitle: { type: String, required: false },
-  reviewContent: { type: String, required: false },
-  reviewPros: { type: String, required: false },
-  reviewCons: { type: String, required: false },
-  ceoRating: { type: Number, required: false },
-  reviewPrep: { type: String, required: false },
-  foundHelpul: { type: Number, required: false },
-  foundNotHelpul: { type: Number, required: false },
+let companyReviewModel = global.DB.define("company_reviews", {
+  id: { type: DataTypes.STRING, primaryKey: true },
+  review_user_Id: { type: DataTypes.STRING, require: true },
+  review_comapny_Id: { type: DataTypes.STRING, require: true },
+  review_is_featured: { type: DataTypes.BOOLEAN, require: false },
+  review_company_rating: { type: DataTypes.INTEGER, require: false },
+  review_date: { type: DataTypes.DATE, require: true },
+  review_title: { type: DataTypes.STRING, require: false },
+  review_content: { type: DataTypes.STRING, require: false },
+  review_pros: { type: DataTypes.STRING, require: false },
+  review_cons: { type: DataTypes.STRING, require: false },
+  ceo_rating: { type: DataTypes.INTEGER, require: false },
+  review_prep: { type: DataTypes.STRING, require: false },
+  found_helpul: { type: DataTypes.INTEGER, require: false },
+  found_not_helpul: { type: DataTypes.INTEGER, require: false },
 });
 
-const companyReviewModel = mongoose.model(
-  "companyReviews",
-  companyReviewsSchema
-);
 module.exports = companyReviewModel;

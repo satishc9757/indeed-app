@@ -3,15 +3,27 @@
 // const mongoose = require('mongoose');
 // const ObjectId = mongoose.Types.ObjectId;
 
-var kafka = require("../kafka/client");
+const kafka = require("../kafka/client");
+const Reviews = require("../models/CompanyReviewsModel");
 // const jwt = require('jsonwebtoken');
 // const { secret } = require('../jwt/config');
 // const { auth } = require("../jwt/passport");
 // auth();
+
+exports.getReviewsByCompanyIdKafka = async function (req, res) {
+  kafka.make_request("company.getreviews", req.query, (err, resp) => {
+    if (err || !resp) {
+      console.log(err);
+      return err.status(500).json({ error: err });
+    }
+    return res.status(200).json(resp);
+  });
+};
+
 exports.getReviewsByCompanyId = async function (req, res) {
   const compId = req.query.compId;
   try {
-    let reviews = await Reviews.find({ reviewCompId: compId });
+    let reviews = await Reviews.findAll({ where: { reviewCompanyId: compId } });
 
     if (reviews) {
       res.send(JSON.stringify(reviews));
