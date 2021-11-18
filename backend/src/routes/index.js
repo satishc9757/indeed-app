@@ -3,7 +3,7 @@ var router = express.Router();
 
 
 router.get("/", function (res, res) {
-    response.send("Hello from Indeed backend!");
+    res.send("Hello from Indeed backend!");
 });
 
 module.exports = router;
