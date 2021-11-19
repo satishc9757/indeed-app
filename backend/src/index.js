@@ -63,18 +63,16 @@ initDBConnection().then(async () => {
   require("./models/LoginDetailsModel");
   require("./models/MessagesModel");
 
-
-
   await global.DB.sync({ alter: false });
 });
 
-mongoose.connect(mongoConnectionURL, mongoDbOptions, (err, result) => {
-  if (err) {
-    console.log("Error while connecting to mongoDB : " + err);
-  } else {
-    console.log("Connected to Mongo DB!");
-  }
-});
+// mongoose.connect(mongoConnectionURL, mongoDbOptions, (err, result) => {
+//   if (err) {
+//     console.log("Error while connecting to mongoDB : " + err);
+//   } else {
+//     console.log("Connected to Mongo DB!");
+//   }
+// });
 
 const indexRouter = require("./routes/index");
 const employerRouter = require("./routes/employerRouter");

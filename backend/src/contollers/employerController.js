@@ -69,6 +69,26 @@ exports.getReviewsByCompanyIdSQLCaching = async function (req, res) {
     }
   };
 
+  exports.getReviewsByCompanyIdSQLCachingKafka = async function (req, res) {
+    const compId = req.query.compId;
+    const cacheKey = "ReviewsByCompanyIdWithKafka="+compId;
+    let cacheData = await redis_client.get(cacheKey);
+      if(cacheData){
+        res.send(cacheData);
+      } else {
+        kafka.make_request("company.getreviews", req.query, (err, resp) => {
+          if (err || !resp) {
+            console.log(err);
+            return err.status(500).json({ error: err });
+          }
+          redis_client.set(cacheKey, JSON.stringify(resp), 'EX', 60 * 60);
+          return res.status(200).json(resp);
+        });
+      }
+
+  };
+
+
 exports.getJobsByCompanyId = async function (req, res) {
   const compId = req.query.compId;
 

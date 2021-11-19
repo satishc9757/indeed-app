@@ -15,13 +15,13 @@ const mongoDbOptions = {
   maxPoolSize: 100,
 };
 
-mongoose.connect(mongoConnectionURL, mongoDbOptions, (err, result) => {
-  if (err) {
-    console.log("Error while connecting to mongoDB : " + err);
-  } else {
-    console.log("Connected to Mongo DB!");
-  }
-});
+// mongoose.connect(mongoConnectionURL, mongoDbOptions, (err, result) => {
+//   if (err) {
+//     console.log("Error while connecting to mongoDB : " + err);
+//   } else {
+//     console.log("Connected to Mongo DB!");
+//   }
+// });
 
 const { initDBConnection } = require("./database/mysqlConnection");
 initDBConnection().then(async () => {
@@ -44,7 +44,7 @@ function handleTopicRequest(topic_name, fname) {
     var data = JSON.parse(message.value);
 
     await fname.handle_request(data.data, function (err, res) {
-      console.log("after handle" + res);
+      //console.log("after handle" + res);
       var payloads = [
         {
           topic: data.replyTo,
@@ -56,7 +56,7 @@ function handleTopicRequest(topic_name, fname) {
         },
       ];
       producer.send(payloads, function (err, data) {
-        console.log(data);
+        //console.log(data);
       });
       return;
     });
