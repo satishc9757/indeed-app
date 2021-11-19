@@ -1,10 +1,10 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes } = require('sequelize');
 
-let companyDetailsModel = global.DB.define("company_details", {
+let companyDetailsModel = global.DB.define('company_details', {
   comp_id: { type: DataTypes.UUID, primaryKey: true },
   comp_name: { type: DataTypes.STRING, require: true },
   comp_size: { type: DataTypes.STRING, require: true },
-  comp_type: { type: DataTypes.STRING,require: false },
+  comp_type: { type: DataTypes.STRING, require: false },
   comp_website: { type: DataTypes.STRING, require: false },
   comp_revenue: { type: DataTypes.INTEGER, require: true },
   comp_headquarters: { type: DataTypes.STRING, require: false },
@@ -18,10 +18,6 @@ let companyDetailsModel = global.DB.define("company_details", {
   comp_work_happiness: { type: DataTypes.FLOAT, require: false },
   comp_learning: { type: DataTypes.FLOAT, require: false },
   comp_appreciation: { type: DataTypes.FLOAT, require: false },
-
-
-
-
 });
 
-module.exports = companyReviewModel;
+module.exports = companyDetailsModel;

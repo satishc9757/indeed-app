@@ -1,20 +1,20 @@
 const { DataTypes } = require("sequelize");
 
 let companyReviewModel = global.DB.define("company_reviews", {
-  id: { type: DataTypes.UUID, primaryKey: true },
-  reviewUserId: { type: DataTypes.STRING, require: true },
-  reviewCompanyId: { type: DataTypes.STRING, require: true },
-  reviewIsFeatured: { type: DataTypes.BOOLEAN, require: false },
-  reviewCompanyRating: { type: DataTypes.INTEGER, require: false },
-  reviewDate: { type: DataTypes.DATE, require: true },
-  reviewTitle: { type: DataTypes.STRING, require: false },
-  reviewContent: { type: DataTypes.STRING, require: false },
-  reviewPros: { type: DataTypes.STRING, require: false },
-  reviewCons: { type: DataTypes.STRING, require: false },
-  ceoRating: { type: DataTypes.INTEGER, require: false },
-  reviewPrep: { type: DataTypes.STRING, require: false },
-  foundHelpul: { type: DataTypes.INTEGER, require: false },
-  foundNotHelpul: { type: DataTypes.INTEGER, require: false },
+  id: { type: DataTypes.STRING, primaryKey: true },
+  review_user_Id: { type: DataTypes.STRING, require: true },
+  review_company_Id: { type: DataTypes.STRING, require: true },
+  review_is_featured: { type: DataTypes.BOOLEAN, require: false },
+  review_company_rating: { type: DataTypes.INTEGER, require: false },
+  review_date: { type: DataTypes.DATE, require: true },
+  review_title: { type: DataTypes.STRING, require: false },
+  review_content: { type: DataTypes.STRING, require: false },
+  review_pros: { type: DataTypes.STRING, require: false },
+  review_cons: { type: DataTypes.STRING, require: false },
+  ceo_rating: { type: DataTypes.INTEGER, require: false },
+  review_prep: { type: DataTypes.STRING, require: false },
+  found_helpul: { type: DataTypes.INTEGER, require: false },
+  found_not_helpul: { type: DataTypes.INTEGER, require: false },
 });
 
 module.exports = companyReviewModel;

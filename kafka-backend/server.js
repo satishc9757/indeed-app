@@ -29,7 +29,7 @@ initDBConnection().then(async () => {
   require("./models/CompanyDetailsModel");
   require("./models/LoginDetailsModel");
   require("./models/MessagesModel");
-  await global.DB.sync({ alter: true });
+  await global.DB.sync({ alter: false });
 });
 const companyReviews = require('./services/company/getreviews')
 
