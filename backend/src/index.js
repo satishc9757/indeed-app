@@ -65,7 +65,7 @@ initDBConnection().then(async () => {
 
 
 
-  await global.DB.sync({ alter: true });
+  await global.DB.sync({ alter: false });
 });
 
 mongoose.connect(mongoConnectionURL, mongoDbOptions, (err, result) => {

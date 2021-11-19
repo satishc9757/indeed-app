@@ -19,5 +19,7 @@ var router = express.Router();
 router.post("/jobs", employerController.getJobsByCompanyId);
 router.get("/reviews", employerController.getReviewsByCompanyId);
 router.get("/reviewsWithKafka", employerController.getReviewsByCompanyIdKafka);
+router.get("/reviewsWithSQLCaching", employerController.getReviewsByCompanyIdSQLCaching);
+
 
 module.exports = router;
