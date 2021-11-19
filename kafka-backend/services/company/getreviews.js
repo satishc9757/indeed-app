@@ -2,7 +2,7 @@ const Reviews = require("../../models/CompanyReviewsModel");
 
 async function handle_request(msg, callback) {
   console.log('inside');
-  const compId = msg.cmpId;
+  const compId = msg.compId;
   console.log("message",msg)
   console.log(Reviews);
   try {
