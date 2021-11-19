@@ -1,5 +1,5 @@
 const kafka = require("kafka-node");
-
+var host="localhost"
 const createKafkaTopics = () => {
   const client = new kafka.KafkaClient({
     kafkaHost: "localhost:9092",

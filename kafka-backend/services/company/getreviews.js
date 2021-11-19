@@ -6,7 +6,7 @@ async function handle_request(msg, callback) {
   console.log("message",msg)
   //console.log(Reviews);
   try {
-    let reviews = await Reviews.findAll({ where: { review_company_Id: compId } });
+    let reviews = await Reviews.findAll({ where: { review_company_Id: compId },offset: msg.offset, limit: 1000 });
     //console.log('reviews', reviews);
     callback(null, reviews);
   } catch (err) {

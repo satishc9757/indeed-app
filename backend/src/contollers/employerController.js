@@ -17,13 +17,24 @@ const redis_client = new Redis(redisConfig)
 // auth();
 
 exports.getReviewsByCompanyIdKafka = async function (req, res) {
-  kafka.make_request("company.getreviews", req.query, (err, resp) => {
+  var result=[]
+  for(let i=0;i<10000;i+=1000){
+    req.query["offset"]=i
+  await kafka.make_request("company.getreviews", req.query, (err, resp) => {
     if (err || !resp) {
       console.log(err);
       return err.status(500).json({ error: err });
     }
-    return res.status(200).json(resp);
+    console.log("Response length ",resp.length)
+    result.push(...resp)  
+    console.log({"res_len":result.length});
+    if(i==9000){
+      return res.status(200).json({"res_len":result});
+    }
   });
+  
+}
+
 };
 
 exports.getReviewsByCompanyId = async function (req, res) {
