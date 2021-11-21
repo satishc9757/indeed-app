@@ -7,8 +7,11 @@ const REDIS_PORT = require('../cache/redisConfig');
 const kafka = require("../kafka/client");
 const Reviews = require("../models/CompanyReviewsModel");
 
-
-const redisConfig =  require('../cache/redisConfig');
+const redisConfig =  {
+  'port': 6379,
+  'host': '3.144.231.148'
+}
+// const redisConfig =  require('../cache/redisConfig');
 const redis_client = new Redis(redisConfig)
 
 // const jwt = require('jsonwebtoken');
@@ -26,13 +29,13 @@ exports.getReviewsByCompanyIdKafka = async function (req, res) {
       return err.status(500).json({ error: err });
     }
     console.log("Response length ",resp.length)
-    result.push(...resp)  
+    result.push(...resp)
     console.log({"res_len":result.length});
     if(i==9000){
       return res.status(200).json({"res_len":result});
     }
   });
-  
+
 }
 
 };
