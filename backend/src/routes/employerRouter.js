@@ -1,4 +1,4 @@
-const employerController = require("../contollers/employerController");
+const employerController = require("../controllers/employerController");
 const COMPANY_IMAGE_PATH = "images/company";
 // const multer  = require('multer')
 // const {checkAuth} = require('../jwt/passport')
