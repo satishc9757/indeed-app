@@ -8,9 +8,6 @@ let messagesModel = global.DB.define("messages", {
   msg_sender_type: { type: DataTypes.STRING, require: true },
   msg_receiver_type: { type: DataTypes.STRING, require: true },
   msg_created: { type: DataTypes.DATE, require: true },
-
-
-
 });
 
 module.exports = messagesModel;
