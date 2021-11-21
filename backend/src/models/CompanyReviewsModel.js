@@ -13,10 +13,10 @@ let companyReviewModel = global.DB.define("company_reviews", {
   review_cons: { type: DataTypes.STRING, require: false },
   ceo_rating: { type: DataTypes.INTEGER, require: false },
   review_prep: { type: DataTypes.STRING, require: false },
-  found_helpul: { type: DataTypes.INTEGER, require: false },
-  found_not_helpul: { type: DataTypes.INTEGER, require: false },
-  createdAt: { type: DataTypes.DATE, require: false },
-  updatedAt: { type: DataTypes.DATE, require: false },
+  found_helpful: { type: DataTypes.INTEGER, require: false },
+  found_not_helpful: { type: DataTypes.INTEGER, require: false },
+  created_at: { type: DataTypes.DATE, require: false },
+  updated_at: { type: DataTypes.DATE, require: false },
 });
 
 module.exports = companyReviewModel;
