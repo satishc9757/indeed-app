@@ -1,9 +1,9 @@
 const { DataTypes } = require("sequelize");
 
 let companyReviewModel = global.DB.define("company_reviews", {
-  id: { type: DataTypes.STRING, primaryKey: true },
-  review_user_Id: { type: DataTypes.STRING, require: true },
-  review_company_Id: { type: DataTypes.STRING, require: true },
+  review_id: { type: DataTypes.INTEGER, primaryKey: true },
+  review_user_id: { type: DataTypes.STRING, require: true },
+  review_company_id: { type: DataTypes.STRING, require: true },
   review_is_featured: { type: DataTypes.BOOLEAN, require: false },
   review_company_rating: { type: DataTypes.FLOAT, require: false },
   review_date: { type: DataTypes.DATE, require: true },

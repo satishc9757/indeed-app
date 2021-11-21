@@ -7,7 +7,9 @@ let messagesModel = global.DB.define("messages", {
   msg_receiver: { type: DataTypes.STRING, require: true },
   msg_sender_type: { type: DataTypes.STRING, require: true },
   msg_receiver_type: { type: DataTypes.STRING, require: true },
-  msg_created: { type: DataTypes.DATE, require: true },
+  msg_created_on: { type: DataTypes.DATE, require: true },
+  created_at: { type: DataTypes.DATE, require: false },
+  updated_at: { type: DataTypes.DATE, require: false },
 });
 
 module.exports = messagesModel;
