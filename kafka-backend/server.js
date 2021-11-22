@@ -31,7 +31,9 @@ initDBConnection().then(async () => {
   require("./models/MessagesModel");
   await global.DB.sync({ alter: false });
 });
+
 const companyReviews = require('./services/company/getreviews')
+const CreateJobPosting = require('./services/employer/createJobPosting');
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -67,3 +69,4 @@ function handleTopicRequest(topic_name, fname) {
 //second argument is a function that will handle this topic request
 // handleTopicRequest("job_postings_data", JobPostingsData);
 handleTopicRequest("company.getreviews", companyReviews);
+handleTopicRequest("employer.createJobPosting", CreateJobPosting);

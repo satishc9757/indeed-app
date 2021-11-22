@@ -128,3 +128,18 @@ exports.getJobsByCompanyId = async function (req, res) {
       .send(JSON.stringify({ message: "Something went wrong!", error: err }));
   }
 };
+
+
+exports.createJobPosting = async function (req, res) {
+
+      const data = req.body;
+      kafka.make_request("employer.createJobPosting", data, (err, resp) => {
+        if (err || !resp) {
+          console.log(err);
+          return err.status(500).json({ error: err });
+        } else {
+          return res.status(200).json(resp);
+        }
+      });
+
+};
