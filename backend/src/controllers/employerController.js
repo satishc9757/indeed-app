@@ -46,9 +46,13 @@ exports.getReviewsByCompanyId = async function (req, res) {
     let reviews = await Reviews.findAll({ where: { review_company_Id: compId } });
 
     if (reviews) {
-      res.send(JSON.stringify(reviews));
+      res
+      .status(200)
+      .end(JSON.stringify(reviews));
     } else {
-      res.send(JSON.stringify([]));
+      res
+      .status(200)
+      .end(JSON.stringify([]));
     }
   } catch (err) {
     res
@@ -110,9 +114,13 @@ exports.getJobsByCompanyId = async function (req, res) {
     let jobPostings = await JobPostings.find({ jobCompanyId: compId });
 
     if (jobPostings) {
-      res.send(JSON.stringify(jobPostings));
+      res
+      .status(200)
+      .end(JSON.stringify(jobPostings));
     } else {
-      res.send(JSON.stringify([]));
+      res
+      .status(200)
+      .end(JSON.stringify([]));
     }
   } catch (err) {
     res
