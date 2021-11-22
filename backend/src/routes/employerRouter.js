@@ -16,7 +16,8 @@ const COMPANY_IMAGE_PATH = "images/company";
 var express = require("express");
 var router = express.Router();
 
-// router.post("/jobs", employerController.getJobsByCompanyId);
+// router.get("/jobs", employerController.getJobsByCompanyId);
+router.post("/job", employerController.getJobsByCompanyId);
 router.get("/reviews", employerController.getReviewsByCompanyId);
 router.get("/reviewsWithKafka", employerController.getReviewsByCompanyIdKafka);
 
