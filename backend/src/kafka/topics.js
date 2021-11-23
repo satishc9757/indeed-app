@@ -17,6 +17,27 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
+      {
+        topic: "add_featured_review",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "get_featured_reviews",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "remove_featured_review",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "update_company_details",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+
     ],
     (err) => {
       if (err) {
