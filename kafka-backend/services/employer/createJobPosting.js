@@ -8,10 +8,16 @@ async function handle_request(msg, callback){
     const data = msg;
     try{
         let jobPosting  = new JobPostings({
-            job_companyId: data.compId,
+            job_company_id: data.job_company_id,
             job_title: data.job_title,
             job_industry: data.job_industry,
-            job_location: data.job_location,
+            job_location: {
+                street: data.job_street,
+                city: data.job_city,
+                state: data.job_state,
+                zipcode: data.job_zipcode,
+                country: data.job_country,
+            },
             job_work_type: data.job_work_type,
             job_salary_details: data.job_salary_details,
             job_compensation: data.job_compensation,
@@ -21,7 +27,7 @@ async function handle_request(msg, callback){
             job_created_at: new Date(),
         });
 
-        order.save((err, result) => {
+        jobPosting.save((err, result) => {
             if(err){
                 console.error("Error in createJobPostings : " + err);
                 callback(null,{ response_code: 500, response_data: "Something went wrong!", err: err});

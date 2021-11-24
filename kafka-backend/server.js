@@ -15,13 +15,13 @@ const mongoDbOptions = {
   maxPoolSize: 100,
 };
 
-// mongoose.connect(mongoConnectionURL, mongoDbOptions, (err, result) => {
-//   if (err) {
-//     console.log("Error while connecting to mongoDB : " + err);
-//   } else {
-//     console.log("Connected to Mongo DB!");
-//   }
-// });
+mongoose.connect(mongoConnectionURL, mongoDbOptions, (err, result) => {
+  if (err) {
+    console.log("Error while connecting to mongoDB : " + err);
+  } else {
+    console.log("Connected to Mongo DB!");
+  }
+});
 
 const { initDBConnection } = require("./database/mysqlConnection");
 initDBConnection().then(async () => {
@@ -41,6 +41,12 @@ const searchByCompanyName = require('./services/jobSeeker/searchByCompanyName')
 const jobRole = require('./services/company/getJobRole');
 const companyDetails = require('./services/company/getCompanyDetails');
 const CreateJobPosting = require('./services/employer/createJobPosting');
+const UpdateJobPosting = require('./services/employer/updateJobPosting');
+const JobPostingData = require('./services/employer/getJobPosting');
+const CompanyJobPostings = require('./services/company/getJobPostings');
+const CreateJobApplication = require('./services/jobseeker/createJobApplication');
+const UpdateApplicationStatus = require('./services/employer/updateApplicationStatus');
+const JobApplicationsData = require('./services/employer/getJobApplications');
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -53,7 +59,7 @@ function handleTopicRequest(topic_name, fname) {
     var data = JSON.parse(message.value);
 
     await fname.handle_request(data.data, function (err, res) {
-      //console.log("after handle" + res);
+      console.log("after handle" + res);
       var payloads = [
         {
           topic: data.replyTo,
@@ -65,7 +71,7 @@ function handleTopicRequest(topic_name, fname) {
         },
       ];
       producer.send(payloads, function (err, data) {
-        //console.log(data);
+        console.log(data);
       });
       return;
     });
@@ -80,4 +86,10 @@ handleTopicRequest("update_employer_details", update_employer);
 handleTopicRequest("search_byCompanyName", searchByCompanyName)
 handleTopicRequest("job_role", jobRole);
 handleTopicRequest("company_details", companyDetails);
+handleTopicRequest("company.getCompanyJobPostings", CompanyJobPostings);
 handleTopicRequest("employer.createJobPosting", CreateJobPosting);
+handleTopicRequest("employer.updateJobPosting", UpdateJobPosting);
+handleTopicRequest("employer.getJobPosting", JobPostingData);
+handleTopicRequest("employer.updateApplicationStatus", UpdateApplicationStatus);
+handleTopicRequest("employer.getJobApplications", JobApplicationsData);
+handleTopicRequest("jobseeker.createJobApplication", CreateJobApplication);
