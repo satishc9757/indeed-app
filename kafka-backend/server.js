@@ -37,14 +37,13 @@ const add_featured_review = require('./services/employer/add_featured_review')
 const get_featured_reviews = require('./services/employer/get_featured_reviews')
 const remove_featured_review = require('./services/employer/remove_featured_review')
 const update_employer = require('./services/employer/update_employer_details')
-const searchByCompanyName = require('./services/jobSeeker/searchByCompanyName')
-const jobRole = require('./services/company/getJobRole');
+const searchQuery = require('./services/jobSeeker/searchQuery')
 const companyDetails = require('./services/company/getCompanyDetails');
 const CreateJobPosting = require('./services/employer/createJobPosting');
 const UpdateJobPosting = require('./services/employer/updateJobPosting');
 const JobPostingData = require('./services/employer/getJobPosting');
 const CompanyJobPostings = require('./services/company/getJobPostings');
-const CreateJobApplication = require('./services/jobseeker/createJobApplication');
+const CreateJobApplication = require('./services/jobSeeker/createJobApplication');
 const UpdateApplicationStatus = require('./services/employer/updateApplicationStatus');
 const JobApplicationsData = require('./services/employer/getJobApplications');
 
@@ -83,8 +82,7 @@ handleTopicRequest("add_featured_review", add_featured_review);
 handleTopicRequest("get_featured_reviews", get_featured_reviews);
 handleTopicRequest("remove_featured_review", remove_featured_review);
 handleTopicRequest("update_employer_details", update_employer);
-handleTopicRequest("search_byCompanyName", searchByCompanyName)
-handleTopicRequest("job_role", jobRole);
+handleTopicRequest("search", searchQuery)
 handleTopicRequest("company_details", companyDetails);
 handleTopicRequest("company.getCompanyJobPostings", CompanyJobPostings);
 handleTopicRequest("employer.createJobPosting", CreateJobPosting);

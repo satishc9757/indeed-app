@@ -79,7 +79,6 @@ const employerRouter = require("./routes/employerRouter");
 const companyRouter = require("./routes/companyRouter");
 const jobseekerRouter = require("./routes/jobseekerRouter");
 const adminRouter = require("./routes/adminRouter");
-const companyRouter = require("./routes/companyRouter");
 const { createKafkaTopics } = require("./kafka/topics");
 createKafkaTopics();
 
