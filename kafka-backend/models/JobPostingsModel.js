@@ -6,7 +6,7 @@ let jobPostingsSchema = new mongoose.Schema({
     job_id: {type: String, required: true},
     job_title: {type: String, required: true},
     job_industry: {type: String, required: false},
-    job_location: [{type: String, required: true}],
+    job_location: {type: Array, required: true},
     job_work_type: {type: String, required: true},
     job_salary_details: {type: String, required: false},
     job_compensation: {type: Number, required: true},
