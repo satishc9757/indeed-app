@@ -44,7 +44,7 @@ exports.getSearchByTitleorLocation = async function (req, res) {
         .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
     }
 };
-  
+
 exports.getSearchByCompanyName = async function (req, res){
     try {
         kafka.make_request("search_byCompanyName", req.query, (err, resp) => {
@@ -70,3 +70,23 @@ exports.getSearchByCompanyName = async function (req, res){
 };
 
 
+exports.createJobApplication = async function (req, res) {
+
+    const data = req.body;
+    kafka.make_request("jobseeker.createJobApplication", data, (err, results) => {
+        if (err){
+            res
+            .status(500)
+            .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+          } else if(results.response_code == 200){
+
+              res.send(JSON.stringify(results.response_data));
+          } else {
+              res
+              .status(500)
+              .send(JSON.stringify({ message: "Something went wrong!", err }));
+          }
+    });
+
+};

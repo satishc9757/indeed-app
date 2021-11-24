@@ -61,3 +61,26 @@ exports.getJobRoleDetailsByCompanyID = async function (req,res){
         .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
     }
 };
+
+
+exports.getJobsByCompanyId = async function (req, res) {
+    const compId = req.query.compId;
+
+    kafka.make_request("company.getCompanyJobPostings", compId, (err, results) => {
+      if (err){
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+      } else if(results.response_code == 200){
+
+          res.send(JSON.stringify(results.response_data));
+      } else {
+          res
+          .status(500)
+          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      }
+    });
+
+
+  };

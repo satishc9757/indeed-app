@@ -16,13 +16,16 @@ const COMPANY_IMAGE_PATH = "images/company";
 var express = require("express");
 var router = express.Router();
 
-// router.get("/jobs", employerController.getJobsByCompanyId);
-router.post("/job", employerController.getJobsByCompanyId);
+router.get("/job", employerController.getJobDetailsById);
+router.post("/job", employerController.createJobPosting);
+router.put("/job", employerController.updateJobPosting);
+router.put("/application/status", employerController.updateApplicationStatus);
 router.get("/reviews", employerController.getReviewsByCompanyId);
 router.get("/reviewsWithKafka", employerController.getReviewsByCompanyIdKafka);
 
 router.get("/reviewsWithSQLCaching", employerController.getReviewsByCompanyIdSQLCaching);
 router.get("/reviewsWithSQLCachingAndKafka", employerController.getReviewsByCompanyIdSQLCachingKafka);
+router.get("/applications", employerController.getJobApplicationsByJobId);
 
 
 module.exports = router;

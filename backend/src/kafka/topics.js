@@ -28,7 +28,7 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
-        topic: "remove_featured_review",
+       topic: "remove_featured_review",
         partitions: 1,
         replicationFactor: 1,
       },
@@ -51,8 +51,42 @@ const createKafkaTopics = () => {
         topic: "company_details",
         partitions: 1,
         replicationFactor: 1,
-      }
-
+      },
+      {
+        topic: "jobseeker.createJobApplication",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "employer.createJobPosting",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "company.getCompanyJobPostings",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "employer.updateJobPosting",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "employer.getJobPosting",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "employer.updateApplicationStatus",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "employer.getJobApplications",
+        partitions: 1,
+        replicationFactor: 1,
+      },
     ],
     (err) => {
       if (err) {
