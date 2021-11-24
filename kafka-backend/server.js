@@ -36,6 +36,9 @@ const add_featured_review = require('./services/employer/add_featured_review')
 const get_featured_reviews = require('./services/employer/get_featured_reviews')
 const remove_featured_review = require('./services/employer/remove_featured_review')
 const update_employer = require('./services/employer/update_employer_details')
+const searchByCompanyName = require('./services/jobSeeker/searchByCompanyName')
+const jobRole = require('./services/company/getJobRole');
+const companyDetails = require('./services/company/getCompanyDetails');
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -72,4 +75,7 @@ handleTopicRequest("add_featured_review", add_featured_review);
 handleTopicRequest("get_featured_reviews", get_featured_reviews);
 handleTopicRequest("remove_featured_review", remove_featured_review);
 handleTopicRequest("update_employer_details", update_employer);
+handleTopicRequest("search_byCompanyName", searchByCompanyName)
+handleTopicRequest("job_role", jobRole);
+handleTopicRequest("company_details", companyDetails);
 

@@ -37,6 +37,11 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
+      {
+        topic: "update_employer_details",
+        partitions: 1,
+        replicationFactor: 1,
+      }
 
     ],
     (err) => {
