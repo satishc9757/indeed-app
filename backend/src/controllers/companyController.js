@@ -4,31 +4,32 @@
 // const ObjectId = mongoose.Types.ObjectId;
 
 var kafka = require('../kafka/client');
-const con = require('../database/mysqlConnection');
+const connection = require('../database/mysqlConnection');
 const jobPostingsModel = require('../models/JobPostingsModel');
 // const jwt = require('jsonwebtoken');
 // const { secret } = require('../jwt/config');
 // const { auth } = require("../jwt/passport");
-auth();
+// auth();
 
 
 exports.getCompanyDetailsByCompanyID = async function (req,res){
     let compId = req.query.compId;
-
-    try{
-        let sql = 'SELECT * FROM company_details WHERE comp_id = '+compId;
-        let results = await con.query(sql);
-
-        if (results) {
-            res
-            .status(200)
-            .end(JSON.stringify(results));
-        } else {
-            res
-            .status(200)
-            .end(JSON.stringify([]));
-        }
-    } catch(err){
+    try {
+        kafka.make_request("company_details", req.query, (err, resp) => {
+            if (err || !resp) {
+              console.log(err);
+                res
+                .status(500)
+                .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
+            }
+            else{
+                res
+                .status(200)
+                .end(JSON.stringify(results));
+            }
+        });
+        
+    } catch (err) {
         res
         .status(500)
         .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
@@ -38,30 +39,23 @@ exports.getCompanyDetailsByCompanyID = async function (req,res){
 exports.getJobRoleDetailsByCompanyID = async function (req,res){
     let compId = req.query.compId;
     let jobId = req.query.jobId;
-    try{
-        let sql = 'SELECT review_content FROM company_reviews WHERE review_company_id = '+compId;
-        let reviews = await con.query(sql);
-        if (reviews.length>0) {
-            sql = 'SELECT * FROM company_details WHERE comp_id = '+compId;
-            let details = await con.query(sql);
-            if(details.length>0){
-                let results = await jobPostingsModel.find({job_id: jobId});
-                results =  Object.assign({}, results, details[0])
-                results = Object.assign({}, results, {'reviews':reviews});
+    console.log(jobId, compId);
+    try {
+        kafka.make_request("job_role", req.query, (err, resp) => {
+            if (err || !resp) {
+              console.log(err);
+                res
+                .status(500)
+                .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
+            }
+            else{
                 res
                 .status(200)
                 .end(JSON.stringify(results));
-            } else{
-                res
-                .status(200)
-                .end(JSON.stringify([]));
             }
-        } else {
-            res
-            .status(200)
-            .end(JSON.stringify([]));
-        }
-    } catch(err){
+        });
+        
+    } catch (err) {
         res
         .status(500)
         .send(JSON.stringify({ message: 'Something went wrong!', error: err }));

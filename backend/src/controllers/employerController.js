@@ -2,8 +2,8 @@
 // const { unlinkSync } = require('fs');
 // const mongoose = require('mongoose');
 // const ObjectId = mongoose.Types.ObjectId;
-const Redis = require('ioredis')
-const REDIS_PORT = require('../cache/redisConfig');
+// const Redis = require('ioredis')
+// const REDIS_PORT = require('../cache/redisConfig');
 const kafka = require("../kafka/client");
 const Reviews = require("../models/CompanyReviewsModel");
 
@@ -12,7 +12,7 @@ const redisConfig =  {
   'host': '3.144.231.148'
 }
 // const redisConfig =  require('../cache/redisConfig');
-const redis_client = new Redis(redisConfig)
+// const redis_client = new Redis(redisConfig)
 
 // const jwt = require('jsonwebtoken');
 // const { secret } = require('../jwt/config');

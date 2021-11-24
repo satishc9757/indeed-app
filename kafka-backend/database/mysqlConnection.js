@@ -21,6 +21,17 @@ const initDBConnection = async () => {
     });
 };
 
+const mysqllib = require("mysql"); 
+const con = mysqllib.createConnection({
+  host: "indeed-db.c9uvql1ff7ga.us-east-2.rds.amazonaws.com",
+  user:"admin",
+  password:"admin123",
+  database:"indeed"
+})
+
 module.exports = {
   initDBConnection,
+  con,
 };
+
+

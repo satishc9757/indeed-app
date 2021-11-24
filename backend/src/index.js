@@ -66,16 +66,17 @@ initDBConnection().then(async () => {
   await global.DB.sync({ alter: false });
 });
 
-// mongoose.connect(mongoConnectionURL, mongoDbOptions, (err, result) => {
-//   if (err) {
-//     console.log("Error while connecting to mongoDB : " + err);
-//   } else {
-//     console.log("Connected to Mongo DB!");
-//   }
-// });
+mongoose.connect(mongoConnectionURL, mongoDbOptions, (err, result) => {
+  if (err) {
+    console.log("Error while connecting to mongoDB : " + err);
+  } else {
+    console.log("Connected to Mongo DB!");
+  }
+});
 
 const indexRouter = require("./routes/index");
 const employerRouter = require("./routes/employerRouter");
+const companyRouter = require("./routes/companyRouter");
 const jobseekerRouter = require("./routes/jobseekerRouter");
 const adminRouter = require("./routes/adminRouter");
 const { createKafkaTopics } = require("./kafka/topics");
@@ -87,6 +88,7 @@ app.use(passport.initialize());
 // app.use(passport_res.initialize());
 app.use("/", indexRouter);
 app.use("/api/employer", employerRouter);
+app.use("/api/company", companyRouter)
 app.use("/api/jobseeker", jobseekerRouter);
 app.use("/api/admin", adminRouter);
 

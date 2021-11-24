@@ -3,7 +3,7 @@ const companyController = require('../controllers/companyController');
 var express = require('express');
 var router = express.Router();
 
-route.get('/company', companyController.getCompanyDetailsByCompanyID);
-route.get('/getJobRole', companyController);
+router.get('/companyDetails', companyController.getCompanyDetailsByCompanyID);
+router.get('/getJobRole', companyController.getJobRoleDetailsByCompanyID);
 
 module.exports = router;
