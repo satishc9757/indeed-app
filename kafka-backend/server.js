@@ -15,13 +15,13 @@ const mongoDbOptions = {
   maxPoolSize: 100,
 };
 
-// mongoose.connect(mongoConnectionURL, mongoDbOptions, (err, result) => {
-//   if (err) {
-//     console.log("Error while connecting to mongoDB : " + err);
-//   } else {
-//     console.log("Connected to Mongo DB!");
-//   }
-// });
+mongoose.connect(mongoConnectionURL, mongoDbOptions, (err, result) => {
+  if (err) {
+    console.log("Error while connecting to mongoDB : " + err);
+  } else {
+    console.log("Connected to Mongo DB!");
+  }
+});
 
 const { initDBConnection } = require("./database/mysqlConnection");
 initDBConnection().then(async () => {
@@ -31,11 +31,18 @@ initDBConnection().then(async () => {
   require("./models/MessagesModel");
   await global.DB.sync({ alter: false });
 });
+
+
 const companyReviews = require('./services/company/getreviews')
 const add_featured_review = require('./services/employer/add_featured_review')
 const get_featured_reviews = require('./services/employer/get_featured_reviews')
 const remove_featured_review = require('./services/employer/remove_featured_review')
-const update_employer = require('./services/employer/update_employer_details')
+// const update_employer = require('./services/employer/update_employer_details')
+const update_jobseeker = require('./services/jobseeker/update_jobseeker_profile')
+const get_jobseeker = require('./services/jobseeker/get_jobseeker_profile')
+const get_resume = require('./services/jobseeker/get_resume')
+const update_resume = require('./services/jobseeker/update_resume')
+const delete_resume = require('./services/jobseeker/delete_resume')
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -71,5 +78,10 @@ handleTopicRequest("company.getreviews", companyReviews);
 handleTopicRequest("add_featured_review", add_featured_review);
 handleTopicRequest("get_featured_reviews", get_featured_reviews);
 handleTopicRequest("remove_featured_review", remove_featured_review);
-handleTopicRequest("update_employer_details", update_employer);
+// handleTopicRequest("update_employer_details", update_employer);
+handleTopicRequest("get_resume", get_resume);
+handleTopicRequest("update_resume", update_resume);
+handleTopicRequest("delete_resume", delete_resume);
+handleTopicRequest("get_jobseeker_profile", get_jobseeker);
+handleTopicRequest("update_jobseeker_profile", update_jobseeker);
 

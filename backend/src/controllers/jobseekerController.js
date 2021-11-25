@@ -66,3 +66,58 @@ exports.getSearchByCompanyName = async function (req, res){
 };
 
 
+//----------------------------------------KD---------------------------------------------
+
+exports.getJobseekerProfile = async function (req, res) {
+    console.log(req.query)
+    await kafka.make_request("get_jobseeker_profile", req.query, (err, resp) => {
+        if (err || !resp) {
+            console.log(err);
+            return err.status(500).json({ error: err });
+        }
+        res.send(resp);
+    })
+}
+
+exports.updateJobseekerProfile = async function (req, res) {
+    console.log(JSON.stringify(req.body)+"---------")
+    await kafka.make_request("update_jobseeker_profile", req.body, (err, resp) => {
+        if (err || !resp) {
+            console.log(err);
+            return resp.status(500).json({ error: err });
+        }
+        console.log("update profile response"+ JSON.stringify(resp))
+        res.send(resp);
+    })
+}
+
+exports.getJobseekerResume = async function (req, res) {
+    await kafka.make_request("get_resume", req.query, (err, resp) => {
+        if (err || !resp) {
+            console.log(err);
+            return err.status(500).json({ error: err });
+        }
+        res.send(resp);
+    })
+}
+
+exports.updateJobseekerResume = async function (req, res) {
+    await kafka.make_request("update_resume", req.query, (err, resp) => {
+        if (err || !resp) {
+            console.log(err);
+            return err.status(500).json({ error: err });
+        }
+        res.send(resp);
+    })
+}
+
+exports.deleteJobseekerResume = async function (req, res) {
+    console.log("inside delete resume")
+    await kafka.make_request("delete_resume", req.query, (err, resp) => {
+        if (err || !resp) {
+            console.log(err);
+            return err.status(500).json({ error: err });
+        }
+        res.send(resp);
+    })
+}

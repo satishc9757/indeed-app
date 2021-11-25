@@ -2,10 +2,17 @@ const jobseekerController = require('../controllers/jobseekerController');
 
 
 var express = require('express');
+const { route } = require('.');
 var router = express.Router();
 
 router.get("/search", jobseekerController.getSearchByTitleorLocation);
 router.get("/search/company", jobseekerController.getSearchByCompanyName);
+router.get("/", jobseekerController.getJobseekerProfile);
+router.post("/", jobseekerController.updateJobseekerProfile);
+router.get("/resume", jobseekerController.getJobseekerResume);
+router.post("/resume", jobseekerController.updateJobseekerResume);
+router.post("/resume/delete", jobseekerController.deleteJobseekerResume);
+
 
 
 module.exports = router;

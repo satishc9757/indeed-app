@@ -7,12 +7,12 @@ const REDIS_PORT = require('../cache/redisConfig');
 const kafka = require("../kafka/client");
 const Reviews = require("../models/CompanyReviewsModel");
 
-const redisConfig =  {
-  'port': 6379,
-  'host': '3.144.231.148'
-}
-// const redisConfig =  require('../cache/redisConfig');
-const redis_client = new Redis(redisConfig)
+// const redisConfig =  {
+//   'port': 6379,
+//   'host': '3.144.231.148'
+// }
+// // const redisConfig =  require('../cache/redisConfig');
+// const redis_client = new Redis(redisConfig)
 
 // const jwt = require('jsonwebtoken');
 // const { secret } = require('../jwt/config');

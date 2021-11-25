@@ -66,13 +66,13 @@ initDBConnection().then(async () => {
   await global.DB.sync({ alter: false });
 });
 
-// mongoose.connect(mongoConnectionURL, mongoDbOptions, (err, result) => {
-//   if (err) {
-//     console.log("Error while connecting to mongoDB : " + err);
-//   } else {
-//     console.log("Connected to Mongo DB!");
-//   }
-// });
+mongoose.connect(mongoConnectionURL, mongoDbOptions, (err, result) => {
+  if (err) {
+    console.log("Error while connecting to mongoDB : " + err);
+  } else {
+    console.log("Connected to Mongo DB!");
+  }
+});
 
 const indexRouter = require("./routes/index");
 const employerRouter = require("./routes/employerRouter");
@@ -82,6 +82,7 @@ const { createKafkaTopics } = require("./kafka/topics");
 createKafkaTopics();
 
 console.log("dir_name " + __dirname);
+console.log("okok")
 app.use(express.json());
 app.use(passport.initialize());
 // app.use(passport_res.initialize());
