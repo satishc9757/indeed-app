@@ -96,7 +96,12 @@ const createKafkaTopics = () => {
         topic: "getChatMessage",
         partitions: 1,
         replicationFactor: 1,
-      }
+      },
+      {
+        topic: "company.getJobStats",
+        partitions: 1,
+        replicationFactor: 1,
+      },
     ],
     (err) => {
       if (err) {
