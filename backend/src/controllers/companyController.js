@@ -25,7 +25,7 @@ exports.getCompanyDetailsByCompanyID = async function (req,res){
             else{
                 res
                 .status(200)
-                .end(JSON.stringify(results));
+                .end(JSON.stringify(resp));
             }
         });
         
