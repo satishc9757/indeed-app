@@ -46,6 +46,8 @@ const CompanyJobPostings = require('./services/company/getJobPostings');
 const CreateJobApplication = require('./services/jobSeeker/createJobApplication');
 const UpdateApplicationStatus = require('./services/employer/updateApplicationStatus');
 const JobApplicationsData = require('./services/employer/getJobApplications');
+const GetChatMessage = require('./services/chats/getChatMessages');
+const AddChatMessage = require('./services/chats/addChatMessage');
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -91,3 +93,5 @@ handleTopicRequest("employer.getJobPosting", JobPostingData);
 handleTopicRequest("employer.updateApplicationStatus", UpdateApplicationStatus);
 handleTopicRequest("employer.getJobApplications", JobApplicationsData);
 handleTopicRequest("jobseeker.createJobApplication", CreateJobApplication);
+handleTopicRequest("getChatMessage", GetChatMessage);
+handleTopicRequest("addChatMessage",AddChatMessage);
