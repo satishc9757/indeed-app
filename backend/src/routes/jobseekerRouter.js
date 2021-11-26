@@ -5,7 +5,7 @@ var router = express.Router();
 
 
 //router.get("/search", jobseekerController.getSearchByTitleorLocation);
-router.get("/search/company", jobseekerController.getSearchByCompanyName);
+// router.get("/search/company", jobseekerController.getSearchByCompanyName);
 router.get("/", jobseekerController.getJobseekerProfile);
 router.post("/", jobseekerController.updateJobseekerProfile);
 router.get("/resume", jobseekerController.getJobseekerResume);
