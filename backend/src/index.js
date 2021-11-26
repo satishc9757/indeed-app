@@ -74,6 +74,8 @@ mongoose.connect(mongoConnectionURL, mongoDbOptions, (err, result) => {
   }
 });
 
+console.log(mongoose.connection.readyState);
+
 const indexRouter = require("./routes/index");
 const employerRouter = require("./routes/employerRouter");
 const companyRouter = require("./routes/companyRouter");

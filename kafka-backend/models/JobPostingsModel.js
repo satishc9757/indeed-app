@@ -16,5 +16,5 @@ let jobPostingsSchema = new mongoose.Schema({
     job_created_at: {type: Date, required: true},
 });
 
-const jobPostingsModel = mongoose.model('jobPostings', jobPostingsSchema);
+const jobPostingsModel = mongoose.model('jobpostings', jobPostingsSchema);
 module.exports = jobPostingsModel;
