@@ -215,3 +215,25 @@ exports.getJobApplicationsByJobId = async function (req, res) {
 
 
 };
+
+exports.updateEmployerDetails = async function (req, res) {
+  const emp=req.body;
+  console.log("request received to update profile at the backend",req.body)
+  kafka.make_request("update_employer_details", emp, (err, results) => {
+    if (err){
+      res
+      .status(500)
+      .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+    } else if(results.response_code == 200){
+
+        res.send(JSON.stringify("Update Successfully"));
+    } else {
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+    }
+  });
+
+
+};

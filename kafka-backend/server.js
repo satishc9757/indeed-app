@@ -35,6 +35,7 @@ initDBConnection().then(async () => {
 const companyReviews = require('./services/company/getreviews')
 const add_featured_review = require('./services/employer/add_featured_review')
 const get_featured_reviews = require('./services/employer/get_featured_reviews')
+const update_featured_review_status = require('./services/company/update_featured_review_status')
 const remove_featured_review = require('./services/employer/remove_featured_review')
 const update_employer = require('./services/employer/update_employer_details')
 const searchQuery = require('./services/jobSeeker/searchQuery')
@@ -82,6 +83,7 @@ function handleTopicRequest(topic_name, fname) {
 
 handleTopicRequest("company.getreviews", companyReviews);
 handleTopicRequest("add_featured_review", add_featured_review);
+handleTopicRequest("update_featured_review_status", update_featured_review_status);
 handleTopicRequest("get_featured_reviews", get_featured_reviews);
 handleTopicRequest("remove_featured_review", remove_featured_review);
 handleTopicRequest("update_employer_details", update_employer);
@@ -97,4 +99,3 @@ handleTopicRequest("jobseeker.createJobApplication", CreateJobApplication);
 handleTopicRequest("getChatMessage", GetChatMessage);
 handleTopicRequest("addChatMessage",AddChatMessage);
 handleTopicRequest("company.getJobStats", CompanyJobStats);
-
