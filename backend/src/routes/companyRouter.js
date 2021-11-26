@@ -9,5 +9,6 @@ router.get('/getJobRole', companyController.getJobRoleDetailsByCompanyID);
 router.get('/jobs', companyController.getJobsByCompanyId);
 router.get('/getFeaturedReviews', companyController.getFeaturedReviewsByCompId);
 router.post('/updateFeaturedReview', companyController.updateFeaturedReviewStatus);
+router.get('/jobstats', companyController.getJobStatsByCompanyId);
 
 module.exports = router;

@@ -33,8 +33,9 @@ initDBConnection().then(async () => {
 });
 
 const companyReviews = require('./services/company/getreviews')
+const add_featured_review = require('./services/employer/add_featured_review')
+const get_featured_reviews = require('./services/employer/get_featured_reviews')
 const update_featured_review_status = require('./services/company/update_featured_review_status')
-const get_featured_reviews = require('./services/company/get_featured_reviews')
 const remove_featured_review = require('./services/employer/remove_featured_review')
 const update_employer = require('./services/employer/update_employer_details')
 const searchQuery = require('./services/jobSeeker/searchQuery')
@@ -46,6 +47,9 @@ const CompanyJobPostings = require('./services/company/getJobPostings');
 const CreateJobApplication = require('./services/jobSeeker/createJobApplication');
 const UpdateApplicationStatus = require('./services/employer/updateApplicationStatus');
 const JobApplicationsData = require('./services/employer/getJobApplications');
+const GetChatMessage = require('./services/chats/getChatMessages');
+const AddChatMessage = require('./services/chats/addChatMessage');
+const CompanyJobStats = require('./services/company/getJobStats');
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -58,8 +62,7 @@ function handleTopicRequest(topic_name, fname) {
     var data = JSON.parse(message.value);
 
     await fname.handle_request(data.data, function (err, res) {
-      console.log("after handle" );
-      console.log(res)
+      console.log("after handle" + res);
       var payloads = [
         {
           topic: data.replyTo,
@@ -79,6 +82,7 @@ function handleTopicRequest(topic_name, fname) {
 }
 
 handleTopicRequest("company.getreviews", companyReviews);
+handleTopicRequest("add_featured_review", add_featured_review);
 handleTopicRequest("update_featured_review_status", update_featured_review_status);
 handleTopicRequest("get_featured_reviews", get_featured_reviews);
 handleTopicRequest("remove_featured_review", remove_featured_review);
@@ -92,3 +96,6 @@ handleTopicRequest("employer.getJobPosting", JobPostingData);
 handleTopicRequest("employer.updateApplicationStatus", UpdateApplicationStatus);
 handleTopicRequest("employer.getJobApplications", JobApplicationsData);
 handleTopicRequest("jobseeker.createJobApplication", CreateJobApplication);
+handleTopicRequest("getChatMessage", GetChatMessage);
+handleTopicRequest("addChatMessage",AddChatMessage);
+handleTopicRequest("company.getJobStats", CompanyJobStats);

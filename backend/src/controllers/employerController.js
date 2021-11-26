@@ -42,6 +42,7 @@ exports.getReviewsByCompanyIdKafka = async function (req, res) {
 
 exports.getReviewsByCompanyId = async function (req, res) {
   const compId = req.query.compId;
+  console.log("here in get reviews compId : "+compId);
   try {
     let reviews = await Reviews.findAll({ where: { review_company_Id: compId } });
 
