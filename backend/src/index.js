@@ -81,7 +81,7 @@ const jobseekerRouter = require("./routes/jobseekerRouter");
 const adminRouter = require("./routes/adminRouter");
 const chatRouter = require("./routes/chatRouter");
 const { createKafkaTopics } = require("./kafka/topics");
-//createKafkaTopics();
+createKafkaTopics();
 
 console.log("dir_name " + __dirname);
 app.use(express.json());
