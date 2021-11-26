@@ -46,6 +46,14 @@ const CompanyJobPostings = require('./services/company/getJobPostings');
 const CreateJobApplication = require('./services/jobSeeker/createJobApplication');
 const UpdateApplicationStatus = require('./services/employer/updateApplicationStatus');
 const JobApplicationsData = require('./services/employer/getJobApplications');
+const MarkReviewAsInappropriate = require('./services/admin/markReviewAsInappropriate');
+const GetAllCompanies = require('./services/admin/getAllCompanies');
+const GetAllReviews = require('./services/admin/getAllReviews');
+const GetNumberOfReviewsPerDay = require('./services/admin/getNumberOfReviewsPerDay');
+const GetTopFiveMostReviewedCompanies = require('./services/admin/getTopFiveMostReviewedCompanies');
+const GetTopFiveCompaniesAvgRating = require('./services/admin/getTopFiveCompaniesAvgRating');
+const GetTopFiveSeekersAccpReviews = require('./services/admin/getTopFiveSeekersAccpReviews');
+const GetTopTenCEORating = require('./services/admin/getTopTenCEORating');
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -91,3 +99,12 @@ handleTopicRequest("employer.getJobPosting", JobPostingData);
 handleTopicRequest("employer.updateApplicationStatus", UpdateApplicationStatus);
 handleTopicRequest("employer.getJobApplications", JobApplicationsData);
 handleTopicRequest("jobseeker.createJobApplication", CreateJobApplication);
+handleTopicRequest("admin.markReviewAsInappropriate", MarkReviewAsInappropriate);
+handleTopicRequest("admin.getAllCompanies", GetAllCompanies);
+handleTopicRequest("admin.getAllReviews", GetAllReviews);
+handleTopicRequest("admin.getNumberOfReviewsPerDay", GetNumberOfReviewsPerDay);
+handleTopicRequest("admin.getTopFiveMostReviewedCompanies", GetTopFiveMostReviewedCompanies);
+handleTopicRequest("admin.getTopFiveCompaniesAvgRating", GetTopFiveCompaniesAvgRating);
+handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpReviews);
+handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
+

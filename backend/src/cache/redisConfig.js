@@ -1,6 +1,6 @@
-redisConfig =  {
-        'port': 6379,
-        'host': '127.0.0.1'
-}
+// redisConfig =  {
+//         'port': 6379,
+//         'host': '127.0.0.1'
+// }
 
-exports.redisConfig = redisConfig;
+// exports.redisConfig = redisConfig;
