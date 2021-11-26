@@ -38,27 +38,54 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+
+        topic: "get_resume",
+        partitions: 1,
+        replicationFactor: 1,
+      },{
+
         topic: "update_employer_details",
+
         partitions: 1,
         replicationFactor: 1,
       },
       {
+
+        topic: "update_resume",
+        partitions: 1,
+        replicationFactor: 1,
+      },{
+
         topic: "search",
         partitions: 1,
         replicationFactor: 1,
       },
       {
+        topic: "delete_resume",
+partitions: 1,
+        replicationFactor: 1,
+      },{
         topic: "company_details",
+
         partitions: 1,
         replicationFactor: 1,
       },
       {
+        topic: "update_jobseeker_profile",
+        partitions: 1,
+        replicationFactor: 1,
+      },{
         topic: "jobseeker.createJobApplication",
         partitions: 1,
         replicationFactor: 1,
       },
       {
-        topic: "employer.createJobPosting",
+        topic: "get_jobseeker_profile",
+        partitions: 1,
+        replicationFactor: 1,
+      },{
+      
+       topic: "employer.createJobPosting",
         partitions: 1,
         replicationFactor: 1,
       },

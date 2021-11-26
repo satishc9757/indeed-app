@@ -1,3 +1,4 @@
+
 var connection = new require("./kafka/Connection");
 //topics files
 //var signin = require('./services/signin.js');
@@ -50,6 +51,11 @@ const JobApplicationsData = require('./services/employer/getJobApplications');
 const GetChatMessage = require('./services/chats/getChatMessages');
 const AddChatMessage = require('./services/chats/addChatMessage');
 const CompanyJobStats = require('./services/company/getJobStats');
+const update_jobseeker = require('./services/jobseeker/update_jobseeker_profile')
+const get_jobseeker = require('./services/jobseeker/get_jobseeker_profile')
+const get_resume = require('./services/jobseeker/get_resume')
+const update_resume = require('./services/jobseeker/update_resume')
+const delete_resume = require('./services/jobseeker/delete_resume')
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -99,3 +105,8 @@ handleTopicRequest("jobseeker.createJobApplication", CreateJobApplication);
 handleTopicRequest("getChatMessage", GetChatMessage);
 handleTopicRequest("addChatMessage",AddChatMessage);
 handleTopicRequest("company.getJobStats", CompanyJobStats);
+handleTopicRequest("get_resume", get_resume);
+handleTopicRequest("update_resume", update_resume);
+handleTopicRequest("delete_resume", delete_resume);
+handleTopicRequest("get_jobseeker_profile", get_jobseeker);
+handleTopicRequest("update_jobseeker_profile", update_jobseeker);

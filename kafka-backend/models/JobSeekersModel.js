@@ -6,7 +6,7 @@ let jobSeekersSchema = new mongoose.Schema({
     seeker_name: {type: String, required: true},
     seeker_email: {type: String, required: true},
     seeker_city: {type: String, required: false},
-    seeker_state: [{type: String, required: false}],
+    seeker_state: { type: String, required: false },
     seeker_country: {type: String, required: true},
     seeker_age: {type: Number, required: false},
     seeker_contact: {type: String, required: true},

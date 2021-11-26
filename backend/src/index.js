@@ -84,6 +84,7 @@ const { createKafkaTopics } = require("./kafka/topics");
 createKafkaTopics();
 
 console.log("dir_name " + __dirname);
+console.log("okok")
 app.use(express.json());
 app.use(passport.initialize());
 // app.use(passport_res.initialize());
