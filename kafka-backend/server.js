@@ -1,3 +1,4 @@
+
 var connection = new require("./kafka/Connection");
 //topics files
 //var signin = require('./services/signin.js');
@@ -32,12 +33,24 @@ initDBConnection().then(async () => {
   await global.DB.sync({ alter: false });
 });
 
-
 const companyReviews = require('./services/company/getreviews')
 const add_featured_review = require('./services/employer/add_featured_review')
 const get_featured_reviews = require('./services/employer/get_featured_reviews')
+const update_featured_review_status = require('./services/company/update_featured_review_status')
 const remove_featured_review = require('./services/employer/remove_featured_review')
-// const update_employer = require('./services/employer/update_employer_details')
+const update_employer = require('./services/employer/update_employer_details')
+const searchQuery = require('./services/jobSeeker/searchQuery')
+const companyDetails = require('./services/company/getCompanyDetails');
+const CreateJobPosting = require('./services/employer/createJobPosting');
+const UpdateJobPosting = require('./services/employer/updateJobPosting');
+const JobPostingData = require('./services/employer/getJobPosting');
+const CompanyJobPostings = require('./services/company/getJobPostings');
+const CreateJobApplication = require('./services/jobSeeker/createJobApplication');
+const UpdateApplicationStatus = require('./services/employer/updateApplicationStatus');
+const JobApplicationsData = require('./services/employer/getJobApplications');
+const GetChatMessage = require('./services/chats/getChatMessages');
+const AddChatMessage = require('./services/chats/addChatMessage');
+const CompanyJobStats = require('./services/company/getJobStats');
 const update_jobseeker = require('./services/jobseeker/update_jobseeker_profile')
 const get_jobseeker = require('./services/jobseeker/get_jobseeker_profile')
 const get_resume = require('./services/jobseeker/get_resume')
@@ -55,7 +68,7 @@ function handleTopicRequest(topic_name, fname) {
     var data = JSON.parse(message.value);
 
     await fname.handle_request(data.data, function (err, res) {
-      //console.log("after handle" + res);
+      console.log("after handle" + res);
       var payloads = [
         {
           topic: data.replyTo,
@@ -67,7 +80,7 @@ function handleTopicRequest(topic_name, fname) {
         },
       ];
       producer.send(payloads, function (err, data) {
-        //console.log(data);
+        console.log(data);
       });
       return;
     });
@@ -76,12 +89,24 @@ function handleTopicRequest(topic_name, fname) {
 
 handleTopicRequest("company.getreviews", companyReviews);
 handleTopicRequest("add_featured_review", add_featured_review);
+handleTopicRequest("update_featured_review_status", update_featured_review_status);
 handleTopicRequest("get_featured_reviews", get_featured_reviews);
 handleTopicRequest("remove_featured_review", remove_featured_review);
-// handleTopicRequest("update_employer_details", update_employer);
+handleTopicRequest("update_employer_details", update_employer);
+handleTopicRequest("search", searchQuery)
+handleTopicRequest("company_details", companyDetails);
+handleTopicRequest("company.getCompanyJobPostings", CompanyJobPostings);
+handleTopicRequest("employer.createJobPosting", CreateJobPosting);
+handleTopicRequest("employer.updateJobPosting", UpdateJobPosting);
+handleTopicRequest("employer.getJobPosting", JobPostingData);
+handleTopicRequest("employer.updateApplicationStatus", UpdateApplicationStatus);
+handleTopicRequest("employer.getJobApplications", JobApplicationsData);
+handleTopicRequest("jobseeker.createJobApplication", CreateJobApplication);
+handleTopicRequest("getChatMessage", GetChatMessage);
+handleTopicRequest("addChatMessage",AddChatMessage);
+handleTopicRequest("company.getJobStats", CompanyJobStats);
 handleTopicRequest("get_resume", get_resume);
 handleTopicRequest("update_resume", update_resume);
 handleTopicRequest("delete_resume", delete_resume);
 handleTopicRequest("get_jobseeker_profile", get_jobseeker);
 handleTopicRequest("update_jobseeker_profile", update_jobseeker);
-

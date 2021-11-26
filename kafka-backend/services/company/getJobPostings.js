@@ -3,7 +3,7 @@ const JobPostings = require('../../models/JobPostingsModel');
 
 async function handle_request(msg, callback){
 
-    const resId = msg.resId;
+    const compId = msg.compId;
     //console.log("Inside getRes using mongo id"+resId);
 
     try{
