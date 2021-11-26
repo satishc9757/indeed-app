@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import Grid from '@material-ui/core/Grid'
-import { TextField, Typography } from '@material-ui/core'
+import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import Grid from '@material-ui/core/Grid';
+import { CardActions, CardContent, TextField, Typography } from '@material-ui/core';
 import Box from '@mui/material/Box';
-import Button from '@material-ui/core/Button'
-import Link from '@mui/material/Link'
+import Button from '@material-ui/core/Button';
+import Link from '@mui/material/Link';
+import Card from '@mui/material/Card';
 import axios from 'axios';
 import backendServer from '../../webConfig';
 
@@ -26,6 +27,7 @@ class LandingPage extends Component {
     }
 
     search = async(e)=>{
+        console.log("called search")
         let location = this.state.location||'';
         var response = await axios.get(`${backendServer}/jobseeker/search?searchQuery=${this.state.search}&location=${location}`);
         await this.setState({
@@ -36,6 +38,30 @@ class LandingPage extends Component {
 
     render() {
         console.log(this.state.results.length===0)
+        let jobCards = [];
+        if(this.state.results.length>0){
+            this.state.results.forEach(result=>
+                jobCards.push(<div>
+                    <Grid item>
+                        <Card fullWidth>
+                            <CardContent>
+                                <Link><Typography>{result.job_title}</Typography></Link>
+                                <Typography>{result.job_company_name} | {result.job_industry}</Typography>
+                                <Typography>{result.job_location[0].city}, {result.job_location[0].state} . Remote</Typography>
+                                <p>{result.job_location.length}+ locations</p>
+                                <Typography>Compensation: {result.job_salary_details} [Full Time]</Typography>
+                                <Typography>Description: {result.job_what_you_need}</Typography>
+                            </CardContent>
+                            <CardActions>
+                                
+                            </CardActions>
+                        </Card>
+                    </Grid><br/>
+                </div>)
+            )
+        }
+
+
         return (   
             <Box> 
                 <Grid container spacing={2} style={{'margin':'2%'}}>
@@ -101,7 +127,12 @@ class LandingPage extends Component {
 
                 {this.state.results.length>0 &&
                 <div>
-                    <p>hii</p>
+                    <Grid direction="column" 
+                    alignItems="flex-start" 
+                    container
+                    >
+                        {jobCards}
+                    </Grid>
                 </div>
                 
                 
