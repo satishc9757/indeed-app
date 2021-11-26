@@ -26,6 +26,6 @@ router.get("/reviewsWithKafka", employerController.getReviewsByCompanyIdKafka);
 router.get("/reviewsWithSQLCaching", employerController.getReviewsByCompanyIdSQLCaching);
 router.get("/reviewsWithSQLCachingAndKafka", employerController.getReviewsByCompanyIdSQLCachingKafka);
 router.get("/applications", employerController.getJobApplicationsByJobId);
-
+router.post("/updateProfile", employerController.updateEmployerDetails);
 
 module.exports = router;

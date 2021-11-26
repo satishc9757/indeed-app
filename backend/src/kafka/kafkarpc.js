@@ -1,7 +1,7 @@
 var crypto = require("crypto");
 var conn = require("./connection");
 
-var TIMEOUT = 14000; //time to wait for response in ms
+var TIMEOUT = 4000; //time to wait for response in ms
 var self;
 
 exports = module.exports = KafkaRPC;
@@ -14,7 +14,7 @@ function KafkaRPC() {
   this.producer = this.connection.getProducer();
 }
 
-KafkaRPC.prototype.makeRequest = function (topic_name, content, callback) {
+KafkaRPC.prototype.makeRequest = async function (topic_name, content, callback) {
   self = this;
   //generate a unique correlation id for this call
   var correlationId = crypto.randomBytes(16).toString("hex");
@@ -43,7 +43,7 @@ KafkaRPC.prototype.makeRequest = function (topic_name, content, callback) {
   self.requests[correlationId] = entry;
 
   //make sure we have a response topic
-  self.setupResponseQueue(self.producer, topic_name, function () {
+  self.setupResponseQueue(self.producer, topic_name, async function () {
     console.log("in response");
     //put the request on a topic
 
@@ -60,10 +60,10 @@ KafkaRPC.prototype.makeRequest = function (topic_name, content, callback) {
     ];
     console.log("in response1");
     console.log(self.producer.ready);
-    self.producer.send(payloads, function (err, data) {
+    await self.producer.send(payloads, async function (err, data) {
       console.log("in response2");
-      if (err) console.log(err);
-      console.log(data);
+      if (err) console.log("error in response 2 ",err);
+      console.log("here is the data",data);
     });
   });
 };
