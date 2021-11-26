@@ -1,8 +1,6 @@
 const jobseekerController = require('../controllers/jobseekerController');
-
-
 var express = require('express');
-const { route } = require('.');
+// const { route } = require('.');
 var router = express.Router();
 
 

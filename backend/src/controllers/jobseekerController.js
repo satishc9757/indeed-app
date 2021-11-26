@@ -56,9 +56,8 @@ exports.createJobApplication = async function (req, res) {
               .send(JSON.stringify({ message: "Something went wrong!", err }));
           }
     });
+}
 
-
-//----------------------------------------KD---------------------------------------------
 
 exports.getJobseekerProfile = async function (req, res) {
     console.log(req.query)
@@ -101,7 +100,7 @@ exports.updateJobseekerResume = async function (req, res) {
         }
         res.send(resp);
     })
-}
+};
 
 exports.deleteJobseekerResume = async function (req, res) {
     console.log("inside delete resume")
@@ -112,7 +111,7 @@ exports.deleteJobseekerResume = async function (req, res) {
         }
         res.send(resp);
     })
-}
-
 };
+
+
 
