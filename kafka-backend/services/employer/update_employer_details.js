@@ -1,28 +1,21 @@
 const Employer = require('../../models/EmployersModel');
 
-
+var mongoose = require('mongoose');
 async function handle_request(msg, callback){
 
     
-    //console.log("Inside getRes using mongo id"+resId);
+    console.log("Inside update employer",msg);
 
-    try{
-        await Employer.updateOne({_id:msg._id},msg,(err,results)=>{
-
-            if(err){
-                callback(null,{ response_code: 500, response_data: "Something went wrong!", err});
-            }
-            else{
-                callback(null, { response_code: 200, response_data: jobPostings});
-            }
-        });
-
-
-    } catch(err){
-        console.error("getJobsByCompanyId : " + err);
-        callback(null,{ response_code: 500, response_data: "Something went wrong!", err});
-    }
-
+        await Employer.updateOne({_id:msg._id},{$set :{emp_name:msg.emp_name}},
+            (err, result) => {
+                if(err){
+                  console.error("Err in update Employer details : " + err);
+                  callback(null,{ response_code: 500, response_data: "Something went wrong!", err});
+                } else {
+                    callback(true, { response_code: 200, response_data : "Exmployer status updated successfully"});
+        
+                }
+            }).clone();
 };
 
 exports.handle_request = handle_request;
