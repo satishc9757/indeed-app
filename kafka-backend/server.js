@@ -57,6 +57,14 @@ const update_resume = require('./services/jobseeker/update_resume')
 const delete_resume = require('./services/jobseeker/delete_resume')
 const getSavedJobs = require("./services/jobSeeker/getSavedJobs")
 const addReviews = require("./services/jobSeeker/addReviews")
+const MarkReviewAsInappropriate = require('./services/admin/markReviewAsInappropriate');
+const GetAllCompanies = require('./services/admin/getAllCompanies');
+const GetAllReviews = require('./services/admin/getAllReviews');
+const GetNumberOfReviewsPerDay = require('./services/admin/getNumberOfReviewsPerDay');
+const GetTopFiveMostReviewedCompanies = require('./services/admin/getTopFiveMostReviewedCompanies');
+const GetTopFiveCompaniesAvgRating = require('./services/admin/getTopFiveCompaniesAvgRating');
+const GetTopFiveSeekersAccpReviews = require('./services/admin/getTopFiveSeekersAccpReviews');
+const GetTopTenCEORating = require('./services/admin/getTopTenCEORating');
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -113,3 +121,12 @@ handleTopicRequest("get_jobseeker_profile", get_jobseeker);
 handleTopicRequest("update_jobseeker_profile", update_jobseeker);
 handleTopicRequest("save_jobs", saveJobs);
 handleTopicRequest("get_saved_jobs",getSavedJobs);
+handleTopicRequest("admin.markReviewAsInappropriate", MarkReviewAsInappropriate);
+handleTopicRequest("admin.getAllCompanies", GetAllCompanies);
+handleTopicRequest("admin.getAllReviews", GetAllReviews);
+handleTopicRequest("admin.getNumberOfReviewsPerDay", GetNumberOfReviewsPerDay);
+handleTopicRequest("admin.getTopFiveMostReviewedCompanies", GetTopFiveMostReviewedCompanies);
+handleTopicRequest("admin.getTopFiveCompaniesAvgRating", GetTopFiveCompaniesAvgRating);
+handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpReviews);
+handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
+
