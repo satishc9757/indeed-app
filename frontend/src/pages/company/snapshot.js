@@ -2,7 +2,7 @@ import { Avatar, Container, Grid, Paper, Tab, Typography } from "@material-ui/co
 import { grey } from "@material-ui/core/colors";
 import { Stack } from "@mui/material";
 import Common from "./common";
-import dp  from "../../media/girl-avatar.png"
+// import dp  from "../../media/girl-avatar.png"
 import { Box } from "@mui/system";
 import { styled } from '@mui/material/styles';
 
@@ -83,7 +83,8 @@ export default function Snapshot() {
                         
                         width="150"
                         height="200"
-                        src={dp} alt="dp"></img>
+                        // src={dp}
+                        alt="dp"></img>
                 </Grid>
                 <Grid item xs={9}>
                     <Stack spacing={8} direction="row">
