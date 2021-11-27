@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { CardActions, CardContent, TextField, Typography } from '@material-ui/core';
 import Box from '@mui/material/Box';
 import Button from '@material-ui/core/Button';
-import Link from '@mui/material/Link';
+import {Link} from 'react-router-dom';
 import Card from '@mui/material/Card';
 import axios from 'axios';
 import backendServer from '../../webConfig';
@@ -47,7 +47,7 @@ class LandingPage extends Component {
                             <CardContent>
                                 <Link><Typography>{result.job_title}</Typography></Link>
                                 <Typography>{result.job_company_name} | {result.job_industry}</Typography>
-                                <Typography>{result.job_location[0].city}, {result.job_location[0].state} . Remote</Typography>
+                                <Typography>{result.job_location[0].city}, {result.job_location[0].state}, {result.job_company_rating || ""} . Remote</Typography>
                                 <p>{result.job_location.length}+ locations</p>
                                 <Typography>Compensation: {result.job_salary_details} [Full Time]</Typography>
                                 <Typography>Description: {result.job_what_you_need}</Typography>
@@ -62,7 +62,9 @@ class LandingPage extends Component {
         }
 
 
-        return (   
+        return (  
+            <div>
+            
             <Box> 
                 <Grid container spacing={2} style={{'margin':'2%'}}>
                     <Grid item sm={2}/>
@@ -103,12 +105,9 @@ class LandingPage extends Component {
                     <Grid container>
                         <Grid item sm={4}/>
                         <Grid item sm={6}>
-                            <Typography>
-                                <Link onClick={this.uploadResume}
-                                    underline="none">
-                                    Post Your Resume
-                                </Link> - It only takes a few seconds
-                            </Typography>
+                            <Link to="/upload">
+                                Post Your Resume
+                            </Link> - It only takes a few seconds
                         </Grid>
                     </Grid>
                     <br/>
@@ -138,6 +137,7 @@ class LandingPage extends Component {
                 
                 }
             </Box>
+            </div>
         )
     }
 }
