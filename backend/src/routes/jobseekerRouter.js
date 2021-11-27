@@ -3,6 +3,12 @@ var express = require('express');
 // const { route } = require('.');
 var router = express.Router();
 
+router.get("/search", jobseekerController.getSearchByTitleorLocation);
+router.get("/search/company", jobseekerController.getSearchByCompanyName);
+router.post("/jobs",jobseekerController.saveJobs);
+router.get("/jobs",jobseekerController.getSavedJobs);
+router.post("/reviews",jobseekerController.addReviews);
+
 
 //router.get("/search", jobseekerController.getSearchByTitleorLocation);
 // router.get("/search/company", jobseekerController.getSearchByCompanyName);
@@ -14,6 +20,7 @@ router.post("/resume/delete", jobseekerController.deleteJobseekerResume);
 
 router.get("/search", jobseekerController.getSearch);
 router.post("/application", jobseekerController.createJobApplication);
+
 
 
 module.exports = router;

@@ -1,4 +1,3 @@
-
 var connection = new require("./kafka/Connection");
 //topics files
 //var signin = require('./services/signin.js');
@@ -56,6 +55,8 @@ const get_jobseeker = require('./services/jobseeker/get_jobseeker_profile')
 const get_resume = require('./services/jobseeker/get_resume')
 const update_resume = require('./services/jobseeker/update_resume')
 const delete_resume = require('./services/jobseeker/delete_resume')
+const getSavedJobs = require("./services/jobSeeker/getSavedJobs")
+const addReviews = require("./services/jobSeeker/addReviews")
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -110,3 +111,5 @@ handleTopicRequest("update_resume", update_resume);
 handleTopicRequest("delete_resume", delete_resume);
 handleTopicRequest("get_jobseeker_profile", get_jobseeker);
 handleTopicRequest("update_jobseeker_profile", update_jobseeker);
+handleTopicRequest("save_jobs", saveJobs);
+handleTopicRequest("get_saved_jobs",getSavedJobs);
