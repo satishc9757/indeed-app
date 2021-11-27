@@ -45,7 +45,7 @@ class LandingPage extends Component {
                     <Grid item>
                         <Card fullWidth>
                             <CardContent>
-                                <Link><Typography>{result.job_title}</Typography></Link>
+                                <Link href="/" underline="none">{result.job_title}</Link>
                                 <Typography>{result.job_company_name} | {result.job_industry}</Typography>
                                 <Typography>{result.job_location[0].city}, {result.job_location[0].state}, {result.job_company_rating || ""} . Remote</Typography>
                                 <p>{result.job_location.length}+ locations</p>
@@ -105,7 +105,7 @@ class LandingPage extends Component {
                     <Grid container>
                         <Grid item sm={4}/>
                         <Grid item sm={6}>
-                            <Link to="/upload">
+                            <Link href="/upload" underline="none">
                                 Post Your Resume
                             </Link> - It only takes a few seconds
                         </Grid>
@@ -114,11 +114,10 @@ class LandingPage extends Component {
                     <Grid container>
                         <Grid item sm={5}/>
                         <Grid item sm={6}>
-                            <Typography>Employers: <Link onClick={this.uploadResume}
-                                    underline="none">
-                                    Post a job
-                                </Link>
-                            </Typography>
+                            Employers: <Link href="/"
+                                underline="none">
+                                Post a job
+                            </Link>
                         </Grid>
                     </Grid>
                 </div>
