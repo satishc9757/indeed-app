@@ -10,6 +10,7 @@ import store from './redux/store'
 import Home from './pages/general/home'
 import Login from './pages/user/login'
 import Signup from './pages/user/signup'
+import UploadResume from './pages/general/uploadResume'
 
 class App extends Component{
   render(){
@@ -21,6 +22,7 @@ class App extends Component{
               <Route exact path="/" element={<Home/>}/>
               <Route exact path="/login" element={<Login/>} />
               <Route exact path="/signup" element={<Signup/>} />
+              <Route path="/upload" element={<UploadResume/>} />
             </Routes>
           </div>
         </Router>
