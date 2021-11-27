@@ -19,5 +19,5 @@ let jobPostingsSchema = new mongoose.Schema({
     job_company_rating: {type: Number}
 });
 
-const jobPostingsModel = mongoose.model('jobPostings', jobPostingsSchema);
+const jobPostingsModel = mongoose.model('jobpostings', jobPostingsSchema);
 module.exports = jobPostingsModel;
