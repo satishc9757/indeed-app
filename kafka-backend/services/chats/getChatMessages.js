@@ -1,18 +1,20 @@
 const connection = require("../../database/mysqlConnection");
-
 async function handle_request(msg, callback) {
 
-    const searchQuery = msg.searchQuery;
+    const employerId = msg.employerId;
+    const jobSeekerId = msg.jobSeekerId;
+
     try{
-        let sql = 'SELECT * FROM company_details WHERE comp_name LIKE "'+searchQuery+'%"';
+        let sql = 'SELECT * FROM messages WHERE msg_sender= "'+employerId+'" AND msg_receiver= "'+jobSeekerId+'";';
+
         await connection.con.query(sql, (err, results)=>{
             if(err){
-                callback(null, results);
+                callback(null, []);
             }
             else{
                 callback(null, results);
             }
-        });
+        })
 
     } catch(err){
         callback({isError: true, error: err, status:500}, null);

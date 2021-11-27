@@ -3,19 +3,18 @@ const JobPostingsModel = require("../../models/JobPostingsModel");
 async function handle_request(msg, callback) {
 
     const compId = msg.compId;
-    const jobId = msg.jobId;
 
     try{
-        let results = await jobPostingsModel.find({$and:[
-            {job_id:jobId}, 
-            {job_company_id:compId}
-        ]});
-        if(results){
-            callback(null, results);
-        }
-        else{
-            callback(null, []);
-        }
+        let sql = 'SELECT * FROM company_details WHERE comp_id= "'+compId+'"';
+
+        await connection.con.query(sql, (err, results)=>{
+            if(err){
+                callback(null, []);
+            }
+            else{
+                callback(null, results);
+            }
+        })
 
     } catch(err){
         callback({isError: true, error: err, status:500}, null);

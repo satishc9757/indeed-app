@@ -7,10 +7,11 @@
 const kafka = require("../kafka/client");
 const Reviews = require("../models/CompanyReviewsModel");
 
-const redisConfig =  {
-  'port': 6379,
-  'host': '3.144.231.148'
-}
+// const redisConfig =  {
+//   'port': 6379,
+//   'host': '3.144.231.148'
+// }
+
 // const redisConfig =  require('../cache/redisConfig');
 // const redis_client = new Redis(redisConfig)
 
@@ -42,6 +43,7 @@ exports.getReviewsByCompanyIdKafka = async function (req, res) {
 
 exports.getReviewsByCompanyId = async function (req, res) {
   const compId = req.query.compId;
+  console.log("here in get reviews compId : "+compId);
   try {
     let reviews = await Reviews.findAll({ where: { review_company_Id: compId } });
 
@@ -107,24 +109,132 @@ exports.getReviewsByCompanyIdSQLCaching = async function (req, res) {
   };
 
 
-exports.getJobsByCompanyId = async function (req, res) {
-  const compId = req.query.compId;
-
-  try {
-    let jobPostings = await JobPostings.find({ jobCompanyId: compId });
-
-    if (jobPostings) {
+exports.getJobDetailsById = async function (req, res) {
+  const jobId = req.query.jobId;
+  console.log("Debug : jobId : "+jobId)
+  kafka.make_request("employer.getJobPosting", jobId, (err, results) => {
+    if (err){
       res
-      .status(200)
-      .end(JSON.stringify(jobPostings));
-    } else {
-      res
-      .status(200)
-      .end(JSON.stringify([]));
-    }
-  } catch (err) {
-    res
       .status(500)
-      .send(JSON.stringify({ message: "Something went wrong!", error: err }));
-  }
+      .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+    } else if(results.response_code == 200){
+
+        res.send(JSON.stringify(results.response_data));
+    } else {
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+    }
+  });
+
+
+};
+
+
+exports.createJobPosting = async function (req, res) {
+
+      const data = req.body;
+      kafka.make_request("employer.createJobPosting", data, (err, results) => {
+        if (err){
+          res
+          .status(500)
+          .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+        } else if(results.response_code == 200){
+
+            res.send(JSON.stringify(results.response_data));
+        } else {
+            res
+            .status(500)
+            .send(JSON.stringify({ message: "Something went wrong!", err }));
+        }
+      });
+
+};
+
+exports.updateJobPosting = async function (req, res) {
+
+  const data = req.body;
+  kafka.make_request("employer.updateJobPosting", data, (err, results) => {
+    if (err){
+      res
+      .status(500)
+      .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+    } else if(results.response_code == 200){
+
+        res.send(JSON.stringify(results.response_data));
+    } else {
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+    }
+  });
+
+};
+
+exports.updateApplicationStatus = async function (req, res) {
+
+  const data = req.body;
+  kafka.make_request("employer.updateApplicationStatus", data, (err, results) => {
+    if (err){
+      res
+      .status(500)
+      .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+    } else if(results.response_code == 200){
+
+        res.send(JSON.stringify(results.response_data));
+    } else {
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+    }
+  });
+
+};
+
+exports.getJobApplicationsByJobId = async function (req, res) {
+  const jobId = req.query.jobId;
+
+  kafka.make_request("employer.getJobApplications", jobId, (err, results) => {
+    if (err){
+      res
+      .status(500)
+      .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+    } else if(results.response_code == 200){
+
+        res.send(JSON.stringify(results.response_data));
+    } else {
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+    }
+  });
+
+
+};
+
+exports.updateEmployerDetails = async function (req, res) {
+  const emp=req.body;
+  console.log("request received to update profile at the backend",req.body)
+  kafka.make_request("update_employer_details", emp, (err, results) => {
+    if (err){
+      res
+      .status(500)
+      .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+    } else if(results.response_code == 200){
+
+        res.send(JSON.stringify("Update Successfully"));
+    } else {
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+    }
+  });
+
+
 };

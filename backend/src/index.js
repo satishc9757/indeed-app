@@ -81,6 +81,7 @@ const employerRouter = require("./routes/employerRouter");
 const companyRouter = require("./routes/companyRouter");
 const jobseekerRouter = require("./routes/jobseekerRouter");
 const adminRouter = require("./routes/adminRouter");
+const chatRouter = require("./routes/chatRouter");
 const { createKafkaTopics } = require("./kafka/topics");
 createKafkaTopics();
 
@@ -93,5 +94,6 @@ app.use("/api/employer", employerRouter);
 app.use("/api/company", companyRouter)
 app.use("/api/jobseeker", jobseekerRouter);
 app.use("/api/admin", adminRouter);
-
+app.use("/api/company", companyRouter);
+app.use("/api/chats", chatRouter);
 //app.use(cookieParser);
