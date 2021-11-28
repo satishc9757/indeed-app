@@ -151,6 +151,11 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
+      {
+        topic: "get_reviews",
+        partitions: 1,
+        replicationFactor: 1,
+      },
     ],
     (err) => {
       if (err) {
