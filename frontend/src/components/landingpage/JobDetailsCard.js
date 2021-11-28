@@ -11,6 +11,7 @@ import { Box } from '@mui/system';
 import { spacing } from '@mui/system';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { Grid, Rating } from '@mui/material';
 
 class JobDetailsCard extends Component {
 
@@ -34,7 +35,8 @@ class JobDetailsCard extends Component {
         job_what_you_love: "Our team helps multinational clients manage their mobile workforce by developing effective expatriate management solutions. You’ll be assisting our team manage business processes through expatriate software implementation, systems redesign and integration with enterprise Human Resources/Payroll solutions such as PeopleSoft, Workday, SAP and Human Resources Access.",
         job_what_you_need: "Understanding of advanced programming concepts and object oriented design patterns, emphasizing data structures and algorithms.",
         job_reviews: 8138,
-        jobSaved: false
+        jobSaved: false,
+        companyAvgRating: 4.3,
     }
 
     handleSaveAction = () => {
@@ -70,11 +72,27 @@ class JobDetailsCard extends Component {
                 <Typography gutterBottom variant="h5" component="div">
                 {this.state.job_title}
                 </Typography>
-                <Box display="flex" spacing={4}>
+                {/* <Box display="flex" spacing={4}>
                     <Link sx={{ml: "2rem"}}>{this.state.job_company_name}</Link>
                     <Typography variant="body2" sx={{ml: "2rem"}} color="text.secondary">4.3</Typography>
                     <Link sx={{m: "2rem"}}>{this.state.job_company_name}</Link>
-                </Box>
+                </Box> */}
+
+                <Grid container spacing={2}>
+                    <Grid item xs={2}>
+                        <Link>{this.state.job_company_name}</Link>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Rating name="read-only"
+                                value={this.state.companyAvgRating}
+                                size="small"
+                                defaultValue={2.5} precision={0.5}
+                                readOnly />
+                    </Grid>
+                    <Grid item xs={5}>
+                        <Link>{this.state.job_reviews} reviews</Link>
+                    </Grid>
+                </Grid>
 
                 <Typography variant="body2" color="text.secondary">
                     {this.state.job_location.city}, {this.state.job_location.state} {this.state.job_location.zipcode}

@@ -35,7 +35,7 @@ initDBConnection().then(async () => {
 const companyReviews = require('./services/company/getreviews')
 // const add_featured_review = require('./services/employer/add_featured_review')
 // const get_featured_reviews = require('./services/employer/get_featured_reviews')
-// const update_featured_review_status = require('./services/company/update_featured_review_status')
+//const update_featured_review_status = require('./services/company/update_featured_review_status')
 // const remove_featured_review = require('./services/employer/remove_featured_review')
 const update_employer = require('./services/employer/update_employer_details')
 const searchQuery = require('./services/jobSeeker/searchQuery')
@@ -65,6 +65,7 @@ const GetTopFiveMostReviewedCompanies = require('./services/admin/getTopFiveMost
 const GetTopFiveCompaniesAvgRating = require('./services/admin/getTopFiveCompaniesAvgRating');
 const GetTopFiveSeekersAccpReviews = require('./services/admin/getTopFiveSeekersAccpReviews');
 const GetTopTenCEORating = require('./services/admin/getTopTenCEORating');
+const CompanySearchQuery = require('./services/company/companySearchQuery');
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -129,4 +130,4 @@ handleTopicRequest("get_saved_jobs",getSavedJobs);
 // handleTopicRequest("admin.getTopFiveCompaniesAvgRating", GetTopFiveCompaniesAvgRating);
 // handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpReviews);
 // handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
-
+handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
