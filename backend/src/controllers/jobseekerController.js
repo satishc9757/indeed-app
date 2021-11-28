@@ -9,6 +9,7 @@ const multer = require('multer');
 const connection = require("../database/mysqlConnection");
 var kafka = require("../kafka/client");
 const jobPostings = require("../models/JobPostingsModel");
+const Jobseeker = require("../models/JobSeekersModel");
 // const jwt = require('jsonwebtoken');
 // const { secret } = require('../jwt/config');
 // const { auth } = require("../jwt/passport");
@@ -36,7 +37,7 @@ const mimetype = filetypes.test( file.mimetype );if( mimetype && extname ){
 const profileImgUpload = multer({
     storage: multerS3({
      s3: s3,
-     bucket: 'indeed-bucket-kd',
+     bucket: 'indeed-bucket-273',
      acl: 'public-read',
      key: function (req, file, cb) {
       cb(null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )
@@ -254,11 +255,11 @@ exports.getJobseekerResume = async function (req, res) {
 }
 
 exports.updateJobseekerResume = async function (req, res) {
-  console.log("inside update resume" + req)
+  console.log("inside update resume" , req.params)
   let seeker_id = req.params.seeker_id;
-  profileImgUpload(req, res, (error) => {
+  await profileImgUpload(req, res, async(error) => {
         console.log('requestOkokok', req.file);
-        console.log('requestOkokok', req.body);
+        console.log('requestOkokok', req.params,seeker_id);
         if (error) {
             console.log('errors', error);
             res.json({ error: error });
@@ -271,18 +272,18 @@ exports.updateJobseekerResume = async function (req, res) {
                 // If Success
                 const imageLocation = req.file.location;// Save the file name into database into profile model
                 const ID = req.file.ID;
-                Jobseeker.findOneAndUpdate({ "_id": seeker_id }, {
+                await Jobseeker.findOneAndUpdate({ "_id": seeker_id }, {
                     "seeker_resume_location": imageLocation
                 })
                     .exec().then(doc => {
                     console.log("Success add resume" + doc)
-                    let res={
-                        message: "Success",
-                        res: JSON.stringify(doc)
-                    }
-                    callback(null, res);
+                    // let res={
+                    //     message: "Success",
+                    //     res: JSON.stringify(doc)
+                    // }
+                    res.status(200).end("Resume Added!");
                 }).catch(error => {
-                    callback({ isError: true, error: error, status: 500 });
+                    return res.status(500).json({ error: error });
                 })
             }
         }

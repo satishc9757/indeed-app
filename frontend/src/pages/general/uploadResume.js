@@ -38,7 +38,7 @@ class uploadResume extends Component {
                 form_data.append('profileImage', this.state.selectedFile, this.state.selectedFile.name);
                 console.log(form_data.get('profileImage') )
 
-                await axios.post(`${backendServer}/jobseeker/resume`, form_data, {
+                await axios.post(`${backendServer}/jobseeker/resume/${this.state.jobSeekerId}`, form_data, {
                     headers: {
                     'accept': 'application/json',
                     'Accept-Language': 'en-US,en;q=0.8',
