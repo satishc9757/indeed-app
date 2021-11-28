@@ -23,7 +23,7 @@ class LandingPage extends Component {
             shadow:1,
             limit:1,
             page:1,
-            totalpage:1
+            totalpage:1,
         }
     }
     onPageChange = async(e, val)=>{
@@ -132,9 +132,14 @@ class LandingPage extends Component {
                     <Grid container>
                         <Grid item sm={4}/>
                         <Grid item sm={6}>
-                            <Link href="/upload" underline="none">
+                            {this.state.jobSeekerId &&
+                                <Link href="/upload" underline="none">
+                                    Post Your Resume
+                                </Link>}
+                            {!this.state.jobSeekerId &&
+                                <Link href="/login" underline="none">
                                 Post Your Resume
-                            </Link> - It only takes a few seconds
+                                </Link>} - It only takes a few seconds
                         </Grid>
                     </Grid>
                     <br/>

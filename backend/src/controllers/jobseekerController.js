@@ -254,6 +254,7 @@ exports.getJobseekerResume = async function (req, res) {
     })
 }
 
+
 exports.updateJobseekerResume = async function (req, res) {
   console.log("inside update resume" , req.params)
   let seeker_id = req.params.seeker_id;
@@ -274,8 +275,7 @@ exports.updateJobseekerResume = async function (req, res) {
                 const ID = req.file.ID;
                 await Jobseeker.findOneAndUpdate({ "_id": seeker_id }, {
                     "seeker_resume_location": imageLocation
-                })
-                    .exec().then(doc => {
+                }).exec().then(doc => {
                     console.log("Success add resume" + doc)
                     // let res={
                     //     message: "Success",
