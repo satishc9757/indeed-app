@@ -12,7 +12,8 @@ import Login from './pages/user/login'
 import Signup from './pages/user/signup'
 import UploadResume from './pages/general/uploadResume'
 import Snapshot from './pages/company/snapshot'
-import Common from './pages/company/common'
+import Common from './pages/company/common';
+import Jobseeker from './pages/user/jobseekerProfile'
 
 class App extends Component{
   render(){
@@ -26,8 +27,8 @@ class App extends Component{
               <Route exact path="/signup" element={<Signup/>} />
               <Route path="/upload" element={<UploadResume/>} />
               <Route exact path="/signup" element={<Signup />} />
-              <Route exact path="/snapshot" element={<Snapshot />} />
               <Route exact path="/common" element={<Common/>} />
+              <Route exact path="/jobseeker" element={<Jobseeker/>} />
 
             </Routes>
           </div>
