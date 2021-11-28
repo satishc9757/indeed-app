@@ -83,8 +83,10 @@ export default function Snapshot() {
                         
                         width="150"
                         height="200"
+
                         // src={dp}
                         alt="dp"></img>
+
                 </Grid>
                 <Grid item xs={9}>
                     <Stack spacing={8} direction="row">

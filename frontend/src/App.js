@@ -10,6 +10,7 @@ import store from './redux/store'
 import Home from './pages/general/home'
 import Login from './pages/user/login'
 import Signup from './pages/user/signup'
+import UploadResume from './pages/general/uploadResume'
 import Snapshot from './pages/company/snapshot'
 import Common from './pages/company/common';
 import Jobseeker from './pages/user/jobseekerProfile'
@@ -23,6 +24,8 @@ class App extends Component{
             <Routes>
               <Route exact path="/" element={<Home/>}/>
               <Route exact path="/login" element={<Login/>} />
+              <Route exact path="/signup" element={<Signup/>} />
+              <Route path="/upload" element={<UploadResume/>} />
               <Route exact path="/signup" element={<Signup />} />
               <Route exact path="/common" element={<Common/>} />
               <Route exact path="/jobseeker" element={<Jobseeker/>} />

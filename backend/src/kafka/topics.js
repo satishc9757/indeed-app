@@ -76,13 +76,8 @@ const createKafkaTopics = () => {
         topic: "save_jobs",
         partitions: 1,
         replicationFactor: 1,
-      } {
+      }, {
         topic: "delete_resume",
-        partitions: 1,
-        replicationFactor: 1,
-      },{
-        topic: "company_details",
-
         partitions: 1,
         replicationFactor: 1,
       },
