@@ -1,10 +1,13 @@
 import { Avatar, Container, Grid, Paper, Tab, Typography, TextField, Button } from "@material-ui/core";
-import { Card, CardActions, CardContent, Stack } from "@mui/material";
+
+import { Card, CardActions, CardContent, IconButton, Stack } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import JobDetails from "./jobDetails";
-
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 class Jobs extends Component {
 
@@ -134,7 +137,21 @@ class Jobs extends Component {
                         onChange = {this.onChange}
                         name="jobtitle"
                         id="jobtitle"
-                        label="Job title"/>
+                        label="Job title"
+                        size="small"
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment> <SearchIcon /> </InputAdornment>
+                              )
+                          }}
+                        // endAdornment={
+                        //     <InputAdornment position="end">
+                        //       <IconButton>
+                        //         {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                        //       </IconButton>
+                        //     </InputAdornment>
+                        //   }
+                          />
                     </Grid>
                     <Grid item sm={3}>
                         <TextField
@@ -143,11 +160,18 @@ class Jobs extends Component {
                         onChange = {this.onChange}
                         name="location"
                         id="location"
-                        label="Search by location"/>
+                        label="Search by location"
+                        size="small"
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment> <LocationOnIcon /> </InputAdornment>
+                              )
+                          }}
+                        />
                     </Grid>
                     <Grid item sm={3}>
                         <Button
-                        size="large"
+                        size="medium"
                         style={{ backgroundColor:"#2557a7", color: "white"}}
                         variant="contained"
                         onClick={this.search}>

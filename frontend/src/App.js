@@ -19,6 +19,7 @@ import { ThemeProvider} from '@material-ui/styles'
 import { createTheme} from '@mui/material/styles'
 import { blue } from '@mui/material/colors';
 import JobDetailsCard from './components/landingpage/JobDetailsCard'
+import CompanyReviews from './pages/companyReviews';
 
 const theme = createTheme({
   pallete: {
@@ -40,10 +41,10 @@ class App extends Component{
               <Route exact path="/login" element={<Login/>} />
               <Route exact path="/signup" element={<Signup/>} />
               <Route path="/upload" element={<UploadResume/>} />
-              <Route exact path="/signup" element={<Signup />} />
               <Route exact path="/common" element={<Common/>} />
               <Route exact path="/jobseeker" element={<Jobseeker/>} />
               <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
+              <Route exact path="/companyreviews" element={<CompanyReviews/>} />
             </Routes>
           </div>
         </Router>
