@@ -217,6 +217,7 @@ exports.getJobseekerResume = async function (req, res) {
 }
 
 exports.updateJobseekerResume = async function (req, res) {
+  console.log("called here!0", req.file)
     await kafka.make_request("update_resume", req.query, (err, resp) => {
         if (err || !resp) {
             console.log(err);
