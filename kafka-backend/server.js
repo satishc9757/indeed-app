@@ -32,11 +32,12 @@ initDBConnection().then(async () => {
   await global.DB.sync({ alter: false });
 });
 
-const companyReviews = require('./services/company/getreviews')
+const companyReviews = require("./services/company/getreviews");
 // const add_featured_review = require('./services/employer/add_featured_review')
 // const get_featured_reviews = require('./services/employer/get_featured_reviews')
 //const update_featured_review_status = require('./services/company/update_featured_review_status')
 // const remove_featured_review = require('./services/employer/remove_featured_review')
+
 const update_employer = require('./services/employer/update_employer_details')
 const searchQuery = require('./services/jobSeeker/searchQuery')
 const companyDetails = require('./services/company/getCompanyDetails');
@@ -65,7 +66,9 @@ const GetTopFiveMostReviewedCompanies = require('./services/admin/getTopFiveMost
 const GetTopFiveCompaniesAvgRating = require('./services/admin/getTopFiveCompaniesAvgRating');
 const GetTopFiveSeekersAccpReviews = require('./services/admin/getTopFiveSeekersAccpReviews');
 const GetTopTenCEORating = require('./services/admin/getTopTenCEORating');
+const getReviews  = require('./services/jobSeeker/getReviews');
 const CompanySearchQuery = require('./services/company/companySearchQuery');
+
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -103,7 +106,7 @@ handleTopicRequest("company.getreviews", companyReviews);
 // handleTopicRequest("get_featured_reviews", get_featured_reviews);
 // handleTopicRequest("remove_featured_review", remove_featured_review);
 handleTopicRequest("update_employer_details", update_employer);
-handleTopicRequest("search", searchQuery)
+handleTopicRequest("search", searchQuery);
 handleTopicRequest("company_details", companyDetails);
 handleTopicRequest("company.getCompanyJobPostings", CompanyJobPostings);
 handleTopicRequest("employer.createJobPosting", CreateJobPosting);
@@ -113,7 +116,7 @@ handleTopicRequest("employer.updateApplicationStatus", UpdateApplicationStatus);
 handleTopicRequest("employer.getJobApplications", JobApplicationsData);
 handleTopicRequest("jobseeker.createJobApplication", CreateJobApplication);
 handleTopicRequest("getChatMessage", GetChatMessage);
-handleTopicRequest("addChatMessage",AddChatMessage);
+handleTopicRequest("addChatMessage", AddChatMessage);
 handleTopicRequest("company.getJobStats", CompanyJobStats);
 handleTopicRequest("get_resume", get_resume);
 handleTopicRequest("update_resume", update_resume);
@@ -121,7 +124,8 @@ handleTopicRequest("delete_resume", delete_resume);
 handleTopicRequest("get_jobseeker_profile", get_jobseeker);
 handleTopicRequest("update_jobseeker_profile", update_jobseeker);
 // handleTopicRequest("save_jobs", saveJobs);
-handleTopicRequest("get_saved_jobs",getSavedJobs);
+handleTopicRequest("get_saved_jobs", getSavedJobs);
+handleTopicRequest("add_reviews", addReviews);
 // handleTopicRequest("admin.markReviewAsInappropriate", MarkReviewAsInappropriate);
 // handleTopicRequest("admin.getAllCompanies", GetAllCompanies);
 // handleTopicRequest("admin.getAllReviews", GetAllReviews);
@@ -130,4 +134,6 @@ handleTopicRequest("get_saved_jobs",getSavedJobs);
 // handleTopicRequest("admin.getTopFiveCompaniesAvgRating", GetTopFiveCompaniesAvgRating);
 // handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpReviews);
 // handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
+handleTopicRequest("get_reviews", getReviews);
 handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
+

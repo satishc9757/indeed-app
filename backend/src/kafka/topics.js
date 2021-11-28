@@ -152,6 +152,11 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+        topic: "get_reviews",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
         topic: "company.companySearchQuery",
         partitions: 1,
         replicationFactor: 1,
