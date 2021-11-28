@@ -34,8 +34,10 @@ class uploadResume extends Component {
             const form_data = new FormData();// If file selected
             if ( this.state.selectedFile ) 
             {
-                console.log("reaching here", this.state.selectedFile);
-                form_data.append( 'profileImage', this.state.selectedFile, this.state.selectedFile.name );
+                console.log("reaching here", this.state.selectedFile, this.state.selectedFile.name);
+                form_data.append('profileImage', this.state.selectedFile, this.state.selectedFile.name);
+                console.log(form_data.get('profileImage') )
+
                 await axios.post(`${backendServer}/jobseeker/resume`, form_data, {
                     headers: {
                     'accept': 'application/json',
@@ -68,6 +70,7 @@ class uploadResume extends Component {
                 alert( error );
                 });
             }
+
             else {
             // if file not selected throw error
             alert( 'Please upload file');
@@ -79,7 +82,6 @@ class uploadResume extends Component {
             })
         }
     }
-
     render() {
 
         return (    
