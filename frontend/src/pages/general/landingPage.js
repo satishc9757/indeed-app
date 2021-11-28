@@ -14,7 +14,9 @@ class LandingPage extends Component {
     constructor(){
         super();
         this.state={
-            results:[]
+            results:[],
+            raised: false,
+            shadow:1
         }
     }
     uploadResume = ()=>{
@@ -44,7 +46,11 @@ class LandingPage extends Component {
             this.state.results.forEach(result=>
                 jobCards.push(<div>
                     <Grid item>
-                        <Card fullWidth>
+                        <Card fullWidth 
+                        onMouseOver={()=> this.setState({raised:true, shadow:3})}
+                        onMouseOut={()=> this.setState({raised:false, shadow:1})}
+                        raised={this.state.raised}
+                        zdepth={this.state.shadow} >
                             <CardContent>
                                 <Link href="/" underline="none">{result.job_title}</Link>
                                 <Typography>{result.job_company_name} | {result.job_industry}</Typography>
@@ -129,6 +135,7 @@ class LandingPage extends Component {
                     <Grid direction="column" 
                     alignItems="flex-start" 
                     container
+                    style={{'margin':'2%'}}
                     >
                         {jobCards}
                     </Grid>

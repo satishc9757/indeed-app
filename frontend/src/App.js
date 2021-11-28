@@ -15,7 +15,21 @@ import Snapshot from './pages/company/snapshot'
 import Common from './pages/company/common';
 import Jobseeker from './pages/user/jobseekerProfile'
 
+import { ThemeProvider} from '@material-ui/styles'
+import { createTheme} from '@mui/material/styles'
+import { blue } from '@mui/material/colors';
+import JobDetailsCard from './components/landingpage/JobDetailsCard'
+
+const theme = createTheme({
+  pallete: {
+    primary:{
+      main: "#2557a7",
+    }
+  }
+});
+
 class App extends Component{
+
   render(){
     return (
       <Provider store={store}>
@@ -29,7 +43,7 @@ class App extends Component{
               <Route exact path="/signup" element={<Signup />} />
               <Route exact path="/common" element={<Common/>} />
               <Route exact path="/jobseeker" element={<Jobseeker/>} />
-
+              <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
             </Routes>
           </div>
         </Router>
