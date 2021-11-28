@@ -37,6 +37,7 @@ class uploadResume extends Component {
                 console.log("reaching here", this.state.selectedFile, this.state.selectedFile.name);
                 form_data.append('profileImage', this.state.selectedFile, this.state.selectedFile.name);
                 console.log(form_data.get('profileImage') )
+
                 await axios.post(`${backendServer}/jobseeker/resume`, form_data, {
                     headers: {
                     'accept': 'application/json',
@@ -68,7 +69,8 @@ class uploadResume extends Component {
                 // If another error
                 alert( error );
                 });
-            } 
+            }
+
             else {
             // if file not selected throw error
             alert( 'Please upload file');
