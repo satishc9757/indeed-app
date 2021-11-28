@@ -36,7 +36,7 @@ const mimetype = filetypes.test( file.mimetype );if( mimetype && extname ){
 const profileImgUpload = multer({
     storage: multerS3({
      s3: s3,
-     bucket: 'uber-bucket-kd',
+     bucket: 'indeed-bucket-kd',
      acl: 'public-read',
      key: function (req, file, cb) {
       cb(null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )
@@ -263,7 +263,7 @@ exports.updateJobseekerResume = async function (req, res) {
             console.log('errors', error);
             res.json({ error: error });
         } else {
-            // If File not found
+            //  If File not found
             if (req.file === undefined) {
                 //console.log( 'Error: No File Selected!' );
                 res.json('Error: No File Selected');
