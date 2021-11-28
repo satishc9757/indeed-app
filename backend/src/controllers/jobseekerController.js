@@ -263,7 +263,7 @@ exports.updateJobseekerResume = async function (req, res) {
             console.log('errors', error);
             res.json({ error: error });
         } else {
-            // If File not found
+            //  If File not found
             if (req.file === undefined) {
                 //console.log( 'Error: No File Selected!' );
                 res.json('Error: No File Selected');
