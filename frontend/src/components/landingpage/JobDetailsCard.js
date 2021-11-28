@@ -53,6 +53,7 @@ class JobDetailsCard extends Component {
 
     render() {
 
+
         const favIcon = this.state.jobSaved ? <FavoriteIcon /> : <FavoriteBorderIcon />;
         const undoButton = this.state.jobSaved ? <Button onClick={this.handleUndoAction}>Undo</Button> : null;
 
