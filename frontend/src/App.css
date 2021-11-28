@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.bold-heading{
+  font-weight: bold;
+}
+
+.light-grey-background {
+  background-color: lightgrey;
+}
+
+.selected-card {
+  background-color: lightgrey;
+  border-left: #2557a7;
+}

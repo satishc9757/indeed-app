@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import { Container, Grid, Tab, Tabs } from "@material-ui/core";
 import Snapshot from './snapshot';
 import JoinUs from "./joinus";
+import Jobs from "./jobs/jobs";
 import {Link, useLocation} from "react-router-dom";
 import { Box } from "@mui/system";
 
@@ -14,28 +15,28 @@ export default function Common() {
     const [tabResult, setTabResult] = React.useState();
     const search = useLocation().search;
 
-    
+
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
     };
-    
+
     useEffect(() => {
         const tab = new URLSearchParams(search).get('tab');
         setTabResult(tab);
     }, [search, tabResult])
-    
+
     const TabContent = () => {
         console.log(tabResult)
         if (tabResult === "snapshot") return <Snapshot />
         else if (tabResult === "join") return <JoinUs/>
         // else if (tabResult === "reviews") return </>
         // else if (tabResult === "salary") return </>
-        // else if (tabResult === "jobs") return </>
+        else if (tabResult === "jobs") return <Jobs/>
         // else if (tabResult==="benefits") return </>
-        //else if (tabResult==="photos") return </> 
-        else return <Snapshot/>    
+        //else if (tabResult==="photos") return </>
+        else return <Snapshot/>
         }
-    
+
 
     return (
         <div
@@ -81,6 +82,3 @@ export default function Common() {
         </div>
     )
 }
-
-
-
