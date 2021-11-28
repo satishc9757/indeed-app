@@ -24,10 +24,10 @@ const s3 = new aws.S3({
     }
     }
 
-   const profileImgUpload = multer({
+const profileImgUpload = multer({
     storage: multerS3({
      s3: s3,
-     bucket: 'uber-bucket-kd',
+     bucket: 'indeed-bucket-273',
      acl: 'public-read',
      key: function (req, file, cb) {
       cb(null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )
@@ -40,6 +40,7 @@ const s3 = new aws.S3({
    }).single('profileImage');
 
 async function handle_request(req, res) {
+    console.log("-------------------"+req)
     profileImgUpload(req, res, (error) => {
         console.log('requestOkokok', req.file);
         console.log('requestOkokok', req.body);

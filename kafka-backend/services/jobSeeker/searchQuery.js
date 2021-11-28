@@ -5,6 +5,8 @@ async function handle_request(msg, callback) {
 
     const searchQuery = msg.searchQuery;
     const location = msg.location;
+    const limit = msg.limit;
+    const page = msg.page;
     let jobCards;
     console.log("searchQuery",searchQuery, location);
     try{
@@ -13,7 +15,10 @@ async function handle_request(msg, callback) {
             jobCards = await jobPostings.find( {$or:[
                 {job_title: {$regex: '.*'+searchQuery+'.*'}},
                 {job_company_name: {$regex: '.*'+searchQuery+'.*'}}
-            ]});
+            ]})
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+            .exec();
         }
         else{
 
@@ -23,11 +28,21 @@ async function handle_request(msg, callback) {
                     {job_company_name: {$regex: '.*'+searchQuery+'.*'}}
                 ]},
                 {"job_location.state": location},
-            ]});
+            ]})
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+            .exec();
         }
         console.log(jobCards);
+        const count = await jobPostings.countDocuments();
+        const data = {
+            jobCards,
+            totalPages: Math.ceil(count / limit),
+            currentPage: page
+        };
+        console.log("data", data);
         if(jobCards){
-            callback(null, jobCards);
+            callback(null, data);
         }
         else{
             console.log(err);

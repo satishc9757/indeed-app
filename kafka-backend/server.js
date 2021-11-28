@@ -35,37 +35,40 @@ initDBConnection().then(async () => {
 const companyReviews = require("./services/company/getreviews");
 // const add_featured_review = require('./services/employer/add_featured_review')
 // const get_featured_reviews = require('./services/employer/get_featured_reviews')
-// const update_featured_review_status = require('./services/company/update_featured_review_status')
+//const update_featured_review_status = require('./services/company/update_featured_review_status')
 // const remove_featured_review = require('./services/employer/remove_featured_review')
-const update_employer = require("./services/employer/update_employer_details");
-const searchQuery = require("./services/jobSeeker/searchQuery");
-const companyDetails = require("./services/company/getCompanyDetails");
-const CreateJobPosting = require("./services/employer/createJobPosting");
-const UpdateJobPosting = require("./services/employer/updateJobPosting");
-const JobPostingData = require("./services/employer/getJobPosting");
-const CompanyJobPostings = require("./services/company/getJobPostings");
-const CreateJobApplication = require("./services/jobSeeker/createJobApplication");
-const UpdateApplicationStatus = require("./services/employer/updateApplicationStatus");
-const JobApplicationsData = require("./services/employer/getJobApplications");
-const GetChatMessage = require("./services/chats/getChatMessages");
-const AddChatMessage = require("./services/chats/addChatMessage");
-const CompanyJobStats = require("./services/company/getJobStats");
-const update_jobseeker = require("./services/jobseeker/update_jobseeker_profile");
-const get_jobseeker = require("./services/jobseeker/get_jobseeker_profile");
-const get_resume = require("./services/jobseeker/get_resume");
-const update_resume = require("./services/jobseeker/update_resume");
-const delete_resume = require("./services/jobseeker/delete_resume");
-const getSavedJobs = require("./services/jobSeeker/getSavedJobs");
-const addReviews = require("./services/jobSeeker/addReviews");
-const MarkReviewAsInappropriate = require("./services/admin/markReviewAsInappropriate");
-const GetAllCompanies = require("./services/admin/getAllCompanies");
-const GetAllReviews = require("./services/admin/getAllReviews");
-const GetNumberOfReviewsPerDay = require("./services/admin/getNumberOfReviewsPerDay");
-const GetTopFiveMostReviewedCompanies = require("./services/admin/getTopFiveMostReviewedCompanies");
-const GetTopFiveCompaniesAvgRating = require("./services/admin/getTopFiveCompaniesAvgRating");
-const GetTopFiveSeekersAccpReviews = require("./services/admin/getTopFiveSeekersAccpReviews");
-const GetTopTenCEORating = require("./services/admin/getTopTenCEORating");
-const getReviews  = require("./services/jobSeeker/getReviews");
+
+const update_employer = require('./services/employer/update_employer_details')
+const searchQuery = require('./services/jobSeeker/searchQuery')
+const companyDetails = require('./services/company/getCompanyDetails');
+const CreateJobPosting = require('./services/employer/createJobPosting');
+const UpdateJobPosting = require('./services/employer/updateJobPosting');
+const JobPostingData = require('./services/employer/getJobPosting');
+const CompanyJobPostings = require('./services/company/getJobPostings');
+const CreateJobApplication = require('./services/jobSeeker/createJobApplication');
+const UpdateApplicationStatus = require('./services/employer/updateApplicationStatus');
+const JobApplicationsData = require('./services/employer/getJobApplications');
+const GetChatMessage = require('./services/chats/getChatMessages');
+const AddChatMessage = require('./services/chats/addChatMessage');
+const CompanyJobStats = require('./services/company/getJobStats');
+const update_jobseeker = require('./services/jobseeker/update_jobseeker_profile')
+const get_jobseeker = require('./services/jobseeker/get_jobseeker_profile')
+const get_resume = require('./services/jobseeker/get_resume')
+const update_resume = require('./services/jobseeker/update_resume')
+const delete_resume = require('./services/jobseeker/delete_resume')
+const getSavedJobs = require("./services/jobSeeker/getSavedJobs")
+const addReviews = require("./services/jobSeeker/addReviews")
+const MarkReviewAsInappropriate = require('./services/admin/markReviewAsInappropriate');
+const GetAllCompanies = require('./services/admin/getAllCompanies');
+const GetAllReviews = require('./services/admin/getAllReviews');
+const GetNumberOfReviewsPerDay = require('./services/admin/getNumberOfReviewsPerDay');
+const GetTopFiveMostReviewedCompanies = require('./services/admin/getTopFiveMostReviewedCompanies');
+const GetTopFiveCompaniesAvgRating = require('./services/admin/getTopFiveCompaniesAvgRating');
+const GetTopFiveSeekersAccpReviews = require('./services/admin/getTopFiveSeekersAccpReviews');
+const GetTopTenCEORating = require('./services/admin/getTopTenCEORating');
+const getReviews  = require('./services/jobSeeker/getReviews');
+const CompanySearchQuery = require('./services/company/companySearchQuery');
+
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -132,3 +135,5 @@ handleTopicRequest("add_reviews", addReviews);
 // handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpReviews);
 // handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
 handleTopicRequest("get_reviews", getReviews);
+handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
+
