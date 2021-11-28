@@ -14,6 +14,7 @@ import UploadResume from './pages/general/uploadResume'
 import Snapshot from './pages/company/snapshot'
 import Common from './pages/company/common';
 import Jobseeker from './pages/user/jobseekerProfile'
+import Salaries from './pages/general/salaries'
 
 class App extends Component{
   render(){
@@ -29,6 +30,7 @@ class App extends Component{
               <Route exact path="/signup" element={<Signup />} />
               <Route exact path="/common" element={<Common/>} />
               <Route exact path="/jobseeker" element={<Jobseeker/>} />
+              <Route exact path="/salaries" element={<Salaries/>} />
 
             </Routes>
           </div>
