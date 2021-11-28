@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './App.css'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import FeaturedReviewCard from './components/Reviews/FeaturedReviewCard'
+import AutoCompleteSearch from './components/Reviews/AutoCompleteSearch'
 
 //redux
 import {Provider} from 'react-redux'
@@ -30,6 +32,8 @@ const theme = createTheme({
     }
   }
 });
+import SalaryReviewTabCard from './components/Reviews/SalaryReviewTabCard'
+import SalaryReviewColumn from './components/Reviews/SalaryReviewColumn'
 
 class App extends Component{
 
@@ -49,6 +53,11 @@ class App extends Component{
               <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
               <Route exact path="/companyreviews" element={<CompanyReviews/>} />
               <Route exact path="/applicants" element={<Applicants/>} />
+              <Route exact path="/reviewCard" element={<FeaturedReviewCard />} />
+              <Route exact path="/autoComplete" element={<AutoCompleteSearch />} />
+              <Route exact path="/salaryTab" element={<SalaryReviewTabCard />} />
+              <Route exact path="/addSalaryCol" element={<SalaryReviewColumn />} />
+
             </Routes>
           </div>
         </Router>

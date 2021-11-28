@@ -39,6 +39,9 @@ const companyReviews = require("./services/company/getreviews");
 // const remove_featured_review = require('./services/employer/remove_featured_review')
 const login = require('./services/users/login');
 const signup = require('./services/users/signup');
+const companyReviews = require('./services/company/getreviews')
+const get_featured_reviews = require('./services/company/get_featured_reviews')
+const update_featured_review_status = require('./services/company/update_featured_review_status')
 const update_employer = require('./services/employer/update_employer_details')
 const searchQuery = require('./services/jobSeeker/searchQuery')
 const companyDetails = require('./services/company/getCompanyDetails');
@@ -108,6 +111,8 @@ handleTopicRequest("company.getreviews", companyReviews);
 // handleTopicRequest("remove_featured_review", remove_featured_review);
 handleTopicRequest("login", login);
 handleTopicRequest("signup", signup);
+handleTopicRequest("update_featured_review_status", update_featured_review_status);
+handleTopicRequest("get_featured_reviews", get_featured_reviews);
 handleTopicRequest("update_employer_details", update_employer);
 handleTopicRequest("search", searchQuery);
 handleTopicRequest("company_details", companyDetails);
