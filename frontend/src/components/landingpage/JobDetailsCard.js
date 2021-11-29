@@ -15,29 +15,29 @@ import { Grid, Rating } from '@mui/material';
 
 class JobDetailsCard extends Component {
 
-    // state = {
-    //     job_company_id: "Comp1",
-    //     job_title: "Software Engineer Intern",
-    //     job_company_name: "PWC",
-    //     job_company_image_link: "https://uber-eats-store-0144.s3.us-east-2.amazonaws.com/images/others/pwc_bg.jpeg",
-    //     job_industry: "Information Technology",
-    //     job_location: {
-    //         city: "San Jose",
-    //         street:"7th Street",
-    //         state: "CA",
-    //         country: "USA",
-    //         zipcode: "95126",
-    //     },
-    //     job_work_type: "Internship",
-    //     job_salary_details: "$50/hour",
-    //     job_compensation: 50,
-    //     job_what_you_do: "As an Intern / Trainee, you'll work as part of a team of problem solvers, helping to solve complex business issues from strategy to execution. PwC Professional skills and responsibilities for this management level.",
-    //     job_what_you_love: "Our team helps multinational clients manage their mobile workforce by developing effective expatriate management solutions. You’ll be assisting our team manage business processes through expatriate software implementation, systems redesign and integration with enterprise Human Resources/Payroll solutions such as PeopleSoft, Workday, SAP and Human Resources Access.",
-    //     job_what_you_need: "Understanding of advanced programming concepts and object oriented design patterns, emphasizing data structures and algorithms.",
-    //     job_reviews: 8138,
-    //     jobSaved: false,
-    //     companyAvgRating: 4.3,
-    // }
+    state = {
+        job_company_id: "Comp1",
+        job_title: "Software Engineer Intern",
+        job_company_name: "PWC",
+        job_company_image_link: "https://uber-eats-store-0144.s3.us-east-2.amazonaws.com/images/others/pwc_bg.jpeg",
+        job_industry: "Information Technology",
+        job_location: {
+            city: "San Jose",
+            street:"7th Street",
+            state: "CA",
+            country: "USA",
+            zipcode: "95126",
+        },
+        job_work_type: "Internship",
+        job_salary_details: "$50/hour",
+        job_compensation: 50,
+        job_what_you_do: "As an Intern / Trainee, you'll work as part of a team of problem solvers, helping to solve complex business issues from strategy to execution. PwC Professional skills and responsibilities for this management level.",
+        job_what_you_love: "Our team helps multinational clients manage their mobile workforce by developing effective expatriate management solutions. You’ll be assisting our team manage business processes through expatriate software implementation, systems redesign and integration with enterprise Human Resources/Payroll solutions such as PeopleSoft, Workday, SAP and Human Resources Access.",
+        job_what_you_need: "Understanding of advanced programming concepts and object oriented design patterns, emphasizing data structures and algorithms.",
+        job_reviews: 8138,
+        jobSaved: false,
+        companyAvgRating: 4.3,
+    }
 
     handleSaveAction = () => {
         if(!this.state.jobSaved){
