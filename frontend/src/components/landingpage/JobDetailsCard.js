@@ -15,29 +15,29 @@ import { Grid, Rating } from '@mui/material';
 
 class JobDetailsCard extends Component {
 
-    state = {
-        job_company_id: "Comp1",
-        job_title: "Software Engineer Intern",
-        job_company_name: "PWC",
-        job_company_image_link: "https://uber-eats-store-0144.s3.us-east-2.amazonaws.com/images/others/pwc_bg.jpeg",
-        job_industry: "Information Technology",
-        job_location: {
-            city: "San Jose",
-            street:"7th Street",
-            state: "CA",
-            country: "USA",
-            zipcode: "95126",
-        },
-        job_work_type: "Internship",
-        job_salary_details: "$50/hour",
-        job_compensation: 50,
-        job_what_you_do: "As an Intern / Trainee, you'll work as part of a team of problem solvers, helping to solve complex business issues from strategy to execution. PwC Professional skills and responsibilities for this management level.",
-        job_what_you_love: "Our team helps multinational clients manage their mobile workforce by developing effective expatriate management solutions. You’ll be assisting our team manage business processes through expatriate software implementation, systems redesign and integration with enterprise Human Resources/Payroll solutions such as PeopleSoft, Workday, SAP and Human Resources Access.",
-        job_what_you_need: "Understanding of advanced programming concepts and object oriented design patterns, emphasizing data structures and algorithms.",
-        job_reviews: 8138,
-        jobSaved: false,
-        companyAvgRating: 4.3,
-    }
+    // state = {
+    //     job_company_id: "Comp1",
+    //     job_title: "Software Engineer Intern",
+    //     job_company_name: "PWC",
+    //     job_company_image_link: "https://uber-eats-store-0144.s3.us-east-2.amazonaws.com/images/others/pwc_bg.jpeg",
+    //     job_industry: "Information Technology",
+    //     job_location: {
+    //         city: "San Jose",
+    //         street:"7th Street",
+    //         state: "CA",
+    //         country: "USA",
+    //         zipcode: "95126",
+    //     },
+    //     job_work_type: "Internship",
+    //     job_salary_details: "$50/hour",
+    //     job_compensation: 50,
+    //     job_what_you_do: "As an Intern / Trainee, you'll work as part of a team of problem solvers, helping to solve complex business issues from strategy to execution. PwC Professional skills and responsibilities for this management level.",
+    //     job_what_you_love: "Our team helps multinational clients manage their mobile workforce by developing effective expatriate management solutions. You’ll be assisting our team manage business processes through expatriate software implementation, systems redesign and integration with enterprise Human Resources/Payroll solutions such as PeopleSoft, Workday, SAP and Human Resources Access.",
+    //     job_what_you_need: "Understanding of advanced programming concepts and object oriented design patterns, emphasizing data structures and algorithms.",
+    //     job_reviews: 8138,
+    //     jobSaved: false,
+    //     companyAvgRating: 4.3,
+    // }
 
     handleSaveAction = () => {
         if(!this.state.jobSaved){
@@ -60,7 +60,7 @@ class JobDetailsCard extends Component {
         const undoButton = this.state.jobSaved ? <Button onClick={this.handleUndoAction}>Undo</Button> : null;
 
         return (
-            <Card sx={{ maxWidth: 545, maxHeight:545 }} display='flex'>
+            <Card sx={{ maxWidth: 545, maxHeight:445 }} display='flex' style={{overflow: "scroll"}}>
             <CardMedia
                 component="img"
                 alt="green iguana"
@@ -70,7 +70,7 @@ class JobDetailsCard extends Component {
 
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                {this.state.job_title}
+                {this.props.job.job_title}
                 </Typography>
                 {/* <Box display="flex" spacing={4}>
                     <Link sx={{ml: "2rem"}}>{this.state.job_company_name}</Link>
@@ -80,11 +80,11 @@ class JobDetailsCard extends Component {
 
                 <Grid container spacing={2}>
                     <Grid item xs={2}>
-                        <Link>{this.state.job_company_name}</Link>
+                        <Link>{this.props.job.job_company_name}</Link>
                     </Grid>
                     <Grid item xs={4}>
                         <Rating name="read-only"
-                                value={this.state.companyAvgRating}
+                                value={this.props.job.job_reviews}
                                 size="small"
                                 defaultValue={2.5} precision={0.5}
                                 readOnly />
@@ -95,10 +95,10 @@ class JobDetailsCard extends Component {
                 </Grid>
 
                 <Typography variant="body2" color="text.secondary">
-                    {this.state.job_location.city}, {this.state.job_location.state} {this.state.job_location.zipcode}
+                    {this.props.job.job_location[0].city}, {this.props.job.job_location[0].state}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    {this.state.job_work_type}
+                    {this.props.job.job_work_type}
                 </Typography>
             </CardContent>
             <CardActions>
@@ -120,7 +120,7 @@ class JobDetailsCard extends Component {
                         Job Details
                     </Typography>
                     <Typography paragraph>
-                        Salary Details: {this.state.job_salary_details}
+                        Salary Details: {this.props.job.job_salary_details}
                     </Typography>
 
                     <Typography paragraph>
@@ -131,23 +131,25 @@ class JobDetailsCard extends Component {
                 <Typography gutterBottom variant="h6" component="div">
                     Full Job Description
                 </Typography>
+                <Typography paragraph>
+                        Department:  {this.props.job.department}
+                </Typography>
+                <Typography paragraph>
+                        Job Location:  {this.props.job.job_location[0].city}, {this.props.job.job_location[0].state}, {this.props.job.job_location[0].country}, {this.props.job.job_location[0].zipcode}
+                </Typography>
+                <Typography paragraph>
+                        Compensation:  {this.props.job.job_compensation}
+                </Typography>
+
 
                 <Typography paragraph>
-                        Job Location:  {this.state.job_location.city}, {this.state.job_location.state} {this.state.job_location.zipcode}
+                    {this.props.job.job_what_you_do}
                 </Typography>
                 <Typography paragraph>
-                        Compensation:  {this.state.job_compensation}
-                </Typography>
-
-
-                <Typography paragraph>
-                    {this.state.job_what_you_do}
+                    {this.props.job.job_what_you_love}
                 </Typography>
                 <Typography paragraph>
-                    {this.state.job_what_you_love}
-                </Typography>
-                <Typography paragraph>
-                    {this.state.job_what_you_need}
+                    {this.props.job.job_what_you_need}
                 </Typography>
 
             </CardContent>
