@@ -60,7 +60,7 @@ class JobDetailsCard extends Component {
         const undoButton = this.state.jobSaved ? <Button onClick={this.handleUndoAction}>Undo</Button> : null;
 
         return (
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ maxWidth: 545, maxHeight:545 }} display='flex'>
             <CardMedia
                 component="img"
                 alt="green iguana"

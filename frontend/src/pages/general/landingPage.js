@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import { CardActions, CardContent, TextField, Typography } from '@material-ui/core';
+import { CardActions, CardContent, TableBody, TableRow, TableCell, TableContainer, TextField, Typography } from '@material-ui/core';
+import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Button from '@material-ui/core/Button';
+import Table from '@mui/material/Table';
+import JobDetailsCard from '../../components/landingpage/JobDetailsCard'
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { InputLabel } from '@mui/material';
-// import {Link} from 'react-router-dom';
-import Link from '@material-ui/core/Link'
+import {Link} from 'react-router-dom';
+// import Link from '@material-ui/core/Link'
 import { Pagination } from '@mui/material';
 import Card from '@mui/material/Card';
 import axios from 'axios';
@@ -21,9 +24,9 @@ class LandingPage extends Component {
             results:[],
             raised: false,
             shadow:1,
-            limit:1,
+            limit:2,
             page:1,
-            totalpage:1,
+            totalpage:1
         }
     }
     onPageChange = async(e, val)=>{
@@ -31,6 +34,13 @@ class LandingPage extends Component {
             page: val
         })
         await this.search();
+    }
+
+    jobId = async(e, id)=>{
+        console.log("job id:",e);
+        await this.setState({
+            jobId:e
+        })
     }
 
     onChange = async(e)=>{
@@ -64,26 +74,48 @@ class LandingPage extends Component {
         if('jobCards' in this.state.results){
             this.state.results['jobCards'].forEach(result=>
                 jobCards.push(
-                <div>
-                    <Grid item>
-                        <Card fullWidth 
-                        onMouseOver={()=> this.setState({raised:true, shadow:3})}
-                        onMouseOut={()=> this.setState({raised:false, shadow:1})}
-                        raised={this.state.raised}
-                        zdepth={this.state.shadow} >
-                            <CardContent>
-                                <Link href="/" underline="none">{result.job_title}</Link>
-                                <Typography>{result.job_company_name} | {result.job_industry}</Typography>
-                                <Typography>{result.job_location[0].city}, {result.job_location[0].state}, {result.job_company_rating || ""} . Remote</Typography>
-                                <p>{result.job_location.length}+ locations</p>
-                                <Typography>Compensation: {result.job_salary_details} [Full Time]</Typography>
-                                <Typography>Description: {result.job_what_you_need}</Typography>
-                            </CardContent>
-                            <CardActions>
-                            </CardActions>
-                        </Card>
-                    </Grid><br/>
-                </div>
+                    <div>
+                        <TableRow>
+                            <TableCell>
+                                <Card fullWidth 
+                                    onMouseOver={()=> this.setState({raised:true, shadow:3})}
+                                    onMouseOut={()=> this.setState({raised:false, shadow:1})}
+                                    raised={this.state.raised}
+                                    zdepth={this.state.shadow} >
+                                        <CardContent>
+                                            <Button onClick={()=>this.jobId(result.job_id)}>{result.job_title}</Button>
+                                            <Typography>{result.job_company_name} | {result.job_industry}</Typography>
+                                            <Typography>{result.job_location[0].city}, {result.job_location[0].state}, {result.job_company_rating || ""} . Remote</Typography>
+                                            <p>{result.job_location.length}+ locations</p>
+                                            <Typography>Compensation: {result.job_salary_details} [Full Time]</Typography>
+                                            <Typography>Description: {result.job_what_you_need}</Typography>
+                                        </CardContent>
+                                        <CardActions>
+                                        </CardActions>
+                                </Card>
+                            </TableCell>
+                        </TableRow>
+                    </div>
+                // <div>
+                //     <Grid item>
+                //         <Card fullWidth 
+                //         onMouseOver={()=> this.setState({raised:true, shadow:3})}
+                //         onMouseOut={()=> this.setState({raised:false, shadow:1})}
+                //         raised={this.state.raised}
+                //         zdepth={this.state.shadow} >
+                //             <CardContent>
+                //                 <Link to="/jobdetails">{result.job_title}</Link>
+                //                 <Typography>{result.job_company_name} | {result.job_industry}</Typography>
+                //                 <Typography>{result.job_location[0].city}, {result.job_location[0].state}, {result.job_company_rating || ""} . Remote</Typography>
+                //                 <p>{result.job_location.length}+ locations</p>
+                //                 <Typography>Compensation: {result.job_salary_details} [Full Time]</Typography>
+                //                 <Typography>Description: {result.job_what_you_need}</Typography>
+                //             </CardContent>
+                //             <CardActions>
+                //             </CardActions>
+                //         </Card>
+                //     </Grid><br/>
+                // </div>
                 )
             )
         }
@@ -133,11 +165,11 @@ class LandingPage extends Component {
                         <Grid item sm={4}/>
                         <Grid item sm={6}>
                             {this.state.jobSeekerId &&
-                                <Link href="/upload" underline="none">
+                                <Link to="/upload" underline="none">
                                     Post Your Resume
                                 </Link>}
                             {!this.state.jobSeekerId &&
-                                <Link href="/login" underline="none">
+                                <Link to="/login" underline="none">
                                 Post Your Resume
                                 </Link>} - It only takes a few seconds
                         </Grid>
@@ -146,7 +178,7 @@ class LandingPage extends Component {
                     <Grid container>
                         <Grid item sm={5}/>
                         <Grid item sm={6}>
-                            Employers: <Link href="/"
+                            Employers: <Link to="/"
                                 underline="none">
                                 Post a job
                             </Link>
@@ -155,9 +187,27 @@ class LandingPage extends Component {
                 </div>
                 }
 
-                {'jobCards' in this.state.results &&
+                {'jobCards' in this.state.results && this.state.results.jobCards.length>0 &&
                 <div>
-                    <Grid direction="column" 
+                    <TableContainer component={Paper}>
+                        <Table>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell>
+                                        <TableContainer>
+                                            <Table>
+                                                <TableBody>
+                                                    {jobCards}
+                                                </TableBody>
+                                            </Table>
+                                        </TableContainer>
+                                    </TableCell>
+                                    <TableCell><JobDetailsCard/></TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    {/* <Grid direction="column" 
                     alignItems="flex-start" 
                     container
                     style={{'margin':'2%'}}
@@ -174,7 +224,7 @@ class LandingPage extends Component {
                         <MenuItem value={5}>5</MenuItem>
                         <MenuItem value={10}>10</MenuItem>
                     </Select>
-                    <Pagination count={this.state.totalpage} page={this.state.page} onChange={this.onPageChange} />
+                    <Pagination count={this.state.totalpage} page={this.state.page} onChange={this.onPageChange} /> */}
                 </div>
                 }
             </Box>
