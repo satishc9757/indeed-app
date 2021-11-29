@@ -14,6 +14,7 @@ import UploadResume from './pages/general/uploadResume'
 import Snapshot from './pages/company/snapshot'
 import Common from './pages/company/common';
 import Jobseeker from './pages/user/jobseekerProfile'
+import Salaries from './pages/general/salaries'
 
 import { ThemeProvider} from '@material-ui/styles'
 import { createTheme} from '@mui/material/styles'
@@ -43,8 +44,10 @@ class App extends Component{
               <Route path="/upload" element={<UploadResume/>} />
               <Route exact path="/common" element={<Common/>} />
               <Route exact path="/jobseeker" element={<Jobseeker/>} />
+              <Route exact path="/salaries" element={<Salaries/>} />
               <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
               <Route exact path="/companyreviews" element={<CompanyReviews/>} />
+
             </Routes>
           </div>
         </Router>
