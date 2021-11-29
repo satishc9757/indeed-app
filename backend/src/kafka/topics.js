@@ -13,6 +13,16 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+        topic: "login",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "signup",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
         topic: "company.getreviews",
         partitions: 1,
         replicationFactor: 1,
