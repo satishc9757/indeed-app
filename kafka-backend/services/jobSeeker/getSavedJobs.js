@@ -4,7 +4,6 @@ const jobPostings = require("../../models/JobPostingsModel");
 
 async function handle_request(msg, callback) {
   const jobSeekerId = msg.jobSeekerId;
-  console.log(jobSeekerId);
   try {
     const jobIds = await jobSeeker
       .findOne({
