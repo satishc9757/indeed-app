@@ -2,14 +2,52 @@
 // const { unlinkSync } = require('fs');
 // const mongoose = require('mongoose');
 // const ObjectId = mongoose.Types.ObjectId;
+const aws = require('aws-sdk');
+const path = require( 'path' );
+const multerS3 = require( 'multer-s3' );
+const multer = require('multer');
 const connection = require("../database/mysqlConnection");
 var kafka = require("../kafka/client");
 const jobPostings = require("../models/JobPostingsModel");
+const Jobseeker = require("../models/JobSeekersModel");
 // const jwt = require('jsonwebtoken');
 // const { secret } = require('../jwt/config');
 // const { auth } = require("../jwt/passport");
 // auth();
 
+const s3 = new aws.S3({
+    accessKeyId: 'AKIAXUKC3TYXKYCP3T44',
+    secretAccessKey: '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',
+    Bucket: 'indeed-bucket-273'
+   });
+
+function checkFileType( file, cb ){
+// Allowed ext
+const filetypes = /jpeg|jpg|png|gif|pdf/;
+// Check ext
+const extname = filetypes.test( path.extname( file.originalname ).toLowerCase());
+// Check mime
+const mimetype = filetypes.test( file.mimetype );if( mimetype && extname ){
+    return cb( null, true );
+} else {
+    cb( 'Error: Images Only!' );
+}
+}
+
+const profileImgUpload = multer({
+    storage: multerS3({
+     s3: s3,
+     bucket: 'indeed-bucket-273',
+     acl: 'public-read',
+     key: function (req, file, cb) {
+      cb(null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )
+     }
+    }),
+    limits:{ fileSize: 2000000 }, // In bytes: 2000000 bytes = 2 MB
+    fileFilter: function( req, file, cb ){
+     checkFileType( file, cb );
+    }
+   }).single('profileImage');
 
 // exports.getSearchByTitleorLocation = async function (req, res) {
 //   const searchQuery = req.query.searchQuery;
@@ -46,39 +84,35 @@ const jobPostings = require("../models/JobPostingsModel");
 //   }
 // };
 
-
-exports.getSearch = async function (req, res){
-    const searchQuery = req.query.searchQuery;
-    console.log(searchQuery);
-    try {
-        kafka.make_request("search", req.query, (err, resp) => {
-            if (err || !resp) {
-              console.log(err);
-                res
-                .status(500)
-                .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
-            }
-            else{
-                res
-                .status(200)
-                .end(JSON.stringify(resp));
-            }
-        });
-        
-    } catch (err) {
-      res
+exports.getSearch = async function (req, res) {
+  const searchQuery = req.query.searchQuery;
+  console.log(searchQuery);
+  try {
+    kafka.make_request("search", req.query, (err, resp) => {
+      if (err || !resp) {
+        console.log(err);
+        res
+          .status(500)
+          .send(
+            JSON.stringify({ message: "Something went wrong!", error: err })
+          );
+      } else {
+        res.status(200).end(JSON.stringify(resp));
+      }
+    });
+  } catch (err) {
+    res
       .status(500)
       .send(JSON.stringify({ message: "Something went wrong!", error: err }));
   }
 };
-
 
 exports.getSearchByCompanyName = async function (req, res) {
   try {
     kafka.make_request("search_byCompanyName", req.query, (err, resp) => {
       if (err || !resp) {
         console.log(err);
-          res
+        res
           .status(500)
           .send(
             JSON.stringify({ message: "Something went wrong!", error: err })
@@ -96,7 +130,6 @@ exports.getSearchByCompanyName = async function (req, res) {
 
 exports.saveJobs = async function (req, res) {
   try {
-    console.log("In save Jobs");
     kafka.make_request(
       "save_jobs",
       { ...req.body, jobSeekerId: req.query.jobSeekerId },
@@ -143,7 +176,140 @@ exports.getSavedJobs = async function (req, res) {
 
 exports.addReviews = async function (req, res) {
   try {
-    kafka.make_request("add_reviews", req.query, (err, resp) => {
+    kafka.make_request(
+      "add_reviews",
+      { ...req.query, ...req.body },
+      (err, resp) => {
+        if (err || !resp) {
+          console.log(err);
+          res
+            .status(500)
+            .send(
+              JSON.stringify({ message: "Something went wrong!", error: err })
+            );
+        } else {
+          res.status(200).end(JSON.stringify(resp));
+        }
+      }
+    );
+  } catch (err) {
+    res
+      .status(500)
+      .send(JSON.stringify({ message: "Something went wrong!", error: err }));
+  }
+};
+
+exports.createJobApplication = async function (req, res) {
+  const data = req.body;
+  kafka.make_request("jobseeker.createJobApplication", data, (err, results) => {
+    if (err) {
+      res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+    } else if (results.response_code == 200) {
+      res.send(JSON.stringify(results.response_data));
+    } else {
+      res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+    }
+  });
+};
+
+exports.getJobseekerProfile = async function (req, res) {
+  console.log(req.query);
+  await kafka.make_request("get_jobseeker_profile", req.query, (err, resp) => {
+    if (err || !resp) {
+      console.log(err);
+      return err.status(500).json({ error: err });
+    }
+    res.send(resp);
+  });
+};
+
+exports.updateJobseekerProfile = async function (req, res) {
+  console.log(JSON.stringify(req.body) + "---------");
+  await kafka.make_request(
+    "update_jobseeker_profile",
+    req.body,
+    (err, resp) => {
+      if (err || !resp) {
+        console.log(err);
+        return resp.status(500).json({ error: err });
+      }
+      console.log("update profile response" + JSON.stringify(resp));
+      res.send(resp);
+    }
+  );
+};
+
+exports.getJobseekerResume = async function (req, res) {
+  await kafka.make_request("get_resume", req.query, (err, resp) => {
+    if (err || !resp) {
+      console.log(err);
+      return err.status(500).json({ error: err });
+    }
+    res.send(resp);
+  });
+};
+
+
+exports.updateJobseekerResume = async function (req, res) {
+  console.log("inside update resume" , req.params)
+  let seeker_id = req.params.seeker_id;
+  await profileImgUpload(req, res, async(error) => {
+        console.log('requestOkokok', req.file);
+        console.log('requestOkokok', req.params,seeker_id);
+        if (error) {
+            console.log('errors', error);
+            res.json({ error: error });
+        } else {
+            //  If File not found
+            if (req.file === undefined) {
+                //console.log( 'Error: No File Selected!' );
+                res.json('Error: No File Selected');
+            } else {
+                // If Success
+                const imageLocation = req.file.location;// Save the file name into database into profile model
+                const ID = req.file.ID;
+                await Jobseeker.findOneAndUpdate({ "_id": seeker_id }, {
+                    "seeker_resume_location": imageLocation
+                }).exec().then(doc => {
+                    console.log("Success add resume" + doc)
+                    // let res={
+                    //     message: "Success",
+                    //     res: JSON.stringify(doc)
+                    // }
+                    res.status(200).end("Resume Added!");
+                }).catch(error => {
+                    return res.status(500).json({ error: error });
+                })
+            }
+        }
+    })
+    // await kafka.make_request("update_resume", req, (err, resp) => {
+    //     if (err || !resp) {
+    //         console.log(err);
+    //         return err.status(500).json({ error: err });
+    //     }
+    //     res.send(resp);
+    // })
+};
+
+exports.deleteJobseekerResume = async function (req, res) {
+  console.log("inside delete resume");
+  await kafka.make_request("delete_resume", req.query, (err, resp) => {
+    if (err || !resp) {
+      console.log(err);
+      return err.status(500).json({ error: err });
+    }
+    res.send(resp);
+  });
+};
+
+exports.getReviews = async function (req, res) {
+  try {
+    kafka.make_request("get_reviews", req.query, (err, resp) => {
       if (err || !resp) {
         console.log(err);
         res
@@ -152,7 +318,7 @@ exports.addReviews = async function (req, res) {
             JSON.stringify({ message: "Something went wrong!", error: err })
           );
       } else {
-        res.status(200).end(JSON.stringify(results));
+        res.status(200).json(resp);
       }
     });
   } catch (err) {
@@ -161,82 +327,3 @@ exports.addReviews = async function (req, res) {
       .send(JSON.stringify({ message: "Something went wrong!", error: err }));
   }
 };
- 
-exports.createJobApplication = async function (req, res) {
-
-    const data = req.body;
-    kafka.make_request("jobseeker.createJobApplication", data, (err, results) => {
-        if (err){
-            res
-            .status(500)
-            .send(JSON.stringify({ message: "Something went wrong!", err }));
-
-          } else if(results.response_code == 200){
-
-              res.send(JSON.stringify(results.response_data));
-          } else {
-              res
-              .status(500)
-              .send(JSON.stringify({ message: "Something went wrong!", err }));
-          }
-    });
-}
-
-
-exports.getJobseekerProfile = async function (req, res) {
-    console.log(req.query)
-    await kafka.make_request("get_jobseeker_profile", req.query, (err, resp) => {
-        if (err || !resp) {
-            console.log(err);
-            return err.status(500).json({ error: err });
-        }
-        res.send(resp);
-    })
-}
-
-exports.updateJobseekerProfile = async function (req, res) {
-    console.log(JSON.stringify(req.body)+"---------")
-    await kafka.make_request("update_jobseeker_profile", req.body, (err, resp) => {
-        if (err || !resp) {
-            console.log(err);
-            return resp.status(500).json({ error: err });
-        }
-        console.log("update profile response"+ JSON.stringify(resp))
-        res.send(resp);
-    })
-}
-
-exports.getJobseekerResume = async function (req, res) {
-    await kafka.make_request("get_resume", req.query, (err, resp) => {
-        if (err || !resp) {
-            console.log(err);
-            return err.status(500).json({ error: err });
-        }
-        res.send(resp);
-    })
-}
-
-exports.updateJobseekerResume = async function (req, res) {
-    await kafka.make_request("update_resume", req.query, (err, resp) => {
-        if (err || !resp) {
-            console.log(err);
-            return err.status(500).json({ error: err });
-        }
-        res.send(resp);
-    })
-};
-
-exports.deleteJobseekerResume = async function (req, res) {
-    console.log("inside delete resume")
-    await kafka.make_request("delete_resume", req.query, (err, resp) => {
-        if (err || !resp) {
-            console.log(err);
-            return err.status(500).json({ error: err });
-        }
-        res.send(resp);
-    })
-};
-
-
-
-
