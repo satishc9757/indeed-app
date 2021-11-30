@@ -14,10 +14,13 @@ import { spacing } from '@mui/system';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Grid, Rating } from '@mui/material';
+import backendServer from '../../webConfig';
+import axios from 'axios';
 
 class JobDetailsCard extends Component {
 
     state = {
+        _id:"619c40485cc9d329b4f41e3d",
         job_company_id: "Comp1",
         job_title: "Software Engineer Intern",
         job_company_name: "PWC",
@@ -41,9 +44,15 @@ class JobDetailsCard extends Component {
         companyAvgRating: 4.3,
     }
 
-    handleSaveAction = () => {
-        if(!this.state.jobSaved){
-            this.setState({jobSaved: true})
+    handleSaveAction = async () => {
+       //const backendServer = "http://localhost:8000/api"//just for local testing
+
+       if(!this.state.jobSaved){
+            const jobSeekerId = "61a081696d73d01739a267ef" // should be fecthed from cookie or session
+            let payload = {jobId: this.state._id};
+            var response = await axios.post(`${backendServer}/jobseeker/jobs?jobSeekerId=${jobSeekerId}`, payload);
+            console.log("response: "+JSON.stringify(response.data));
+            await this.setState({jobSaved: true})
         }
 
     }
@@ -62,7 +71,8 @@ class JobDetailsCard extends Component {
         const undoButton = this.state.jobSaved ? <Button onClick={this.handleUndoAction}>Undo</Button> : null;
 
         return (
-            <Card sx={{ maxWidth: 545, maxHeight:445 }} display='flex' style={{overflow: "scroll"}}>
+
+            <Card sx={{ maxWidth: 545, maxHeight:545 }} display='flex' style={{overflow: "scroll"}}>
             <CardMedia
                 component="img"
                 alt="green iguana"
@@ -70,7 +80,7 @@ class JobDetailsCard extends Component {
                 image={this.state.job_company_image_link}
             />
 
-            <CardContent>
+            <CardContent >
                 <Typography gutterBottom variant="h5" component="div">
                 {this.props.job.job_title}
                 </Typography>

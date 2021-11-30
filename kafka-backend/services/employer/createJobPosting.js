@@ -24,6 +24,7 @@ async function handle_request(msg, callback){
             job_what_you_do: data.job_what_you_do,
             job_what_you_love: data.job_what_you_love,
             job_what_you_need: data.job_what_you_need,
+            job_company_name: data.job_company_name,
             job_created_at: new Date(),
             job_company_rating: data.rating
         });

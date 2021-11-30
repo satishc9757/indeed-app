@@ -110,7 +110,7 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },{
-      
+
        topic: "employer.createJobPosting",
         partitions: 1,
         replicationFactor: 1,
