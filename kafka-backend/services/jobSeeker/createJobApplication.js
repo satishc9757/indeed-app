@@ -29,7 +29,7 @@ async function handle_request(msg, callback){
             app_updated_on: new Date(),
         });
 
-        application.save((err, result) => {
+        application.save(async(err, result) => {
             if(err){
                 console.error("Error in createJobApplication : " + err);
                 callback(null,{ response_code: 500, response_data: "Something went wrong!", err: err});
