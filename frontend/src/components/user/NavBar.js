@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
-
+import { Link } from 'react-router-dom';
 import {connect} from 'react-redux'
 
 import logo from '../../media/IndeedLogo.png'
@@ -20,7 +20,7 @@ class NavBar extends Component {
                 <img src={logo} alt="Profile" width="110" height="30"/>
 
                 <Button>
-                    Find jobs
+                    <Link to="/">Find jobs</Link>
                 </Button>
                 <Button>
                     Company reviews
@@ -31,7 +31,7 @@ class NavBar extends Component {
                 </Button>
 
                 <Button>
-                    Upload your resume
+                    <Link to="/upload">Upload Resume</Link>
                 </Button>
 
                 <Button>

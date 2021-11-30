@@ -6,6 +6,7 @@ import { Container, Grid, Tab, Tabs } from "@material-ui/core";
 import Snapshot from './snapshot';
 import JoinUs from "./joinus";
 import Jobs from "./jobs/jobs";
+import JobPosted from "./jobs/jobPosted";
 import {Link, useLocation} from "react-router-dom";
 import { Box } from "@mui/system";
 
@@ -32,6 +33,7 @@ export default function Common() {
         // else if (tabResult === "reviews") return </>
         // else if (tabResult === "salary") return </>
         else if (tabResult === "jobs") return <Jobs/>
+        else if (tabResult === "applicants") return <JobPosted/>
         // else if (tabResult==="benefits") return </>
         //else if (tabResult==="photos") return </>
         else return <Snapshot/>
@@ -73,6 +75,7 @@ export default function Common() {
                 <Tab label="Salaries" to='/common?tab=salaries' component={Link}/>
                 <Tab label="Benefits" to='/common?tab=benefits' component={Link}/>
                 <Tab label="Photos" to='/common?tab=photos' component={Link} />
+                <Tab label="Applicants" to='/common?tab=applicants' component={Link} />
                 <Tab label="Jobs" to='/common?tab=jobs' component={Link} />
             </Tabs>
             <hr />

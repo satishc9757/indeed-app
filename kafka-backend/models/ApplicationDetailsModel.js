@@ -5,7 +5,7 @@ const AddressSchema = require('./AddressModel');
 
 let applicationDetailsSchema = new mongoose.Schema({
     app_job_id: {type: ObjectId, required: true},
-    app_job_seeker_id: {type: ObjectId, required: true},
+    app_job_seeker_id: {type: Number, required: true},
     app_date: {type: Date, required: true},
     app_name: {type: String, required: true},
     app_email: {type: String, required: true},

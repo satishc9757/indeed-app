@@ -21,6 +21,7 @@ import { createTheme} from '@mui/material/styles'
 import { blue } from '@mui/material/colors';
 import JobDetailsCard from './components/landingpage/JobDetailsCard'
 import CompanyReviews from './pages/companyReviews';
+import Applicants from './pages/applicants';
 
 const theme = createTheme({
   pallete: {
@@ -47,7 +48,7 @@ class App extends Component{
               <Route exact path="/salaries" element={<Salaries/>} />
               <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
               <Route exact path="/companyreviews" element={<CompanyReviews/>} />
-
+              <Route exact path="/applicants" element={<Applicants/>} />
             </Routes>
           </div>
         </Router>

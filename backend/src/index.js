@@ -94,6 +94,5 @@ app.use("/api/employer", employerRouter);
 app.use("/api/company", companyRouter)
 app.use("/api/jobseeker", jobseekerRouter);
 app.use("/api/admin", adminRouter);
-app.use("/api/company", companyRouter);
 app.use("/api/chats", chatRouter);
 //app.use(cookieParser);
