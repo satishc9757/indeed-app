@@ -5,6 +5,9 @@ import Common from "./common";
 // import dp  from "../../media/girl-avatar.png"
 import { Box } from "@mui/system";
 import { styled } from '@mui/material/styles';
+import backendServer from "../../webConfig";
+import { useEffect, useState } from "react";
+const axios = require('axios');
 
 const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
@@ -12,17 +15,17 @@ const Item = styled(Paper)(({ theme }) => ({
     width: 148,
     elevation: 0,
     margin: 10,
-    
+    display: "flex",
+    alignItems: "flex-start",
+    flexDirection: "column",
+    justifyContent: "center",
     
 }));
 
-// const Block = styled(Paper)`
-// height:100;
-// width:100
-// `
 
 
-export default function Snapshot() {
+export default function Snapshot({CompanyDetails}) {
+    console.log(CompanyDetails)
     return (
         <Container>
             <Typography
@@ -38,7 +41,7 @@ export default function Snapshot() {
                     <Stack direction="row" spacing={2}>
                         <Avatar variant="rounded"
                     >
-                        89
+                        {CompanyDetails.comp_work_happiness}
                         {/* {Score} */}
                         </Avatar>
                         <div>
@@ -50,11 +53,11 @@ export default function Snapshot() {
                     <Stack direction="row" spacing={2}>
                         <Avatar variant="rounded"
                     >
-                        89
+                        {CompanyDetails.comp_learning}
                         {/* {Score} */}
                         </Avatar>
                         <div>
-                            <Typography variant="h6">Work Happiness Score</Typography>
+                            <Typography variant="h6">Learning</Typography>
                         </div>
                     </Stack>
                 </Grid>
@@ -62,11 +65,11 @@ export default function Snapshot() {
                     <Stack direction="row" spacing={2}>
                         <Avatar variant="rounded"
                     >
-                        89
+                        {CompanyDetails.comp_appreciation}
                         {/* {Score} */}
                         </Avatar>
                         <div>
-                            <Typography variant="h6">Work Happiness Score</Typography>
+                            <Typography variant="h6">Appreciation</Typography>
                         </div>
                     </Stack>
                 </Grid> 
@@ -92,36 +95,35 @@ export default function Snapshot() {
                     <Stack spacing={8} direction="row">
                         <Box sx={{display: 'flex'}}>
                             <div ><Item>
-                                <Typography >CEO</Typography>
-                                <Typography >ABC</Typography>
+                                <Typography variant='h6' >CEO</Typography>
+                                <Typography >{CompanyDetails.comp_ceo}</Typography>
                             </Item></div>
                             <div ><Item>
-                                <Typography >Founded</Typography>
-                                <Typography >ABC</Typography>
+                                <Typography variant='h6'>Founded</Typography>
+                                <Typography >{CompanyDetails.comp_founded}</Typography>
                             </Item></div>
                             <div ><Item>
-                                <Typography >Company Size</Typography>
-                                <Typography >ABC</Typography>
+                                <Typography variant='h6'>Company Size</Typography>
+                                <Typography >{CompanyDetails.comp_size}</Typography>
                             </Item></div>
                             <div ><Item>
-                                <Typography >Revenue</Typography>
-                                <Typography >ABC</Typography>
+                                <Typography variant='h6' >Revenue</Typography>
+                                {/* <Typography variant='caption'>more than</Typography> */}
+                                <Typography >{CompanyDetails.comp_revenue}</Typography>
                             </Item></div>
                         </Box>
                     </Stack>
                     <Box sx={{display: 'flex'}}>
                         <div ><Item>
-                            <Typography >Industry</Typography>
-                            <Typography >ABC</Typography>
+                            <Typography variant='h6'>Industry</Typography>
+                            <Typography >{CompanyDetails.comp_ceo}</Typography>
                         </Item></div>
                     </Box>
                     
                 </Grid>
             </Grid>
             <Container>
-                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam cursus lorem aliquam nisi varius dignissim. Proin feugiat cursus urna. Vestibulum id erat vitae purus faucibus maximus. Duis nec nisi tristique, bibendum nunc eu, lacinia velit. Donec et tempor sapien.
-                
-                Praesent dictum felis ac elit euismod, et sagittis lacus pretium. Aenean ac vulputate nisi. Aliquam auctor magna et luctus congue. Mauris ultrices erat sed eros porttitor finibus. Quisque fermentum lacus ac posuere aliquet. Nam a neque ut erat euismod scelerisque. Etiam elementum turpis pharetra massa mattis dignissim. Etiam sed ullamcorper est. Aliquam nibh tellus, sagittis eget est sit amet, lacinia placerat velit.</span>
+                <span>{CompanyDetails.comp_description}</span>
             </Container>
             <br/><br/>
             <Typography
@@ -129,7 +131,7 @@ export default function Snapshot() {
                 Jobs near you
             </Typography>
             <Typography variant="body">
-                You're seeing Google jobs close to <b>San Jose, CA.</b>
+                You're seeing {CompanyDetails.comp_name} jobs close to <b>San Jose, CA.</b>
             </Typography>
             <br/><br/>
             <Typography

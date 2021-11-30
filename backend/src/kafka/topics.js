@@ -13,6 +13,16 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+        topic: "login",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "signup",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
         topic: "company.getreviews",
         partitions: 1,
         replicationFactor: 1,
@@ -148,6 +158,21 @@ const createKafkaTopics = () => {
       },
       {
         topic: "company.getJobStats",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "get_reviews",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "company.companySearchQuery",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "update_featured_review_status",
         partitions: 1,
         replicationFactor: 1,
       },

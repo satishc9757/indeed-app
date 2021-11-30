@@ -89,7 +89,7 @@ console.log("dir_name " + __dirname);
 app.use(express.json());
 app.use(passport.initialize());
 // app.use(passport_res.initialize());
-app.use("/", indexRouter);
+app.use("/api/", indexRouter);
 app.use("/api/employer", employerRouter);
 app.use("/api/company", companyRouter)
 app.use("/api/jobseeker", jobseekerRouter);

@@ -1,5 +1,6 @@
-import { Card, CardContent, Container, Grid, Link, List, ListItem, ListItemIcon, Modal, SvgIcon, TextField, Typography } from "@material-ui/core";
-import React from "react";
+import { Card, CardContent, Container, Grid, Link, List, ListItem, ListItemIcon, Modal, TextField, Typography } from "@material-ui/core";
+import React, { useEffect } from "react";
+import backendServer from "../../webConfig";
 import NavBar from "../../components/user/NavBar";
 import ArticleIcon from '@mui/icons-material/Article';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -8,6 +9,8 @@ import { ListItemButton, ListItemText } from "@mui/material";
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DeleteIcon from '@mui/icons-material/Delete';
+const axios = require('axios');
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -21,6 +24,16 @@ export default function Jobseeker() {
     const [resumeOpen, setResumeOpen] = React.useState(false);
     const handleResumeOpen = () => setResumeOpen(true);
     const handleResumeClose = () => setResumeOpen(false);
+    useEffect(() => {
+        let seekerID = '61a081696d73d01739a267ef';
+        axios.get(`${backendServer}/jobseeker?${seekerID}`)
+            .then(response => {
+                console.log(response.data);
+            }).catch=(error) => {
+                console.log(error)
+            }
+        }, [])
+
     return (
         <div>
             <NavBar />

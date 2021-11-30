@@ -8,33 +8,43 @@ import JoinUs from "./joinus";
 import Jobs from "./jobs/jobs";
 import {Link, useLocation} from "react-router-dom";
 import { Box } from "@mui/system";
-
+import backendServer from "../../webConfig";
+const axios = require('axios');
 
 export default function Common() {
     const [tabValue, setTabValue] = React.useState(0);
-    const [tabResult, setTabResult] = React.useState();
+    const [tabResult, setTabResult] = React.useState('snapshot');
+    const [companyDetails, setCompanyDetails] = useState('')
     const search = useLocation().search;
 
 
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
     };
-
     useEffect(() => {
         const tab = new URLSearchParams(search).get('tab');
         setTabResult(tab);
-    }, [search, tabResult])
+        let Company_ID = 3;
+        axios.get(`${backendServer}/company/companyDetails?compId=${Company_ID}`)
+            .then(response => {
+                console.log(JSON.stringify(response.data[0])+"-----");
+                setCompanyDetails(response.data[0])
+            }).catch=(error) => {
+                console.log(error)
+            }
+    }, [search])
 
+    
     const TabContent = () => {
         console.log(tabResult)
-        if (tabResult === "snapshot") return <Snapshot />
-        else if (tabResult === "join") return <JoinUs/>
+        if (tabResult === "snapshot") return <Snapshot CompanyDetails={companyDetails} />
+        else if (tabResult === "join") return <JoinUs CompanyDetails={companyDetails} />
         // else if (tabResult === "reviews") return </>
         // else if (tabResult === "salary") return </>
         else if (tabResult === "jobs") return <Jobs/>
         // else if (tabResult==="benefits") return </>
         //else if (tabResult==="photos") return </>
-        else return <Snapshot/>
+        else return <Snapshot CompanyDetails={companyDetails} />
         }
 
 
@@ -76,9 +86,7 @@ export default function Common() {
                 <Tab label="Jobs" to='/common?tab=jobs' component={Link} />
             </Tabs>
             <hr />
-            <Box m={10}>
-            <TabContent />
-            </Box>
+            <Box m={10}>{companyDetails !== "" ? <TabContent /> : null}</Box>
         </div>
     )
 }

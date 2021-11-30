@@ -1,11 +1,10 @@
 const connection = require("../../database/mysqlConnection");
 async function handle_request(msg, callback) {
 
-    const employerId = msg.employerId;
-    const jobSeekerId = msg.jobSeekerId;
+    const id = msg.id;
 
     try{
-        let sql = 'SELECT * FROM messages WHERE msg_sender= "'+employerId+'" AND msg_receiver= "'+jobSeekerId+'";';
+        let sql = 'SELECT * FROM messages WHERE msg_sender= "'+id+'" OR msg_receiver= "'+id+'" order by msg_created_on;';
 
         await connection.con.query(sql, (err, results)=>{
             if(err){
