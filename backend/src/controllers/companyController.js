@@ -64,9 +64,8 @@ exports.getJobRoleDetailsByCompanyID = async function (req,res){
 
 
 exports.getJobsByCompanyId = async function (req, res) {
-    const compId = req.query.compId;
 
-    kafka.make_request("company.getCompanyJobPostings", compId, (err, results) => {
+    kafka.make_request("company.getCompanyJobPostings", req.query, (err, results) => {
       if (err){
         res
         .status(500)

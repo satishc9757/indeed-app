@@ -61,7 +61,8 @@ class LandingPage extends Component {
         await this.setState({
             results: response.data,
             totalpage: Number(response.data.totalPages),
-            page: Number(response.data.currentPage)
+            page: Number(response.data.currentPage),
+            selectedJobIndex:0
         });
 
     }
