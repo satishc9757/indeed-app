@@ -11,11 +11,14 @@ import Home from './pages/general/home'
 import Login from './pages/user/login'
 import Signup from './pages/user/signup'
 import UploadResume from './pages/general/uploadResume'
-import Snapshot from './pages/company/snapshot'
 import Common from './pages/company/common';
 import Jobseeker from './pages/user/jobseekerProfile'
 import Salaries from './pages/general/salaries'
+
+import CompanyProfile from './pages/company/companyProfile'
+
 import Conversations from './pages/general/conversations'
+
 import { ThemeProvider} from '@material-ui/styles'
 import { createTheme} from '@mui/material/styles'
 import { blue } from '@mui/material/colors';
@@ -48,8 +51,13 @@ class App extends Component{
               <Route exact path="/salaries" element={<Salaries/>} />
               <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
               <Route exact path="/companyreviews" element={<CompanyReviews/>} />
+
+              <Route exact path="/applicants" element={<Applicants />} />
+              <Route exact path="/companyprofile" element={<CompanyProfile/>} />
+
               <Route exact path="/conversations" element={<Conversations/>} />
-              <Route exact path="/applicants" element={<Applicants/>} />
+              
+
             </Routes>
           </div>
         </Router>

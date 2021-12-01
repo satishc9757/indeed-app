@@ -96,7 +96,7 @@ class uploadResume extends Component {
                             }}
                             >
                                 <Typography component="h1" variant="h5" style={{padding:"2%"}}>
-                                    Add Resume
+                                    Add/Update Resume
                                 </Typography><br /><br/>
                                 <label htmlFor="btn-upload" >
                                     <input
