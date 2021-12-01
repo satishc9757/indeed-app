@@ -1,0 +1,522 @@
+[33mcommit 6473e8ffa547479138af7af7f0e77361f0c7376d[m[33m ([m[1;36mHEAD -> [m[1;32mFIND_SALARIES[m[33m)[m
+Merge: a7ad502 8d190f0
+Author: Jui Thombre <jui20oct@gmail.com>
+Date:   Sun Nov 28 15:20:48 2021 -0800
+
+    Merged FIND_SALARIES branch
+
+[33mcommit a7ad50270d91641b6efc96933f7aa0eda92aa506[m[33m ([m[1;31morigin/FIND_SALARIES[m[33m)[m
+Author: Jui Thombre <jui20oct@gmail.com>
+Date:   Sun Nov 28 12:28:03 2021 -0800
+
+    Find salaries page
+
+[33mcommit 8d190f05b50daca92b237b8c75ba552e9498ef7e[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Sun Nov 28 12:51:46 2021 -0700
+
+    synced the pages
+
+[33mcommit 47ce7918b71c6dec4445823253afa95b7732e890[m
+Merge: 5a438b1 558ffd5
+Author: Dhrupa Patel <dhrupapatel337@gmail.com>
+Date:   Sun Nov 28 02:30:47 2021 -0700
+
+    Merge pull request #23 from satishc9757/resume_upload
+    
+    resume upload feature
+
+[33mcommit 558ffd53a11190939d0d85fbd1bbe758bb2083a6[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Sun Nov 28 02:29:45 2021 -0700
+
+    resume upload feature
+
+[33mcommit 5a438b1b5fefd0996b55a0ada2a198cca007d054[m
+Merge: fc38465 eab7ffd
+Author: Dhrupa Patel <dhrupapatel337@gmail.com>
+Date:   Sun Nov 28 01:58:59 2021 -0700
+
+    Merge pull request #22 from satishc9757/pagination
+    
+    added server side pagination
+
+[33mcommit eab7ffd468f953d37b0570cdb0bb443f3f435177[m
+Merge: 951d92d fc38465
+Author: Dhrupa Patel <dhrupapatel337@gmail.com>
+Date:   Sun Nov 28 01:58:52 2021 -0700
+
+    Merge branch 'master' into pagination
+
+[33mcommit 951d92dc1ea7c3e74a27b4c190406de5b6cadf5f[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Sun Nov 28 01:56:04 2021 -0700
+
+    added server side pagination
+
+[33mcommit fc3846562c5f64e212fc113409cb76cba1de53d6[m
+Merge: 17196f6 8faaaa0
+Author: dkinjal <89802201+dkinjal@users.noreply.github.com>
+Date:   Sun Nov 28 00:48:19 2021 -0800
+
+    Merge pull request #21 from satishc9757/temp1
+    
+    Temp1
+
+[33mcommit 8faaaa0d205c4c54b48315e218f46494bd55d369[m
+Author: dkinjal <kinjal.dhanani@sjsu.edu>
+Date:   Sun Nov 28 00:47:27 2021 -0800
+
+    added resume api in the backend
+
+[33mcommit f6a299093864c085f79c5c74123f3e76704d1dcf[m
+Author: dkinjal <kinjal.dhanani@sjsu.edu>
+Date:   Sun Nov 28 00:41:07 2021 -0800
+
+    added resume api in the backend
+
+[33mcommit 17196f664ba2c5ba8369518fd78964052687b9ca[m
+Merge: c06765d c225425
+Author: dkinjal <89802201+dkinjal@users.noreply.github.com>
+Date:   Sat Nov 27 23:17:41 2021 -0800
+
+    Merge pull request #20 from satishc9757/resume_api
+    
+    added resume api in the backend
+
+[33mcommit c2254251d41f2f915ce2ad7ce6338a99cfb7d162[m
+Merge: a274176 c06765d
+Author: dkinjal <89802201+dkinjal@users.noreply.github.com>
+Date:   Sat Nov 27 23:17:32 2021 -0800
+
+    Merge branch 'master' into resume_api
+
+[33mcommit a274176999b12c84483a6b1cbe82f7657cd2b5df[m
+Author: dkinjal <kinjal.dhanani@sjsu.edu>
+Date:   Sat Nov 27 23:12:50 2021 -0800
+
+    added resume api in the backend
+
+[33mcommit c06765dfec78100c1ab23daae2f0b67fcfaf0099[m
+Merge: de3a832 97a93ea
+Author: Satish Choudhary <46245645+satishc9757@users.noreply.github.com>
+Date:   Sat Nov 27 20:55:06 2021 -0800
+
+    Merge pull request #19 from satishc9757/FRONTEND_JOB_DETAILS_CARD
+    
+    Frontend job details card and jobs tab
+
+[33mcommit 97a93eaecf7f1c72a20f48ad6a8a1937073ff0a2[m
+Author: Satish Choudhary <satishc9757@gmail.com>
+Date:   Sat Nov 27 20:38:54 2021 -0800
+
+    Frontend: Added entry in common for Jobs
+
+[33mcommit 31f78ed2f5c0f9826fd3174af68fb4661a60e8db[m
+Author: Satish Choudhary <satishc9757@gmail.com>
+Date:   Sat Nov 27 19:36:48 2021 -0800
+
+    Frontend: Added Jobs tab under company
+
+[33mcommit c285ad5cff371a03ba606c00808d207445742276[m
+Author: Satish Choudhary <satishc9757@gmail.com>
+Date:   Fri Nov 26 01:33:21 2021 -0800
+
+    Frontend: Added the layout of job details card
+
+[33mcommit de3a832adfba02d5b25c1ac46e7510ce5ec61ca2[m
+Merge: f960740 417adf5
+Author: Dhrupa Patel <dhrupapatel337@gmail.com>
+Date:   Sat Nov 27 20:02:13 2021 -0700
+
+    Merge pull request #18 from satishc9757/UI_updates
+    
+    updated small UI part
+
+[33mcommit 417adf5cd226a89e3dafbb149589f37f2a115d34[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Sat Nov 27 20:01:42 2021 -0700
+
+    updated small UI part
+
+[33mcommit f96074068d1615774a80a35b7a22aebdf6ff8334[m[33m ([m[1;32mADMIN_APIS[m[33m)[m
+Merge: e5cd38e 4530ef4
+Author: dkinjal <89802201+dkinjal@users.noreply.github.com>
+Date:   Sat Nov 27 18:29:54 2021 -0800
+
+    Merge pull request #17 from satishc9757/temp
+    
+    Latest required
+
+[33mcommit 4530ef4ccdb08257f8506b5b72a7a680a0b5bd25[m
+Merge: bae0daa e5cd38e
+Author: dkinjal <89802201+dkinjal@users.noreply.github.com>
+Date:   Sat Nov 27 18:29:37 2021 -0800
+
+    Merge branch 'master' into temp
+
+[33mcommit bae0daa81387c5d55145ce2dee7ad4e683dafe1d[m
+Author: dkinjal <kinjal.dhanani@sjsu.edu>
+Date:   Sat Nov 27 18:27:44 2021 -0800
+
+    need updated version
+
+[33mcommit e5cd38e399864d53ce11c76fd2ecd14e9ba008b5[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Sat Nov 27 10:19:43 2021 -0700
+
+    solved errors
+
+[33mcommit 3a81a3d1c2f1f2b11a77bcd8ac9e9a84c8853315[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Sat Nov 27 10:05:02 2021 -0700
+
+    solved link error
+
+[33mcommit a2069519846b0e7dff2232ed45883da49bef1f78[m
+Merge: be9a46d eeb64ff
+Author: Dhrupa Patel <dhrupapatel337@gmail.com>
+Date:   Sat Nov 27 09:41:08 2021 -0700
+
+    Merge pull request #16 from satishc9757/frontend_landing
+    
+    added landing page
+
+[33mcommit eeb64ff95cfa19dbc89239dcfd7d47e122e050ed[m
+Merge: 5cbcb4b be9a46d
+Author: Dhrupa Patel <dhrupapatel337@gmail.com>
+Date:   Sat Nov 27 09:40:59 2021 -0700
+
+    Merge branch 'master' into frontend_landing
+
+[33mcommit 5cbcb4b7cce2d914c95bf7557db0bacf92d33f7b[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Sat Nov 27 09:39:42 2021 -0700
+
+    added landing page
+
+[33mcommit be9a46dcd2f390024fcccb4488186e426bfb9a90[m
+Merge: e8358ce e43b7fc
+Author: dkinjal <89802201+dkinjal@users.noreply.github.com>
+Date:   Sat Nov 27 00:24:14 2021 -0800
+
+    Merge pull request #15 from satishc9757/company_page
+    
+    Update snapshot.js
+
+[33mcommit ae883520be232135bb80930f24ae828b67c9da3a[m
+Author: dkinjal <kinjal.dhanani@sjsu.edu>
+Date:   Sat Nov 27 00:22:46 2021 -0800
+
+    removing local image
+
+[33mcommit e43b7fcdb03d3edd1d2a6120eaa4f4d1cb443f36[m[33m ([m[1;31morigin/company_page[m[33m)[m
+Author: dkinjal <89802201+dkinjal@users.noreply.github.com>
+Date:   Sat Nov 27 00:21:24 2021 -0800
+
+    Update snapshot.js
+
+[33mcommit e8358ce316665833f4a3c4f862bcfcb9b96beec6[m
+Merge: ca2521c b924274
+Author: dkinjal <89802201+dkinjal@users.noreply.github.com>
+Date:   Fri Nov 26 23:37:53 2021 -0800
+
+    Merge pull request #14 from satishc9757/company_page
+    
+    Added common company tab
+
+[33mcommit b924274d286a108abb9c7f80e920063799d467c2[m
+Author: dkinjal <kinjal.dhanani@sjsu.edu>
+Date:   Fri Nov 26 23:36:19 2021 -0800
+
+    Added common company tab
+
+[33mcommit ca2521c2841beead84e6f5a535697eab28a9a2b4[m
+Merge: ce00fa1 e349568
+Author: Satish Choudhary <46245645+satishc9757@users.noreply.github.com>
+Date:   Fri Nov 26 23:01:29 2021 -0800
+
+    Merge pull request #13 from satishc9757/ADMIN_APIS
+    
+    APIs for getting reviews, companies and analytics
+
+[33mcommit e3495687952959f9909b34adcfa39a43bb946c60[m[33m ([m[1;31morigin/ADMIN_APIS[m[33m)[m
+Merge: e89f37d ce00fa1
+Author: Satish Choudhary <46245645+satishc9757@users.noreply.github.com>
+Date:   Fri Nov 26 23:01:22 2021 -0800
+
+    Merge branch 'master' into ADMIN_APIS
+
+[33mcommit ce00fa11e99d4dc396bffdadcdc8d8654bd03899[m
+Merge: 4d17cca 0e05815
+Author: Satish Choudhary <46245645+satishc9757@users.noreply.github.com>
+Date:   Fri Nov 26 22:59:05 2021 -0800
+
+    Merge pull request #12 from satishc9757/save_jobs
+    
+    added jobs fetch and save function
+
+[33mcommit 0e058158615a9b396a35a42457ef709b47615e3e[m[33m ([m[1;31morigin/save_jobs[m[33m)[m
+Merge: 59a88ef 4d17cca
+Author: Satish Choudhary <46245645+satishc9757@users.noreply.github.com>
+Date:   Fri Nov 26 22:58:57 2021 -0800
+
+    Merge branch 'master' into save_jobs
+
+[33mcommit e89f37daaa2932cd8aabe65aaa7fc441ebf14589[m
+Author: Jui Thombre <jui20oct@gmail.com>
+Date:   Fri Nov 26 09:28:17 2021 -0800
+
+    APIs for getting reviews, companies and analytics
+
+[33mcommit 4d17cca25f6ec4987d029f89b56374b37b8423fb[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Fri Nov 26 00:38:36 2021 -0700
+
+    added landing page
+
+[33mcommit 59a88ef845f59a49a7a695953a7f2e66c5904277[m
+Author: dhruvisha98 <dhruvi.m.shah@gmail.com>
+Date:   Thu Nov 25 23:28:27 2021 -0800
+
+    added jobs fetch and save function
+
+[33mcommit ab6155a535842f85bf641de3c3913e1be0b64277[m
+Author: Dhrupa Patel <dhrupapatel337@gmail.com>
+Date:   Thu Nov 25 22:39:58 2021 -0800
+
+    Update jobseekerRouter.js
+
+[33mcommit 5823ea89c4c393093f43a5a01eb0f4d5eb00d33b[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Thu Nov 25 23:36:07 2021 -0700
+
+    removed errors
+
+[33mcommit 0f2a82ab7cbb42114c5d787acbd4289283159879[m
+Merge: c22ff28 4783d43
+Author: dkinjal <89802201+dkinjal@users.noreply.github.com>
+Date:   Thu Nov 25 19:35:14 2021 -0800
+
+    Merge pull request #11 from satishc9757/jobseeker_apis
+    
+    Added jobseeker profile and resume APIs
+
+[33mcommit 4783d432680afdc41acda16185456dabd2efed2b[m[33m ([m[1;31morigin/jobseeker_apis[m[33m)[m
+Merge: f51f828 c22ff28
+Author: dkinjal <89802201+dkinjal@users.noreply.github.com>
+Date:   Thu Nov 25 19:34:21 2021 -0800
+
+    Merge branch 'master' into jobseeker_apis
+
+[33mcommit c22ff28daf8223ee09b3723b9ed28c3f15a857b4[m
+Merge: 75c9f8b e567d7f
+Author: Dhrupa Patel <dhrupapatel337@gmail.com>
+Date:   Thu Nov 25 18:44:13 2021 -0700
+
+    Merge pull request #10 from satishc9757/update_search_query
+    
+    updated the search query
+
+[33mcommit e567d7f96f7e7f14da5d3c11559b075095a4f9f3[m[33m ([m[1;31morigin/update_search_query[m[33m)[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Thu Nov 25 18:40:40 2021 -0700
+
+    updated the search query
+
+[33mcommit 75c9f8bb9288ef7f84cc9de7f7df6fa2dd0b9002[m
+Merge: 3c86354 6f7be6b
+Author: Saurabh Sathe <sathesaurabh30@gmail.com>
+Date:   Thu Nov 25 17:24:32 2021 -0800
+
+    Merge pull request #9 from satishc9757/update_employer_details
+    
+    tested the 4 apis developed;
+
+[33mcommit 6f7be6b313a947c38148c5f8e48b10accb7e9f47[m[33m ([m[1;31morigin/update_employer_details[m[33m)[m
+Author: Checkout <sathesaurabh30@gmail.com>
+Date:   Thu Nov 25 17:23:45 2021 -0800
+
+    resolved conflicts and some extra code
+
+[33mcommit 4af98cb2e483059725357930301eb6d8d26b9751[m
+Merge: bea59ae 3c86354
+Author: Satish Choudhary <46245645+satishc9757@users.noreply.github.com>
+Date:   Thu Nov 25 17:10:03 2021 -0800
+
+    Merge branch 'master' into update_employer_details
+
+[33mcommit bea59ae29ae79d00075c4da4f048e75cf0d5590f[m
+Author: Checkout <sathesaurabh30@gmail.com>
+Date:   Thu Nov 25 16:44:29 2021 -0800
+
+    tested the 4 apis developed;
+
+[33mcommit f51f828c39000871d6c3e20826752d262c7857e3[m
+Author: dkinjal <kinjal.dhanani@sjsu.edu>
+Date:   Thu Nov 25 14:57:50 2021 -0800
+
+    Added jobseeker profile and resume APIs
+
+[33mcommit 3c86354afd1aa97ace40f2d5c23ab4c78a17a0f1[m
+Merge: 91b8db2 042a79e
+Author: Dhrupa Patel <dhrupapatel337@gmail.com>
+Date:   Thu Nov 25 15:56:18 2021 -0700
+
+    Merge pull request #8 from satishc9757/chat_apis
+    
+    added and tested chat apis
+
+[33mcommit 042a79e156df1ed4e18baefed9b94d917c782126[m
+Merge: 4528a0b 91b8db2
+Author: Satish Choudhary <46245645+satishc9757@users.noreply.github.com>
+Date:   Thu Nov 25 14:54:00 2021 -0800
+
+    Merge branch 'master' into chat_apis
+
+[33mcommit 4528a0bf51827b21a6e6369d6ebe50bc286a90e7[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Thu Nov 25 15:44:10 2021 -0700
+
+    added and tested chat apis
+
+[33mcommit 91b8db2b52731d5c0db207f18290ee172f07e86b[m
+Merge: dad861a 1b7dac3
+Author: Satish Choudhary <46245645+satishc9757@users.noreply.github.com>
+Date:   Thu Nov 25 12:50:23 2021 -0800
+
+    Merge pull request #6 from satishc9757/JOB_STATS
+    
+    Backend: Added Job stats API
+
+[33mcommit 1b7dac31f79b006b5468226cbfb92ecd3c183c07[m[33m ([m[1;31morigin/JOB_STATS[m[33m)[m
+Author: Satish Choudhary <satishc9757@gmail.com>
+Date:   Thu Nov 25 12:46:21 2021 -0800
+
+    Backend: Added Job stats API
+
+[33mcommit dad861aa2edb8a57165a5dad43c6970d364031d2[m[33m ([m[1;32mFRONTEND[m[33m)[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Thu Nov 25 01:32:21 2021 -0700
+
+    tested the apis
+
+[33mcommit 97c8e4bdb56153e2dba973f2a553beb4afd15003[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Wed Nov 24 03:11:01 2021 -0700
+
+    added job_company_name to models
+
+[33mcommit 7b9684ccb22177d3838c293e9001fe0a03c9312b[m
+Merge: f836b97 9bcb442
+Author: Dhrupa Patel <dhrupapatel337@gmail.com>
+Date:   Wed Nov 24 01:45:56 2021 -0700
+
+    Merge pull request #5 from satishc9757/JOB_POSTINGS
+    
+    Job postings and Job Applications
+
+[33mcommit 9bcb4427a2febfe4c845558c3fde13c148fa4340[m[33m ([m[1;31morigin/JOB_POSTINGS[m[33m)[m
+Author: Satish Choudhary <satishc9757@gmail.com>
+Date:   Tue Nov 23 23:52:03 2021 -0800
+
+    Kafka-Backend: Added job postings and job application CRUD APIs
+
+[33mcommit b77d85108a2edff326357686e2520204006dfdc7[m
+Author: Satish Choudhary <satishc9757@gmail.com>
+Date:   Tue Nov 23 23:50:02 2021 -0800
+
+    Backend: Added job postings and job application CRUD APIs
+
+[33mcommit 2896cd726602ea4f04bdda29e2a7f6c7dde66c10[m
+Author: Satish Choudhary <satishc9757@gmail.com>
+Date:   Mon Nov 22 15:40:03 2021 -0800
+
+    Added create job postings API
+
+[33mcommit f836b97b6e7e86fe0bdcbdd09e8b283926394c99[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Wed Nov 24 00:17:25 2021 -0700
+
+    removed job role redudant apis
+
+[33mcommit f6c79511aca9464b6e3957e087810ad30ff3941d[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Wed Nov 24 00:09:09 2021 -0700
+
+    removed job role redudant apis
+
+[33mcommit e459c48cb82ce800998cdb19efba897139fd92d1[m
+Merge: e310720 4668fbf
+Author: Dhrupa Patel <dhrupapatel337@gmail.com>
+Date:   Tue Nov 23 22:22:09 2021 -0700
+
+    Merge pull request #4 from satishc9757/Kafka_to_APIS
+    
+    added kafka to few apis
+
+[33mcommit 4668fbf96201df38aa3e3048179d129030fe2ed6[m[33m ([m[1;31morigin/Kafka_to_APIS[m[33m)[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Tue Nov 23 21:02:54 2021 -0700
+
+    added kafka to few apis
+
+[33mcommit e310720c4d63b1739dee437d094c86aa84970d6b[m
+Merge: adb579f ad083e5
+Author: Satish Choudhary <46245645+satishc9757@users.noreply.github.com>
+Date:   Tue Nov 23 16:26:11 2021 -0800
+
+    Merge pull request #3 from satishc9757/FRONTEND
+    
+    Frontend initial setup
+
+[33mcommit ad083e5f90f76f8835de9677bcefcab38c329082[m[33m ([m[1;31morigin/FRONTEND[m[33m)[m
+Author: Jui Thombre <jui20oct@gmail.com>
+Date:   Tue Nov 23 15:21:02 2021 -0800
+
+    Frontend initial setup
+
+[33mcommit adb579fedf70312c7c710de31acb6a55e53429c1[m[33m ([m[1;32mmaster[m[33m)[m
+Merge: 88ced56 b5083d8
+Author: Saurabh Sathe <sathesaurabh30@gmail.com>
+Date:   Mon Nov 22 21:38:09 2021 -0800
+
+    Merge pull request #2 from satishc9757/update_employer_details
+    
+    developed kafka services for featured review operations
+
+[33mcommit b5083d8795d73aa79726414e2ff47f0474854fb6[m
+Author: Checkout <sathesaurabh30@gmail.com>
+Date:   Mon Nov 22 21:29:19 2021 -0800
+
+    developed kafka services for featured review operations
+
+[33mcommit 88ced56683a99fc8dfc5bcc9db5a98a295cb8b27[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Sun Nov 21 21:51:59 2021 -0700
+
+    added apis
+
+[33mcommit cbc4c23cef51703ff4595bafa605ea11c5cb15c7[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Sun Nov 21 17:16:59 2021 -0700
+
+    added apis
+
+[33mcommit 3de0d1e1d5a9de38741729ce672e4021d4cfb177[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Sun Nov 21 14:38:00 2021 -0700
+
+    added few router and controller files to edit
+
+[33mcommit 996831a123460a05d3cbffebc1fb09ea38a66308[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Sun Nov 21 14:02:59 2021 -0700
+
+    synced the models with our schema diagram
+
+[33mcommit 1f3ec31edef767ae8cc2a2b8abf3290020bfc0f5[m
+Author: Dhrupa-patel <dhrupapatel337@gmail.com>
+Date:   Sun Nov 21 12:53:59 2021 -0700
+
+    changed MySQL few columns datatype
