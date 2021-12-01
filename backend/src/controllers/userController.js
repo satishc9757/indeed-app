@@ -12,9 +12,9 @@ var kafka = require('../kafka/client');
 // auth();
 
 exports.login = async function (req, res) {
-    console.log("login details ", req.body)
+    console.log("login details ", req.query)
     try {
-        kafka.make_request("login", req.body, (err, resp) => {
+        kafka.make_request("login", req.query, (err, resp) => {
             console.log(resp);
             if (err || !resp) {
               console.log(err);
