@@ -9,7 +9,7 @@ async function handle_request(msg, callback) {
       .findOne({
         seeker_id: jobSeekerId,
       })
-      .select("seeker_job_saved");
+      .select("seeker_job_applied");
 
     console.log(jobIds);
     // Array of job Objects
@@ -27,10 +27,10 @@ async function handle_request(msg, callback) {
 
     if (
       jobIds &&
-      jobIds.seeker_job_saved &&
-      jobIds.seeker_job_saved.length > 0
+      jobIds.seeker_job_applied &&
+      jobIds.seeker_job_applied.length > 0
     ) {
-      jobIds.seeker_job_saved.map((jobId) => {
+      jobIds.seeker_job_applied.map((jobId) => {
         // Get details from job postings for each job Id
         jobs.push(jobMap[jobId]);
       });
