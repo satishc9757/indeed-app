@@ -3,7 +3,7 @@ import './App.css'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import FeaturedReviewCard from './components/Reviews/FeaturedReviewCard'
 import AutoCompleteSearch from './components/Reviews/AutoCompleteSearch'
-
+import SalayReviewsTab from './components/Reviews/SalayReviewsTab'
 //redux
 import {Provider} from 'react-redux'
 import store from './redux/store'
@@ -57,7 +57,7 @@ class App extends Component{
               <Route exact path="/autoComplete" element={<AutoCompleteSearch />} />
               <Route exact path="/salaryTab" element={<SalaryReviewTabCard />} />
               <Route exact path="/addSalaryCol" element={<SalaryReviewColumn />} />
-
+              <Route exact path="/reviewsTab" element={<SalayReviewsTab />} />
             </Routes>
           </div>
         </Router>

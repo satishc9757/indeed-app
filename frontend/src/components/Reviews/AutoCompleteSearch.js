@@ -2,63 +2,80 @@ import React,{useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
-
-        
-     
-export default function ComboBox() {
-    const [autoval,setautoval]=useState()
+import SalaryModal  from './SalaryModal';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+export default function AutoCompleteSearchBox(props) {
+    const top100Films=props.data
+    const [title,settitle]=useState()
+    const [category,setcategory]=useState()
+    const [place,setplace]=useState("all")
+    
     const [selectedOptions, setSelectedOptions] = useState([]);
 
-    const handleChange = (event, value) => {setSelectedOptions(value);console.log(value)};
-
+    const handleChange = (event, value) => {setplace(value);console.log("value",value)};
+    const handleJobChange = (event, value) => {setcategory(value.category);settitle(value.salary_job_title)};
+    const handleSearch=()=>{
+        props.applyfilter(category,title,place)
+    }
     const options = top100Films.map((option) => {
-        const firstLetter = option.categoy[0].toUpperCase();
+        const firstLetter = option.category.toLowerCase()
         return {
           firstLetter:firstLetter,
           ...option,
         };
       });
+
+    const locations=top100Films.map((option)=>{return option.salary_job_location})
   return (<div className="container" style={{display:"flex",alignItems:"center",justifyContent:"center", background:"#faf9f8"}}>
-      <table><td>
+      
+      <table>
+      <tr><h3> <b>How much does {"company"} pay for {"role"}</b> </h3></tr>
+        <td>
       <label><b>Jobs</b></label>
     <Autocomplete
     id="grouped-demo"
     
     options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
     groupBy={(option) => option.firstLetter}
-    getOptionLabel={(option) => option.title}
+    getOptionLabel={(option) => option.salary_job_title}
     sx={{ width: 300}}
     style={{background:"white"}}
     size="small"
-    onChange={handleChange}
+    onChange={handleJobChange}
     renderInput={(params) => <TextField {...params} />}
     />
     <br />
 </td><td>
 <label><b>Place</b></label>
 <Autocomplete
-    id="grouped-demo"
-    
-    options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
-    groupBy={(option) => option.firstLetter}
-    getOptionLabel={(option) => option.title}
+    disablePortal
+    id="combo-box-demo"
+    options={locations}
+  
+   
+    getOptionLabel={(option) => option}
     sx={{ width: 300 }}
     onChange={handleChange}
     size="small"
     style={{background:"white"}}
     renderInput={(params) => <TextField {...params}/>}
+
     />
-</td></table>   </div>
+</td>
+<td>
+  <br />
+<Button variant="outlined" onClick={handleSearch}>
+        Search
+      </Button>
+</td>
+<td>
+  <br />
+<SalaryModal department_list={props.dept_list} />
+</td>
+</table>   </div>
   
   );
 }
 
-const top100Films = [
-    { title: 'The Shawshank Redemption', year: 1994 , categoy:"A"},
-    { title: 'The Godfather', year: 1972 , categoy:"A" },
-    { title: 'The Godfather: Part II', year: 1974 , categoy:"B"},
-    { title: 'The Dark Knight', year: 2008  , categoy:"B"},
-    { title: '12 Angry Men', year: 1957 ,  categoy:"C"},
-    
-  ];
-  

@@ -13,8 +13,8 @@ import Grid from '@mui/material/Grid';
 
 
 
-const FeaturedReviewCard = () => {
-
+const FeaturedReviewCard = (props) => {
+  
     const bull = (
         <Box
           component="span"
@@ -25,29 +25,24 @@ const FeaturedReviewCard = () => {
       );
 
     return (
-        <div className="container" style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
-       
-        <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={1} justifyContent="center">
-        <Grid  xs="4">
         
         <Card sx={{ maxWidth: 500, height:"80%" }} size="small">
-            
+        
       <CardContent>
       <Grid container spacing={2} style={{margin:"5px"}}>
       <Grid item xs="6" >
         <Typography variant="h5" component="div" >
-          Detailer
+          {props.data.salary_job_title}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          2 Salaries Reported
+          {props.data.salary_job_location}
         </Typography>
         </Grid>
         <Grid item xs="6" style={{padding:"20px",paddingRight:"45px"}} >
         <Typography variant="body2" style={{float:"right"}}>
          Average Salary
          
-          <h1 style={{margin:"0px"}}><b>$135,000</b></h1>
+          <h1 style={{margin:"0px"}}><b>{props.data.avg_salary}$</b></h1>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; per year
           
         </Typography>
@@ -57,54 +52,6 @@ const FeaturedReviewCard = () => {
        </Grid>
       </CardContent>
      </Card>
-    </Grid>
-    <Grid xs="4">
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-     <Card sx={{  maxWidth: 500, height:"80%" }}>
-            
-            <CardContent>
-            <Grid container spacing={2} style={{margin:"5px"}}>
-            <Grid item xs="6">
-              <Typography variant="h5" component="div">
-                Detailer
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                2 Salaries Reported
-              </Typography>
-              </Grid>
-              <Grid item xs="6" style={{padding:"20px",paddingRight:"45px"}}>
-              <Typography variant="body2" style={{float:"right"}}>
-               Average Salary
-               
-                <h1 style={{margin:"0px"}}><b>$135,000</b></h1>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; per year
-                
-              </Typography>
-             
-             
-              </Grid>
-             </Grid>
-            </CardContent>
-           </Card>
-          
-                </Grid>
-                <Grid xs="4">
-
-
-
-                </Grid>
-                </Grid>
-      </Box>
-    </div>
     )
 }
 

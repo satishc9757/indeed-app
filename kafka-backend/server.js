@@ -42,6 +42,8 @@ const signup = require('./services/users/signup');
 const companyReviews = require('./services/company/getreviews')
 const get_featured_reviews = require('./services/company/get_featured_reviews')
 const update_featured_review_status = require('./services/company/update_featured_review_status')
+const get_avg_salary_by_dept = require('./services/salary_reviews/get_avg_salaries_by_dept')
+const get_company_dept_titles_list = require('./services/salary_reviews/get_company_dept_titles')
 const update_employer = require('./services/employer/update_employer_details')
 const searchQuery = require('./services/jobSeeker/searchQuery')
 const companyDetails = require('./services/company/getCompanyDetails');
@@ -72,8 +74,7 @@ const GetTopFiveSeekersAccpReviews = require('./services/admin/getTopFiveSeekers
 const GetTopTenCEORating = require('./services/admin/getTopTenCEORating');
 const getReviews  = require('./services/jobSeeker/getReviews');
 const CompanySearchQuery = require('./services/company/companySearchQuery');
-
-
+const add_salary_review = require ('./services/salary_reviews/add_salary_review')
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
   var consumer = connection.getConsumer(topic_name);
@@ -113,6 +114,9 @@ handleTopicRequest("login", login);
 handleTopicRequest("signup", signup);
 handleTopicRequest("update_featured_review_status", update_featured_review_status);
 handleTopicRequest("get_featured_reviews", get_featured_reviews);
+handleTopicRequest("get_avg_salary_by_dept", get_avg_salary_by_dept);
+handleTopicRequest("get_company_dept_titles_list", get_company_dept_titles_list);
+handleTopicRequest("add_salary_review", add_salary_review);
 handleTopicRequest("update_employer_details", update_employer);
 handleTopicRequest("search", searchQuery);
 handleTopicRequest("company_details", companyDetails);
@@ -144,4 +148,3 @@ handleTopicRequest("add_reviews", addReviews);
 // handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
 handleTopicRequest("get_reviews", getReviews);
 handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
-
