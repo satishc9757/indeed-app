@@ -69,12 +69,6 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
-
-        topic: "search",
-        partitions: 1,
-        replicationFactor: 1,
-      },
-      {
         topic: "job_role",
         partitions: 1,
         replicationFactor: 1,
@@ -167,6 +161,11 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+        topic: "search",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
         topic: "company.companySearchQuery",
         partitions: 1,
         replicationFactor: 1,
@@ -176,6 +175,16 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
+      {
+        topic: "update_email",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "get_applied_jobs",
+        partitions: 1,
+        replicationFactor: 1,
+      }
     ],
     (err) => {
       if (err) {

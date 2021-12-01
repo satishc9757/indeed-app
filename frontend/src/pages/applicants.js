@@ -8,17 +8,21 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import {Container} from '@material-ui/core';
 import { connect } from "react-redux";
+import {Link} from "react-router-dom";
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { createTheme } from "@mui/material/styles";
 import { Button } from "@mui/material";
+import NavBar from "../components/user/NavBar";
 import axios from 'axios';
 import backendServer from '../webConfig';
+import Jobseeker from "./user/jobseekerProfile";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: "#008b8b",
+      backgroundColor: "#696969",
       color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
@@ -57,99 +61,129 @@ class Applicants extends Component{
             update:false,
             id:null
         }
+        sessionStorage.removeItem('job-seeker-id');
+    }
+
+    getapplicants = async()=>{
+        var response = await axios.get(`${backendServer}/employer/applications?jobId=619c7284f49b8582761555f2`);
+        await this.setState({
+            applicants:response.data
+        })
     }
     
     async componentDidMount(){
-        var response = await axios.get(`${backendServer}/employer/applications?jobId=619db70dfcc04cecadbd5f5a`);
-        console.log(response);
+        console.log("props",this.props);
+        this.getapplicants();
+    }
+
+    onChange = async (e)=>{
+        await this.setState({
+            application_status:e.target.value
+        })
+    }
+
+    profile = async(id)=>{
+        console.log(id);
+        await sessionStorage.setItem('job-seeker-id',id);
+    }
+
+    update = async(row)=>{
+        console.log(row,this.state)
+        var data = {
+            "app_id":row._id,
+            "app_status": this.state.application_status
+        }
+
+        var res = await axios.post(`${backendServer}/employer/application/status`,data);
+        await this.getapplicants();
+        await this.setState({
+            update:false,
+        })
+    }
+
+
+    enableEdit = async(row)=>{
+        await this.setState({
+            update:true,
+            id:row._id
+        })
     }
 
     render(){
         return(
-            <TableContainer>
-                <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                    <TableHead>
-                        <TableRow>
-                        <StyledTableCell>Order ID</StyledTableCell>
-                        <StyledTableCell align="right">Customer Name</StyledTableCell>
-                        <StyledTableCell align="right">Delivery Type</StyledTableCell>
-                        <StyledTableCell align="right">Order Status</StyledTableCell>
-                        <StyledTableCell align="right">Order Mode</StyledTableCell>
-                        <StyledTableCell align="right">Order Date</StyledTableCell>
-                        <StyledTableCell align="right">Order Time</StyledTableCell>
-                        <StyledTableCell align="right">Update</StyledTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        
-                        {this.state.applicants.map((row) => (
-                        <StyledTableRow>
-                            <StyledTableCell component="th" scope="row">
-                            <Button style={{color: "blue"}} type="button" color="inherit" value={row._id} onClick={this.handleClickOpen}>
-                            {row._id}
-                            </Button>
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
-                                <Button onClick={()=> this.profile(row.custId)}>{row.customerName}</Button>
-                            </StyledTableCell>
-                            <StyledTableCell align="right">{row.deliveryType}</StyledTableCell>
-                            {this.state.update && this.state.id===row._id ? ( 
-                                <FormControl>
-                                <InputLabel id="update">Order Status</InputLabel>
-                                <Select
-                                labelId="update"
-                                id="update"
-                                defaultValue={"Null"}
-                                label="Order Status"
-                                name="update"
-                                onChange={this.onChange}
-                                >
-                                <MenuItem value={"Order Recieved"}>Order Recieved</MenuItem>
-                                <MenuItem value={"Preparing"}>Preparing</MenuItem>
-                                <MenuItem value={"On the Way"}>On the Way</MenuItem>
-                                <MenuItem value={"Delivered"}>Delivered</MenuItem>
-                                <MenuItem value={"Pickup Ready"}>Pickup Ready</MenuItem>
-                                <MenuItem value={"Cancelled Order"}>Cancel Order</MenuItem>
-                                <MenuItem value={"Picked Up"}>Picked Up</MenuItem>
-                                </Select>
-                                </FormControl>
-                                // <TextField
-                                // autoComplete="update"
-                                // name="update"
-                                // required
-                                // id="update"
-                                // label="Status Update"
-                                // onChange={this.onChange}
-                                // autoFocus
-                                // />
-                            ):(
-                                <StyledTableCell style={{color: "green"}} align="right">{row.orderStatus}</StyledTableCell>
-                            )}
-                            <StyledTableCell align="right">{row.Order_Mode}</StyledTableCell>
-                            <StyledTableCell align="right">{row.date}</StyledTableCell>
-                            <StyledTableCell align="right">{row.time}</StyledTableCell>
-                            {this.state.update && this.state.id===row._id? ( 
-                                <Button 
-                                    onClick={() => this.update(row)}  
-                                    value={[row]} 
-                                    size="small">
-                                        Submit
-                                </Button>
-                            ):(
-                                <Button 
-                                    onClick={() => this.enableEdit(row)}  
-                                    value={[row]} 
-                                    size="small">
-                                        Update Status
-                                </Button>
-                            )}
-                        </StyledTableRow>
+            <div>
+                <NavBar />
+                <Container>
+                    <TableContainer>
+                        <Table sx={{ maxWidth: '70%' }} style={{margin: '2% auto', align:'center' }} aria-label="customized table">
+                            <TableHead>
+                                <TableRow>
+                                <StyledTableCell>User Name</StyledTableCell>
+                                <StyledTableCell align="right">Resume</StyledTableCell>
+                                <StyledTableCell align="right">Cover Letter</StyledTableCell>
+                                <StyledTableCell align="right">Application Status</StyledTableCell>
+                                <StyledTableCell align="right">Update</StyledTableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
 
-                        ))}
-                    </TableBody>
+                                {this.state.applicants.map((row) => (
+                                <StyledTableRow>
+                                    <StyledTableCell component="th" scope="row">
+                                        <Button><Link to="/jobseeker" onClick={()=> this.profile(row.app_job_seeker_id)}>{row.app_name}</Link></Button>
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right">{row.app_resume_link}</StyledTableCell>
+                                    <StyledTableCell align="right">{row.app_cover_letter_link}</StyledTableCell>
+                                    
+                                    {this.state.update && this.state.id===row._id ? ( 
+                                        <StyledTableCell style={{margin :'auto'}}  align="right">
+                                        <FormControl>
+                                            <InputLabel  id="update">Application Status</InputLabel>
+                                            <Select
+                                            labelId="update"
+                                            id="update"
+                                            defaultValue={"Null"}
+                                            label="Application Status"
+                                            name="update"
+                                            onChange={this.onChange}
+                                            >
+                                            <MenuItem value={"Submitted"}>Submitted</MenuItem>
+                                            <MenuItem value={"Reviewed"}>Reviewed</MenuItem>
+                                            <MenuItem value={"Initial Screening"}>Initial Screening</MenuItem>
+                                            <MenuItem value={"Interviewing"}>Interviewing</MenuItem>
+                                            <MenuItem value={"Hired"}>Hired</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                        </StyledTableCell>
+                                    ):(
+                                        <StyledTableCell align="right">{row.app_status}</StyledTableCell>
+                                    )}
+                                    <StyledTableCell align="right">
+                                    {this.state.update && this.state.id===row._id? ( 
+                                        <Button style={{margin :'auto'}} 
+                                            onClick={() => this.update(row)}  
+                                            value={[row]} 
+                                            size="small">
+                                                Submit
+                                        </Button>
+                                    ):(
+                                        <Button style={{margin :'auto'}} 
+                                            onClick={() => this.enableEdit(row)}  
+                                            value={[row]} 
+                                            size="small">
+                                                Update Status
+                                        </Button>
+                                    )}
+                                    </StyledTableCell>
+                                </StyledTableRow>
 
-                </Table>
-            </TableContainer>
+                                ))}
+                            </TableBody>
+
+                        </Table>
+                    </TableContainer>
+                </Container>
+            </div>
         )
     }
 

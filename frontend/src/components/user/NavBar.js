@@ -32,7 +32,12 @@ class NavBar extends Component {
                 </Button>
 
                 <Button>
-                    <Link to="/upload">Upload Resume</Link>
+                    {'userId' in sessionStorage &&
+                    <Link to="/upload">Upload Resume</Link>}
+                    {! ('userId' in sessionStorage) && 
+                        <Link to="/login">Upload Resume</Link>
+                        
+                    }
                 </Button>
 
                 <Button>

@@ -26,10 +26,12 @@ const style = {
   bgcolor: 'background.paper',
   
 };
+
 export default function Jobseeker() {
     const navigate = useNavigate();
     const userType ="employer"
         // sessionStorage.getItem("user_type")
+
     const [resumeOpen, setResumeOpen] = React.useState(false);
     const handleResumeOpen = () => setResumeOpen(true);
     const handleResumeClose = () => setResumeOpen(false);
