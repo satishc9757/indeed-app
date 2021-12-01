@@ -167,7 +167,17 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+        topic: "get_avg_salary_by_dept",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
         topic: "company.companySearchQuery",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "get_company_dept_titles_list",
         partitions: 1,
         replicationFactor: 1,
       },
@@ -176,6 +186,12 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
+      {
+        topic: "add_salary_review",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      
     ],
     (err) => {
       if (err) {
