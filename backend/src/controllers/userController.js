@@ -4,6 +4,7 @@
 // const ObjectId = mongoose.Types.ObjectId;
 
 const Login = require("../models/LoginDetailsModel");
+var bcrypt = require("bcrypt");
 
 var kafka = require('../kafka/client');
 // const jwt = require('jsonwebtoken');
@@ -13,6 +14,7 @@ var kafka = require('../kafka/client');
 
 exports.login = async function (req, res) {
     console.log("login details ", req.query)
+    req.query
     try {
         kafka.make_request("login", req.query, (err, resp) => {
             console.log(resp);

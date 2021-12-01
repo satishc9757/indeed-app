@@ -7,7 +7,7 @@ async function handle_request(msg, callback) {
   try {
     const jobIds = await jobSeeker
       .findOne({
-        _id: mongoose.Types.ObjectId(String(jobSeekerId)),
+        seeker_id: jobSeekerId,
       })
       .select("seeker_job_saved");
 

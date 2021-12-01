@@ -37,6 +37,7 @@ const companyReviews = require("./services/company/getreviews");
 // const get_featured_reviews = require('./services/employer/get_featured_reviews')
 //const update_featured_review_status = require('./services/company/update_featured_review_status')
 // const remove_featured_review = require('./services/employer/remove_featured_review')
+const updateEmail = require("./services/jobseeker/update_email");
 const login = require('./services/users/login');
 const signup = require('./services/users/signup');
 const update_employer = require('./services/employer/update_employer_details')
@@ -58,6 +59,7 @@ const get_resume = require('./services/jobseeker/get_resume')
 const update_resume = require('./services/jobseeker/update_resume')
 const delete_resume = require('./services/jobseeker/delete_resume')
 const getSavedJobs = require("./services/jobSeeker/getSavedJobs")
+const appliedJobs = require("./services/jobSeeker/getAppliedJobs");
 const addReviews = require("./services/jobSeeker/addReviews")
 const MarkReviewAsInappropriate = require('./services/admin/markReviewAsInappropriate');
 const GetAllCompanies = require('./services/admin/getAllCompanies');
@@ -106,6 +108,7 @@ handleTopicRequest("company.getreviews", companyReviews);
 // handleTopicRequest("update_featured_review_status", update_featured_review_status);
 // handleTopicRequest("get_featured_reviews", get_featured_reviews);
 // handleTopicRequest("remove_featured_review", remove_featured_review);
+handleTopicRequest("update_email", updateEmail);
 handleTopicRequest("login", login);
 handleTopicRequest("signup", signup);
 handleTopicRequest("update_employer_details", update_employer);
@@ -128,6 +131,7 @@ handleTopicRequest("get_jobseeker_profile", get_jobseeker);
 handleTopicRequest("update_jobseeker_profile", update_jobseeker);
 // handleTopicRequest("save_jobs", saveJobs);
 handleTopicRequest("get_saved_jobs", getSavedJobs);
+handleTopicRequest("get_applied_jobs",appliedJobs);
 handleTopicRequest("add_reviews", addReviews);
 // handleTopicRequest("admin.markReviewAsInappropriate", MarkReviewAsInappropriate);
 // handleTopicRequest("admin.getAllCompanies", GetAllCompanies);

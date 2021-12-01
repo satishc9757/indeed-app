@@ -19,6 +19,8 @@ router.post("/resume/:seeker_id", jobseekerController.updateJobseekerResume);
 router.post("/resume/delete", jobseekerController.deleteJobseekerResume);
 router.get("/search", jobseekerController.getSearch);
 router.post("/application", jobseekerController.createJobApplication);
+router.post("/update/email", jobseekerController.updateEmail);
+router.get("/appliedJobs", jobseekerController.getAppliedJobs);
 
 
 
