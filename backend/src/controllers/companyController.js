@@ -104,10 +104,9 @@ exports.updateFeaturedReviewStatus = async function (req, res) {
         .send(JSON.stringify({ message: "Something went wrong!", err }));
     }
   });
-  
+
 
 };
-
 
 exports.getFeaturedReviewsByCompId = async function (req, res) {
   const compId = req.query.compId;
@@ -132,24 +131,63 @@ exports.getFeaturedReviewsByCompId = async function (req, res) {
 
 
 };
-      
+
 exports.getJobStatsByCompanyId = async function (req, res) {
 
-  kafka.make_request("company.getJobStats", req.query, (err, results) => {
+    kafka.make_request("company.getJobStats", req.query, (err, results) => {
+      if (err){
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+      } else if(results.response_code == 200){
+
+          res.send(JSON.stringify(results.response_data));
+      } else {
+          res
+          .status(500)
+          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      }
+    });
+
+
+};
+
+exports.getCompaniesBySearchQuery = async function (req, res) {
+    const query = req.query;
+
+    kafka.make_request("company.companySearchQuery", query, (err, results) => {
+      if (err){
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+      } else if(results.response_code == 200){
+
+          res.send(JSON.stringify(results.response_data));
+      } else {
+          res
+          .status(500)
+          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      }
+    });
+
+};
+
+exports.getCompanies = async function (req, res) {
+  kafka.make_request("company.getAllCompanies", null, (err, results) => {
     if (err){
       res
       .status(500)
       .send(JSON.stringify({ message: "Something went wrong!", err }));
 
-    } else if(results.response_code == 200){
+    } else if(results){
 
-        res.send(JSON.stringify(results.response_data));
+        res.send(JSON.stringify(results));
     } else {
         res
         .status(500)
         .send(JSON.stringify({ message: "Something went wrong!", err }));
     }
   });
-
-
-};
+}

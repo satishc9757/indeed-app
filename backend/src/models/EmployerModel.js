@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 let EmployersSchema = new mongoose.Schema({
-    _id: {type: String, required: true},
+    emp_id: {type: Number, required: true},
     emp_name: {type: String, required: true},
     app_email: {type: String, required: true},
     emp_role: {type: String, required: true},

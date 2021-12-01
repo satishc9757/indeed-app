@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 let companyDetailsModel = global.DB.define('company_details', {
-  comp_id: { type: DataTypes.STRING, primaryKey: true },
+  comp_id: { type: DataTypes.INTEGER, primaryKey: true },
   comp_name: { type: DataTypes.STRING, require: true },
   comp_size: { type: DataTypes.STRING, require: true },
   comp_type: { type: DataTypes.STRING, require: true },

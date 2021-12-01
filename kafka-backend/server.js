@@ -35,8 +35,10 @@ initDBConnection().then(async () => {
 const companyReviews = require("./services/company/getreviews");
 // const add_featured_review = require('./services/employer/add_featured_review')
 // const get_featured_reviews = require('./services/employer/get_featured_reviews')
-// const update_featured_review_status = require('./services/company/update_featured_review_status')
+//const update_featured_review_status = require('./services/company/update_featured_review_status')
 // const remove_featured_review = require('./services/employer/remove_featured_review')
+const login = require("./services/users/login");
+const signup = require("./services/users/signup");
 const update_employer = require("./services/employer/update_employer_details");
 const searchQuery = require("./services/jobSeeker/searchQuery");
 const companyDetails = require("./services/company/getCompanyDetails");
@@ -65,7 +67,9 @@ const GetTopFiveMostReviewedCompanies = require("./services/admin/getTopFiveMost
 const GetTopFiveCompaniesAvgRating = require("./services/admin/getTopFiveCompaniesAvgRating");
 const GetTopFiveSeekersAccpReviews = require("./services/admin/getTopFiveSeekersAccpReviews");
 const GetTopTenCEORating = require("./services/admin/getTopTenCEORating");
-const getReviews  = require("./services/jobSeeker/getReviews");
+const getReviews = require("./services/jobSeeker/getReviews");
+const CompanySearchQuery = require("./services/company/companySearchQuery");
+const getCompanies = require("./services/company/getCompanies");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -102,6 +106,8 @@ handleTopicRequest("company.getreviews", companyReviews);
 // handleTopicRequest("update_featured_review_status", update_featured_review_status);
 // handleTopicRequest("get_featured_reviews", get_featured_reviews);
 // handleTopicRequest("remove_featured_review", remove_featured_review);
+handleTopicRequest("login", login);
+handleTopicRequest("signup", signup);
 handleTopicRequest("update_employer_details", update_employer);
 handleTopicRequest("search", searchQuery);
 handleTopicRequest("company_details", companyDetails);
@@ -132,3 +138,5 @@ handleTopicRequest("add_reviews", addReviews);
 // handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpReviews);
 // handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
 handleTopicRequest("get_reviews", getReviews);
+handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
+handleTopicRequest("company.getAllCompanies", getCompanies);
