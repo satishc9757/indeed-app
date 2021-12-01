@@ -121,7 +121,7 @@ class LandingPage extends Component {
         return (  
             <div>
             
-            <Box> 
+            <Box component="form"> 
                 <Grid container spacing={2} style={{'margin':'2% 0%'}}>
                     <Grid item sm={2}/>
                     <Grid item sm={3}>
@@ -145,6 +145,7 @@ class LandingPage extends Component {
                     </Grid>
                     <Grid item sm={2}>
                         <Button
+                        type="submit"
                         size="large"
                         color="primary"
                         variant="contained" 
@@ -161,14 +162,15 @@ class LandingPage extends Component {
                     <Grid container>
                         <Grid item sm={4}/>
                         <Grid item sm={6}>
-                            {this.state.jobSeekerId &&
+                            {'user-id' in sessionStorage &&
                                 <Link to="/upload" underline="none">
                                     Post Your Resume
                                 </Link>}
-                            {!this.state.jobSeekerId &&
+                            {!('user-id' in sessionStorage) &&
+                                <div>
                                 <Link to="/login" underline="none">
                                 Post Your Resume
-                                </Link>} - It only takes a few seconds
+                                </Link> - It only takes a few seconds</div>}
                         </Grid>
                     </Grid>
                     <br/>
@@ -183,7 +185,7 @@ class LandingPage extends Component {
                     </Grid>
                 </div>
                 }
-                
+            </Box>
                 {/* JOBS PANEL */}
                 {'jobCards' in this.state.results && this.state.results.jobCards.length>0 &&
                 <div>
@@ -223,8 +225,6 @@ class LandingPage extends Component {
                 </div>
                 }
 
-                
-            </Box>
             </div>
         )
     }

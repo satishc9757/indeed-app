@@ -198,7 +198,7 @@ exports.updateApplicationStatus = async function (req, res) {
 exports.getJobApplicationsByJobId = async function (req, res) {
   const jobId = req.query.jobId;
 
-  kafka.make_request("employer.getJobApplications", jobId, (err, results) => {
+  kafka.make_request("employer.getJobApplications", req.query, (err, results) => {
     if (err){
       res
       .status(500)
