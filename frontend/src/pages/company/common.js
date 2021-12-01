@@ -43,7 +43,7 @@ export default function Common() {
         // else if (tabResult === "reviews") return </>
         // else if (tabResult === "salary") return </>
         else if (tabResult === "jobs") return <Jobs/>
-        else if (tabResult === "applicants") return <JobPosted/>
+        else if (tabResult === "applicants" && sessionStorage.getItem("user-type")==="employer") return <JobPosted/>
         // else if (tabResult==="benefits") return </>
         //else if (tabResult==="photos") return </>
         else return <Snapshot CompanyDetails={companyDetails} />

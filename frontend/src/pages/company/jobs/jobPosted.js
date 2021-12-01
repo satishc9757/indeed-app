@@ -39,11 +39,11 @@ class JobPosted extends Component {
                 <Card
                     style={selectedStyle}
                     variant="outlined"
-                    onClick={(event) => this.handleJobCardClick(event, index)}
+                    // onClick={(event) => this.handleJobCardClick(event, index)}
                     >
                     <CardContent>
                         <Typography variant="h5" component="div">
-                            <Link to = "/applicants" params={{"jobid":job._id}}>{job.job_title}</Link>
+                            <Link to = {`/applicants`} >{job.job_title}</Link>
                         </Typography>
                         <Typography>
                             {job.job_company_name} | {job.job_industry}

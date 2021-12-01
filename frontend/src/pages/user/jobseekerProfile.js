@@ -20,7 +20,10 @@ const style = {
   bgcolor: 'background.paper',
   
 };
-export default function Jobseeker() {
+
+export default function Jobseeker({id}) {
+
+    console.log("id",id);
     const [resumeOpen, setResumeOpen] = React.useState(false);
     const handleResumeOpen = () => setResumeOpen(true);
     const handleResumeClose = () => setResumeOpen(false);

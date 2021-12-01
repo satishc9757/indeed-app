@@ -104,7 +104,7 @@ class uploadResume extends Component {
                                         name="btn-upload"
                                         style={{ display: 'none' }}
                                         type="file"
-                                        accept="image/*"
+                                        accept="application/*"
                                         onChange = {this.singleFileChangedHandler}
                                     />
                                     

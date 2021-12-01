@@ -19,7 +19,7 @@ var router = express.Router();
 router.get("/job", employerController.getJobDetailsById);
 router.post("/job", employerController.createJobPosting);
 router.put("/job", employerController.updateJobPosting);
-router.put("/application/status", employerController.updateApplicationStatus);
+router.post("/application/status", employerController.updateApplicationStatus);
 router.get("/reviews", employerController.getReviewsByCompanyId);
 router.get("/reviewsWithKafka", employerController.getReviewsByCompanyIdKafka);
 
