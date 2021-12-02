@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Grid, Table, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import logo from "../../media/IndeedLogo.png";
 import { Box } from "@mui/system";
 import backendServer from "../../webConfig";
@@ -15,6 +16,7 @@ export default function JobseeekerSignup() {
   const [country, setCountry] = useState("");
   const [phone, setPhone] = useState("");
   const [age, setAge] = useState("");
+  const navigate = useNavigate();
 
   const signupDetails = useSelector((state) => state.signUp);
 
@@ -31,6 +33,7 @@ export default function JobseeekerSignup() {
       contact: phone,
       password:signupDetails.password
     });
+    navigate("/login");
   };
 
   return (
