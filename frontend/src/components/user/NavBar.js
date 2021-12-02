@@ -108,12 +108,20 @@ class NavBar extends Component {
                     </div>
                 ):(
                     <div>
-                        <Link to='/jobseeker'>
-                            <IconButton>
-                                <PersonIcon/>
-                            </IconButton>
-                        </Link>
-                        <Button onClick={this.signOut}>SignOut</Button>
+                        {sessionStorage.getItem("user-type")==="jobseeker"? (
+                            <Link to='/jobseeker'>
+                                <IconButton>
+                                    <PersonIcon/>
+                                </IconButton>
+                            </Link>
+                        ):(
+                            <Link to='/companyprofile'>
+                                <IconButton>
+                                    <PersonIcon/>
+                                </IconButton>
+                            </Link>
+                        )}
+                        <Button onClick={this.signOut}><Link to="/">SignOut</Link></Button>
                     </div>
                 )}
             </Toolbar>
