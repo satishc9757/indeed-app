@@ -131,6 +131,30 @@ exports.getJobDetailsById = async function (req, res) {
 
 };
 
+exports.getEmployerProfile = async function (req, res) {
+  
+  try {
+    kafka.make_request("get_emp_profile", req.query, (err, resp) => {
+      if (err || !resp) {
+        console.log(err);
+        res
+          .status(500)
+          .send(
+            JSON.stringify({ message: "Something went wrong!", error: err })
+          );
+      } else {
+        res.status(200).json(resp);
+      }
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .send(JSON.stringify({ message: "Something went wrong!", error: err }));
+  }
+
+
+};
+
 
 exports.createJobPosting = async function (req, res) {
 
@@ -198,7 +222,7 @@ exports.updateApplicationStatus = async function (req, res) {
 exports.getJobApplicationsByJobId = async function (req, res) {
   const jobId = req.query.jobId;
 
-  kafka.make_request("employer.getJobApplications", jobId, (err, results) => {
+  kafka.make_request("employer.getJobApplications", req.query, (err, results) => {
     if (err){
       res
       .status(500)

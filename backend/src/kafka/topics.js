@@ -43,6 +43,11 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+       topic: "get_emp_profile",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
         topic: "update_company_details",
         partitions: 1,
         replicationFactor: 1,
@@ -69,12 +74,6 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
-
-        topic: "search",
-        partitions: 1,
-        replicationFactor: 1,
-      },
-      {
         topic: "job_role",
         partitions: 1,
         replicationFactor: 1,
@@ -82,7 +81,13 @@ const createKafkaTopics = () => {
         topic: "company_details",
         partitions: 1,
         replicationFactor: 1,
-      }, {
+      },
+      {
+        topic: "updateCompanyDetails",
+        partitions: 1,
+        replicationFactor: 1,
+      }, 
+      {
         topic: "save_jobs",
         partitions: 1,
         replicationFactor: 1,
@@ -105,7 +110,7 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },{
-      
+
        topic: "employer.createJobPosting",
         partitions: 1,
         replicationFactor: 1,
@@ -172,6 +177,11 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+        topic: "search",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
         topic: "company.companySearchQuery",
         partitions: 1,
         replicationFactor: 1,
@@ -185,13 +195,26 @@ const createKafkaTopics = () => {
         topic: "update_featured_review_status",
         partitions: 1,
         replicationFactor: 1,
+      },{
+        topic: "company.getCompanyJobPostingsWithPagination",
+        partitions: 1,
+        replicationFactor: 1,
       },
       {
         topic: "add_salary_review",
         partitions: 1,
         replicationFactor: 1,
       },
-      
+      {
+        topic: "update_email",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "get_applied_jobs",
+        partitions: 1,
+        replicationFactor: 1,
+      }
     ],
     (err) => {
       if (err) {

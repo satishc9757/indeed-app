@@ -4,9 +4,11 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/companyDetails', companyController.getCompanyDetailsByCompanyID);
+router.post('/companyDetails', companyController.updateCompanyDetailsByCompanyID);
 router.get('/getJobRole', companyController.getJobRoleDetailsByCompanyID);
 router.get('/company', companyController.getCompanyDetailsByCompanyID);
 router.get('/jobs', companyController.getJobsByCompanyId);
+router.get('/jobsByPages', companyController.getJobsByCompanyIdWithPagination);
 router.get('/getFeaturedReviews', companyController.getFeaturedReviewsByCompId);
 router.post('/updateFeaturedReview', companyController.updateFeaturedReviewStatus);
 router.get('/jobstats', companyController.getJobStatsByCompanyId);

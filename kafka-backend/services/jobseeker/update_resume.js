@@ -13,7 +13,7 @@ const s3 = new aws.S3({
 
    function checkFileType( file, cb ){
     // Allowed ext
-    const filetypes = /jpeg|jpg|png|gif|pdf/;
+    const filetypes = /jpeg|jpg|png|pdf/;
     // Check ext
     const extname = filetypes.test( path.extname( file.originalname ).toLowerCase());
     // Check mime
@@ -56,7 +56,7 @@ async function handle_request(req, res) {
                 // If Success
                 const imageLocation = req.file.location;// Save the file name into database into profile model
                 const ID = req.file.ID;
-                Jobseeker.findOneAndUpdate({ "_id": msg.seeker_id }, {
+                Jobseeker.findOneAndUpdate({ "seeker_id": msg.seeker_id }, {
                     "seeker_resume_location": imageLocation
                 })
                     .exec().then(doc => {

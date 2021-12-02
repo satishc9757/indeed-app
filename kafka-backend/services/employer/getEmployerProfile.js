@@ -1,13 +1,13 @@
-const Jobseeker = require('../../models/JobSeekersModel');
+const Employer = require('../../models/EmployersModel')
 
 async function handle_request(msg, callback) {
-  console.log('inside get jobseeker');
-  const seeker_id = msg.seeker_id;
+  console.log('inside get employer' + msg.empID);
+  const empID = msg.empID;
   console.log("message",msg)
   try {
-    let jobseeker = await Jobseeker.find({ seeker_id: seeker_id });
+    let employer = await Employer.find({ emp_id: empID });
     //console.log('employer', employer);
-    callback(null, jobseeker);
+    callback(null, employer);
   } catch (err) {
     console.log(err);
     callback({ isError: true, error: err, status: 500 }, null);

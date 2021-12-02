@@ -1,12 +1,11 @@
 const Jobseeker = require('../../models/JobSeekersModel');
 
 async function handle_request(msg, callback) {
+    console.log(msg.seeker_id)
     Jobseeker.updateOne({ seeker_id: msg.seeker_id }, {
-    
-    seeker_resume_location: "",
-    
+    seeker_email: msg.seeker_email,
     }).exec().then(doc => {
-        console.log("Success delete resume" + doc)
+        console.log("Success update profile" + doc)
         let res={
             message: "Success",
             res: JSON.stringify(doc)

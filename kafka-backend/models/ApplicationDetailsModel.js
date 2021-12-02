@@ -18,5 +18,5 @@ let applicationDetailsSchema = new mongoose.Schema({
     app_updated_on: {type: Date, required: false},
 });
 
-const applicationDetailsModel = mongoose.model('applicationDetails', applicationDetailsSchema);
+const applicationDetailsModel = mongoose.model('applicationdetails', applicationDetailsSchema);
 module.exports = applicationDetailsModel;

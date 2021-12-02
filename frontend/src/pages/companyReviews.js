@@ -141,8 +141,6 @@ class CompanyReviews extends Component {
     }
 
     render(){
-
-
         return (
             <div>
                 <NavBar />

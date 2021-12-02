@@ -2,6 +2,7 @@ import { Avatar, Container, Grid, Paper, Tab, Typography } from "@material-ui/co
 import React, { Component } from 'react';
 import { CardActions, CardContent, TableRow, TableCell, TextField } from '@material-ui/core';
 import { Card, IconButton, Pagination, Stack } from "@mui/material";
+import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from 'axios';
@@ -10,12 +11,13 @@ import backendServer from '../../../webConfig';
 
 class JobPosted extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             jobs:[]
         }
         sessionStorage.setItem('emp_company_id',1);
+        sessionStorage.removeItem('applicants-job-id')
     }
 
     async componentDidMount(){
@@ -24,6 +26,12 @@ class JobPosted extends Component {
         await this.setState({
             jobs: response.data
         })
+    }
+
+    onClick = async(val)=>{
+        console.log(val);
+        await sessionStorage.setItem('applicants-job-id',val)
+
     }
 
     renderJobCard = (job, index) => {
@@ -39,11 +47,11 @@ class JobPosted extends Component {
                 <Card
                     style={selectedStyle}
                     variant="outlined"
-                    onClick={(event) => this.handleJobCardClick(event, index)}
+                    // onClick={(event) => this.handleJobCardClick(event, index)}
                     >
                     <CardContent>
                         <Typography variant="h5" component="div">
-                            <Link to = "/applicants" params={{"jobid":job._id}}>{job.job_title}</Link>
+                        <Button onClick= {()=>this.onClick(job._id)} ><Link to = {"/applicants/"+job._id}>{job.job_title}</Link></Button>
                         </Typography>
                         <Typography>
                             {job.job_company_name} | {job.job_industry}

@@ -43,7 +43,7 @@ export default function Common() {
         // else if (tabResult === "reviews") return </>
         // else if (tabResult === "salary") return </>
         else if (tabResult === "jobs") return <Jobs/>
-        else if (tabResult === "applicants") return <JobPosted/>
+        else if (tabResult === "applicants" && sessionStorage.getItem("user-type")==="employer") return <JobPosted/>
         // else if (tabResult==="benefits") return </>
         //else if (tabResult==="photos") return </>
         else return <Snapshot CompanyDetails={companyDetails} />
@@ -85,7 +85,8 @@ export default function Common() {
                 <Tab label="Salaries" to='/common?tab=salaries' component={Link}/>
                 <Tab label="Benefits" to='/common?tab=benefits' component={Link}/>
                 <Tab label="Photos" to='/common?tab=photos' component={Link} />
-                <Tab label="Applicants" to='/common?tab=applicants' component={Link} />
+                {sessionStorage.getItem("user-type")==="employer" && 
+                <Tab label="Applicants" to='/common?tab=applicants' component={Link} />}
                 <Tab label="Jobs" to='/common?tab=jobs' component={Link} />
             </Tabs>
             <hr />
