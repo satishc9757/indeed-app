@@ -22,7 +22,7 @@ router.put("/job", employerController.updateJobPosting);
 router.post("/application/status", employerController.updateApplicationStatus);
 router.get("/reviews", employerController.getReviewsByCompanyId);
 router.get("/reviewsWithKafka", employerController.getReviewsByCompanyIdKafka);
-
+router.get("/", employerController.getEmployerProfile);
 router.get("/reviewsWithSQLCaching", employerController.getReviewsByCompanyIdSQLCaching);
 router.get("/reviewsWithSQLCachingAndKafka", employerController.getReviewsByCompanyIdSQLCachingKafka);
 router.get("/applications", employerController.getJobApplicationsByJobId);

@@ -6,7 +6,17 @@ async function handle_request(msg, callback){
     
     console.log("Inside update employer",msg);
 
-        await Employer.updateOne({_id:msg._id},{$set :{emp_name:msg.emp_name}},
+    await Employer.updateOne({ emp_id: msg.emp_id }, {
+        $set: {
+            emp_name: msg.emp_name,
+            emp_id: msg.emp_id,
+            emp_city: msg.emp_city,
+            emp_state: msg.emp_state,
+            emp_country: msg.country,
+            emp_role: msg.role
+            
+        }
+    },
             (err, result) => {
                 if(err){
                   console.error("Err in update Employer details : " + err);

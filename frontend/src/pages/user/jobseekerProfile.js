@@ -29,7 +29,7 @@ const style = {
 
 export default function Jobseeker() {
     const navigate = useNavigate();
-    const userType ="employer"
+    const userType =""
         // sessionStorage.getItem("user_type")
 
     const [resumeOpen, setResumeOpen] = React.useState(false);
@@ -44,9 +44,12 @@ export default function Jobseeker() {
     const [seekerEmail, setSeekerEmail] = React.useState('');
     const [seekerContact, setSeekerContact] = React.useState('');
     const [jobDetails, setJobDetails] = React.useState([])
+    const [appJobDetails, setAppJobDetails] = React.useState([])
+
+    const [initials, setInitials] = React.useState([])
 
     const downloadResume = () => {
-        let seekerID = '61a081696d73d01739a267ef'
+        let seekerID = 2
         // let seekerID = sessionStorage.getItem("seeker_id");
         console.log("download resume")
         axios.get(`${backendServer}/jobseeker/resume?seeker_id=${seekerID}`)
@@ -57,8 +60,24 @@ export default function Jobseeker() {
             }
     }
      
+    const updateProfile = () => {
+        let seekerID = 2
+        let data = {"seeker_id":seekerID,
+            "seeker_name": firstName+' '+lastName,
+            "seeker_email": seekerEmail,
+            "seeker_contact":seekerContact
+        }
+        axios.post(`${backendServer}/jobseeker`,data)
+            .then(response => {
+                console.log(response)
+            }).catch=(error) => {
+                console.log(error)
+            }
+        
+    }
+
     const deleteResume = () => {
-        let seekerID = '61a081696d73d01739a267ef';
+        let seekerID = 2
         axios.post(`${backendServer}/jobseeker/resume/delete?seeker_id=${seekerID}`)
             .then(response => {
                 console.log(response)
@@ -73,19 +92,31 @@ export default function Jobseeker() {
     }
 
     useEffect(() => {
-        let seekerID = 4
+        let seekerID = 2;
         axios.get(`${backendServer}/jobseeker?seeker_id=${seekerID}`)
             .then(response => {
-                let data = response.data;
-                console.log(data);
-                let name = data[0].seeker_name.split(" ")
+                let data = response.data[0];
+                console.log(data)
+                let name = data.seeker_name.split(" ")
+                setInitials(name[0].substring(0, 1).toUpperCase()+name[name.length - 1].substring(0, 1).toUpperCase())
                 setFirstName(name[0]);
                 setLastName(name[1]);
-                setSeekerProfile(data[0]);
+                setSeekerProfile(data);
+            axios.get(`${backendServer}/jobseeker/jobs?jobSeekerId=${seekerID}`)
+        
                 axios.get(`${backendServer}/jobseeker/jobs?jobSeekerId=${seekerID}`)
+
             .then(response => {
-                let data = response.data;
-                setJobDetails(data);
+                let data1 = response.data;
+                console.log(data1)
+                setJobDetails(data1);
+                axios.get(`${backendServer}/jobseeker/appliedJobs?jobSeekerId=${seekerID}`).then(response => {
+                let data2 = response.data;
+                console.log(data2)
+                setAppJobDetails(data2);
+                }).catch=(error) => {
+                console.log(error)
+            }
             }).catch=(error) => {
                 console.log(error)
             }
@@ -109,7 +140,7 @@ export default function Jobseeker() {
             }}>
                 <Stack direction="row" spacing={2}>
                     
-                    <Avatar sx={{ width: 70, height: 70, backgroundColor: "blue" }}>OP</Avatar>
+                    <Avatar sx={{ width: 70, height: 70, backgroundColor: "midnightblue" }}>{initials}</Avatar>
                     <Stack direction="column" >
                     <Typography variant="h5"> {seekerProfile.seeker_name}</Typography>
                     <div>
@@ -162,7 +193,9 @@ export default function Jobseeker() {
                                 onChange={e => setSeekerContact(e.target.value)} />
                             <br /><br />
                             <Stack spacing={2} direction="row">
-                                <Button variant="contained" color='primary'>Save</Button>
+                                    <Button
+                                        onClick={updateProfile}
+                                        variant="contained" color='primary'>Save</Button>
                                 <Button variant="outlined" color='primary'>Cancel</Button>
                             </Stack>
                         </CardContent>
@@ -235,7 +268,15 @@ export default function Jobseeker() {
                                 </Grid>
                             ))}
                         </Grid>
-                        <Typography variant='subtitle1'>Applied</Typography>
+                                <Typography variant='subtitle1'>Applied</Typography>
+                                <Grid container style={{flexDirection: "column"}} spacing={3} >
+                                    {appJobDetails.map(details=>(
+                                        <Grid style={{ maxWidth:500
+                                        }} item md={3} key={details._id}>
+                                            <JobCard jobDetails={details} /> 
+                                        </Grid>
+                                    ))}
+                                </Grid>
                     </CardContent>
                 </Card>
                 <br />
