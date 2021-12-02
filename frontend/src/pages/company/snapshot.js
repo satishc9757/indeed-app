@@ -24,8 +24,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 
-export default function Snapshot({CompanyDetails}) {
+export default function Snapshot({CompanyDetails},{featuredReviews}) {
     console.log(CompanyDetails)
+    console.log(featuredReviews)
     return (
         <Container>
             <Typography
@@ -126,14 +127,14 @@ export default function Snapshot({CompanyDetails}) {
                 <span>{CompanyDetails.comp_description}</span>
             </Container>
             <br/><br/>
-            <Typography
+            {/* <Typography
                 variant="h4">
                 Jobs near you
             </Typography>
             <Typography variant="body">
                 You're seeing {CompanyDetails.comp_name} jobs close to <b>San Jose, CA.</b>
             </Typography>
-            <br/><br/>
+            <br/><br/> */}
             <Typography
                 variant="h4">
                 Reviews

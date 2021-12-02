@@ -50,8 +50,10 @@ class JobStats extends Component {
 
     async componentDidMount(){
         this.setState({searchResultText: "Popular companies near you" });
-        const compId = "Comp1";  //hardcoded for now
+        const compId = sessionStorage.getItem("compId");
+        console.log(compId)  //hardcoded for now
         var response = await axios.get(`${backendServer}/company/jobStats?compId=${compId}`);
+        console.log(response)
         await this.setState({
             jobStats: response.data
         });
@@ -102,8 +104,6 @@ class JobStats extends Component {
     }
 
     render(){
-
-
         return (
             <div>
                 <NavBar />
