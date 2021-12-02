@@ -29,14 +29,13 @@ import Conversations from './pages/general/conversations'
 import { ThemeProvider} from '@material-ui/styles'
 import { createTheme} from '@mui/material/styles'
 import { blue } from '@mui/material/colors';
+import EmployerHome from './pages/employer/employerHome';
 import JobDetailsCard from './components/landingpage/JobDetailsCard'
 import Applicants from './pages/employer/applicants';
 import JobPostings from './pages/employer/jobPostings';
 import JobStats from './pages/employer/jobStats';
 import SalaryReviewTabCard from './components/Reviews/SalaryReviewTabCard'
 import SalaryReviewColumn from './components/Reviews/SalaryReviewColumn'
-// import CompanyReviews from './pages/companyReviews';
-// import Applicants from './pages/applicants';
 import ReviewTab from './components/Reviews/ReviewTab'
 import ReviewCard from './components/Reviews/ReviewCard'
 const theme = createTheme({
@@ -64,6 +63,7 @@ class App extends Component {
               <Route exact path="/salaries" element={<Salaries/>} />
               <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
               <Route exact path="/companyreviews" element={<CompanyReviews/>} />
+              <Route exact path="/employer" element={<EmployerHome/>} />
               <Route exact path="/jobs" element={<JobPosted/>} />
               <Route exact path="/reviewCard" element={<FeaturedReviewCard />} />
               <Route exact path="/autoComplete" element={<AutoCompleteSearch />} />

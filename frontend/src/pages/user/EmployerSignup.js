@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import logo from "../../media/IndeedLogo.png";
 import { Box } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 import backendServer from "../../webConfig";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -25,13 +26,14 @@ export default function JobseeekerSignup() {
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
   const [phone, setPhone] = useState("");
-
+  const navigate = useNavigate();
   const [companies, setCompanies] = useState([]);
 
   useEffect(() => {
     axios.get(`${backendServer}/company/companies`).then((res) => {
       setCompanies(res.data);
     });
+    navigate("/login");
   }, []);
 
   const [company, setCompany] = useState([]);
