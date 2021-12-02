@@ -161,9 +161,9 @@ class LandingPage extends Component {
                         <Grid item sm={4}/>
                         <Grid item sm={6}>
                             {'user-id' in sessionStorage &&
-                                <Link to="/upload" underline="none">
+                                <div><Link to="/upload" underline="none">
                                     Post Your Resume
-                                </Link>}
+                                </Link>- It only takes a few seconds</div>}
                             {!('user-id' in sessionStorage) &&
                                 <div>
                                 <Link to="/login" underline="none">

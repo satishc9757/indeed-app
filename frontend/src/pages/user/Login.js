@@ -24,13 +24,14 @@ export default function Login() {
     if(data.data){
       sessionStorage.setItem("user-type",data.data.user_type);
       sessionStorage.setItem("user-email",data.data.user_email);
-      sessionStorage.setItem("user-id",data.data.user_id);
     }
-    if(data.data.user_type==="employer"){
-      navigate("/common");
+    if(data.data.user_type==="jobseeker"){
+      sessionStorage.setItem("job-seeker-id", data.data.user_id);
+      navigate("/");
     }
     else{
-      navigate("/")
+      sessionStorage.setItem("emp-id",data.data.user_id);
+      navigate("/employer")
     }
    
 

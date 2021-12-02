@@ -11,28 +11,9 @@ import PersonIcon from '@mui/icons-material/Person';
 import logo from '../../media/IndeedLogo.png'
 
 class NavBar extends Component {
-    constructor(props){
-        super(props);
-        this.state={
-            route:[]
-        }
-    }
-    async componentDidMount(){
-        // let type = sessionStorage.getItem("user_type");
-        let type="jobseeker"
-        if (type === "employer") {
-            this.setState({
-                route: "/companyProfile"
-            })
-        } else if (type === "jobseeker") {
-            this.setState({
-                route: "/jobseeker"
-            })
-        }
-    }
-    
 
-    constructor(props){
+    constructor(){
+        super();
         this.state={
             notLoggedIn:false
         }
@@ -40,7 +21,7 @@ class NavBar extends Component {
 
     signOut = async(e)=>{
         await sessionStorage.clear();
-        this.setState({
+        await this.setState({
             notLoggedIn:true
         })
     }
@@ -53,22 +34,32 @@ class NavBar extends Component {
                 
                 <img src={logo} alt="Profile" width="110" height="30"/>
 
-                <Button>
-                    <Link to="/">Find jobs</Link>
-                </Button>
-                <Button>
-                    Company reviews
-                </Button>
-
-                <Button>
                     {(sessionStorage.getItem("user-type")==="employer")?(
-                        <Link to="/applicants">Jobs</Link>
+                        <div>
+                            <Button>
+                                <Link to="/jobs">Jobs</Link>
+                            </Button>
+                            <Button>
+                                Messages
+                            </Button>
+                        </div>
                     ):(
-                        <div>Find salaries</div>
+                        <div>
+                            <Button>
+                                <Link to="/">Find jobs</Link>
+                            </Button>
+                            <Button>
+                                Company reviews
+                            </Button>
+                            <Button>
+                                Find salaries
+                            </Button>
+                        </div>
                     )
                     }
-                </Button>
-                {'user-id' in sessionStorage && sessionStorage.getItem("user-type")!=="employer"? (
+
+                
+                {sessionStorage.getItem("user-type")!=="employer"? (
                     <Button><Link to="/upload">Upload Resume</Link></Button>
                 ):(
                     <div>
@@ -77,20 +68,15 @@ class NavBar extends Component {
                     </div>
                 )
                 }
-                {this.state.notLoggedIn?(
+                {!('user-type' in sessionStorage)?(
                     <div>
                         <Button>
                             Sign in
                         </Button>
 
-                        <Button>
+                        <Button><Link to="/employer">
                             Employers / Post Job
-                                </Button>
-                        <Link to='/jobseeker'>
-                            <IconButton>
-                                <PersonIcon/>
-                            </IconButton>
-                        </Link>
+                            </Link></Button>
                         <Button>
                             <Link to="/login">
                                 Login
@@ -100,7 +86,12 @@ class NavBar extends Component {
                     </div>
                 ):(
                     <div>
-                        <Button onClick={this.signOut}></Button>
+                        <Link to='/jobseeker'>
+                            <IconButton>
+                                <PersonIcon/>
+                            </IconButton>
+                        </Link>
+                        <Button onClick={this.signOut}>SignOut</Button>
                     </div>
                 )}
             </Toolbar>

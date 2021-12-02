@@ -50,10 +50,10 @@ export default function Jobseeker() {
     const [initials, setInitials] = React.useState([])
 
     const downloadResume = () => {
-        let seekerID = 2
+        // let seekerID = 2
         // let seekerID = sessionStorage.getItem("seeker_id");
         console.log("download resume")
-        axios.get(`${backendServer}/jobseeker/resume?seeker_id=${seekerID}`)
+        axios.get(`${backendServer}/jobseeker/resume?seeker_id=${sessionStorage.getItem("job-seeker-id")}`)
             .then(response => {
                 console.log(response)
             }).catch=(error) => {
@@ -62,8 +62,8 @@ export default function Jobseeker() {
     }
      
     const updateProfile = () => {
-        let seekerID = 2
-        let data = {"seeker_id":seekerID,
+        // let seekerID = 2
+        let data = {"seeker_id":sessionStorage.getItem("job-seeker-id"),
             "seeker_name": firstName+' '+lastName,
             "seeker_email": seekerEmail,
             "seeker_contact":seekerContact
@@ -78,8 +78,8 @@ export default function Jobseeker() {
     }
 
     const deleteResume = () => {
-        let seekerID = 2
-        axios.post(`${backendServer}/jobseeker/resume/delete?seeker_id=${seekerID}`)
+        // let seekerID = 2
+        axios.post(`${backendServer}/jobseeker/resume/delete?seeker_id=${sessionStorage.getItem("job-seeker-id")}`)
             .then(response => {
                 console.log(response)
             }).catch=(error) => {
@@ -93,7 +93,7 @@ export default function Jobseeker() {
     }
 
     useEffect(() => {
-        let seekerID = 2;
+        let seekerID = sessionStorage.getItem("job-seeker-id");
         axios.get(`${backendServer}/jobseeker?seeker_id=${seekerID}`)
             .then(response => {
                 let data = response.data[0];
@@ -150,7 +150,7 @@ export default function Jobseeker() {
                     </Stack>
                 </Stack>
                 <br/><br/>
-                {userType === "employer" ?
+                {sessionStorage.getItem("user-type") === "employer" ?
               
                     <Card style={{ width: 500 }}>
                         <CardContent >

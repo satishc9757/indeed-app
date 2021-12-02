@@ -38,6 +38,11 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+        topic: "add_employee_review",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
         topic: "remove_featured_review",
         partitions: 1,
         replicationFactor: 1,
