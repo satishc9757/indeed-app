@@ -21,7 +21,6 @@ class JobPosted extends Component {
     }
 
     async componentDidMount(){
-        
         var response = await axios.get(`${backendServer}/company/jobs?compId=${sessionStorage.getItem('emp_company_id')}`)
         console.log("response",response);
         await this.setState({

@@ -29,7 +29,7 @@ export default function CompanyProfile () {
 
 
     const updateProfile = () => {
-        let emp_id=5
+        let emp_id=sessionStorage.getItem("emp-id")
         let data = {
             "emp_id": emp_id,
             "emp_name": firstName + ' ' + lastName,
@@ -48,7 +48,7 @@ export default function CompanyProfile () {
     }
 
     const updateCompany = () => {
-        let companyID = 2
+        let companyID = sessionStorage.getItem("emp-company-id")
         console.log(lastName)
         let data = {
             "comp_id": companyID,
@@ -75,8 +75,8 @@ export default function CompanyProfile () {
 
 
     useEffect(() => {
-        let compId = 2;
-        let empID = 5;
+        let compId = sessionStorage.getItem("emp-company-id");
+        let empID = sessionStorage.getItem("emp-id");
         axios.get(`${backendServer}/employer?empID=${empID}`)
             .then(response => {
                 let data = response.data[0];
