@@ -15,24 +15,52 @@ const axios = require('axios');
 export default function Common() {
     const [tabValue, setTabValue] = React.useState(0);
     const [tabResult, setTabResult] = React.useState('snapshot');
-    const [companyDetails, setCompanyDetails] = useState('')
+    const [companyDetails, setCompanyDetails] = useState('');
+    const [featuredReviews, setFeaturedReviews] = useState([]);
     const search = useLocation().search;
 
 
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
     };
-    useEffect(() => {
-        const tab = new URLSearchParams(search).get('tab');
-        setTabResult(tab);
-        let Company_ID = 3;
-        axios.get(`${backendServer}/company/companyDetails?compId=${Company_ID}`)
-            .then(response => {
-                console.log(JSON.stringify(response.data[0])+"-----");
-                setCompanyDetails(response.data[0])
-            }).catch=(error) => {
-                console.log(error)
+    // useEffect(() => {
+    //     const tab = new URLSearchParams(search).get('tab');
+    //     setTabResult(tab);
+    //     let Company_ID = 3;
+    //     axios.get(`${backendServer}/company/companyDetails?compId=${Company_ID}`)
+    //         .then(response => {
+    //             console.log(JSON.stringify(response.data[0])+"-----");
+    //             setCompanyDetails(response.data[0])
+    //         }).catch=(error) => {
+    //             console.log(error)
+    //         }
+    // }, [search])
+
+    useEffect( () => {
+        
+        async function fetchDetails(){
+            const tab = new URLSearchParams(search).get('tab');
+            
+            let Company_ID = 2;
+            var response = await axios.get(`${backendServer}/company/companyDetails?compId=${Company_ID}`);
+            console.log(JSON.stringify(response.data[0])+"-----");
+            await setCompanyDetails(response)
+            var reviews = await axios.get(`${backendServer}/company/getFeaturedReviews?compId=${Company_ID}`);
+            await console.log("reviews ", reviews.data);
+            for (var idx = 0; idx<reviews.data.length; idx++){
+                await featuredReviews.push(reviews.data[idx]);
             }
+            // await setFeaturedReviews(reviews.data)
+            await console.log(featuredReviews);
+            await setTabResult(tab);
+        }
+        fetchDetails()
+            //     }).catch=(error) => {
+            //         console.log(error)
+            //     }
+            // }).catch=(error) => {
+            //     console.log(error)
+            // }
     }, [search])
 
     

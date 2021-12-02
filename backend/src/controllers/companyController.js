@@ -159,20 +159,16 @@ exports.getJobsByCompanyId = async function (req, res) {
     const compId = req.query.compId;
   
     kafka.make_request("get_featured_reviews", compId, (err, results) => {
-      console.log(results)
+      console.log("resutls from kafka",results)
   
       if (err){
         res
         .status(500)
         .send(JSON.stringify({ message: "Something went wrong!", err }));
   
-      } else if(results.response_code == 200){
-  
-          res.send(JSON.stringify(results.response_data));
-      } else {
-          res
-          .status(500)
-          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      } 
+      else{
+          res.send(results);
       }
     });
   

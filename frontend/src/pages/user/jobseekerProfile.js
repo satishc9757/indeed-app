@@ -103,9 +103,8 @@ export default function Jobseeker() {
                 setFirstName(name[0]);
                 setLastName(name[1]);
                 setSeekerProfile(data);
-        
-                axios.get(`${backendServer}/jobseeker/jobs?jobSeekerId=${seekerID}`)
 
+            axios.get(`${backendServer}/jobseeker/jobs?jobSeekerId=${seekerID}`)
             .then(response => {
                 let data1 = response.data;
                 console.log(data1)
