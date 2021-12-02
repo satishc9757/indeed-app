@@ -13,8 +13,8 @@ import axios from 'axios';
 class Jobs extends Component {
 
     state = {
-            companySearchText :"",
-            locaitonSearchText :"",
+            jobTitleSearchText :"",
+            locationSearchText :"",
             limit:1,
             page:1,
             totalpage:2,
@@ -26,13 +26,13 @@ class Jobs extends Component {
                     job_company_name: "PWC",
                     job_company_image_link: "https://uber-eats-store-0144.s3.us-east-2.amazonaws.com/images/others/pwc_bg.jpeg",
                     job_industry: "Information Technology",
-                    job_location: {
+                    job_location: [{
                         city: "San Jose",
                         street:"7th Street",
                         state: "CA",
                         country: "USA",
                         zipcode: "95126",
-                    },
+                    }],
                     job_work_type: "Internship",
                     job_salary_details: "$50/hour",
                     job_compensation: 50,
@@ -46,13 +46,13 @@ class Jobs extends Component {
                     job_company_name: "PWC",
                     job_company_image_link: "https://uber-eats-store-0144.s3.us-east-2.amazonaws.com/images/others/pwc_bg.jpeg",
                     job_industry: "Information Technology",
-                    job_location: {
+                    job_location: [{
                         city: "San Jose",
                         street:"7th Street",
                         state: "CA",
                         country: "USA",
                         zipcode: "95126",
-                    },
+                    }],
                     job_work_type: "Internship",
                     job_salary_details: "$50/hour",
                     job_compensation: 50,
@@ -102,7 +102,7 @@ class Jobs extends Component {
         await this.setState({
             limit: e.target.value
         });
-        await this.search();
+        await this.onSearch();
     }
 
     handleJobCardClick = (event, jobIndex) => {
@@ -114,10 +114,11 @@ class Jobs extends Component {
 
     onSearch = async () => {
         const backendServer = "http://localhost:8000/api"//just for local testing
-        let location = this.state.location||'';
-        var response = await axios.get(`${backendServer}/jobseeker/search?searchQuery=${this.state.search}&location=${location}&page=${this.state.page}&limit=${this.state.limit}`);
+        let location = this.state.locationSearchText||'';
+        var response = await axios.get(`${backendServer}/jobseeker/search?searchQuery=${this.state.jobTitleSearchText}&location=${location}&page=${this.state.page}&limit=${this.state.limit}`);
+        console.log("jobs data : "+JSON.stringify(response.data));
         await this.setState({
-            jobs: response.data,
+            jobs: response.data.jobCards,
             totalpage: Number(response.data.totalPages),
             page: Number(response.data.currentPage)
         });
@@ -145,7 +146,7 @@ class Jobs extends Component {
                             {job.job_title}
                         </Typography>
                         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                            {job.job_location.city}, {job.job_location.state}
+                            {job.job_location[0].city}, {job.job_location[0].state}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             {diffDays}+ days ago
@@ -173,8 +174,8 @@ class Jobs extends Component {
                         fullWidth
                         required
                         onChange = {this.onChange}
-                        name="jobtitle"
-                        id="jobtitle"
+                        name="jobTitleSearchText"
+                        id="jobTitleSearchText"
                         label="Job title"
                         size="small"
                         InputProps={{
@@ -196,8 +197,8 @@ class Jobs extends Component {
                         variant = "outlined"
                         fullWidth
                         onChange = {this.onChange}
-                        name="location"
-                        id="location"
+                        name="locationSearchText"
+                        id="locationSearchText"
                         label="Search by location"
                         size="small"
                         InputProps={{
@@ -212,7 +213,7 @@ class Jobs extends Component {
                         size="medium"
                         style={{ backgroundColor:"#2557a7", color: "white"}}
                         variant="contained"
-                        onClick={this.search}>
+                        onClick={this.onSearch}>
                             Find jobs
                         </Button>
                     </Grid>

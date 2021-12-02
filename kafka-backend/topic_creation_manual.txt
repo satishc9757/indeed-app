@@ -1,0 +1,52 @@
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic company.getreviews
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic update_featured_review_status
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic get_featured_reviews
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic update_employer_details
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic search
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic company_details
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic company.getCompanyJobPostings
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic employer.createJobPosting
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic employer.updateJobPosting
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic employer.getJobPosting
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic employer.updateApplicationStatus
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic employer.getJobApplications
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic employer.jobseeker.createJobApplication
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic jobseeker.createJobApplication
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic getChatMessage
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic addChatMessage
+.\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic company.getJobStats
+
+
+
+
+
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic update_company_details
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic search
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic company_details
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic company.getCompanyJobPostings
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic  employer.createJobPosting
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic   employer.updateJobPosting
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic employer.getJobPosting
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic employer.updateApplicationStatus
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic employer.getJobApplications
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic jobseeker.createJobApplication
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic admin.getAllCompanies
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic admin.getAllReviews
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic admin.getTopFiveMostReviewedCompanies
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic admin.getTopFiveCompaniesAvgRating
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic admin.getNumberOfReviewsPerDay
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic admin.markReviewAsInappropriate
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic admin.getTopFiveSeekersAccpReviews
+
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic admin.getTopTenCEORating
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic get_resume
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic getChatMessage
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic addChatMessage
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic company.getJobStats
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic update_resume
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic delete_resume
+ 
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic get_jobseeker_profile
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic update_jobseeker_profile
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 –topic get_saved_jobs

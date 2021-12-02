@@ -8,9 +8,14 @@ router.post('/companyDetails', companyController.updateCompanyDetailsByCompanyID
 router.get('/getJobRole', companyController.getJobRoleDetailsByCompanyID);
 router.get('/company', companyController.getCompanyDetailsByCompanyID);
 router.get('/jobs', companyController.getJobsByCompanyId);
+router.get('/jobsByPages', companyController.getJobsByCompanyIdWithPagination);
 router.get('/getFeaturedReviews', companyController.getFeaturedReviewsByCompId);
 router.post('/updateFeaturedReview', companyController.updateFeaturedReviewStatus);
 router.get('/jobstats', companyController.getJobStatsByCompanyId);
-router.get('/search', companyController.getCompaniesBySearchQuery);
+router.get('/companies',companyController.getCompanies)
 
+router.get('/search', companyController.getCompaniesBySearchQuery);
+router.get('/avgSalByDept', companyController.getAvgSalaryByDeptId);
+router.post('/addSalaryReview',companyController.addSalaryReview)
+router.get('/JobTitleByDept', companyController.getTitleByDepts);
 module.exports = router;

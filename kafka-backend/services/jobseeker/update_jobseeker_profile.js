@@ -11,9 +11,6 @@ async function handle_request(msg, callback) {
     seeker_age: msg.seeker_age,
     seeker_contact:msg.seeker_contact,
     seeker_resume_location: msg.seeker_resume_location,
-    seeker_job_applied: msg.seeker_job_applied,
-    seeker_job_saved: msg.seeker_job_saved,
-    seeker_created_at:msg.seeker_created_at
     }).exec().then(doc => {
         console.log("Success update profile" + doc)
         let res={
