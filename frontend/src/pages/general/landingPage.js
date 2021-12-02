@@ -183,7 +183,6 @@ class LandingPage extends Component {
                     </Grid>
                 </div>
                 }
-
                 {/* JOBS PANEL */}
                 {'jobCards' in this.state.results && this.state.results.jobCards.length>0 &&
                 <div>

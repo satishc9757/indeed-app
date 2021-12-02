@@ -37,6 +37,18 @@ const companyReviews = require("./services/company/getreviews");
 // const get_featured_reviews = require('./services/employer/get_featured_reviews')
 //const update_featured_review_status = require('./services/company/update_featured_review_status')
 // const remove_featured_review = require('./services/employer/remove_featured_review')
+const login = require("./services/users/login");
+const signup = require("./services/users/signup");
+const JobPostingData = require("./services/employer/getJobPosting");
+const CompanyJobPostings = require("./services/company/getJobPostings");
+const GetAllCompanies = require("./services/admin/getAllCompanies");
+const GetNumberOfReviewsPerDay = require("./services/admin/getNumberOfReviewsPerDay");
+const GetTopFiveMostReviewedCompanies = require("./services/admin/getTopFiveMostReviewedCompanies");
+const GetTopFiveCompaniesAvgRating = require("./services/admin/getTopFiveCompaniesAvgRating");
+const GetTopFiveSeekersAccpReviews = require("./services/admin/getTopFiveSeekersAccpReviews");
+const GetTopTenCEORating = require("./services/admin/getTopTenCEORating");
+const CompanySearchQuery = require("./services/company/companySearchQuery");
+const getCompanies = require("./services/company/getCompanies");
 const updateEmail = require("./services/jobseeker/update_email");
 const login = require('./services/users/login');
 const signup = require('./services/users/signup');
@@ -51,8 +63,6 @@ const companyDetails = require('./services/company/getCompanyDetails');
 const updateCompanyDetails = require('./services/company/updateCompanyDetails');
 const CreateJobPosting = require('./services/employer/createJobPosting');
 const UpdateJobPosting = require('./services/employer/updateJobPosting');
-const JobPostingData = require('./services/employer/getJobPosting');
-const CompanyJobPostings = require('./services/company/getJobPostings');
 const CompanyJobPostingsWithPagination = require('./services/company/getJobPostingsWithPagination');
 const CreateJobApplication = require('./services/jobSeeker/createJobApplication');
 const UpdateApplicationStatus = require('./services/employer/updateApplicationStatus');
@@ -70,16 +80,11 @@ const appliedJobs = require("./services/jobSeeker/getAppliedJobs");
 const addReviews = require("./services/jobSeeker/addReviews");
 const get_emp = require("./services/employer/getEmployerProfile")
 const MarkReviewAsInappropriate = require('./services/admin/markReviewAsInappropriate');
-const GetAllCompanies = require('./services/admin/getAllCompanies');
 const GetAllReviews = require('./services/admin/getAllReviews');
-const GetNumberOfReviewsPerDay = require('./services/admin/getNumberOfReviewsPerDay');
-const GetTopFiveMostReviewedCompanies = require('./services/admin/getTopFiveMostReviewedCompanies');
-const GetTopFiveCompaniesAvgRating = require('./services/admin/getTopFiveCompaniesAvgRating');
-const GetTopFiveSeekersAccpReviews = require('./services/admin/getTopFiveSeekersAccpReviews');
-const GetTopTenCEORating = require('./services/admin/getTopTenCEORating');
 const getReviews  = require('./services/jobSeeker/getReviews');
 const CompanySearchQuery = require('./services/company/companySearchQuery');
 const add_salary_review = require ('./services/salary_reviews/add_salary_review')
+
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
   var consumer = connection.getConsumer(topic_name);
@@ -157,4 +162,5 @@ handleTopicRequest("admin.getAllCompanies", GetAllCompanies);
 // handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
 handleTopicRequest("get_reviews", getReviews);
 handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
+handleTopicRequest("company.getAllCompanies", getCompanies);
 handleTopicRequest("get_emp_profile", get_emp);
