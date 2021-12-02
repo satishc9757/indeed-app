@@ -11,6 +11,26 @@ import PersonIcon from '@mui/icons-material/Person';
 import logo from '../../media/IndeedLogo.png'
 
 class NavBar extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            route:[]
+        }
+    }
+    async componentDidMount(){
+        // let type = sessionStorage.getItem("user_type");
+        let type="jobseeker"
+        if (type === "employer") {
+            this.setState({
+                route: "/companyProfile"
+            })
+        } else if (type === "jobseeker") {
+            this.setState({
+                route: "/jobseeker"
+            })
+        }
+    }
+    
 
     render(){
         return (
@@ -47,7 +67,7 @@ class NavBar extends Component {
                 <Button>
                     Employers / Post Job
                         </Button>
-                <Link to='/jobseeker'>
+                <Link to={this.state.route}>
                     <IconButton>
                         <PersonIcon/>
                     </IconButton>
