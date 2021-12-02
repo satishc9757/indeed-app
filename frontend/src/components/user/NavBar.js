@@ -12,12 +12,34 @@ import logo from '../../media/IndeedLogo.png'
 
 class NavBar extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
+            route: [],
             notLoggedIn:false
         }
     }
+    async componentDidMount(){
+        // let type = sessionStorage.getItem("user_type");
+        let type="jobseeker"
+        if (type === "employer") {
+            this.setState({
+                route: "/companyProfile"
+            })
+        } else if (type === "jobseeker") {
+            this.setState({
+                route: "/jobseeker"
+            })
+        }
+    }
+    
+
+    // constructor(props){
+    //     this.state={
+    //         notLoggedIn:false
+    //     }
+    // }
+
 
     signOut = async(e)=>{
         await sessionStorage.clear();

@@ -103,6 +103,7 @@ export default function Jobseeker() {
                 setFirstName(name[0]);
                 setLastName(name[1]);
                 setSeekerProfile(data);
+
             axios.get(`${backendServer}/jobseeker/jobs?jobSeekerId=${seekerID}`)
             .then(response => {
                 let data1 = response.data;
@@ -112,6 +113,18 @@ export default function Jobseeker() {
                 let data2 = response.data;
                 console.log(data2)
                 setAppJobDetails(data2);
+
+                    
+            //         axios.get(`${backendServer}/jobseeker/reviews?jobseekerid=${seekerID}`).then(response => {
+            //     let data2 = response.data;
+            //     console.log(data2)
+            //     // setAppJobDetails(data2);
+
+                    
+            //     }).catch=(error) => {
+            //     console.log(error)
+            // }
+                    
                 }).catch=(error) => {
                 console.log(error)
             }
