@@ -309,6 +309,7 @@ exports.deleteJobseekerResume = async function (req, res) {
 
 exports.getReviews = async function (req, res) {
   try {
+    console.log("called here! ", req.query);
     kafka.make_request("get_reviews", req.query, (err, resp) => {
       if (err || !resp) {
         console.log(err);

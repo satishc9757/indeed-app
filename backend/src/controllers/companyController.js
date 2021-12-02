@@ -236,23 +236,20 @@ return res.status(500).json({ error: error });
     const compId = req.query.compId;
   
     kafka.make_request("get_featured_reviews", compId, (err, results) => {
-      console.log((results)+ "------=========-----"+ err)
+
+      console.log("resutls from kafka",results)
+
   
       if (err){
         res
         .status(500)
         .send(JSON.stringify({ message: "Something went wrong!", err }));
   
-      } else
-        // if (results.response_code == 200)
-      {
-  
+
+      } 
+      else{
           res.send(results);
-      // } else {
-      //     res
-      //     .status(500)
-      //     .send(JSON.stringify({ message: "Something went wrong!", err }));
-       }
+      }
     });
   
   
