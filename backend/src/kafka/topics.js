@@ -186,6 +186,10 @@ const createKafkaTopics = () => {
         topic: "update_featured_review_status",
         partitions: 1,
         replicationFactor: 1,
+      },{
+        topic: "company.getCompanyJobPostingsWithPagination",
+        partitions: 1,
+        replicationFactor: 1,
       },
       {
         topic: "company.getAllCompanies",

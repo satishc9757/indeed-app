@@ -56,6 +56,7 @@ const companyDetails = require('./services/company/getCompanyDetails');
 const updateCompanyDetails = require('./services/company/updateCompanyDetails');
 const CreateJobPosting = require('./services/employer/createJobPosting');
 const UpdateJobPosting = require('./services/employer/updateJobPosting');
+const CompanyJobPostingsWithPagination = require('./services/company/getJobPostingsWithPagination');
 const CreateJobApplication = require('./services/jobSeeker/createJobApplication');
 const UpdateApplicationStatus = require('./services/employer/updateApplicationStatus');
 const JobApplicationsData = require('./services/employer/getJobApplications');
@@ -119,6 +120,7 @@ handleTopicRequest("search", searchQuery);
 handleTopicRequest("company_details", companyDetails);
 handleTopicRequest("updateCompanyDetails", updateCompanyDetails);
 handleTopicRequest("company.getCompanyJobPostings", CompanyJobPostings);
+handleTopicRequest("company.getCompanyJobPostingsWithPagination", CompanyJobPostingsWithPagination);
 handleTopicRequest("employer.createJobPosting", CreateJobPosting);
 handleTopicRequest("employer.updateJobPosting", UpdateJobPosting);
 handleTopicRequest("employer.getJobPosting", JobPostingData);
@@ -149,5 +151,3 @@ handleTopicRequest("get_reviews", getReviews);
 handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
 handleTopicRequest("company.getAllCompanies", getCompanies);
 handleTopicRequest("get_emp_profile", get_emp);
-
-

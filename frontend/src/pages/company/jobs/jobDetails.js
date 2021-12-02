@@ -75,7 +75,7 @@ class JobDetails extends Component {
 
 
                 <Typography variant="body2" color="text.secondary">
-                    {this.props.job.job_location.city}, {this.props.job.job_location.state} {this.props.job.job_location.zipcode}
+                    {this.props.job.job_location[0].city}, {this.props.job.job_location[0].state} {this.props.job.job_location.zipcode}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                     {this.props.job.job_work_type}
