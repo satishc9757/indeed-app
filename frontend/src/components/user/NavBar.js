@@ -11,6 +11,26 @@ import PersonIcon from '@mui/icons-material/Person';
 import logo from '../../media/IndeedLogo.png'
 
 class NavBar extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            route:[]
+        }
+    }
+    async componentDidMount(){
+        // let type = sessionStorage.getItem("user_type");
+        let type="jobseeker"
+        if (type === "employer") {
+            this.setState({
+                route: "/companyProfile"
+            })
+        } else if (type === "jobseeker") {
+            this.setState({
+                route: "/jobseeker"
+            })
+        }
+    }
+    
 
     render(){
         return (
@@ -50,22 +70,29 @@ class NavBar extends Component {
                         Sign in
                     </Button>
 
-                    <Button>
-                        Employers / Post Job
-                            </Button>
-                    <Link to='/jobseeker'>
-                        <IconButton>
-                            <PersonIcon/>
-                        </IconButton>
-                    </Link>
-                    <Button>
-                        <Link to="/login">
-                            Login
-                        </Link>
-                    </Button>
-                    <Button color="inherit"></Button>
+
+                <Button>
+                    Sign in
+                </Button>
+
+                <Button>
+                    Employers / Post Job
+                        </Button>
+                <Link to={this.state.route}>
+                    <IconButton>
+                        <PersonIcon/>
+                    </IconButton>
+                </Link>
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    Login
+                </Typography>
+                <Button color="inherit"></Button>
+
+                    
+                   
                 </div>
             }
+
             </Toolbar>
             </AppBar>
             </Box>

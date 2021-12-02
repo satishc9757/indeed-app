@@ -224,7 +224,8 @@ export default function CompanyProfile () {
                         
                         <br /><br />
                         <Stack spacing={2} direction="row">
-                        <Button variant="contained" color='primary'>Save</Button>
+                            <Button onClick={updateCompany}
+                                variant="contained" color='primary'>Save</Button>
                         <Button variant="outlined" color='primary'>Cancel</Button>
                         </Stack>
                     </CardContent>

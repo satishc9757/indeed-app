@@ -3,11 +3,12 @@ import { ListItemButton } from '@mui/material'
 import NavBar from '../../components/user/NavBar'
 import backendServer from "../../webConfig";
 import React, { useEffect } from "react";
-
 const axios = require('axios');
 
 export default function CompanyList() {
     const [companyDetails, setCompanyDetails] = React.useState([]);
+    const [searchvalue, setSearch] = React.useState([]);
+    const [searchResult, setSearchResult] = React.useState([]);
 
     useEffect(() => {
         axios.get(`${backendServer}/admin/getAllCompanies`)
@@ -19,13 +20,34 @@ export default function CompanyList() {
             }).catch = (error) => {
                 console.log(error)
             }
-    }, [])
+    }, [searchResult])
     
-    const openReviews = (value) => {
-        console.log(value)
+    const search = async () => {
+        setSearchResult([])
+        console.log(companyDetails.length)
+        for (var i = 0; i < companyDetails.length; i++){
+            console.log(companyDetails[i])
+            let company = companyDetails[i].comp_name
+            console.log(company)
+            if (company.includes(searchvalue)) {
+                console.log(company)
+                let a = searchResult
+                a.push(company)
+                console.log(a)
+                setSearchResult(a)
+                console.log(searchResult)
+            }
+            
+        }
+               
     }
 
 
+    const openReviews = (value) => {
+        console.log(value)
+             
+    }
+    
     return (
         <div>
             <NavBar />
@@ -38,14 +60,16 @@ export default function CompanyList() {
                 alignContent: "center",
                 alignItems:"center"
             }}>
-            <Grid container spacing={2} style={{'margin':'2% ', justifyContent:"center"}}>
-                    <Grid item sm={2}/>
+
+                
+            <Grid container spacing={2} style={{'margin':'2% ', justifyContent:"center", alignItems:"center"}}>
+                   
                     <Grid item sm={3}>
                         <TextField
                         variant = "outlined" 
                         fullWidth
                         required
-                        // onChange = {this.onChange}
+                            onChange={(e)=>setSearch(e.target.value)}
                         name="search"
                         id="search"
                         label="Search"/>
@@ -53,6 +77,7 @@ export default function CompanyList() {
                     
                     <Grid item sm={2}>
                         <Button
+                            onClick={(e)=>search()}
                         type="submit"
                         size="large"
                         color="primary"
@@ -60,12 +85,35 @@ export default function CompanyList() {
                         margin="normal"
                         // onClick={this.search}
                         >
-                            Find jobs
+                            Find Company
+                        
                         </Button>
                     </Grid>
                 </Grid>
 
-
+                {searchResult.length === 0 ? <div></div> :
+                    <div>
+                    <Typography variant="h5"> Search Result</Typography>
+                <br/>
+            <Card style={{
+                    width: 700,
+                flexDirection: "column"}}>
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                {searchResult.map(details=>(
+                    <div>
+                        <ListItem  disablePadding>
+                            <ListItemButton onClick={(e)=>openReviews(e.target.value)}>
+                                <ListItemText primary={details} />
+                            </ListItemButton>
+                        </ListItem>
+                        <Divider component="li" />
+                        </div>))}
+                        </List>
+                        </Card>
+                    </div>
+                                
+                            
+                }
             
                 <Typography variant="h5"> Company List</Typography>
                 <br/>
@@ -76,7 +124,7 @@ export default function CompanyList() {
                 {companyDetails.map(details=>(
                     <div>
                         <ListItem key={details.comp_id} disablePadding>
-                            <ListItemButton onClick={(e)=>openReviews(e.target.value)}>
+                            <ListItemButton onClick={(e)=>openReviews(details.comp_id)}>
                                 <ListItemText primary={details.comp_name} />
                             </ListItemButton>
                         </ListItem>
