@@ -37,8 +37,6 @@ const companyReviews = require("./services/company/getreviews");
 // const get_featured_reviews = require('./services/employer/get_featured_reviews')
 //const update_featured_review_status = require('./services/company/update_featured_review_status')
 // const remove_featured_review = require('./services/employer/remove_featured_review')
-const login = require("./services/users/login");
-const signup = require("./services/users/signup");
 const JobPostingData = require("./services/employer/getJobPosting");
 const CompanyJobPostings = require("./services/company/getJobPostings");
 const GetAllCompanies = require("./services/admin/getAllCompanies");
@@ -52,7 +50,6 @@ const getCompanies = require("./services/company/getCompanies");
 const updateEmail = require("./services/jobseeker/update_email");
 const login = require('./services/users/login');
 const signup = require('./services/users/signup');
-const companyReviews = require('./services/company/getreviews')
 const get_featured_reviews = require('./services/company/get_featured_reviews')
 const update_featured_review_status = require('./services/company/update_featured_review_status')
 const get_avg_salary_by_dept = require('./services/salary_reviews/get_avg_salaries_by_dept')
@@ -82,7 +79,6 @@ const get_emp = require("./services/employer/getEmployerProfile")
 const MarkReviewAsInappropriate = require('./services/admin/markReviewAsInappropriate');
 const GetAllReviews = require('./services/admin/getAllReviews');
 const getReviews  = require('./services/jobSeeker/getReviews');
-const CompanySearchQuery = require('./services/company/companySearchQuery');
 const add_salary_review = require ('./services/salary_reviews/add_salary_review')
 
 function handleTopicRequest(topic_name, fname) {
@@ -152,14 +148,14 @@ handleTopicRequest("update_jobseeker_profile", update_jobseeker);
 handleTopicRequest("get_saved_jobs", getSavedJobs);
 handleTopicRequest("get_applied_jobs",appliedJobs);
 handleTopicRequest("add_reviews", addReviews);
-// handleTopicRequest("admin.markReviewAsInappropriate", MarkReviewAsInappropriate);
+handleTopicRequest("admin.markReviewAsInappropriate", MarkReviewAsInappropriate);
 handleTopicRequest("admin.getAllCompanies", GetAllCompanies);
-// handleTopicRequest("admin.getAllReviews", GetAllReviews);
-// handleTopicRequest("admin.getNumberOfReviewsPerDay", GetNumberOfReviewsPerDay);
-// handleTopicRequest("admin.getTopFiveMostReviewedCompanies", GetTopFiveMostReviewedCompanies);
-// handleTopicRequest("admin.getTopFiveCompaniesAvgRating", GetTopFiveCompaniesAvgRating);
-// handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpReviews);
-// handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
+handleTopicRequest("admin.getAllReviews", GetAllReviews);
+handleTopicRequest("admin.getNumberOfReviewsPerDay", GetNumberOfReviewsPerDay);
+handleTopicRequest("admin.getTopFiveMostReviewedCompanies", GetTopFiveMostReviewedCompanies);
+handleTopicRequest("admin.getTopFiveCompaniesAvgRating", GetTopFiveCompaniesAvgRating);
+handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpReviews);
+handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
 handleTopicRequest("get_reviews", getReviews);
 handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
 handleTopicRequest("company.getAllCompanies", getCompanies);

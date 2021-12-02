@@ -221,11 +221,49 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
+      
+      {
+        topic: "admin.getTopFiveCompaniesAvgRating",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic:'admin.getTopFiveMostReviewedCompanies',
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic:'admin.markReviewAsInappropriate',
+        partitions: 1,
+        replicationFactor: 1,
+      },
       {
         topic: "admin.getAllCompanies",
         partitions: 1,
         replicationFactor: 1,
-      }
+      },
+      {
+        topic: "admin.getAllReviews",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "admin.getNumberOfReviewsPerDay",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "admin.getTopFiveSeekersAccpReviews",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "admin.getTopTenCEORating",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      
+      
     ],
     (err) => {
       if (err) {

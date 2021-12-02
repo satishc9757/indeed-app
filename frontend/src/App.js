@@ -19,7 +19,6 @@ import Snapshot from "./pages/company/snapshot";
 import Jobseeker from "./pages/user/jobseekerProfile";
 import Salaries from './pages/general/salaries'
 import JobPosted from './pages/employer/jobPosted';
-import CompanyReviews from './pages/companyReviews';
 import JobseeekerSignup from "./pages/user/JobseekerSignup";
 import EmployerSignup from "./pages/user/EmployerSignup";
 import Common from './pages/company/common';
@@ -32,9 +31,11 @@ import { blue } from '@mui/material/colors';
 import JobDetailsCard from './components/landingpage/JobDetailsCard'
 import CompanyReviews from './pages/companyReviews';
 import Applicants from './pages/employer/applicants';
-import Applicants from './pages/applicants';
 import JobPostings from './pages/employer/jobPostings';
 import JobStats from './pages/employer/jobStats';
+import Analytics from './pages/admin/Analytics';
+import SalaryReviewTabCard from './components/Reviews/SalaryReviewTabCard'
+import SalaryReviewColumn from './components/Reviews/SalaryReviewColumn'
 
 const theme = createTheme({
   pallete: {
@@ -43,8 +44,7 @@ const theme = createTheme({
     },
   },
 });
-import SalaryReviewTabCard from './components/Reviews/SalaryReviewTabCard'
-import SalaryReviewColumn from './components/Reviews/SalaryReviewColumn'
+
 
 class App extends Component {
   render() {
@@ -78,6 +78,8 @@ class App extends Component {
               <Route exact path="/jobPostings" element={<JobPostings/>} />
               <Route exact path="/employer/jobPostings" element={<JobPostings/>} />
               <Route exact path="/employer/jobstats" element={<JobStats/>} />
+              <Route exact path="/analytics" element={<Analytics/>} />
+
             </Routes>
           </div>
         </Router>
