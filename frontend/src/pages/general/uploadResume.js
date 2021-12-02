@@ -80,47 +80,43 @@ class uploadResume extends Component {
 
     render() {
 
-        return (   
-            <div>
-                <Grid direction="row" container >
-                    <NavBar/>
-                    <ThemeProvider theme={this.state.theme}>
-                        <Container component="main" maxWidth="xs">
-                            <CssBaseline />
-                            <Box
-                            sx={{
-                                marginTop: 8,
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                            }}
-                            >
-                                <Typography component="h1" variant="h5" style={{padding:"2%"}}>
-                                    Add/Update Resume
-                                </Typography><br /><br/>
-                                <label htmlFor="btn-upload" >
-                                    <input
-                                        id="btn-upload"
-                                        name="btn-upload"
-                                        style={{ display: 'none' }}
-                                        type="file"
-                                        accept="application/*"
-                                        onChange = {this.singleFileChangedHandler}
-                                    />
-                                    
-                                    <Button
-                                        className="btn-choose"
-                                        variant="outlined"
-                                        component="span"
-                                        >
-                                        Choose a File to Upload
-                                    </Button>
-                                </label>
-                            </Box>
-                        </Container>
-                    </ThemeProvider>
-                </Grid>
-            </div>
+        return (
+            <Grid direction="row" container >
+                <NavBar/>
+                    <Container>
+                        <CssBaseline />
+                        <Box
+                        sx={{
+                            marginTop: 8,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                        >
+                            <Typography component="h1" variant="h5" style={{padding:"2%"}}>
+                                Add/Update Resume
+                            </Typography><br /><br/>
+                            <label htmlFor="btn-upload" >
+                                <input
+                                    id="btn-upload"
+                                    name="btn-upload"
+                                    style={{ display: 'none' }}
+                                    type="file"
+                                    accept="application/*"
+                                    onChange = {this.singleFileChangedHandler}
+                                />
+                                
+                                <Button
+                                    className="btn-choose"
+                                    variant="outlined"
+                                    component="span"
+                                    >
+                                    Choose a File to Upload
+                                </Button>
+                            </label>
+                        </Box>
+                    </Container>
+            </Grid>
         )
     }
 }
