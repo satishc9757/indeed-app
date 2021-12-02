@@ -27,6 +27,7 @@ const style = {
   
 };
 
+
 export default function Jobseeker() {
     const navigate = useNavigate();
     const userType =""

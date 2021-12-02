@@ -17,7 +17,8 @@ let jobPostingsSchema = new mongoose.Schema({
     job_what_you_need: {type: String, required: true},
     job_created_at: {type: Date, required: true},
     job_applicants: {type: Number, default:0, required: true},
-    job_company_rating: {type: Number}
+    job_company_rating: {type: Number},
+    departments:{type: String, required: true}
 });
 
 const jobPostingsModel = mongoose.model('jobpostings', jobPostingsSchema);

@@ -48,17 +48,28 @@ class NavBar extends Component {
                 </Button>
 
                 <Button>
-                    Find salaries
-                </Button>
-
-                <Button>
-                    {'userId' in sessionStorage &&
-                    <Link to="/upload">Upload Resume</Link>}
-                    {! ('userId' in sessionStorage) && 
-                        <Link to="/login">Upload Resume</Link>
-                        
+                    {(sessionStorage.getItem("user-type")==="employer")?(
+                        <Link to="/applicants">Jobs</Link>
+                    ):(
+                        <p>Find salaries</p>
+                    )
                     }
                 </Button>
+                {'user-id' in sessionStorage && sessionStorage.getItem("user-type")!=="employer"? (
+                    <Button><Link to="/upload">Upload Resume</Link></Button>
+                ):(
+                    <div>
+                        {sessionStorage.getItem("user-type")!=="employer" &&
+                        <Button><Link to="/login">Upload Resume</Link></Button>}
+                    </div>
+                )
+                }
+                {!('user-id' in sessionStorage)&& 
+                <div>
+                    <Button>
+                        Sign in
+                    </Button>
+
 
                 <Button>
                     Sign in
@@ -76,6 +87,12 @@ class NavBar extends Component {
                     Login
                 </Typography>
                 <Button color="inherit"></Button>
+
+                    
+                   
+                </div>
+            }
+
             </Toolbar>
             </AppBar>
             </Box>

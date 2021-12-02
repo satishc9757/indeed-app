@@ -3,7 +3,7 @@ const jobSeeker = require("../../models/JobSeekersModel");
 const mongoose = require("mongoose");
 
 async function handle_request(msg, callback) {
-  console.log("msg", msg);
+  console.log("msg from save jobs", msg);
   console.log(mongoose.connection.readyState);
   const jobId = msg.jobId;
   const jobSeekerId = msg.jobSeekerId;

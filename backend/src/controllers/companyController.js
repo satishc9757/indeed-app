@@ -109,54 +109,77 @@ exports.getJobsByCompanyId = async function (req, res) {
 
 };
 
-exports.updateFeaturedReviewStatus = async function (req, res) {
-  const review_details = req.body;
+  exports.getJobsByCompanyIdWithPagination = async function (req, res) {
+    // const compId = req.query.compId;
 
-  kafka.make_request("update_featured_review_status", review_details, (err, results) => {
-    console.log(results)
-    if (err){
-      res
-      .status(500)
-      .send(JSON.stringify({ message: "Something went wrong!", err }));
-
-    } else if(results.response_code == 200){
-
-        res.send(JSON.stringify(results.response_data));
-    } else {
+    kafka.make_request("company.getCompanyJobPostingsWithPagination", req.query, (err, results) => {
+      if (err){
         res
         .status(500)
         .send(JSON.stringify({ message: "Something went wrong!", err }));
-    }
-  });
+
+      } else if(results.response_code == 200){
+
+          res.send(JSON.stringify(results.response_data));
+      } else {
+          res
+          .status(500)
+          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      }
+    });
 
 
-};
+  };
 
-exports.getFeaturedReviewsByCompId = async function (req, res) {
-  const compId = req.query.compId;
-
-  kafka.make_request("get_featured_reviews", compId, (err, results) => {
-    console.log(results)
-
-    if (err){
-      res
-      .status(500)
-      .send(JSON.stringify({ message: "Something went wrong!", err }));
-
-    } else if(results.response_code == 200){
-
-        res.send(JSON.stringify(results.response_data));
-    } else {
+  exports.updateFeaturedReviewStatus = async function (req, res) {
+    const review_details = req.body;
+  
+    kafka.make_request("update_featured_review_status", review_details, (err, results) => {
+      console.log(results)
+      if (err){
         res
         .status(500)
         .send(JSON.stringify({ message: "Something went wrong!", err }));
-    }
-  });
+  
+      } else if(results.response_code == 200){
+  
+          res.send(JSON.stringify(results.response_data));
+      } else {
+          res
+          .status(500)
+          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      }
+    });
+  
+  
+  };
 
 
-};
+  exports.getFeaturedReviewsByCompId = async function (req, res) {
+    const compId = req.query.compId;
+  
+    kafka.make_request("get_featured_reviews", compId, (err, results) => {
+      console.log(results)
+  
+      if (err){
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+  
+      } else if(results.response_code == 200){
+  
+          res.send(JSON.stringify(results.response_data));
+      } else {
+          res
+          .status(500)
+          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      }
+    });
+  
+  
+  };
 
-exports.getJobStatsByCompanyId = async function (req, res) {
+  exports.getJobStatsByCompanyId = async function (req, res) {
 
     kafka.make_request("company.getJobStats", req.query, (err, results) => {
       if (err){
@@ -195,5 +218,98 @@ exports.getCompaniesBySearchQuery = async function (req, res) {
           .send(JSON.stringify({ message: "Something went wrong!", err }));
       }
     });
+  }
+  
+  exports.getAvgSalaryByDeptId = async function (req, res) {
+    
+    const data={
+      compId : req.query.compId,
+      dept :req.query.deptId
+    }
 
+    kafka.make_request("get_avg_salary_by_dept", data, (err, results) => {
+      console.log("here are your results",results)
+
+      if (err){
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+      } else if(results){
+
+          res.status(200).send(JSON.stringify(results));
+      } else {
+          res
+          .status(500)
+          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      }
+    });
+
+
+  };
+  exports.getTitleByDepts = async function (req, res) {
+    
+    const data={
+      compId : req.query.compId,
+    }
+
+    kafka.make_request("get_company_dept_titles_list", data, (err, results) => {
+      console.log("here are your results",results)
+
+      if (err){
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+      } else if(results){
+
+          res.status(200).send(JSON.stringify(results));
+      } else {
+          res
+          .status(500)
+          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      }
+    });
+
+
+  };
+
+  exports.addSalaryReview = async function (req, res) {
+    const review_details = req.body;
+
+    kafka.make_request("add_salary_review", review_details, (err, results) => {
+      console.log("here are your results",results)
+      if (err){
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+      } else if(results.affectedRows >0){
+
+          res.status(200).send("Added successfully");
+      } else {
+          res
+          .status(500)
+          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      }
+    });
+    
 };
+
+exports.getCompanies = async function (req, res) {
+  kafka.make_request("company.getAllCompanies", null, (err, results) => {
+    if (err){
+      res
+      .status(500)
+      .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+    } else if(results){
+
+        res.send(JSON.stringify(results));
+    } else {
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+    }
+  });
+}
