@@ -35,8 +35,10 @@ import JobPostings from './pages/employer/jobPostings';
 import JobStats from './pages/employer/jobStats';
 import SalaryReviewTabCard from './components/Reviews/SalaryReviewTabCard'
 import SalaryReviewColumn from './components/Reviews/SalaryReviewColumn'
-
-
+import CompanyReviews from './pages/companyReviews';
+import Applicants from './pages/applicants';
+import ReviewTab from './components/Reviews/ReviewTab'
+import ReviewCard from './components/Reviews/ReviewCard'
 const theme = createTheme({
   pallete: {
     primary: {
@@ -44,8 +46,10 @@ const theme = createTheme({
     },
   },
 });
+
 class App extends Component {
   render() {
+
     return (
       <Provider store={store}>
         <Router>
@@ -76,6 +80,9 @@ class App extends Component {
               <Route exact path="/jobPostings" element={<JobPostings/>} />
               <Route exact path="/employer/jobPostings" element={<JobPostings/>} />
               <Route exact path="/employer/jobstats" element={<JobStats/>} />
+              <Route exact path="/salaryReviewsTab" element={<SalayReviewsTab />} />
+              <Route exact path="/companyReviewsTab" element={<ReviewTab />} />
+              <Route exact path="/companyReviewsCard" element={<ReviewCard />} />
             </Routes>
           </div>
         </Router>
