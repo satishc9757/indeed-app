@@ -15,10 +15,10 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { createTheme } from "@mui/material/styles";
 import { Button } from "@mui/material";
-import NavBar from "../components/user/NavBar";
+import NavBar from "../../components/user/NavBar";
 import axios from 'axios';
-import backendServer from '../webConfig';
-import Jobseeker from "./user/jobseekerProfile";
+import backendServer from '../../webConfig';
+import Jobseeker from "../user/jobseekerProfile";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {

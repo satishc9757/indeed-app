@@ -13,8 +13,8 @@ async function handle_request(msg, callback) {
         if(location===''){
             console.log("hello");
             jobCards = await jobPostings.find( {$or:[
-                {job_title: {$regex: '.*'+searchQuery+'.*'}},
-                {job_company_name: {$regex: '.*'+searchQuery+'.*'}}
+                {job_title: {$regex: '.*'+searchQuery+'.*', $options: 'i'}},
+                {job_company_name: {$regex: '.*'+searchQuery+'.*', $options: 'i'}}
             ]})
             .limit(limit * 1)
             .skip((page - 1) * limit)
@@ -24,10 +24,10 @@ async function handle_request(msg, callback) {
 
             jobCards = await jobPostings.find( {$and:[
                 {$or:[
-                    {job_title: {$regex: '.*'+searchQuery+'.*'}},
-                    {job_company_name: {$regex: '.*'+searchQuery+'.*'}}
+                    {job_title: {$regex: '.*'+searchQuery+'.*', $options: 'i'}},
+                    {job_company_name: {$regex: '.*'+searchQuery+'.*', $options: 'i'}}
                 ]},
-                {"job_location.state": location},
+                {"job_location.state": {$regex: location, $options:'i'}},
             ]})
             .limit(limit * 1)
             .skip((page - 1) * limit)

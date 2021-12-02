@@ -5,8 +5,9 @@ import { Card, IconButton, Pagination, Stack } from "@mui/material";
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
+import NavBar from "../../components/user/NavBar";
 import axios from 'axios';
-import backendServer from '../../../webConfig';
+import backendServer from '../../webConfig';
 
 
 class JobPosted extends Component {
@@ -80,7 +81,9 @@ class JobPosted extends Component {
 
     render() {
         return (
-            <Container>
+            <div>
+            <NavBar />
+            <Container><br/>
                 <Typography
                     variant="h4">
                     Jobs Posted
@@ -96,6 +99,7 @@ class JobPosted extends Component {
                     </Grid>
                 </Container>
             </Container>
+            </div>
         )
     }
 }

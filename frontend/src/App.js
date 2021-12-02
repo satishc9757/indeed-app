@@ -14,7 +14,7 @@ import UploadResume from './pages/general/uploadResume'
 import Common from './pages/company/common';
 import Jobseeker from './pages/user/jobseekerProfile'
 import Salaries from './pages/general/salaries'
-
+import JobPosted from './pages/employer/jobPosted';
 import CompanyProfile from './pages/company/companyProfile'
 
 import Conversations from './pages/general/conversations'
@@ -24,7 +24,7 @@ import { createTheme} from '@mui/material/styles'
 import { blue } from '@mui/material/colors';
 import JobDetailsCard from './components/landingpage/JobDetailsCard'
 import CompanyReviews from './pages/companyReviews';
-import Applicants from './pages/applicants';
+import Applicants from './pages/employer/applicants';
 
 const theme = createTheme({
   pallete: {
@@ -51,7 +51,7 @@ class App extends Component{
               <Route exact path="/salaries" element={<Salaries/>} />
               <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
               <Route exact path="/companyreviews" element={<CompanyReviews/>} />
-
+              <Route exact path="/jobs" element={<JobPosted/>} />
               <Route exact path="/applicants/:id" element={<Applicants/>} />
               <Route exact path="/companyprofile" element={<CompanyProfile/>} />
 
