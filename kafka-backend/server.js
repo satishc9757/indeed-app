@@ -4,7 +4,7 @@ var connection = new require("./kafka/Connection");
 //var Books = require('./services/books.js');
 // var JobPostingsData = require("./services/employer/JobPostingsData");
 
-// const companyReviews = require('./services/company/getreviews')
+const companyReviews = require('./services/company/getreviews')
 
 const { mongoConnectionURL } = require("./database/mongoConnection");
 const mongoose = require("mongoose");
