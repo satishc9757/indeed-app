@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import Grid from '@material-ui/core/Grid'
 import { Typography } from "@material-ui/core";
+import { Button } from "@mui/material";
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import backendServer from '../../webConfig';
@@ -22,9 +23,12 @@ class EmployerHome extends Component {
             <div>
                 <Grid direction="row" container >
                     <NavBar/>
-                    <Grid container spacing={2} style={{'margin':'5% 25%'}}>
+                    <Grid container spacing={0}
+                        alignItems="center"
+                        justifyContent="center"
+                        style={{ minHeight: '90vh' }}>
                         {sessionStorage.getItem("user-type")==="employer"?(
-                            <Link to="/jobs">Access Here</Link>
+                            <Button><Link to="/jobs">Access Jobs Here</Link></Button>
                         ):(
                             <div>
                                 <Typography>Kindly Login here to access employers functionalities - <Link to="/login">Login</Link></Typography> 
