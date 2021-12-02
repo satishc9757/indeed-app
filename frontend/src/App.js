@@ -12,7 +12,6 @@ import Login from "./pages/user/Login";
 import Signup from "./pages/user/Signup";
 import UploadResume from "./pages/general/uploadResume";
 import Snapshot from "./pages/company/snapshot";
-import Common from "./pages/company/common";
 import Jobseeker from "./pages/user/jobseekerProfile";
 import Salaries from './pages/general/salaries'
 import CompanyReviews from './pages/companyReviews';

@@ -201,6 +201,11 @@ const createKafkaTopics = () => {
         topic: "get_applied_jobs",
         partitions: 1,
         replicationFactor: 1,
+      },
+      {
+        topic: "admin.getAllCompanies",
+        partitions: 1,
+        replicationFactor: 1,
       }
     ],
     (err) => {
