@@ -32,6 +32,19 @@ class NavBar extends Component {
     }
     
 
+    constructor(props){
+        this.state={
+            notLoggedIn:false
+        }
+    }
+
+    signOut = async(e)=>{
+        await sessionStorage.clear();
+        this.setState({
+            notLoggedIn:true
+        })
+    }
+
     render(){
         return (
             <Box sx={{ flexGrow: 1 }}>
@@ -64,35 +77,32 @@ class NavBar extends Component {
                     </div>
                 )
                 }
-                {!('user-id' in sessionStorage)&& 
-                <div>
-                    <Button>
-                        Sign in
-                    </Button>
-
-
-                <Button>
-                    Sign in
-                </Button>
-
-                <Button>
-                    Employers / Post Job
+                {this.state.notLoggedIn?(
+                    <div>
+                        <Button>
+                            Sign in
                         </Button>
-                <Link to={this.state.route}>
-                    <IconButton>
-                        <PersonIcon/>
-                    </IconButton>
-                </Link>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    Login
-                </Typography>
-                <Button color="inherit"></Button>
 
-                    
-                   
-                </div>
-            }
-
+                        <Button>
+                            Employers / Post Job
+                                </Button>
+                        <Link to='/jobseeker'>
+                            <IconButton>
+                                <PersonIcon/>
+                            </IconButton>
+                        </Link>
+                        <Button>
+                            <Link to="/login">
+                                Login
+                            </Link>
+                        </Button>
+                        <Button color="inherit"></Button>
+                    </div>
+                ):(
+                    <div>
+                        <Button onClick={this.signOut}></Button>
+                    </div>
+                )}
             </Toolbar>
             </AppBar>
             </Box>
