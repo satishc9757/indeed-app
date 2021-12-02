@@ -103,6 +103,11 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+        topic: "add_employee_review",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
         topic: "update_jobseeker_profile",
         partitions: 1,
         replicationFactor: 1,
@@ -182,6 +187,7 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
+      
       {
         topic: "search",
         partitions: 1,
@@ -226,6 +232,7 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
+      
       {
         topic: "admin.getAllCompanies",
         partitions: 1,
