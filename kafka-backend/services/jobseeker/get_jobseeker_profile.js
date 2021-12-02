@@ -5,7 +5,7 @@ async function handle_request(msg, callback) {
   const seeker_id = msg.seeker_id;
   console.log("message",msg)
   try {
-    let jobseeker = await Jobseeker.find({ _id: seeker_id });
+    let jobseeker = await Jobseeker.find({ seeker_id: seeker_id });
     //console.log('employer', employer);
     callback(null, jobseeker);
   } catch (err) {

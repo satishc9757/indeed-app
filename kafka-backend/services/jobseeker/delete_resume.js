@@ -1,7 +1,7 @@
 const Jobseeker = require('../../models/JobSeekersModel');
 
 async function handle_request(msg, callback) {
-    Jobseeker.updateOne({ _id: msg.seeker_id }, {
+    Jobseeker.updateOne({ seeker_id: msg.seeker_id }, {
     
     seeker_resume_location: "",
     

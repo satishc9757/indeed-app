@@ -17,11 +17,11 @@ import axios from 'axios';
 import backendServer from '../../webConfig';
 
 class LandingPage extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             results:[],
-            limit:1,
+            limit:3,
             page:1,
             totalpage:1,
             selectedJobIndex:0
@@ -64,7 +64,6 @@ class LandingPage extends Component {
             page: Number(response.data.currentPage),
             selectedJobIndex:0
         });
-
     }
 
     handleJobCardClick = async(event, jobIndex) => {
@@ -121,7 +120,7 @@ class LandingPage extends Component {
         return (  
             <div>
             
-            <Box component="form"> 
+            <Box> 
                 <Grid container spacing={2} style={{'margin':'2% 0%'}}>
                     <Grid item sm={2}/>
                     <Grid item sm={3}>
@@ -145,7 +144,6 @@ class LandingPage extends Component {
                     </Grid>
                     <Grid item sm={2}>
                         <Button
-                        type="submit"
                         size="large"
                         color="primary"
                         variant="contained" 
@@ -185,7 +183,7 @@ class LandingPage extends Component {
                     </Grid>
                 </div>
                 }
-            </Box>
+
                 {/* JOBS PANEL */}
                 {'jobCards' in this.state.results && this.state.results.jobCards.length>0 &&
                 <div>
@@ -224,7 +222,7 @@ class LandingPage extends Component {
                 <Pagination count={this.state.totalpage} page={this.state.page} onChange={this.onPageChange} />
                 </div>
                 }
-
+                </Box>
             </div>
         )
     }

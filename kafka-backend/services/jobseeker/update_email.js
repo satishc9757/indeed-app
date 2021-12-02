@@ -2,7 +2,7 @@ const Jobseeker = require('../../models/JobSeekersModel');
 
 async function handle_request(msg, callback) {
     console.log(msg.seeker_id)
-    Jobseeker.updateOne({ _id: msg.seeker_id }, {
+    Jobseeker.updateOne({ seeker_id: msg.seeker_id }, {
     seeker_email: msg.seeker_email,
     }).exec().then(doc => {
         console.log("Success update profile" + doc)

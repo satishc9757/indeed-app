@@ -17,12 +17,12 @@ import backendServer from '../../webConfig';
 
 
 class uploadResume extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             theme:createTheme(),
             isLoggedIn: false,
-            // jobSeekerId:'User1' /* For now hard Coded to make the code run*/
+            jobSeekerId: 4 /* For now hard Coded to make the code run*/
         }
     }
 
