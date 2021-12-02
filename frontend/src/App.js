@@ -35,8 +35,8 @@ import JobPostings from './pages/employer/jobPostings';
 import JobStats from './pages/employer/jobStats';
 import SalaryReviewTabCard from './components/Reviews/SalaryReviewTabCard'
 import SalaryReviewColumn from './components/Reviews/SalaryReviewColumn'
-import CompanyReviews from './pages/companyReviews';
-import Applicants from './pages/applicants';
+// import CompanyReviews from './pages/companyReviews';
+// import Applicants from './pages/applicants';
 import ReviewTab from './components/Reviews/ReviewTab'
 import ReviewCard from './components/Reviews/ReviewCard'
 const theme = createTheme({

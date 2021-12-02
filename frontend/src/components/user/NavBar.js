@@ -14,7 +14,8 @@ class NavBar extends Component {
     constructor(props){
         super(props);
         this.state={
-            route:[]
+            route: [],
+            notLoggedIn:false
         }
     }
     async componentDidMount(){
@@ -32,11 +33,11 @@ class NavBar extends Component {
     }
     
 
-    constructor(props){
-        this.state={
-            notLoggedIn:false
-        }
-    }
+    // constructor(props){
+    //     this.state={
+    //         notLoggedIn:false
+    //     }
+    // }
 
     signOut = async(e)=>{
         await sessionStorage.clear();
