@@ -71,15 +71,17 @@ export default function Jobseeker() {
     const replaceResume = () => {
         navigate('/upload')
     }
+
     useEffect(() => {
-        let seekerID = '61a084133d0de0f95f86bf8a'
+        let seekerID = 4
         axios.get(`${backendServer}/jobseeker?seeker_id=${seekerID}`)
             .then(response => {
                 let data = response.data;
-                let name = data.seeker_name.split(" ")
+                console.log(data);
+                let name = data[0].seeker_name.split(" ")
                 setFirstName(name[0]);
                 setLastName(name[1]);
-                setSeekerProfile(data);
+                setSeekerProfile(data[0]);
                 axios.get(`${backendServer}/jobseeker/jobs?jobSeekerId=${seekerID}`)
             .then(response => {
                 let data = response.data;
@@ -126,7 +128,7 @@ export default function Jobseeker() {
                             <Typography variant='subtitle1'>{seekerProfile.seeker_contact}</Typography>
                             <Typography variant='subtitle1'>{seekerProfile.seeker_state},{seekerProfile.seeker_country}</Typography>
                             <Typography variant='subtitle1'>{seekerProfile.seeker_age}</Typography>
-                            <a href={seekerProfile.seeker_resume_location} type="application/pdf" >
+                            <a href={seekerProfile.seeker_resume_location} target="_blank" type="application/pdf" >
                                Resume </a>
                         </CardContent>
                     </Card>

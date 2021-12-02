@@ -56,7 +56,7 @@ async function handle_request(req, res) {
                 // If Success
                 const imageLocation = req.file.location;// Save the file name into database into profile model
                 const ID = req.file.ID;
-                Jobseeker.findOneAndUpdate({ "_id": msg.seeker_id }, {
+                Jobseeker.findOneAndUpdate({ "seeker_id": msg.seeker_id }, {
                     "seeker_resume_location": imageLocation
                 })
                     .exec().then(doc => {

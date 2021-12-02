@@ -10,7 +10,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import {Container} from '@material-ui/core';
 import { connect } from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { createTheme } from "@mui/material/styles";
@@ -54,8 +54,8 @@ const theme = createTheme({
 
 class Applicants extends Component{
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
             applicants:[],
             update:false,
@@ -65,7 +65,7 @@ class Applicants extends Component{
     }
 
     getapplicants = async()=>{
-        var response = await axios.get(`${backendServer}/employer/applications?jobId=619c7284f49b8582761555f2`);
+        var response = await axios.get(`${backendServer}/employer/applications?jobId=${sessionStorage.getItem("applicants-job-id")}`);
         await this.setState({
             applicants:response.data
         })
@@ -132,8 +132,8 @@ class Applicants extends Component{
                                     <StyledTableCell component="th" scope="row">
                                         <Button><Link to="/jobseeker" onClick={()=> this.profile(row.app_job_seeker_id)}>{row.app_name}</Link></Button>
                                     </StyledTableCell>
-                                    <StyledTableCell align="right">{row.app_resume_link}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.app_cover_letter_link}</StyledTableCell>
+                                    <StyledTableCell align="right"><a href ={row.app_resume_link} target="_blank">Resume</a></StyledTableCell>
+                                    <StyledTableCell align="right"><a href = {row.app_cover_letter_link} target="_blank">Cover Letter</a></StyledTableCell>
                                     
                                     {this.state.update && this.state.id===row._id ? ( 
                                         <StyledTableCell style={{margin :'auto'}}  align="right">

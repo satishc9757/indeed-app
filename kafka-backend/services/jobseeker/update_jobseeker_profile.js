@@ -2,7 +2,7 @@ const Jobseeker = require('../../models/JobSeekersModel');
 
 async function handle_request(msg, callback) {
     console.log(msg.seeker_id)
-    Jobseeker.updateOne({ _id: msg.seeker_id }, {
+    Jobseeker.updateOne({ seeker_id: msg.seeker_id }, {
     seeker_name: msg.seeker_name,
     seeker_email: msg.seeker_email,
     seeker_city: msg.seeker_city,

@@ -52,7 +52,7 @@ class App extends Component{
               <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
               <Route exact path="/companyreviews" element={<CompanyReviews/>} />
 
-              <Route exact path="/applicants" element={<Applicants />} />
+              <Route exact path="/applicants/:id" element={<Applicants/>} />
               <Route exact path="/companyprofile" element={<CompanyProfile/>} />
 
               <Route exact path="/conversations" element={<Conversations/>} />
