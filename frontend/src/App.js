@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import './App.css'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import FeaturedReviewCard from './components/Reviews/FeaturedReviewCard'
+import AutoCompleteSearch from './components/Reviews/AutoCompleteSearch'
+import SalayReviewsTab from './components/Reviews/SalayReviewsTab'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
-
 //redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
@@ -38,6 +40,8 @@ const theme = createTheme({
     },
   },
 });
+import SalaryReviewTabCard from './components/Reviews/SalaryReviewTabCard'
+import SalaryReviewColumn from './components/Reviews/SalaryReviewColumn'
 
 class App extends Component {
   render() {
@@ -55,6 +59,11 @@ class App extends Component {
               <Route exact path="/salaries" element={<Salaries/>} />
               <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
               <Route exact path="/companyreviews" element={<CompanyReviews/>} />
+              <Route exact path="/reviewCard" element={<FeaturedReviewCard />} />
+              <Route exact path="/autoComplete" element={<AutoCompleteSearch />} />
+              <Route exact path="/salaryTab" element={<SalaryReviewTabCard />} />
+              <Route exact path="/addSalaryCol" element={<SalaryReviewColumn />} />
+              <Route exact path="/reviewsTab" element={<SalayReviewsTab />} />
               <Route exact path="/jobseekersignup" element={<JobseeekerSignup/>} />
               <Route exact path="/employersignup" element={<EmployerSignup/>} />
               <Route exact path="/companylist" element={<CompanyList/>} />

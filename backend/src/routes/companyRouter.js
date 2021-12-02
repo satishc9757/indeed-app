@@ -15,5 +15,7 @@ router.get('/jobstats', companyController.getJobStatsByCompanyId);
 router.get('/companies',companyController.getCompanies)
 
 router.get('/search', companyController.getCompaniesBySearchQuery);
-
+router.get('/avgSalByDept', companyController.getAvgSalaryByDeptId);
+router.post('/addSalaryReview',companyController.addSalaryReview)
+router.get('/JobTitleByDept', companyController.getTitleByDepts);
 module.exports = router;

@@ -173,6 +173,11 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+        topic: "get_avg_salary_by_dept",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
         topic: "search",
         partitions: 1,
         replicationFactor: 1,
@@ -183,11 +188,21 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+        topic: "get_company_dept_titles_list",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
         topic: "update_featured_review_status",
         partitions: 1,
         replicationFactor: 1,
       },{
         topic: "company.getCompanyJobPostingsWithPagination",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "add_salary_review",
         partitions: 1,
         replicationFactor: 1,
       },
