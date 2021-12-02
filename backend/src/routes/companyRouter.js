@@ -13,7 +13,7 @@ router.get('/getFeaturedReviews', companyController.getFeaturedReviewsByCompId);
 router.post('/updateFeaturedReview', companyController.updateFeaturedReviewStatus);
 router.get('/jobstats', companyController.getJobStatsByCompanyId);
 router.get('/companies',companyController.getCompanies)
-
+router.post('/profile', companyController.uploadCompanyProfilePicture)
 router.get('/search', companyController.getCompaniesBySearchQuery);
 router.get('/avgSalByDept', companyController.getAvgSalaryByDeptId);
 router.post('/addSalaryReview',companyController.addSalaryReview)

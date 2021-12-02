@@ -16,29 +16,42 @@ export default function Common() {
     const [tabValue, setTabValue] = React.useState(0);
     const [tabResult, setTabResult] = React.useState('snapshot');
     const [companyDetails, setCompanyDetails] = useState('')
+        const [featuredReviews, setFeaturedReviews] = useState([])
+
     const search = useLocation().search;
 
 
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
     };
-    useEffect(() => {
-        const tab = new URLSearchParams(search).get('tab');
-        setTabResult(tab);
-        let Company_ID = 3;
-        axios.get(`${backendServer}/company/companyDetails?compId=${Company_ID}`)
-            .then(response => {
-                console.log(JSON.stringify(response.data[0])+"-----");
-                setCompanyDetails(response.data[0])
-            }).catch=(error) => {
-                console.log(error)
-            }
+    useEffect( () => {
+        
+        async function fetchDetails(){
+            const tab = new URLSearchParams(search).get('tab');
+            
+            let Company_ID = 2;
+            var response = await axios.get(`${backendServer}/company/companyDetails?compId=${Company_ID}`);
+            // console.log(JSON.stringify(response.data[0])+"-----");
+            await setCompanyDetails(response)
+            var reviews = axios.get(`${backendServer}/company/getFeaturedReviews?compId=${Company_ID}`);
+            await console.log(JSON.stringify(reviews) + "-----");
+            await setFeaturedReviews(reviews.data)
+            await console.log(featuredReviews)
+            await setTabResult(tab);
+        }
+        fetchDetails()
+            //     }).catch=(error) => {
+            //         console.log(error)
+            //     }
+            // }).catch=(error) => {
+            //     console.log(error)
+            // }
     }, [search])
 
     
     const TabContent = () => {
         console.log(tabResult)
-        if (tabResult === "snapshot") return <Snapshot CompanyDetails={companyDetails} />
+        if (tabResult === "snapshot") return <Snapshot CompanyDetails={companyDetails} featuredReviews={featuredReviews} />
         else if (tabResult === "join") return <JoinUs CompanyDetails={companyDetails} />
         // else if (tabResult === "reviews") return </>
         // else if (tabResult === "salary") return </>
@@ -87,7 +100,7 @@ export default function Common() {
                 <Tab label="Jobs" to='/common?tab=jobs' component={Link} />
             </Tabs>
             <hr />
-            <Box m={10}>{companyDetails !== "" ? <TabContent /> : null}</Box>
+            <Box m={10}>{companyDetails !== "" && featuredReviews!==""? <TabContent /> : null}</Box>
         </div>
     )
 }

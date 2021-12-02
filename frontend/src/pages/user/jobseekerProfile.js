@@ -93,7 +93,7 @@ export default function Jobseeker() {
     }
 
     useEffect(() => {
-        let seekerID = sessionStorage.getItem("job-seeker-id");
+        let seekerID = sessionStorage.getItem("job-seeker-id"); 
         axios.get(`${backendServer}/jobseeker?seeker_id=${seekerID}`)
             .then(response => {
                 let data = response.data[0];
@@ -116,15 +116,15 @@ export default function Jobseeker() {
                 setAppJobDetails(data2);
 
                     
-            //         axios.get(`${backendServer}/jobseeker/reviews?jobseekerid=${seekerID}`).then(response => {
-            //     let data2 = response.data;
-            //     console.log(data2)
-            //     // setAppJobDetails(data2);
+                    axios.get(`${backendServer}/jobseeker/reviews?jobseekerid=${seekerID}`).then(response => {
+                let data2 = response.data;
+                console.log(data2)
+                // setAppJobDetails(data2);
 
                     
-            //     }).catch=(error) => {
-            //     console.log(error)
-            // }
+                }).catch=(error) => {
+                console.log(error)
+            }
                     
                 }).catch=(error) => {
                 console.log(error)
