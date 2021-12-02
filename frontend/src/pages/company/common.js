@@ -10,6 +10,7 @@ import JobPosted from "./jobs/jobPosted";
 import {Link, useLocation} from "react-router-dom";
 import { Box } from "@mui/system";
 import backendServer from "../../webConfig";
+import Photos from "../../components/company/Photos";
 const axios = require('axios');
 
 export default function Common() {
@@ -45,7 +46,7 @@ export default function Common() {
         else if (tabResult === "jobs") return <Jobs/>
         else if (tabResult === "applicants" && sessionStorage.getItem("user-type")==="employer") return <JobPosted/>
         // else if (tabResult==="benefits") return </>
-        //else if (tabResult==="photos") return </>
+        else if (tabResult==="photos") return <Photos/>
         else return <Snapshot CompanyDetails={companyDetails} />
         }
 
