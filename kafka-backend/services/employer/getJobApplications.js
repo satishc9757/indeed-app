@@ -5,11 +5,11 @@ const ObjectId = mongoose.Types.ObjectId;
 async function handle_request(msg, callback){
 
     const jobId = msg.jobId;
-    //console.log("Inside getRes using mongo id"+resId);
+    console.log("Inside getRes using mongo id"+jobId);
 
     try{
         let jobApplications  = await ApplicationDetails.find({app_job_id: ObjectId(jobId)});
-
+        console.log(jobApplications)
         if(jobApplications){
             callback(null, { response_code: 200, response_data: jobApplications});
         } else{

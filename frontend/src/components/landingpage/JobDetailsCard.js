@@ -7,6 +7,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { IconButton, Link } from '@material-ui/core';
+// import {Link} from 'react-router-dom';
+import Common from '../../pages/company/common';
 import { Box } from '@mui/system';
 import { spacing } from '@mui/system';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -80,7 +82,7 @@ class JobDetailsCard extends Component {
 
                 <Grid container spacing={2}>
                     <Grid item xs={2}>
-                        <Link>{this.props.job.job_company_name}</Link>
+                        <Link href="/common" >{this.props.job.job_company_name}</Link>
                     </Grid>
                     <Grid item xs={4}>
                         <Rating name="read-only"

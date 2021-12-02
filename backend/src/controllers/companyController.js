@@ -36,6 +36,31 @@ exports.getCompanyDetailsByCompanyID = async function (req,res){
     }
 };
 
+exports.updateCompanyDetailsByCompanyID = async function (req, res){
+  
+  try{
+    kafka.make_request("updateCompanyDetails", req.body, (err, resp) => {
+      if (err || !resp) {
+        console.log(err);
+          res
+          .status(500)
+          .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
+      }
+      else{
+          console.log(resp);
+          res
+          .status(200)
+          .end(JSON.stringify(resp));
+      }
+    })
+  }catch (err) {
+    res
+    .status(500)
+    .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
+  }
+
+}
+
 exports.getJobRoleDetailsByCompanyID = async function (req,res){
     let compId = req.query.compId;
     let jobId = req.query.jobId;
@@ -51,7 +76,7 @@ exports.getJobRoleDetailsByCompanyID = async function (req,res){
             else{
                 res
                 .status(200)
-                .end(JSON.stringify(results));
+                .end(JSON.stringify(resp));
             }
         });
 
@@ -64,9 +89,8 @@ exports.getJobRoleDetailsByCompanyID = async function (req,res){
 
 
 exports.getJobsByCompanyId = async function (req, res) {
-    const compId = req.query.compId;
 
-    kafka.make_request("company.getCompanyJobPostings", compId, (err, results) => {
+    kafka.make_request("company.getCompanyJobPostings", req.query, (err, results) => {
       if (err){
         res
         .status(500)
@@ -83,7 +107,7 @@ exports.getJobsByCompanyId = async function (req, res) {
     });
 
 
-  };
+};
 
 exports.updateFeaturedReviewStatus = async function (req, res) {
   const review_details = req.body;

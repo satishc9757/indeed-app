@@ -4,9 +4,10 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
-
-import {connect} from 'react-redux'
-
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import IconButton from '@mui/material/IconButton';
+import PersonIcon from '@mui/icons-material/Person';
 import logo from '../../media/IndeedLogo.png'
 
 class NavBar extends Component {
@@ -20,7 +21,7 @@ class NavBar extends Component {
                 <img src={logo} alt="Profile" width="110" height="30"/>
 
                 <Button>
-                    Find jobs
+                    <Link to="/">Find jobs</Link>
                 </Button>
                 <Button>
                     Company reviews
@@ -31,7 +32,12 @@ class NavBar extends Component {
                 </Button>
 
                 <Button>
-                    Upload your resume
+                    {'userId' in sessionStorage &&
+                    <Link to="/upload">Upload Resume</Link>}
+                    {! ('userId' in sessionStorage) && 
+                        <Link to="/login">Upload Resume</Link>
+                        
+                    }
                 </Button>
 
                 <Button>
@@ -40,7 +46,12 @@ class NavBar extends Component {
 
                 <Button>
                     Employers / Post Job
-                </Button>
+                        </Button>
+                <Link to='/jobseeker'>
+                    <IconButton>
+                        <PersonIcon/>
+                    </IconButton>
+                </Link>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Login
                 </Typography>

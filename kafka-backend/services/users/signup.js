@@ -1,6 +1,9 @@
 const connection = require("../../database/mysqlConnection");
 const Jobseeker = require('../../models/JobSeekersModel');
 const Employer = require('../../models/EmployersModel');
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+
 
 async function handle_request(msg, callback) {
     console.log("signup", msg);
@@ -15,7 +18,9 @@ async function handle_request(msg, callback) {
             }
             else{
                 len = await results.length;
-                console.log(len);
+
+                const hashPassword = await bcrypt.hash(msg.password, saltRounds);
+
                 var user;
                 if(msg.user_type==='employer'){
                     user = await new Employer({
@@ -49,7 +54,7 @@ async function handle_request(msg, callback) {
                     });
                 }
                 sql = "INSERT INTO login_details (user_id, user_email, user_password, user_type,created_at, updated_at)";
-                sql += "VALUES ("+ String(len+1)+", '"+msg.email+"', '"+msg.password+"', '"+msg.user_type+"',"+Date.now()+","+Date.now()+");"
+                sql += "VALUES ("+ String(len+1)+", '"+msg.email+"', '"+hashPassword+"', '"+msg.user_type+"',"+Date.now()+","+Date.now()+");"
                 
                 await connection.con.query(sql, async(error, add)=>{
                     if(error){
@@ -60,7 +65,7 @@ async function handle_request(msg, callback) {
                         const saveUser = await user.save();
                         if(saveUser){
                                                 
-                            callback(null, "\n Added Successfully");
+                            callback(null, "Added Successfully");
                         }
                         else{
                             callback({status: 401}, "Invalid Data");

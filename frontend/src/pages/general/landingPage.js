@@ -17,11 +17,11 @@ import axios from 'axios';
 import backendServer from '../../webConfig';
 
 class LandingPage extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             results:[],
-            limit:1,
+            limit:3,
             page:1,
             totalpage:1,
             selectedJobIndex:0
@@ -61,9 +61,9 @@ class LandingPage extends Component {
         await this.setState({
             results: response.data,
             totalpage: Number(response.data.totalPages),
-            page: Number(response.data.currentPage)
+            page: Number(response.data.currentPage),
+            selectedJobIndex:0
         });
-
     }
 
     handleJobCardClick = async(event, jobIndex) => {
@@ -160,14 +160,15 @@ class LandingPage extends Component {
                     <Grid container>
                         <Grid item sm={4}/>
                         <Grid item sm={6}>
-                            {this.state.jobSeekerId &&
+                            {'user-id' in sessionStorage &&
                                 <Link to="/upload" underline="none">
                                     Post Your Resume
                                 </Link>}
-                            {!this.state.jobSeekerId &&
+                            {!('user-id' in sessionStorage) &&
+                                <div>
                                 <Link to="/login" underline="none">
                                 Post Your Resume
-                                </Link>} - It only takes a few seconds
+                                </Link> - It only takes a few seconds</div>}
                         </Grid>
                     </Grid>
                     <br/>
@@ -182,7 +183,6 @@ class LandingPage extends Component {
                     </Grid>
                 </div>
                 }
-                
                 {/* JOBS PANEL */}
                 {'jobCards' in this.state.results && this.state.results.jobCards.length>0 &&
                 <div>
@@ -221,9 +221,7 @@ class LandingPage extends Component {
                 <Pagination count={this.state.totalpage} page={this.state.page} onChange={this.onPageChange} />
                 </div>
                 }
-
-                
-            </Box>
+                </Box>
             </div>
         )
     }

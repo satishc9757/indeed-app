@@ -17,12 +17,12 @@ import backendServer from '../../webConfig';
 
 
 class uploadResume extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             theme:createTheme(),
             isLoggedIn: false,
-            // jobSeekerId:'User1' /* For now hard Coded to make the code run*/
+            jobSeekerId: 4 /* For now hard Coded to make the code run*/
         }
     }
 
@@ -96,7 +96,7 @@ class uploadResume extends Component {
                             }}
                             >
                                 <Typography component="h1" variant="h5" style={{padding:"2%"}}>
-                                    Add Resume
+                                    Add/Update Resume
                                 </Typography><br /><br/>
                                 <label htmlFor="btn-upload" >
                                     <input
@@ -104,7 +104,7 @@ class uploadResume extends Component {
                                         name="btn-upload"
                                         style={{ display: 'none' }}
                                         type="file"
-                                        accept="image/*"
+                                        accept="application/*"
                                         onChange = {this.singleFileChangedHandler}
                                     />
                                     

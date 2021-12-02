@@ -1,4 +1,5 @@
 const ApplicationDetails = require('../../models/ApplicationDetailsModel');
+const jobPostings = require('../../models/JobPostingsModel');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -9,7 +10,7 @@ async function handle_request(msg, callback){
     try{
         let application  = new ApplicationDetails({
             app_job_id: ObjectId(data.app_job_id),
-            app_job_seeker_id: ObjectId(data.app_job_seeker_id),
+            app_job_seeker_id: Number(data.app_job_seeker_id),
             app_date: new Date(),
             app_name: data.app_name,
             app_email: data.app_email,
@@ -28,12 +29,13 @@ async function handle_request(msg, callback){
             app_updated_on: new Date(),
         });
 
-        application.save((err, result) => {
+
+        application.save( async (err, result) => {
             if(err){
                 console.error("Error in createJobApplication : " + err);
                 callback(null,{ response_code: 500, response_data: "Something went wrong!", err: err});
             } else {
-
+                var res = await jobPostings.findOneAndUpdate({"_id":ObjectId(data.app_job_id)},{$inc:{job_applicants:1}});
                 callback(null, { response_code: 200,
                     response_data: { message: "Job application created successfully" }});
             }

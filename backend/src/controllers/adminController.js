@@ -59,6 +59,7 @@ exports.getAllReviews = async function (req,res){
 
 exports.getAllCompanies = async function (req,res){
     try {
+        console.log("inside get all companies")
         kafka.make_request("admin.getAllCompanies", req.query, (err, resp) => {
             if (err || !resp) {
               console.log(err);

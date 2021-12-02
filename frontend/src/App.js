@@ -14,14 +14,19 @@ import UploadResume from "./pages/general/uploadResume";
 import Snapshot from "./pages/company/snapshot";
 import Common from "./pages/company/common";
 import Jobseeker from "./pages/user/jobseekerProfile";
-import { createTheme } from "@mui/material/styles";
-import { blue } from "@mui/material/colors";
-import JobDetailsCard from "./components/landingpage/JobDetailsCard";
 import Salaries from './pages/general/salaries'
-import { ThemeProvider} from '@material-ui/styles'
 import CompanyReviews from './pages/companyReviews';
 import JobseeekerSignup from "./pages/user/JobseekerSignup";
 import EmployerSignup from "./pages/user/EmployerSignup";
+import Common from './pages/company/common';
+import CompanyProfile from './pages/company/companyProfile'
+import CompanyList from './pages/admin/companyList'
+import Conversations from './pages/general/conversations'
+import { ThemeProvider} from '@material-ui/styles'
+import { createTheme} from '@mui/material/styles'
+import { blue } from '@mui/material/colors';
+import JobDetailsCard from './components/landingpage/JobDetailsCard'
+import Applicants from './pages/applicants';
 
 const theme = createTheme({
   pallete: {
@@ -49,8 +54,12 @@ class App extends Component {
               <Route exact path="/companyreviews" element={<CompanyReviews/>} />
               <Route exact path="/jobseekersignup" element={<JobseeekerSignup/>} />
               <Route exact path="/employersignup" element={<EmployerSignup/>} />
-
-
+               <Route exact path="/companylist" element={<CompanyList/>} />
+                <Route exact path="/applicants/:id" element={<Applicants/>} />
+              <Route exact path="/applicants" element={<Applicants />} />
+              <Route exact path="/companyprofile" element={<CompanyProfile/>} />
+              <Route exact path="/conversations" element={<Conversations/>} />
+              
 
             </Routes>
           </div>

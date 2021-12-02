@@ -9,7 +9,7 @@ async function handle_request(msg, callback) {
   const jobSeekerId = msg.jobSeekerId;
   try {
     const seeker = await jobSeeker.findOne({
-      _id: mongoose.Types.ObjectId(String(jobSeekerId)),
+      seeker_id: jobSeekerId,
     });
 
     if (
@@ -23,7 +23,7 @@ async function handle_request(msg, callback) {
         })
       ) {
         const updatedJobSeeker = await jobSeeker.updateOne(
-          { _id: mongoose.Types.ObjectId(String(jobSeekerId)) },
+          { seeker_id: jobSeekerId },
           {
             $push: {
               seeker_job_saved: jobId,
@@ -38,7 +38,7 @@ async function handle_request(msg, callback) {
       }
     } else {
       const updatedJobSeeker = await jobSeeker.updateOne(
-        { _id: mongoose.Types.ObjectId(String(jobSeekerId)) },
+        { seeker_id: jobSeekerId },
         {
           $push: {
             seeker_job_saved: jobId,
