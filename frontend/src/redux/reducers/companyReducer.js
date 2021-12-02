@@ -1,6 +1,7 @@
 import { } from '../types'
 
 const initialState = {
+    signUpData: {}
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export

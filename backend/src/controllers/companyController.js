@@ -219,3 +219,21 @@ exports.getCompaniesBySearchQuery = async function (req, res) {
     });
 
 };
+
+exports.getCompanies = async function (req, res) {
+  kafka.make_request("company.getAllCompanies", null, (err, results) => {
+    if (err){
+      res
+      .status(500)
+      .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+    } else if(results){
+
+        res.send(JSON.stringify(results));
+    } else {
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+    }
+  });
+}
