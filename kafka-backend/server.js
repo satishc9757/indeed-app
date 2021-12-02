@@ -32,13 +32,11 @@ initDBConnection().then(async () => {
   await global.DB.sync({ alter: false });
 });
 
-const companyReviews = require("./services/company/getreviews");
+
 // const add_featured_review = require('./services/employer/add_featured_review')
 // const get_featured_reviews = require('./services/employer/get_featured_reviews')
 //const update_featured_review_status = require('./services/company/update_featured_review_status')
 // const remove_featured_review = require('./services/employer/remove_featured_review')
-const login = require("./services/users/login");
-const signup = require("./services/users/signup");
 const JobPostingData = require("./services/employer/getJobPosting");
 const CompanyJobPostings = require("./services/company/getJobPostings");
 const GetAllCompanies = require("./services/admin/getAllCompanies");
@@ -82,7 +80,6 @@ const get_emp = require("./services/employer/getEmployerProfile")
 const MarkReviewAsInappropriate = require('./services/admin/markReviewAsInappropriate');
 const GetAllReviews = require('./services/admin/getAllReviews');
 const getReviews  = require('./services/jobSeeker/getReviews');
-const CompanySearchQuery = require('./services/company/companySearchQuery');
 const add_salary_review = require ('./services/salary_reviews/add_salary_review')
 
 function handleTopicRequest(topic_name, fname) {

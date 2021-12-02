@@ -13,11 +13,11 @@ var kafka = require('../kafka/client');
 // auth();
 
 exports.login = async function (req, res) {
-    console.log("login details ", req.query)
+    console.log("login details ", req.body)
     req.query
     try {
-        kafka.make_request("login", req.query, (err, resp) => {
-            console.log(resp);
+        kafka.make_request("login", req.body, (err, resp) => {
+            console.log("resp",resp);
             if (err || !resp) {
               console.log(err);
                 res
@@ -27,7 +27,7 @@ exports.login = async function (req, res) {
             else{
                 res
                 .status(200)
-                .end(resp);
+                .end(JSON.stringify(resp));
             }
         });
         

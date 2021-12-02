@@ -31,7 +31,7 @@ class NavBar extends Component {
                     {(sessionStorage.getItem("user-type")==="employer")?(
                         <Link to="/applicants">Jobs</Link>
                     ):(
-                        <p>Find salaries</p>
+                        <div>Find salaries</div>
                     )
                     }
                 </Button>

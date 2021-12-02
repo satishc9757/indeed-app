@@ -30,11 +30,12 @@ import { ThemeProvider} from '@material-ui/styles'
 import { createTheme} from '@mui/material/styles'
 import { blue } from '@mui/material/colors';
 import JobDetailsCard from './components/landingpage/JobDetailsCard'
-import CompanyReviews from './pages/companyReviews';
 import Applicants from './pages/employer/applicants';
-import Applicants from './pages/applicants';
 import JobPostings from './pages/employer/jobPostings';
 import JobStats from './pages/employer/jobStats';
+import SalaryReviewTabCard from './components/Reviews/SalaryReviewTabCard'
+import SalaryReviewColumn from './components/Reviews/SalaryReviewColumn'
+
 
 const theme = createTheme({
   pallete: {
@@ -43,9 +44,6 @@ const theme = createTheme({
     },
   },
 });
-import SalaryReviewTabCard from './components/Reviews/SalaryReviewTabCard'
-import SalaryReviewColumn from './components/Reviews/SalaryReviewColumn'
-
 class App extends Component {
   render() {
     return (
