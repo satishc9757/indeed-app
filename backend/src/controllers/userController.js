@@ -4,7 +4,7 @@
 // const ObjectId = mongoose.Types.ObjectId;
 
 const Login = require("../models/LoginDetailsModel");
-var bcrypt = require("bcrypt");
+const employer = require("../models/EmployerModel");
 
 var kafka = require('../kafka/client');
 // const jwt = require('jsonwebtoken');
@@ -13,11 +13,11 @@ var kafka = require('../kafka/client');
 // auth();
 
 exports.login = async function (req, res) {
-    console.log("login details ", req.query)
+    console.log("login details ", req.body)
     req.query
     try {
-        kafka.make_request("login", req.query, (err, resp) => {
-            console.log(resp);
+        kafka.make_request("login", req.body, (err, resp) => {
+            console.log("resp",resp);
             if (err || !resp) {
               console.log(err);
                 res
@@ -27,7 +27,7 @@ exports.login = async function (req, res) {
             else{
                 res
                 .status(200)
-                .end(resp);
+                .end(JSON.stringify(resp));
             }
         });
         
@@ -59,4 +59,23 @@ exports.signup = async function (req,res){
         .status(500)
         .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
     }
+};
+
+exports.getCompanyId = async function (req,res){
+    console.log("signup data", req.query);
+
+    var id = await employer.findOne({emp_id:req.query.id});
+    console.log(id)
+    if(id){
+        res
+        .status(200)
+        .end(JSON.stringify({id:id.emp_company_id}));
+
+    }
+    else{
+        res
+        .status(500)
+        .send(JSON.stringify({ message: 'Something went wrong!'}));
+    }
+    
 };

@@ -4,7 +4,7 @@ var connection = new require("./kafka/Connection");
 //var Books = require('./services/books.js');
 // var JobPostingsData = require("./services/employer/JobPostingsData");
 
-// const companyReviews = require('./services/company/getreviews')
+const companyReviews = require('./services/company/getreviews')
 
 const { mongoConnectionURL } = require("./database/mongoConnection");
 const mongoose = require("mongoose");
@@ -32,7 +32,7 @@ initDBConnection().then(async () => {
   await global.DB.sync({ alter: false });
 });
 
-const companyReviews = require("./services/company/getreviews");
+
 // const add_featured_review = require('./services/employer/add_featured_review')
 // const get_featured_reviews = require('./services/employer/get_featured_reviews')
 //const update_featured_review_status = require('./services/company/update_featured_review_status')
@@ -50,6 +50,7 @@ const getCompanies = require("./services/company/getCompanies");
 const updateEmail = require("./services/jobseeker/update_email");
 const login = require('./services/users/login');
 const signup = require('./services/users/signup');
+// const companyReviews = require('./services/company/getreviews')
 const get_featured_reviews = require('./services/company/get_featured_reviews')
 const update_featured_review_status = require('./services/company/update_featured_review_status')
 const get_avg_salary_by_dept = require('./services/salary_reviews/get_avg_salaries_by_dept')
@@ -80,6 +81,8 @@ const MarkReviewAsInappropriate = require('./services/admin/markReviewAsInapprop
 const GetAllReviews = require('./services/admin/getAllReviews');
 const getReviews  = require('./services/jobSeeker/getReviews');
 const add_salary_review = require ('./services/salary_reviews/add_salary_review')
+const add_review = require('./services/company/add_review')
+const get_reviews = require('./services/company/get_reviews')
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -111,7 +114,8 @@ function handleTopicRequest(topic_name, fname) {
   });
 }
 
-handleTopicRequest("company.getreviews", companyReviews);
+handleTopicRequest("company.getreviews", get_reviews);
+handleTopicRequest("get_reviews",getReviews);
 // handleTopicRequest("add_featured_review", add_featured_review);
 // handleTopicRequest("update_featured_review_status", update_featured_review_status);
 // handleTopicRequest("get_featured_reviews", get_featured_reviews);
@@ -157,6 +161,14 @@ handleTopicRequest("admin.getTopFiveCompaniesAvgRating", GetTopFiveCompaniesAvgR
 handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpReviews);
 handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
 handleTopicRequest("get_reviews", getReviews);
+// handleTopicRequest("admin.getAllReviews", GetAllReviews);
+// handleTopicRequest("admin.getNumberOfReviewsPerDay", GetNumberOfReviewsPerDay);
+// handleTopicRequest("admin.getTopFiveMostReviewedCompanies", GetTopFiveMostReviewedCompanies);
+// handleTopicRequest("admin.getTopFiveCompaniesAvgRating", GetTopFiveCompaniesAvgRating);
+// handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpReviews);
+// handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
+// handleTopicRequest("get_reviews", get_reviews);
 handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
 handleTopicRequest("company.getAllCompanies", getCompanies);
 handleTopicRequest("get_emp_profile", get_emp);
+handleTopicRequest("add_employee_review",add_review );

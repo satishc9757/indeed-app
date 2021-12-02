@@ -159,20 +159,16 @@ exports.getJobsByCompanyId = async function (req, res) {
     const compId = req.query.compId;
   
     kafka.make_request("get_featured_reviews", compId, (err, results) => {
-      console.log(results)
+      console.log("resutls from kafka",results)
   
       if (err){
         res
         .status(500)
         .send(JSON.stringify({ message: "Something went wrong!", err }));
   
-      } else if(results.response_code == 200){
-  
-          res.send(JSON.stringify(results.response_data));
-      } else {
-          res
-          .status(500)
-          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      } 
+      else{
+          res.send(results);
       }
     });
   
@@ -296,6 +292,7 @@ exports.getCompaniesBySearchQuery = async function (req, res) {
     
 };
 
+
 exports.getCompanies = async function (req, res) {
   kafka.make_request("company.getAllCompanies", null, (err, results) => {
     if (err){
@@ -313,3 +310,55 @@ exports.getCompanies = async function (req, res) {
     }
   });
 }
+
+
+
+
+
+  exports.addEmployeeReview = async function (req, res) {
+    const review_details = req.body;
+
+    kafka.make_request("add_employee_review", review_details, (err, results) => {
+      console.log("here are your results",results)
+      if (err){
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+      } else if(results.affectedRows >0){
+
+          res.status(200).send("Added successfully");
+      } else {
+          res
+          .status(500)
+          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      }
+    });
+    
+
+  };
+
+  exports.getReviewsByCompId = async function (req, res) {
+    const compId = req.query.compId;
+  
+    kafka.make_request("get_reviews", compId, (err, results) => {
+
+      console.log("response--------------->",results)
+      if (err){
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+  
+      } else if(results.length>0){
+  
+          res.send(JSON.stringify(results));
+      } else {
+          res
+          .status(500)
+          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      }
+    });
+  
+  
+  };
+

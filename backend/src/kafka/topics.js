@@ -38,6 +38,11 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+        topic: "add_employee_review",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
         topic: "remove_featured_review",
         partitions: 1,
         replicationFactor: 1,
@@ -94,6 +99,11 @@ const createKafkaTopics = () => {
       },
       {
         topic: "delete_resume",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "add_employee_review",
         partitions: 1,
         replicationFactor: 1,
       },
@@ -177,6 +187,7 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
+      
       {
         topic: "search",
         partitions: 1,

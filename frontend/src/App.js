@@ -28,15 +28,16 @@ import Conversations from './pages/general/conversations'
 import { ThemeProvider} from '@material-ui/styles'
 import { createTheme} from '@mui/material/styles'
 import { blue } from '@mui/material/colors';
+import EmployerHome from './pages/employer/employerHome';
 import JobDetailsCard from './components/landingpage/JobDetailsCard'
-import CompanyReviews from './pages/companyReviews';
 import Applicants from './pages/employer/applicants';
 import JobPostings from './pages/employer/jobPostings';
 import JobStats from './pages/employer/jobStats';
 import Analytics from './pages/admin/Analytics';
 import SalaryReviewTabCard from './components/Reviews/SalaryReviewTabCard'
 import SalaryReviewColumn from './components/Reviews/SalaryReviewColumn'
-
+import ReviewTab from './components/Reviews/ReviewTab'
+import ReviewCard from './components/Reviews/ReviewCard'
 const theme = createTheme({
   pallete: {
     primary: {
@@ -48,6 +49,7 @@ const theme = createTheme({
 
 class App extends Component {
   render() {
+
     return (
       <Provider store={store}>
         <Router>
@@ -62,6 +64,7 @@ class App extends Component {
               <Route exact path="/salaries" element={<Salaries/>} />
               <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
               <Route exact path="/companyreviews" element={<CompanyReviews/>} />
+              <Route exact path="/employer" element={<EmployerHome/>} />
               <Route exact path="/jobs" element={<JobPosted/>} />
               <Route exact path="/reviewCard" element={<FeaturedReviewCard />} />
               <Route exact path="/autoComplete" element={<AutoCompleteSearch />} />
@@ -79,7 +82,9 @@ class App extends Component {
               <Route exact path="/employer/jobPostings" element={<JobPostings/>} />
               <Route exact path="/employer/jobstats" element={<JobStats/>} />
               <Route exact path="/analytics" element={<Analytics/>} />
-
+              <Route exact path="/salaryReviewsTab" element={<SalayReviewsTab />} />
+              <Route exact path="/companyReviewsTab" element={<ReviewTab />} />
+              <Route exact path="/companyReviewsCard" element={<ReviewCard />} />
             </Routes>
           </div>
         </Router>

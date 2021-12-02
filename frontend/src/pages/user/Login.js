@@ -13,15 +13,26 @@ export default function Login() {
   const navigate = useNavigate();
 
 
-  const login = ()=>{
+  const login = async ()=>{
     //Call Login API here
-    axios.get(`${backendServer}/login`,{
+    const data = await axios.post(`${backendServer}/login`,{
      
       email:email,
       password:password
 
     })
-    navigate("/common")
+    if(data.data){
+      sessionStorage.setItem("user-type",data.data.user_type);
+      sessionStorage.setItem("user-email",data.data.user_email);
+    }
+    if(data.data.user_type==="jobseeker"){
+      sessionStorage.setItem("job-seeker-id", data.data.user_id);
+      navigate("/");
+    }
+    else{
+      sessionStorage.setItem("emp-id",data.data.user_id);
+      navigate("/employer")
+    }
    
 
   }

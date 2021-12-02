@@ -17,11 +17,11 @@ class JobPosted extends Component {
         this.state={
             jobs:[]
         }
-        sessionStorage.setItem('emp_company_id',1);
         sessionStorage.removeItem('applicants-job-id')
     }
 
     async componentDidMount(){
+        
         var response = await axios.get(`${backendServer}/company/jobs?compId=${sessionStorage.getItem('emp_company_id')}`)
         console.log("response",response);
         await this.setState({
