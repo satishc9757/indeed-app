@@ -60,7 +60,8 @@ const update_resume = require('./services/jobseeker/update_resume')
 const delete_resume = require('./services/jobseeker/delete_resume')
 const getSavedJobs = require("./services/jobSeeker/getSavedJobs")
 const appliedJobs = require("./services/jobSeeker/getAppliedJobs");
-const addReviews = require("./services/jobSeeker/addReviews")
+const addReviews = require("./services/jobSeeker/addReviews");
+const get_emp = require("./services/employer/getEmployerProfile")
 const MarkReviewAsInappropriate = require('./services/admin/markReviewAsInappropriate');
 const GetAllCompanies = require('./services/admin/getAllCompanies');
 const GetAllReviews = require('./services/admin/getAllReviews');
@@ -134,7 +135,7 @@ handleTopicRequest("get_saved_jobs", getSavedJobs);
 handleTopicRequest("get_applied_jobs",appliedJobs);
 handleTopicRequest("add_reviews", addReviews);
 // handleTopicRequest("admin.markReviewAsInappropriate", MarkReviewAsInappropriate);
-// handleTopicRequest("admin.getAllCompanies", GetAllCompanies);
+handleTopicRequest("admin.getAllCompanies", GetAllCompanies);
 // handleTopicRequest("admin.getAllReviews", GetAllReviews);
 // handleTopicRequest("admin.getNumberOfReviewsPerDay", GetNumberOfReviewsPerDay);
 // handleTopicRequest("admin.getTopFiveMostReviewedCompanies", GetTopFiveMostReviewedCompanies);
@@ -143,4 +144,6 @@ handleTopicRequest("add_reviews", addReviews);
 // handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
 handleTopicRequest("get_reviews", getReviews);
 handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
+handleTopicRequest("get_emp_profile", get_emp);
+
 

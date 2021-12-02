@@ -16,7 +16,7 @@ import Jobseeker from './pages/user/jobseekerProfile'
 import Salaries from './pages/general/salaries'
 
 import CompanyProfile from './pages/company/companyProfile'
-
+import CompanyList from './pages/admin/companyList'
 import Conversations from './pages/general/conversations'
 
 import { ThemeProvider} from '@material-ui/styles'
@@ -51,10 +51,9 @@ class App extends Component{
               <Route exact path="/salaries" element={<Salaries/>} />
               <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
               <Route exact path="/companyreviews" element={<CompanyReviews/>} />
-
+              <Route exact path="/companylist" element={<CompanyList/>} />
               <Route exact path="/applicants" element={<Applicants />} />
               <Route exact path="/companyprofile" element={<CompanyProfile/>} />
-
               <Route exact path="/conversations" element={<Conversations/>} />
               
 
