@@ -52,7 +52,7 @@ export default class CreateJobPostingsModal extends Component {
     render(){
         return(
             <div>
-            <Button variant="outlined" onClick={this.handleClickOpen}>
+            <Button variant="contained" onClick={this.handleClickOpen}>
                 Add Job posting
             </Button>
 
@@ -251,14 +251,14 @@ export default class CreateJobPostingsModal extends Component {
                                     />
                                 </Grid>
                             </Grid>
-                            <Button
+                            {/* <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                             >
                             Create
-                            </Button>
+                            </Button> */}
                             <Grid container justifyContent="flex-end">
                             {/* <Grid item>
                                 <Link href="#" variant="body2">
@@ -270,7 +270,7 @@ export default class CreateJobPostingsModal extends Component {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose}>Cancel</Button>
-                        <Button onClick={this.handleSubmit}>Add Job</Button>
+                        <Button onClick={this.handleSubmit}>Post Job</Button>
                     </DialogActions>
             </Dialog>
             </div>

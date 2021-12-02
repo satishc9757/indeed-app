@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './App.css'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 
 //redux
 import {Provider} from 'react-redux'
@@ -26,6 +28,7 @@ import JobDetailsCard from './components/landingpage/JobDetailsCard'
 import CompanyReviews from './pages/companyReviews';
 import Applicants from './pages/applicants';
 import JobPostings from './pages/employer/jobPostings';
+import JobStats from './pages/employer/jobStats';
 
 const theme = createTheme({
   pallete: {
@@ -58,6 +61,8 @@ class App extends Component{
               <Route exact path="/companyprofile" element={<CompanyProfile/>} />
               <Route exact path="/conversations" element={<Conversations/>} />
               <Route exact path="/jobPostings" element={<JobPostings/>} />
+              <Route exact path="/employer/jobPostings" element={<JobPostings/>} />
+              <Route exact path="/employer/jobstats" element={<JobStats/>} />
             </Routes>
           </div>
         </Router>

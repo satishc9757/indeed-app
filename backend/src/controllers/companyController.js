@@ -109,6 +109,28 @@ exports.getJobsByCompanyId = async function (req, res) {
 
 };
 
+  exports.getJobsByCompanyIdWithPagination = async function (req, res) {
+    // const compId = req.query.compId;
+
+    kafka.make_request("company.getCompanyJobPostingsWithPagination", req.query, (err, results) => {
+      if (err){
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+
+      } else if(results.response_code == 200){
+
+          res.send(JSON.stringify(results.response_data));
+      } else {
+          res
+          .status(500)
+          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      }
+    });
+
+
+  };
+
 exports.updateFeaturedReviewStatus = async function (req, res) {
   const review_details = req.body;
 

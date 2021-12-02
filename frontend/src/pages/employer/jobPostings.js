@@ -13,22 +13,27 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NavBar from "../../components/user/NavBar";
-import { Card, CardContent, InputLabel, MenuItem, Select } from '@mui/material';
+import { Card, CardContent, InputLabel, MenuItem, Pagination, Select, Stack } from '@mui/material';
 import backendServer from '../../webConfig';
 import axios from 'axios';
 import CreateJobPostingsModal from './createJobPostingModal';
 import { GridList, GridListTile } from '@material-ui/core';
+import JobDetails from './jobDetailsPage';
 
 const theme = createTheme();
 
 export default class JobPostings extends React.Component {
 
    state = {
-       job_work_type : "Remote",
-       job_type : "Full-time",
-       inputErrors: {
-            fullName:"error"
-       },
+        limit:2,
+        page:1,
+        totalpage:1,
+        selectedJobIndex : 0,
+    //    job_work_type : "Remote",
+    //    job_type : "Full-time",
+    //    inputErrors: {
+    //         fullName:"error"
+    //    },
        jobs : [{
         job_company_id: "Comp1",
         job_title: "Software Engineer Intern",
@@ -72,6 +77,45 @@ export default class JobPostings extends React.Component {
     }],
    }
 
+   onPageChange = async(e, val)=>{
+    await this.setState({
+        page: val
+    })
+    await this.onFetch();
+}
+
+onChange = async(e)=>{
+    await this.setState({
+        [e.target.name]: e.target.value
+    });
+}
+
+onSelect = async(e)=>{
+    await this.setState({
+        limit: e.target.value
+    });
+    await this.onFetch();
+}
+
+onFetch = async(e)=>{
+    let job_company_id = "Comp1";
+    const response = await axios.get(`${backendServer}/company/jobsByPages?compId=${job_company_id}&page=${this.state.page}&limit=${this.state.limit}`);
+    console.log("jobs data : "+JSON.stringify(response.data));
+    await this.setState({
+        jobs: response.data.jobPostings,
+        totalpage: Number(response.data.totalPages),
+        page: Number(response.data.currentPage)
+    });
+
+}
+
+handleJobCardClick = (event, jobIndex) => {
+    // this.setState({currentJob: this.state.jobs[jobIndex]});
+    // console.log(event);
+    // event.target.classList.add("light-grey-background");
+    this.setState({selectedJobIndex: jobIndex});
+}
+
   handleSubmit = async (data) => {
     // event.preventDefault();
     //const data = new FormData(event.currentTarget);
@@ -110,60 +154,23 @@ export default class JobPostings extends React.Component {
   };
 
 
-//   renderFormInputElements = (inputField) => {
-//       return(
-//         <Grid item xs={12}>
-//             <TextField
-//             error="false"
-//             autoComplete="given-name"
-//             name={inputField.name}
-//             required
-//             fullWidth
-//             id={inputField.name}
-//             label={inputField.label}
-//             //errorText={this.state.inputErrors[inputField.name]}
-//             helperText="error"
-//             autoFocus
-//             />
-//         </Grid>
-//     );
-//   }
-
-  onFieldChange = (e) =>{
-    this.setState({
-        [e.target.name]: e.target.value
-    });
-  }
-
-  async componentDidMount(){
-    let job_company_id = "Comp1";
-    const response = await axios.get(`${backendServer}/company/jobs?compId=${job_company_id}`);
-    console.log("jobs data : "+JSON.stringify(response.data));
-    await this.setState({
-        jobs: response.data,
-        totalpage: Number(response.data.totalPages),
-        page: Number(response.data.currentPage)
-    });
-  }
-
   renderJobCard = (job, index) => {
     // const oneDay = 24 * 60 * 60 * 1000;
     // const currentDate = new Date();
     // const jobDate = new Date(job.job_created_at); //job_created_at should be in mm/dd/yyyy format
     // const diffDays = Math.round(Math.abs((currentDate - jobDate) / oneDay));
-    // const selectedStyle = (this.state.selectedJobIndex == index) ? {backgroundColor:"lightgrey", borderLeftColor:"#2557a7", borderLeftWidth: "thick"} : null;
+    const selectedStyle = (this.state.selectedJobIndex == index) ? {backgroundColor:"lightgrey", borderLeftColor:"#2557a7", borderLeftWidth: "thick"} : null;
 
 
     return(
         <div >
-            {/* <Grid item xs={2} sm={4} md={4} key={index}> */}
-            <GridListTile key={index}>
             <Card
+                style={selectedStyle}
                 variant="outlined"
                 onClick={(event) => this.handleJobCardClick(event, index)}
                 >
                 <CardContent>
-                    <Typography variant="h5" component="div">
+                <Typography variant="h5" component="div">
                         {job.job_title}
                     </Typography>
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
@@ -177,10 +184,60 @@ export default class JobPostings extends React.Component {
                 </CardContent>
 
             </Card>
-            </GridListTile>
         </div>
     );
 }
+
+
+
+  async componentDidMount(){
+    let job_company_id = "Comp1";
+    const response = await axios.get(`${backendServer}/company/jobsByPages?compId=${job_company_id}&page=${this.state.page}&limit=${this.state.limit}`);
+    console.log("jobs data : "+JSON.stringify(response.data));
+    await this.setState({
+        jobs: response.data.jobPostings,
+        totalpage: Number(response.data.totalPages),
+        page: Number(response.data.currentPage)
+    });
+  }
+
+//   renderJobCard = (job, index) => {
+//     // const oneDay = 24 * 60 * 60 * 1000;
+//     // const currentDate = new Date();
+//     // const jobDate = new Date(job.job_created_at); //job_created_at should be in mm/dd/yyyy format
+//     // const diffDays = Math.round(Math.abs((currentDate - jobDate) / oneDay));
+//     // const selectedStyle = (this.state.selectedJobIndex == index) ? {backgroundColor:"lightgrey", borderLeftColor:"#2557a7", borderLeftWidth: "thick"} : null;
+
+
+//     return(
+//         <div >
+//             {/* <Grid item xs={2} sm={4} md={4} key={index}> */}
+//             {/* <GridListTile key={index}> */}
+//             <div className="col-md-3">
+//             <Card
+//                 variant="outlined"
+//                 onClick={(event) => this.handleJobCardClick(event, index)}
+//                 >
+//                 <CardContent>
+//                     <Typography variant="h5" component="div">
+//                         {job.job_title}
+//                     </Typography>
+//                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
+//                         {job.job_location[0].city}, {job.job_location[0].state}
+//                     </Typography>
+//                     <Typography> {job.job_type}, {job.job_work_type}</Typography>
+//                         <p>{job.job_location.length}+ locations</p>
+//                     <Typography>Compensation: {job.job_salary_details}</Typography>
+//                     <Typography>Description: {job.job_what_you_need}</Typography>
+//                     <Typography>Posted on <i>{job.job_created_at}</i></Typography>
+//                 </CardContent>
+
+//             </Card>
+//             </div>
+//             {/* </GridListTile> */}
+//         </div>
+//     );
+// }
 
   render(){
 
@@ -189,7 +246,7 @@ export default class JobPostings extends React.Component {
             <div >
             <NavBar />
 
-            <ThemeProvider theme={theme}>
+            {/* <ThemeProvider theme={theme}> */}
                 {/* SEARCH PANEL */}
                 <Grid container spacing={2} style={{'margin':'2%'}}>
                     <Grid item sm={2}/>
@@ -209,14 +266,58 @@ export default class JobPostings extends React.Component {
 
                 <br/><br/>
                 {/* JOBS CARDS */}
-                <Container >
+                {/* <Container >
 
-                    {/* <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}> */}
+                    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                     <GridList spacing={4} cols={3}  style={{overflowY: 'none'}} >
                         {this.state.jobs.map(this.renderJobCard)}
                     </GridList>
+                    <div className="container-fluid">
+                        <div className="row">
+                            {this.state.jobs.map(this.renderJobCard)}
+                        </div>
+                    </div>
+
+                </Container> */}
+
+                {/* JOBS PANEL */}
+                <Container>
+
+                    <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                        <Stack spacing={2}>
+                            {this.state.jobs.map(this.renderJobCard)}
+                        </Stack>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <JobDetails job={this.state.jobs[this.state.selectedJobIndex]}/>
+                        </Grid>
+                    </Grid>
                 </Container>
-            </ThemeProvider>
+
+                {/* PAGINATION         */}
+                <Container style={{marginBottom: "31px"}}>
+                <Grid container spacing={2}>
+                        <Grid item xs={1}>
+                        <InputLabel id="page-select-label">Page Size</InputLabel>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Select id="page-select"
+                                defaultValue={1}
+                                label="page-select-label"
+                                onChange={this.onSelect} >
+                                    <MenuItem value={1}>1</MenuItem>
+                                    <MenuItem value={2}>2</MenuItem>
+                                    <MenuItem value={5}>5</MenuItem>
+                                    <MenuItem value={10}>10</MenuItem>
+                            </Select>
+                        </Grid>
+                </Grid>
+
+
+                    <Pagination count={this.state.totalpage} page={this.state.page} onChange={this.onPageChange} />
+                </Container>
+            {/* </ThemeProvider> */}
             </div>
             )
         }
