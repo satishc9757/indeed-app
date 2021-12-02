@@ -50,7 +50,7 @@ const getCompanies = require("./services/company/getCompanies");
 const updateEmail = require("./services/jobseeker/update_email");
 const login = require('./services/users/login');
 const signup = require('./services/users/signup');
-const companyReviews = require('./services/company/getreviews')
+//const companyReviews = require('./services/company/getreviews')
 const get_featured_reviews = require('./services/company/get_featured_reviews')
 const update_featured_review_status = require('./services/company/update_featured_review_status')
 const get_avg_salary_by_dept = require('./services/salary_reviews/get_avg_salaries_by_dept')
@@ -81,6 +81,8 @@ const MarkReviewAsInappropriate = require('./services/admin/markReviewAsInapprop
 const GetAllReviews = require('./services/admin/getAllReviews');
 const getReviews  = require('./services/jobSeeker/getReviews');
 const add_salary_review = require ('./services/salary_reviews/add_salary_review')
+const add_review = require('./services/company/add_review')
+const get_reviews = require('./services/company/get_reviews')
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -157,7 +159,8 @@ handleTopicRequest("admin.getAllCompanies", GetAllCompanies);
 // handleTopicRequest("admin.getTopFiveCompaniesAvgRating", GetTopFiveCompaniesAvgRating);
 // handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpReviews);
 // handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
-handleTopicRequest("get_reviews", getReviews);
+handleTopicRequest("get_reviews", get_reviews);
 handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
 handleTopicRequest("company.getAllCompanies", getCompanies);
 handleTopicRequest("get_emp_profile", get_emp);
+handleTopicRequest("add_employee_review",add_review );
