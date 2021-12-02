@@ -51,8 +51,11 @@ class App extends Component{
               <Route exact path="/salaries" element={<Salaries/>} />
               <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
               <Route exact path="/companyreviews" element={<CompanyReviews/>} />
+
               <Route exact path="/companylist" element={<CompanyList/>} />
+                <Route exact path="/applicants/:id" element={<Applicants/>} />
               <Route exact path="/applicants" element={<Applicants />} />
+
               <Route exact path="/companyprofile" element={<CompanyProfile/>} />
               <Route exact path="/conversations" element={<Conversations/>} />
               

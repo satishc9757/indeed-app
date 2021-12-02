@@ -85,7 +85,8 @@ export default function Common() {
                 <Tab label="Salaries" to='/common?tab=salaries' component={Link}/>
                 <Tab label="Benefits" to='/common?tab=benefits' component={Link}/>
                 <Tab label="Photos" to='/common?tab=photos' component={Link} />
-                <Tab label="Applicants" to='/common?tab=applicants' component={Link} />
+                {sessionStorage.getItem("user-type")==="employer" && 
+                <Tab label="Applicants" to='/common?tab=applicants' component={Link} />}
                 <Tab label="Jobs" to='/common?tab=jobs' component={Link} />
             </Tabs>
             <hr />

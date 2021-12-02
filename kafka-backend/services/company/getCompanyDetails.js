@@ -5,7 +5,7 @@ async function handle_request(msg, callback) {
     const compId = msg.compId;
 
     try{
-        let sql = 'SELECT * FROM company_details WHERE comp_id= '+compId+';'
+        let sql = 'SELECT * FROM company_details WHERE comp_id= '+ compId +';'
 
         await connection.con.query(sql, (err, results)=>{
             if(err){

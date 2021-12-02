@@ -272,7 +272,7 @@ exports.updateJobseekerResume = async function (req, res) {
                 // If Success
                 const imageLocation = req.file.location;// Save the file name into database into profile model
                 const ID = req.file.ID;
-                await Jobseeker.findOneAndUpdate({ "_id": seeker_id }, {
+                await Jobseeker.findOneAndUpdate({ "seeker_id": seeker_id }, {
                     "seeker_resume_location": imageLocation
                 }).exec().then(doc => {
                     console.log("Success add resume" + doc)

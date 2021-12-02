@@ -43,6 +43,7 @@ const signup = require('./services/users/signup');
 const update_employer = require('./services/employer/update_employer_details')
 const searchQuery = require('./services/jobSeeker/searchQuery')
 const companyDetails = require('./services/company/getCompanyDetails');
+const updateCompanyDetails = require('./services/company/updateCompanyDetails');
 const CreateJobPosting = require('./services/employer/createJobPosting');
 const UpdateJobPosting = require('./services/employer/updateJobPosting');
 const JobPostingData = require('./services/employer/getJobPosting');
@@ -115,6 +116,7 @@ handleTopicRequest("signup", signup);
 handleTopicRequest("update_employer_details", update_employer);
 handleTopicRequest("search", searchQuery);
 handleTopicRequest("company_details", companyDetails);
+handleTopicRequest("updateCompanyDetails", updateCompanyDetails);
 handleTopicRequest("company.getCompanyJobPostings", CompanyJobPostings);
 handleTopicRequest("employer.createJobPosting", CreateJobPosting);
 handleTopicRequest("employer.updateJobPosting", UpdateJobPosting);
