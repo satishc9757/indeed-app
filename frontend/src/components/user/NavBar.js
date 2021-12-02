@@ -28,34 +28,44 @@ class NavBar extends Component {
                 </Button>
 
                 <Button>
-                    Find salaries
-                </Button>
-
-                <Button>
-                    {'userId' in sessionStorage &&
-                    <Link to="/upload">Upload Resume</Link>}
-                    {! ('userId' in sessionStorage) && 
-                        <Link to="/login">Upload Resume</Link>
-                        
+                    {(sessionStorage.getItem("user-type")==="employer")?(
+                        <Link to="/applicants">Jobs</Link>
+                    ):(
+                        <p>Find salaries</p>
+                    )
                     }
                 </Button>
+                {'user-id' in sessionStorage && sessionStorage.getItem("user-type")!=="employer"? (
+                    <Button><Link to="/upload">Upload Resume</Link></Button>
+                ):(
+                    <div>
+                        {sessionStorage.getItem("user-type")!=="employer" &&
+                        <Button><Link to="/login">Upload Resume</Link></Button>}
+                    </div>
+                )
+                }
+                {!('user-id' in sessionStorage)&& 
+                <div>
+                    <Button>
+                        Sign in
+                    </Button>
 
-                <Button>
-                    Sign in
-                </Button>
-
-                <Button>
-                    Employers / Post Job
-                        </Button>
-                <Link to='/jobseeker'>
-                    <IconButton>
-                        <PersonIcon/>
-                    </IconButton>
-                </Link>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    Login
-                </Typography>
-                <Button color="inherit"></Button>
+                    <Button>
+                        Employers / Post Job
+                            </Button>
+                    <Link to='/jobseeker'>
+                        <IconButton>
+                            <PersonIcon/>
+                        </IconButton>
+                    </Link>
+                    <Button>
+                        <Link to="/login">
+                            Login
+                        </Link>
+                    </Button>
+                    <Button color="inherit"></Button>
+                </div>
+            }
             </Toolbar>
             </AppBar>
             </Box>

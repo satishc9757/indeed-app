@@ -18,6 +18,7 @@ import UploadResume from "./pages/general/uploadResume";
 import Snapshot from "./pages/company/snapshot";
 import Jobseeker from "./pages/user/jobseekerProfile";
 import Salaries from './pages/general/salaries'
+import JobPosted from './pages/employer/jobPosted';
 import CompanyReviews from './pages/companyReviews';
 import JobseeekerSignup from "./pages/user/JobseekerSignup";
 import EmployerSignup from "./pages/user/EmployerSignup";
@@ -29,6 +30,8 @@ import { ThemeProvider} from '@material-ui/styles'
 import { createTheme} from '@mui/material/styles'
 import { blue } from '@mui/material/colors';
 import JobDetailsCard from './components/landingpage/JobDetailsCard'
+import CompanyReviews from './pages/companyReviews';
+import Applicants from './pages/employer/applicants';
 import Applicants from './pages/applicants';
 import JobPostings from './pages/employer/jobPostings';
 import JobStats from './pages/employer/jobStats';
@@ -59,6 +62,7 @@ class App extends Component {
               <Route exact path="/salaries" element={<Salaries/>} />
               <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
               <Route exact path="/companyreviews" element={<CompanyReviews/>} />
+              <Route exact path="/jobs" element={<JobPosted/>} />
               <Route exact path="/reviewCard" element={<FeaturedReviewCard />} />
               <Route exact path="/autoComplete" element={<AutoCompleteSearch />} />
               <Route exact path="/salaryTab" element={<SalaryReviewTabCard />} />

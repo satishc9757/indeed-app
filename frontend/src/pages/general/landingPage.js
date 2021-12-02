@@ -21,7 +21,7 @@ class LandingPage extends Component {
         super(props);
         this.state={
             results:[],
-            limit:3,
+            limit:2,
             page:1,
             totalpage:1,
             selectedJobIndex:0
