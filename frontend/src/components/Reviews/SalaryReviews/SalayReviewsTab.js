@@ -21,15 +21,15 @@ const SalayReviewsTab = (props) => {
     const [updated,setupdated]=useState(false)
     const [current,setcurrent]=useState([])
     const [mainlist,setmain]=useState([])
-    const [comp_id,setcompid]=useState(props.CompanyDetails.data[0].comp_id)
-    const [comp_name,setcompName]=useState(props.CompanyDetails.data[0].comp_name)
+  const [comp_id, setcompid] =useState(props.CompanyDetails.comp_id)
+  const [comp_name, setcompName]=useState(props.CompanyDetails.comp_name)
     const [usertype,setusertype]=useState("employer")
     const [btndisable,setbtndisable]=useState(usertype!="employer"?true:false)
 
     const department_list = []
     var result={}
     useEffect(async()=>{
-      console.log("data--------------------->",props.CompanyDetails.data[0])
+      console.log("data--------------------->",props.CompanyDetails)
       
       //setcompid(props.CompanyDetails.data[0].comp_id)
       //setcompName(props.CompanyDetails.data[0].comp_name)
