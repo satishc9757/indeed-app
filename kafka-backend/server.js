@@ -4,7 +4,6 @@ var connection = new require("./kafka/Connection");
 //var Books = require('./services/books.js');
 // var JobPostingsData = require("./services/employer/JobPostingsData");
 
-
 const { mongoConnectionURL } = require("./database/mongoConnection");
 const mongoose = require("mongoose");
 
@@ -82,7 +81,7 @@ const getReviews = require("./services/jobSeeker/getReviews");
 const add_salary_review = require("./services/salary_reviews/add_salary_review");
 const add_review = require("./services/company/add_review");
 const get_reviews = require("./services/company/get_reviews");
-
+const saveJobs = require("./services/jobSeeker/saveJobs");
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
   var consumer = connection.getConsumer(topic_name);
@@ -156,7 +155,7 @@ handleTopicRequest("update_resume", update_resume);
 handleTopicRequest("delete_resume", delete_resume);
 handleTopicRequest("get_jobseeker_profile", get_jobseeker);
 handleTopicRequest("update_jobseeker_profile", update_jobseeker);
-// handleTopicRequest("save_jobs", saveJobs);
+handleTopicRequest("save_jobs", saveJobs);
 handleTopicRequest("get_saved_jobs", getSavedJobs);
 handleTopicRequest("get_applied_jobs", appliedJobs);
 handleTopicRequest("add_reviews", addReviews);
