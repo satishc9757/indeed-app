@@ -6,6 +6,7 @@ import Common from "./common";
 import { Box } from "@mui/system";
 import { styled } from '@mui/material/styles';
 import backendServer from "../../webConfig";
+import ReviewTab from "../../components/Reviews/ReviewTab"
 import { useEffect, useState } from "react";
 const axios = require('axios');
 
@@ -139,6 +140,9 @@ export default function Snapshot({CompanyDetails},{featuredReviews}) {
                 variant="h4">
                 Reviews
             </Typography>
+            <Container>
+                <ReviewTab />
+                </Container>
         </Container>
         
     )

@@ -194,7 +194,7 @@ class conversations extends Component {
                                     </Grid>
                                 </Grid>
                                 :
-                                <Grid container item direction="column">
+                                <Grid container item direction="column" xs={12}>
                                     {this.displayMessages()}
                                 </Grid>
                             }

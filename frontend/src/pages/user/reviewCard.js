@@ -11,21 +11,23 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
-export default function ReviewUserCard() {
+export default function ReviewUserCard(reviews) {
+    console.log(reviews.reviews)
+    let reviews2 = reviews.reviews
     return (
         <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div className="col-sm">
+            <div >
 
             </div>
-            <div className="col-sm-3">
+            <div >
                 <Card sx={{ maxWidth: 600 }}>
                     <table>
         
                         <td style={{ justifyContent: "center" }}>
                             <Typography sx={{ fontSize: 23 }} style={{ padding: "0px", margin: "0px" }}>
-                                &nbsp;&nbsp;<b>{props.review.review_company_rating}</b>
+                                &nbsp;&nbsp;<b>{reviews2.review_company_rating}</b>
         
-                                <Rating name="read-only" defaultValue={props.review.review_company_rating} precision={0.5} readOnly size="small" style={{ color: "#aa4069" }} />
+                                <Rating name="read-only" value={reviews2.review_company_rating} precision={0.5} readOnly size="small" style={{ color: "#aa4069" }} />
                             </Typography>
       
                         </td>
@@ -33,28 +35,28 @@ export default function ReviewUserCard() {
                             <CardContent>
      
                                 <Typography variant="h5" component="div">
-                                    <b>{props.review.review_title}</b>
+                                    <b>{reviews2.review_title}</b>
                                 </Typography>
                                 <Typography sx={{ fontSize: 12 }} color="text.secondary">
                                     Software Engineer Intern (Former Employee)- Santa Clara, CA  - April,2017
                                 </Typography>
                                 <Typography variant="body2">
-                                    {props.review.review_content}
+                                    {reviews2.review_content}
         
                                 </Typography>
                                 <Typography variant="body2">
                                     <h5><b>Pros</b></h5>
-                                    {props.review.review_pros}
+                                    {reviews2.review_pros}
         
                                 </Typography>
                                 <Typography variant="body2">
                                     <h5><b>Cons</b></h5>
-                                    {props.review.review_cons}
+                                    {reviews2.review_cons}
         
                                 </Typography>
                                 <Typography variant="body2">
                                     <h5><b>Prep</b></h5>
-                                    {props.review.review_prep}
+                                    {reviews2.review_prep}
         
                                 </Typography>
                                 <br />

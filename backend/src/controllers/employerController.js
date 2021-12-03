@@ -46,7 +46,7 @@ exports.getReviewsByCompanyId = async function (req, res) {
   console.log("here in get reviews compId : "+compId);
   try {
     let reviews = await Reviews.findAll({ where: { review_company_Id: compId } });
-
+    console.log(reviews)
     if (reviews) {
       res
       .status(200)
