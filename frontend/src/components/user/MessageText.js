@@ -48,11 +48,11 @@ class MessageText extends Component {
                     <Grid item xs={2} className={classes.name}>
                         
                     </Grid>
-                    <Grid item xs={10} className={classes.msgReceiver} style={{overflow: "scroll"}}>
+                    <Grid item xs={10} className={classes.msgReceiver}>
                         {message.msg_content}
                     </Grid>
                 </> :
-                <Grid container justifyContent="flex-end" alignContent="flex-end" style={{overflow: "scroll"}}>
+                <Grid container justifyContent="flex-end" alignContent="flex-end" >
                     <Grid item xs={10} className={classes.msgSender}>
                         {/* <div className={classes.chat}> */}
                             {message.msg_content}

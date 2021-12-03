@@ -6,18 +6,12 @@ import {connect} from 'react-redux'
 import Grid from '@material-ui/core/Grid'
 import SearchIcon from '@mui/icons-material/Search'
 import AddLocationIcon from '@mui/icons-material/AddLocation'
+import {getSalariesByJobTitleLocation} from '../../redux/actions/userActions'
 
 import bg_salaries from '../../media/bg_salaries.png'
 
 const styles = (theme) => ({
     ...theme.spread,
-    tile : {
-        width:'1349px',
-        height:'335px',
-        objectFit: 'cover',
-        position: 'relative',
-        backgroundPosition: 'center'
-    },
     search : {
         backgroundImage: `url(${bg_salaries})`,
         backgroundPosition: 'center',
@@ -78,12 +72,21 @@ class FindSalaries extends Component {
         })
     }
 
+    handleGetSalariesByJobTitleLocation = (event) => {
+        event.preventDefault()
+        let searchDetails = {
+            job_title : this.state.jobTitle !== '' && this.state.jobTitle, 
+            job_location : this.state.location !== '' && this.state.location
+        }
+        this.props.getSalariesByJobTitleLocation(searchDetails, this.props.history)
+    }
+
     render() {
         const { classes } = this.props
-
+        console.log(this.state.jobTitle)
         return (    
             <Grid container >
-                <Grid alignItems item className={classes.search}> 
+                <Grid  item className={classes.search}> 
                     <Grid item className={classes.head1}>
                         Find a career you'll love
                     </Grid>
@@ -131,7 +134,7 @@ class FindSalaries extends Component {
                                     What
                                 </Grid>
                                 <Grid item>
-                                    <Button className={classes.button}>
+                                    <Button className={classes.button} onClick={this.handleGetSalariesByJobTitleLocation}>
                                         Search
                                     </Button>
                                 </Grid>
@@ -141,7 +144,6 @@ class FindSalaries extends Component {
                         </Grid>
                     </Grid>
                 </Grid>
-                
             </Grid>
         )
     }
@@ -150,4 +152,4 @@ class FindSalaries extends Component {
 const mapStateToProps = (state) => ({
 })
 
-export default connect(mapStateToProps, {} )(withStyles(styles)(FindSalaries))
+export default connect(mapStateToProps, {getSalariesByJobTitleLocation} )(withStyles(styles)(FindSalaries))
