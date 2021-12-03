@@ -218,3 +218,72 @@ exports.getTopTenCEORating = async function (req,res){
         .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
     }
 };
+
+exports.markPhotoAsInappropriate = async function (req, res) {
+    try {
+        kafka.make_request("admin.markPhotoAsInappropriate", req.query, (err, resp) => {
+            if (err || !resp) {
+              console.log(err);
+                res
+                .status(500)
+                .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
+            }
+            else{
+                res
+                .status(200)
+                .end(JSON.stringify(resp));
+            }
+        });
+        
+    } catch (err) {
+        res
+        .status(500)
+        .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
+    }
+};
+
+exports.markPhotoAsAppropriate = async function (req, res) {
+    try {
+        kafka.make_request("admin.markPhotoAsAppropriate", req.query, (err, resp) => {
+            if (err || !resp) {
+              console.log(err);
+                res
+                .status(500)
+                .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
+            }
+            else{
+                res
+                .status(200)
+                .end(JSON.stringify(resp));
+            }
+        });
+        
+    } catch (err) {
+        res
+        .status(500)
+        .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
+    }
+};
+
+exports.getAllPhotos = async function (req,res){
+    try {
+        kafka.make_request("admin.getAllPhotos", req.query, (err, resp) => {
+            if (err || !resp) {
+              console.log(err);
+                res
+                .status(500)
+                .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
+            }
+            else{
+                res
+                .status(200)
+                .end(JSON.stringify(resp));
+            }
+        });
+        
+    } catch (err) {
+        res
+        .status(500)
+        .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
+    }
+};
