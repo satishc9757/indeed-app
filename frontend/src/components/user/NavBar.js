@@ -134,30 +134,6 @@ class NavBar extends Component {
                         <Button onClick={this.signOut}><Link to="/">SignOut</Link></Button>
                     </div>
                 )}
-              </div>
-            )}
-            {!("user-type" in sessionStorage) ? (
-              <div>
-                <Button>Sign in</Button>
-
-                <Button>
-                  <Link to="/employer">Employers / Post Job</Link>
-                </Button>
-                <Button>
-                  <Link to="/login">Login</Link>
-                </Button>
-                <Button color="inherit"></Button>
-              </div>
-            ) : (
-              <div>
-                <Link to="/jobseeker">
-                  <IconButton>
-                    <PersonIcon />
-                  </IconButton>
-                </Link>
-                <Button onClick={this.signOut}>SignOut</Button>
-              </div>
-            )}
           </Toolbar>
         </AppBar>
       </Box>
