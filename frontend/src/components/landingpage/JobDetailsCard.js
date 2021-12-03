@@ -19,6 +19,7 @@ import axios from 'axios';
 import Modal from '@mui/material/Modal';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
+import UploadCoverLetter from '../../components/landingpage/uploadCoverLetter'
 
 class JobDetailsCard extends Component {
 
@@ -46,7 +47,8 @@ class JobDetailsCard extends Component {
         // jobSaved: false,
         // companyAvgRating: 4.3,
         appliedForJob: false,
-        openLogin: false
+        openLogin: false,
+        openCoverLetterModal: false
     }
 
     handleSaveAction = async () => {
@@ -83,34 +85,48 @@ class JobDetailsCard extends Component {
         // const job_seeker_cover_letter_link = "";
         // const job_seeker_resume_link = "";
         if(job_seeker_id && this.props.profileData){
-            console.log("from props : "+JSON.stringify(this.props.profileData));
-            const payload = {
-                app_job_id: this.props.job._id,
-                app_job_seeker_id: job_seeker_id,
-                app_name: this.props.profileData.seeker_name,
-                app_email: this.props.profileData.seeker_email,
-                //app_gender: this.props.profileData.seeker_name,
-                app_street: this.props.profileData.seeker_name,
-                app_city: this.props.profileData.seeker_city,
-                app_state: this.props.profileData.seeker_state,
-                //app_zipcode: this.props.profileData.seeker_name,
-                app_country: this.props.profileData.seeker_country,
-                app_resume_link: this.props.profileData.seeker_resume_location,
-                //app_cover_letter_link: this.props.profileData.seeker_name
-            }
 
-          console.log("payload : "+JSON.stringify(payload));
-          axios.defaults.headers.common.authorization = await localStorage.getItem("token");
-          var response = await axios.post(`${backendServer}/jobseeker/application`, payload);
-          console.log("response: "+JSON.stringify(response.data));
-          if(response.status === 200){
-              this.setState({appliedForJob: true});
-          }
-          } else {
-              console.log("hostory push "+JSON.stringify(this.props));
-              this.setState({openLogin: true});
-          }
+            this.setState({openCoverLetterModal: true});
+        } else {
+            console.log("hostory push "+JSON.stringify(this.props));
+            this.setState({openLogin: true});
+            // this.setState({openCoverLetterModal: true});
 
+        }
+
+
+    }
+
+    createApplication = async (coverletterLocation) => {
+        console.log("cover letter : "+coverletterLocation);
+        console.log("from props : "+JSON.stringify(this.props.profileData));
+        const job_seeker_id =  sessionStorage.getItem("job-seeker-id");
+        const job_seeker_email =  sessionStorage.getItem("user-email");
+        const payload = {
+            app_job_id: this.props.job._id,
+            app_job_seeker_id: job_seeker_id,
+            app_name: this.props.profileData.seeker_name,
+            app_email: job_seeker_email,
+            //app_gender: this.props.profileData.seeker_name,
+            app_street: this.props.profileData.seeker_name,
+            app_city: this.props.profileData.seeker_city,
+            app_state: this.props.profileData.seeker_state,
+            //app_zipcode: this.props.profileData.seeker_name,
+            app_country: this.props.profileData.seeker_country,
+            app_resume_link: this.props.profileData.seeker_resume_location,
+            app_cover_letter_link: coverletterLocation
+        }
+
+        console.log("payload : "+JSON.stringify(payload));
+        var response = await axios.post(`${backendServer}/jobseeker/application`, payload);
+        console.log("response: "+JSON.stringify(response.data));
+        if(response.status === 200){
+            this.setState({appliedForJob: true});
+        }
+    }
+
+    closeCoverLetterModal = () => {
+        this.setState({openCoverLetterModal: false});
     }
 
     closeLoginModal = () => {
@@ -235,7 +251,9 @@ class JobDetailsCard extends Component {
             </CardContent>
 
                 {this.loginModal()}
-
+                <UploadCoverLetter openCoverLetterModal={this.state.openCoverLetterModal}
+                                    closeCoverLetterModal={this.closeCoverLetterModal}
+                                    createApplication={this.createApplication}/>
             </Card>
         )
     }
