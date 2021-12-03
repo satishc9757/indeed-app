@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
+import { Button, Dialog } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { IconButton, Link } from '@material-ui/core';
 // import {Link} from 'react-router-dom';
@@ -16,6 +16,10 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Grid, Rating } from '@mui/material';
 import backendServer from '../../webConfig';
 import axios from 'axios';
+import Modal from '@mui/material/Modal';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import UploadCoverLetter from '../../components/landingpage/uploadCoverLetter'
 
 class JobDetailsCard extends Component {
 
@@ -43,6 +47,8 @@ class JobDetailsCard extends Component {
         // jobSaved: false,
         // companyAvgRating: 4.3,
         appliedForJob: false,
+        openLogin: false,
+        openCoverLetterModal: false
     }
 
     handleSaveAction = async () => {
@@ -51,6 +57,7 @@ class JobDetailsCard extends Component {
        if(!this.state.jobSaved){
             const jobSeekerId = "61a081696d73d01739a267ef" // should be fecthed from cookie or session
             let payload = {jobId: this.state._id};
+            axios.defaults.headers.common.authorization = await localStorage.getItem("token");
             var response = await axios.post(`${backendServer}/jobseeker/jobs?jobSeekerId=${jobSeekerId}`, payload);
             console.log("response: "+JSON.stringify(response.data));
             await this.setState({jobSaved: true})
@@ -77,12 +84,29 @@ class JobDetailsCard extends Component {
         // const job_seeker_gender = "";
         // const job_seeker_cover_letter_link = "";
         // const job_seeker_resume_link = "";
+        if(job_seeker_id && this.props.profileData){
+
+            this.setState({openCoverLetterModal: true});
+        } else {
+            console.log("hostory push "+JSON.stringify(this.props));
+            this.setState({openLogin: true});
+            // this.setState({openCoverLetterModal: true});
+
+        }
+
+
+    }
+
+    createApplication = async (coverletterLocation) => {
+        console.log("cover letter : "+coverletterLocation);
         console.log("from props : "+JSON.stringify(this.props.profileData));
+        const job_seeker_id =  sessionStorage.getItem("job-seeker-id");
+        const job_seeker_email =  sessionStorage.getItem("user-email");
         const payload = {
             app_job_id: this.props.job._id,
             app_job_seeker_id: job_seeker_id,
             app_name: this.props.profileData.seeker_name,
-            app_email: this.props.profileData.seeker_email,
+            app_email: job_seeker_email,
             //app_gender: this.props.profileData.seeker_name,
             app_street: this.props.profileData.seeker_name,
             app_city: this.props.profileData.seeker_city,
@@ -90,7 +114,7 @@ class JobDetailsCard extends Component {
             //app_zipcode: this.props.profileData.seeker_name,
             app_country: this.props.profileData.seeker_country,
             app_resume_link: this.props.profileData.seeker_resume_location,
-            //app_cover_letter_link: this.props.profileData.seeker_name
+            app_cover_letter_link: coverletterLocation
         }
 
         console.log("payload : "+JSON.stringify(payload));
@@ -101,9 +125,32 @@ class JobDetailsCard extends Component {
         }
     }
 
+    closeCoverLetterModal = () => {
+        this.setState({openCoverLetterModal: false});
+    }
+
+    closeLoginModal = () => {
+        this.setState({openLogin: false});
+    }
+
+    loginModal = () => {
+        return (
+            <Dialog open={this.state.openLogin} onClose={this.closeLoginModal}>
+            {/* <DialogTitle style={{textAlign:"center"}}>New Job Posting</DialogTitle> */}
+            <DialogContent>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                    Please login first. <Link href="/login">Login</Link>
+                </Typography>
+            </DialogContent>
+            <DialogActions>
+                    <Button onClick={this.closeLoginModal}>Cancel</Button>
+            </DialogActions>
+            </Dialog>)
+    }
+
     render() {
 
-
+        const applyButton = this.state.appliedForJob ? <Button  disabled variant="contained">Applied</Button> :  <Button onClick={this.handleApplyJob} variant="contained">Apply</Button>
         const favIcon = this.state.jobSaved ? <FavoriteIcon /> : <FavoriteBorderIcon />;
         const undoButton = this.state.jobSaved ? <Button onClick={this.handleUndoAction}>Undo</Button> : null;
 
@@ -151,7 +198,7 @@ class JobDetailsCard extends Component {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button onClick={this.handleApplyJob} variant="contained">Apply</Button>
+                {applyButton}
                 <Button onClick={this.handleSaveAction} variant="contained" color="grey">
                     {favIcon}
                 </Button>
@@ -202,6 +249,11 @@ class JobDetailsCard extends Component {
                 </Typography>
 
             </CardContent>
+
+                {this.loginModal()}
+                <UploadCoverLetter openCoverLetterModal={this.state.openCoverLetterModal}
+                                    closeCoverLetterModal={this.closeCoverLetterModal}
+                                    createApplication={this.createApplication}/>
             </Card>
         )
     }

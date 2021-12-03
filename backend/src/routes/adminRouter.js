@@ -1,15 +1,16 @@
 const adminController = require('../controllers/adminController');
-
+const { checkAuth } = require("../Utils/passport");
 var express = require('express');
 var router = express.Router();
 
-router.get('/markReviewAsInappropriate', adminController.markReviewAsInappropriate); //test later
-router.get('/getAllCompanies', adminController.getAllCompanies);
-router.get('/getAllReviews', adminController.getAllReviews);
-router.get('/getNumberOfReviewsPerDay', adminController.getNumberOfReviewsPerDay);
-router.get('/getTopFiveMostReviewedCompanies', adminController.getTopFiveMostReviewedCompanies);
-router.get('/getTopFiveCompaniesAvgRating', adminController.getTopFiveCompaniesAvgRating);
-router.get('/getTopFiveSeekersAccpReviews', adminController.getTopFiveSeekersAccpReviews);
-router.get('/getTopTenCEORating', adminController.getTopTenCEORating);
+router.get('/markReviewAsInappropriate', checkAuth, adminController.markReviewAsInappropriate); 
+router.get('/markReviewAsAppropriate',checkAuth, adminController.markReviewAsAppropriate); 
+router.get('/getAllCompanies',checkAuth, adminController.getAllCompanies);
+router.get('/getAllReviews',checkAuth, adminController.getAllReviews);
+router.get('/getNumberOfReviewsPerDay',checkAuth, adminController.getNumberOfReviewsPerDay);
+router.get('/getTopFiveMostReviewedCompanies',checkAuth, adminController.getTopFiveMostReviewedCompanies);
+router.get('/getTopFiveCompaniesAvgRating',checkAuth, adminController.getTopFiveCompaniesAvgRating);
+router.get('/getTopFiveSeekersAccpReviews', checkAuth, adminController.getTopFiveSeekersAccpReviews);
+router.get('/getTopTenCEORating', checkAuth,adminController.getTopTenCEORating);
 
 module.exports = router;

@@ -310,7 +310,7 @@ exports.updateJobseekerResume = async function (req, res) {
 };
 
 exports.updateJobseekerCover = async function (req, res) {
-  console.log("inside update resume", req.params);
+  console.log("inside update cover", req.params);
   await profileImgUpload(req, res, async (error) => {
     console.log("requestOkokok", req.file);
     if (error) {
@@ -324,8 +324,8 @@ exports.updateJobseekerCover = async function (req, res) {
       } else {
         // If Success
         const imageLocation = req.file.location; // Save the file name into database into profile model
-        const ID = req.file.ID;
-        res.status(200).end({ location: ID });
+        const ID = req.file.location;
+        res.status(200).end(ID);
       }
     }
   });
@@ -373,13 +373,14 @@ exports.getReviews = async function (req, res) {
 
 exports.updateEmail = async function (req, res) {
   try {
-    kafka.make_request("update_email", req.body, (err, resp) => {
-      if (err || !resp) {
-        console.log(err);
+    kafka.make_request("update_email", req.body, (error, resp) => {
+      console.log(error + "----------" + resp);
+      if (error || !resp) {
+        console.log(error);
         res
           .status(500)
           .send(
-            JSON.stringify({ message: "Something went wrong!", error: err })
+            JSON.stringify({ message: "Something went wrong!", error: error })
           );
       } else {
         res.status(200).json(resp);
@@ -406,6 +407,31 @@ exports.getAppliedJobs = async function (req, res) {
         res.status(200).json(resp);
       }
     });
+  } catch (err) {
+    res
+      .status(500)
+      .send(JSON.stringify({ message: "Something went wrong!", error: err }));
+  }
+};
+
+exports.getSalariesByJobTitleLocation = async function (req, res) {
+  try {
+    kafka.make_request(
+      "getSalariesByJobTitleLocation",
+      req.query,
+      (err, resp) => {
+        if (err || !resp) {
+          console.log(err);
+          res
+            .status(500)
+            .send(
+              JSON.stringify({ message: "Something went wrong!", error: err })
+            );
+        } else {
+          res.status(200).json(resp);
+        }
+      }
+    );
   } catch (err) {
     res
       .status(500)

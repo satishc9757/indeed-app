@@ -2,6 +2,7 @@ import {  Button, Card, CardContent, Container, Grid, Link, List, ListItem, List
 import React, { useEffect } from "react";
 import Avatar from '@mui/material/Avatar';
 import backendServer from "../../webConfig";
+
 import NavBar from "../../components/user/NavBar";
 import ArticleIcon from '@mui/icons-material/Article';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -30,7 +31,6 @@ const style = {
 
 
 export default function Jobseeker() {
-    const navigate = useNavigate();
     // const userType =""
     sessionStorage.getItem("user_type")//gitttt
 
@@ -49,11 +49,12 @@ export default function Jobseeker() {
     const [appJobDetails, setAppJobDetails] = React.useState([])
     const [reviews, setReviews] = React.useState([])
     const [initials, setInitials] = React.useState([])
-
-    const downloadResume = () => {
+const navigate = useNavigate();
+    const downloadResume = async() => {
         // let seekerID = 2
         let seekerID = sessionStorage.getItem("job-seeker-id");
         console.log("download resume")
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         axios.get(`${backendServer}/jobseeker/resume?seeker_id=${sessionStorage.getItem("job-seeker-id")}`)
             .then(response => {
                 console.log(response)
@@ -62,7 +63,7 @@ export default function Jobseeker() {
             }
     }
      
-    const updateProfile = () => {
+    const updateProfile = async() => {
         // let seekerID = 2
         let seekerID = sessionStorage.getItem("job-seeker-id");
         let data = {"seeker_id":sessionStorage.getItem("job-seeker-id"),
@@ -70,6 +71,7 @@ export default function Jobseeker() {
             "seeker_email": seekerEmail,
             "seeker_contact":seekerContact
         }
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         axios.post(`${backendServer}/jobseeker`,data)
             .then(response => {
                 console.log(response)
@@ -79,9 +81,10 @@ export default function Jobseeker() {
         
     }
 
-    const deleteResume = () => {
+    const deleteResume = async() => {
         // let seekerID = 2
         let seekerID = sessionStorage.getItem("job-seeker-id");
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         axios.post(`${backendServer}/jobseeker/resume/delete?seeker_id=${sessionStorage.getItem("job-seeker-id")}`)
             .then(response => {
                 console.log(response)
@@ -91,66 +94,75 @@ export default function Jobseeker() {
 
     }
 
+    
     const replaceResume = () => {
         navigate('/upload')
     }
 
-    useEffect(() => {
-        setReviews([])
-        let seekerID = sessionStorage.getItem("job-seeker-id"); 
-        // let seekerID =2
-        axios.get(`${backendServer}/jobseeker?seeker_id=${seekerID}`)
-            .then(response => {
-                let data = response.data[0];
-                console.log(data)
-                let name = data.seeker_name.split(" ")
-                setInitials(name[0].substring(0, 1).toUpperCase()+name[name.length - 1].substring(0, 1).toUpperCase())
-                setFirstName(name[0]);
-                setLastName(name[1]);
-                setSeekerProfile(data);
+    useEffect( () => {
+    
+        async function onFirstLoad () {
+            setReviews([])
+            let seekerID = sessionStorage.getItem("job-seeker-id");
+            // let seekerID =2
+            axios.defaults.headers.common.authorization = await localStorage.getItem("token");
+            axios.get(`${backendServer}/jobseeker?seeker_id=${seekerID}`)
+                .then(response => {
+                    let data = response.data[0];
+                    console.log(data)
+                    let name = data.seeker_name.split(" ")
+                    setInitials(name[0].substring(0, 1).toUpperCase() + name[name.length - 1].substring(0, 1).toUpperCase())
+                    setFirstName(name[0]);
+                    setLastName(name[1]);
+                    setSeekerProfile(data);
 
-            axios.get(`${backendServer}/jobseeker/jobs?jobSeekerId=${seekerID}`)
-            .then(response => {
-                let data1 = response.data;
-                console.log(data1)
-                setJobDetails(data1);
-                axios.get(`${backendServer}/jobseeker/appliedJobs?jobSeekerId=${seekerID}`).then(response => {
-                let data2 = response.data;
-                console.log(data2)
-                setAppJobDetails(data2);
+                    axios.get(`${backendServer}/jobseeker/jobs?jobSeekerId=${seekerID}`)
+                        .then(response => {
+                            let data1 = response.data;
+                            console.log(data1)
+                            setJobDetails(data1);
+                            axios.get(`${backendServer}/jobseeker/appliedJobs?jobSeekerId=${seekerID}`).then(response => {
+                                let data2 = response.data;
+                                console.log(data2)
+                                setAppJobDetails(data2);
 
                     
-                    axios.get(`${backendServer}/jobseeker/reviews?jobseekerid=${seekerID}`).then(response => {
-                let data2 = response.data;
-                        console.log(data2)
-                        // setReviews(data2)
-                        let reviewstemp = [];
-                        for (let i = 0; i < data2.length; i++) {
-                            console.log(data2[i])
-                            reviewstemp.push(data2[i])
+                                axios.get(`${backendServer}/jobseeker/reviews?jobseekerid=${seekerID}`).then(response => {
+                                    let data2 = response.data;
+                                    console.log(data2)
+                                    // setReviews(data2)
+                                    let reviewstemp = [];
+                                    for (let i = 0; i < data2.length; i++) {
+                                        console.log(data2[i])
+                                        reviewstemp.push(data2[i])
+                                    }
+                                    console.log(reviewstemp)
+
+                                    setReviews(reviewstemp)
+                    
+                                }).catch = (error) => {
+                                    console.log(error)
+                                }
+                        
+                            }).catch = (error) => {
+                                console.log(error)
+                            }
+                        }).catch = (error) => {
+                            console.log(error)
                         }
-                        console.log(reviewstemp)
-
-                        setReviews(reviewstemp)
-                    
-                    }).catch=(error) => {
+                }).catch = (error) => {
                     console.log(error)
                 }
-                        
-                    }).catch=(error) => {
-                console.log(error)
-            }
-            }).catch=(error) => {
-                console.log(error)
-            }
-            }).catch=(error) => {
-                console.log(error)
-            }
         
         
-    }, [])
+        }
+        onFirstLoad();
+    },[])
 
-    
+    const routeReview = () => {
+        navigate("/common?tab=reviews")
+    }
+
     console.log(reviews)
     const search = async (data2) => {
         let reviewstemp = [];
@@ -220,7 +232,7 @@ export default function Jobseeker() {
                         
                             <Link onClick={handleEmailOpen}><Typography variant='body' color='primary'>edit</Typography></Link>
                             <Modal open={emailOpen} onClose={handleEmailClose}>
-                                <EmailModal seekerEmail={seekerEmail} />
+                                <EmailModal seekerEmail={seekerEmail} handleEmailClose={handleEmailClose} />
                             </Modal>
                         
                             <Typography variant='subtitle1'>Phone Number</Typography>
@@ -231,7 +243,9 @@ export default function Jobseeker() {
                                     <Button
                                         onClick={updateProfile}
                                         variant="contained" color='primary'>Save</Button>
-                                <Button variant="outlined" color='primary'>Cancel</Button>
+                                    {/* <Button variant="outlined"
+                                        // onClick={onFirstLoad()}
+                                        color='primary'>Cancel</Button> */}
                             </Stack>
                         </CardContent>
                     </Card>
@@ -316,8 +330,10 @@ export default function Jobseeker() {
                 </Card>
                 <br />
                 
-                <Card style={{ width: 500 }}>
-                    <CardContent>
+                        <Card
+                            onClick={routeReview}
+                            style={{ width: 500 }}>
+                    <CardContent >
                                 <Typography variant='h6'>Reviews</Typography>
                                 {/* <ReviewUserCard reviews={reviews}></ReviewUserCard> */}
                                 

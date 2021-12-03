@@ -1,6 +1,10 @@
 import { Button, Card, CardContent, Container, Grid, Link, List, ListItem, ListItemIcon, Modal, TextField, Typography } from "@material-ui/core";
 import backendServer from "../../webConfig";
 import Box from '@mui/material/Box';
+import React, { useEffect } from "react";
+
+const axios = require('axios');
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -10,7 +14,24 @@ const style = {
   bgcolor: 'background.paper',
   
 };
-export default function EmailModal({seekerEmail}) {
+export default function EmailModal({ seekerEmail }, { handleEmailClose }) {
+    const [seekerEmail1, setSeekerEmail] = React.useState('');
+    const updateEmail = () => {
+        let id= sessionStorage.getItem("job-seeker-id")
+        let body = {
+            "seeker_email": seekerEmail1,
+            "seeker_id": id
+        }
+        console.log(body)
+        axios.defaults.headers.common.authorization = localStorage.getItem("token");
+        axios.post(`${backendServer}/jobseeker/email`,body)
+            .then(response => {
+                console.log(response)
+            }).catch=(error) => {
+                console.log(error)
+            }
+    }
+
     return (
         < Box sx = { style } >
             <Container >
@@ -18,12 +39,18 @@ export default function EmailModal({seekerEmail}) {
                 <Typography variant="h6">
                     Changing email address for {seekerEmail} </Typography>
                 <Typography variant='subtitle1'>New Email Address</Typography>
-                <TextField fullWidth variant="outlined" label=""></TextField>
-                <Typography variant='subtitle1'>Current Password</Typography>
+                <TextField fullWidth variant="outlined"
+                     onChange={e => setSeekerEmail(e.target.value)}
+                    label=""></TextField>
+                <Typography variant='subtitle1'>Enter again</Typography>
                 <TextField fullWidth variant="outlined" label=""></TextField>
                 <br /> <br />
-                <Button color="primary" variant="contained">Save Email</Button>
-                <Button variant="text">Cancel changes</Button>
+                <Button color="primary"
+                onClick={updateEmail}
+                    variant="contained">Save Email</Button>
+                <Button variant="text"
+                    onClick={handleEmailClose}
+                >Cancel changes</Button>
                 <br/><br/>
             </Container>
             </Box >

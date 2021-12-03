@@ -14,7 +14,9 @@ export default function JoinUs({CompanyDetails}) {
             </Typography>
             <br/><br/>
             
-            <span>{ CompanyDetails.comp_description}</span>
+            <span>{CompanyDetails.comp_description}</span>
+            <br/>
+            <span>{ CompanyDetails.comp_about}</span>
             
             <br/><br/>
         </Container>

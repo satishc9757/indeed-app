@@ -41,6 +41,7 @@ class NavBar extends Component {
 
   signOut = async (e) => {
     await sessionStorage.clear();
+    await localStorage.clear();
     await this.setState({
       notLoggedIn: true,
     });
@@ -88,6 +89,7 @@ class NavBar extends Component {
                   <Button>
                     <Link to="/login">Upload Resume</Link>
                   </Button>
+
                 )}
               </div>
             )}

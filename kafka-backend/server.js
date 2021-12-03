@@ -31,7 +31,7 @@ initDBConnection().then(async () => {
 });
 
 // const add_featured_review = require('./services/employer/add_featured_review')
-// const get_featured_reviews = require('./services/employer/get_featured_reviews')
+
 //const update_featured_review_status = require('./services/company/update_featured_review_status')
 // const remove_featured_review = require('./services/employer/remove_featured_review')
 const companyReviews = require("./services/company/getreviews");
@@ -76,12 +76,15 @@ const appliedJobs = require("./services/jobSeeker/getAppliedJobs");
 const addReviews = require("./services/jobSeeker/addReviews");
 const get_emp = require("./services/employer/getEmployerProfile");
 const MarkReviewAsInappropriate = require("./services/admin/markReviewAsInappropriate");
+const MarkReviewAsAppropriate = require("./services/admin/markReviewAsAppropriate");
 const GetAllReviews = require("./services/admin/getAllReviews");
 const getReviews = require("./services/jobSeeker/getReviews");
 const add_salary_review = require("./services/salary_reviews/add_salary_review");
 const add_review = require("./services/company/add_review");
 const get_reviews = require("./services/company/get_reviews");
-const saveJobs = require("./services/jobSeeker/saveJobs");
+const GetSalariesByJobTitleLocation = require("./services/jobSeeker/getSalariesByJobTitleLocation");
+
+const vote_review = require("./services/company/mark_helpful");
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
   var consumer = connection.getConsumer(topic_name);
@@ -114,9 +117,10 @@ function handleTopicRequest(topic_name, fname) {
 
 handleTopicRequest("company.getreviews", get_reviews);
 handleTopicRequest("get_reviews", getReviews);
+//handleTopicRequest("company.getreviews", companyReviews);
 // handleTopicRequest("add_featured_review", add_featured_review);
 // handleTopicRequest("update_featured_review_status", update_featured_review_status);
-// handleTopicRequest("get_featured_reviews", get_featured_reviews);
+
 // handleTopicRequest("remove_featured_review", remove_featured_review);
 handleTopicRequest("update_email", updateEmail);
 handleTopicRequest("login", login);
@@ -163,6 +167,7 @@ handleTopicRequest(
   "admin.markReviewAsInappropriate",
   MarkReviewAsInappropriate
 );
+handleTopicRequest("admin.markReviewAsAppropriate", MarkReviewAsAppropriate);
 handleTopicRequest("admin.getAllCompanies", GetAllCompanies);
 handleTopicRequest("admin.getAllReviews", GetAllReviews);
 handleTopicRequest("admin.getNumberOfReviewsPerDay", GetNumberOfReviewsPerDay);
@@ -180,14 +185,12 @@ handleTopicRequest(
 );
 handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
 handleTopicRequest("get_reviews", getReviews);
-// handleTopicRequest("admin.getAllReviews", GetAllReviews);
-// handleTopicRequest("admin.getNumberOfReviewsPerDay", GetNumberOfReviewsPerDay);
-// handleTopicRequest("admin.getTopFiveMostReviewedCompanies", GetTopFiveMostReviewedCompanies);
-// handleTopicRequest("admin.getTopFiveCompaniesAvgRating", GetTopFiveCompaniesAvgRating);
-// handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpReviews);
-// handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
-// handleTopicRequest("get_reviews", get_reviews);
 handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
 handleTopicRequest("company.getAllCompanies", getCompanies);
 handleTopicRequest("get_emp_profile", get_emp);
 handleTopicRequest("add_employee_review", add_review);
+handleTopicRequest(
+  "getSalariesByJobTitleLocation",
+  GetSalariesByJobTitleLocation
+);
+handleTopicRequest("vote_review", vote_review);

@@ -21,6 +21,7 @@ class JobPosted extends Component {
     }
 
     async componentDidMount(){
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         var response = await axios.get(`${backendServer}/company/jobs?compId=${sessionStorage.getItem('emp_company_id')}`)
         console.log("response",response);
         await this.setState({

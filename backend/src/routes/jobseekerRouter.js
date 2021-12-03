@@ -2,27 +2,30 @@ const jobseekerController = require('../controllers/jobseekerController');
 var express = require('express');
 // const { route } = require('.');
 var router = express.Router();
-
+const { checkAuth } = require("../Utils/passport");
 // router.get("/search", jobseekerController.getSearchByTitleorLocation);
-router.get("/search/company", jobseekerController.getSearchByCompanyName);
-router.post("/jobs",jobseekerController.saveJobs);
-router.get("/jobs",jobseekerController.getSavedJobs);
-router.post("/reviews",jobseekerController.addReviews);
-router.get("/reviews",jobseekerController.getReviews);
+router.get("/search/company", checkAuth, jobseekerController.getSearchByCompanyName);
+router.post("/jobs", checkAuth, jobseekerController.saveJobs);
+router.get("/jobs", checkAuth, jobseekerController.getSavedJobs);
+router.post("/reviews", checkAuth, jobseekerController.addReviews);
+router.get("/reviews", checkAuth, jobseekerController.getReviews);
 
 //router.get("/search", jobseekerController.getSearchByTitleorLocation);
 // router.get("/search/company", jobseekerController.getSearchByCompanyName);
-router.get("/", jobseekerController.getJobseekerProfile);
-router.post("/", jobseekerController.updateJobseekerProfile);
-router.get("/resume", jobseekerController.getJobseekerResume);
-router.post("/resume/:seeker_id", jobseekerController.updateJobseekerResume);
-router.post("/coverletter", jobseekerController.updateJobseekerCover);
-router.post("/resume/delete", jobseekerController.deleteJobseekerResume);
-router.get("/search", jobseekerController.getSearch);
-router.post("/application", jobseekerController.createJobApplication);
-router.post("/update/email", jobseekerController.updateEmail);
-router.get("/appliedJobs", jobseekerController.getAppliedJobs);
 
+router.get("/", checkAuth, jobseekerController.getJobseekerProfile);
+router.post("/", checkAuth, jobseekerController.updateJobseekerProfile);
+router.get("/resume", checkAuth, jobseekerController.getJobseekerResume);
+router.post("/resume/:seeker_id", checkAuth, jobseekerController.updateJobseekerResume);
+router.post("/coverletter", checkAuth, jobseekerController.updateJobseekerCover);
+router.post("/resume/delete", checkAuth, jobseekerController.deleteJobseekerResume);
+router.get("/search", checkAuth, jobseekerController.getSearch);
+router.post("/application", checkAuth, jobseekerController.createJobApplication);
+router.post("/update/email", checkAuth, jobseekerController.updateEmail);
+router.get("/appliedJobs", checkAuth, jobseekerController.getAppliedJobs);
 
+router.get("/getSalariesByJobTitleLocation",checkAuth, jobseekerController.getSalariesByJobTitleLocation);
+
+router.post("/email",checkAuth, jobseekerController.updateEmail);
 
 module.exports = router;
