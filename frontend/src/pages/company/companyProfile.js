@@ -1,7 +1,6 @@
 import {  Button, Card, CardContent, Container, Grid, IconButton, Link, List, ListItem, ListItemIcon, Modal, TextField, Typography } from "@material-ui/core";
 import React, { useEffect } from "react";
 import backendServer from "../../webConfig";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Avatar from '@mui/material/Avatar';
 import ImageUpload from "./uploadProfile";
 import NavBar from "../../components/user/NavBar";
@@ -44,7 +43,9 @@ const [profile, setProfile] = React.useState('');
   const handleClose = () => setOpen(false);
 
     const updateProfile = () => {
+
         let emp_id=sessionStorage.getItem("emp-id")
+
         let data = {
             "emp_id": emp_id,
             "emp_name": firstName + ' ' + lastName,
@@ -59,18 +60,18 @@ const [profile, setProfile] = React.useState('');
             }).catch=(error) => {
                 console.log(error)
             }
-        
     }
-
 
     const uploadProfile = () => {
         
     }
     const updateCompany = () => {
-        let companyID = sessionStorage.getItem("emp-company-id")
+
+        let compId = sessionStorage.getItem('emp-company-id')
+
         console.log(lastName)
         let data = {
-            "comp_id": companyID,
+            "comp_id": compId,
             "comp_name": city,
             "comp_size": companySize,
             "comp_type": companyType,
@@ -93,43 +94,75 @@ const [profile, setProfile] = React.useState('');
     }
 
 
-    useEffect(() => {
-        let compId = sessionStorage.getItem("emp-company-id");
-        let empID = sessionStorage.getItem("emp-id");
-        axios.get(`${backendServer}/employer?empID=${empID}`)
-            .then(response => {
-                let data = response.data[0];
-                let name = data.emp_name.split(" ")
-                setFirstName(name[0])
-                setLastName(name[1])
-                setRole(data.emp_role)
-                setCity(data.emp_city)
-                setState(data.emp_state)
-                setCountry(data.emp_country)
+
+//     useEffect(() => {
+//         // let compId = 2;
+//         // let empID = 5;
+//         let compId = sessionStorage.getItem('emp_company_id')
+//         let empID = sessionStorage.getItem('emp-id')
+//         axios.get(`${backendServer}/employer?empID=${empID}`)
+//             .then(response => {
+//                 let data = response.data[0];
+//                 let name = data.emp_name.split(" ")
+//                 setFirstName(name[0])
+//                 setLastName(name[1])
+//                 setRole(data.emp_role)
+//                 setCity(data.emp_city)
+//                 setState(data.emp_state)
+//                 setCountry(data.emp_country)
                
                 
-                axios.get(`${backendServer}/company/companyDetails?compId=${compId}`)
-                    .then(response => {
-                        let data1 = response.data[0];
-                        console.log(data1)
-                        setWebsite(data1.comp_website)
-                        setCompanySize(data1.comp_size)
-                        setCompanyType(data1.comp_type)
-                        setProfile(data1.comp_profile_location)
-                        setCEO(data1.comp_ceo)
-                        setFounded(data1.comp_founded)
-                        setHeadquarters(data1.comp_headquarters)
-                        setMission(data1.comp_mission)
-                        setVision(data1.comp_mission)
-                        setRevenue(data1.comp_revenue)
+//                 axios.get(`${backendServer}/company/companyDetails?compId=${compId}`)
+//                     .then(response => {
+//                         let data1 = response.data[0];
+//                         console.log(data1)
+//                         setWebsite(data1.comp_website)
+//                         setCompanySize(data1.comp_size)
+//                         setCompanyType(data1.comp_type)
+//                         setProfile(data1.comp_profile_location)
+//                         setCEO(data1.comp_ceo)
+//                         setFounded(data1.comp_founded)
+//                         setHeadquarters(data1.comp_headquarters)
+//                         setMission(data1.comp_mission)
+//                         setVision(data1.comp_mission)
+//                         setRevenue(data1.comp_revenue)
                         
                
-                    }).catch = (error) => {
-                        console.log(error)
-                    }
-            })
+//                     }).catch = (error) => {
+//                         console.log(error)
+//                     }
+//             })
+
+    useEffect(async () => {
+        let compId = sessionStorage.getItem("emp_company_id");
+        let empID = sessionStorage.getItem("emp-id");
+        var response = await axios.get(`${backendServer}/employer?empID=${empID}`);
+        let data = await response.data[0];
+        console.log("data ", data);
+        let name = await data.emp_name.split(" ")
+        await setFirstName(name[0]);
+        await setLastName(name[1]);
+        await setRole(data.emp_role);
+        await setCity(data.emp_city);
+        await setState(data.emp_state);
+        await setCountry(data.emp_country);
         
-        }, [profile, handleClose])
+        let data1 = await axios.get(`${backendServer}/company/companyDetails?compId=${compId}`);
+        data1 = await data1.data[0];
+        console.log("response ",response, data1)
+        setWebsite(data1.comp_website)
+        setCompanySize(data1.comp_size)
+        setCompanyType(data1.comp_type)
+        setProfile(data1.comp_profile_location)
+        setCEO(data1.comp_ceo)
+        setFounded(data1.comp_founded)
+        setHeadquarters(data1.comp_headquarters)
+        setMission(data1.comp_mission)
+        setVision(data1.comp_mission)
+        setRevenue(data1.comp_revenue)
+
+        
+        }, [profile, open])
 
 
     

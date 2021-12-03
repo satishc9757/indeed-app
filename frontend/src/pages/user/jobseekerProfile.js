@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import JobCard from "./jobCard";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EmailModal from "./emailModal";
+import ReviewUserCard from './reviewCard'
 import { blue } from "@material-ui/core/colors";
 const axios = require('axios');
 
@@ -30,8 +31,8 @@ const style = {
 
 export default function Jobseeker() {
     const navigate = useNavigate();
-    const userType =""
-        // sessionStorage.getItem("user_type")
+    // const userType =""
+    sessionStorage.getItem("user_type")//gitttt
 
     const [resumeOpen, setResumeOpen] = React.useState(false);
     const handleResumeOpen = () => setResumeOpen(true);
@@ -46,12 +47,12 @@ export default function Jobseeker() {
     const [seekerContact, setSeekerContact] = React.useState('');
     const [jobDetails, setJobDetails] = React.useState([])
     const [appJobDetails, setAppJobDetails] = React.useState([])
-
+    const [reviews, setReviews] = React.useState([])
     const [initials, setInitials] = React.useState([])
 
     const downloadResume = () => {
         // let seekerID = 2
-        // let seekerID = sessionStorage.getItem("seeker_id");
+        let seekerID = sessionStorage.getItem("job-seeker-id");
         console.log("download resume")
         axios.get(`${backendServer}/jobseeker/resume?seeker_id=${sessionStorage.getItem("job-seeker-id")}`)
             .then(response => {
@@ -63,6 +64,7 @@ export default function Jobseeker() {
      
     const updateProfile = () => {
         // let seekerID = 2
+        let seekerID = sessionStorage.getItem("job-seeker-id");
         let data = {"seeker_id":sessionStorage.getItem("job-seeker-id"),
             "seeker_name": firstName+' '+lastName,
             "seeker_email": seekerEmail,
@@ -79,6 +81,7 @@ export default function Jobseeker() {
 
     const deleteResume = () => {
         // let seekerID = 2
+        let seekerID = sessionStorage.getItem("job-seeker-id");
         axios.post(`${backendServer}/jobseeker/resume/delete?seeker_id=${sessionStorage.getItem("job-seeker-id")}`)
             .then(response => {
                 console.log(response)
@@ -93,7 +96,9 @@ export default function Jobseeker() {
     }
 
     useEffect(() => {
+        setReviews([])
         let seekerID = sessionStorage.getItem("job-seeker-id"); 
+        // let seekerID =2
         axios.get(`${backendServer}/jobseeker?seeker_id=${seekerID}`)
             .then(response => {
                 let data = response.data[0];
@@ -117,15 +122,22 @@ export default function Jobseeker() {
                     
                     axios.get(`${backendServer}/jobseeker/reviews?jobseekerid=${seekerID}`).then(response => {
                 let data2 = response.data;
-                console.log(data2)
-                // setAppJobDetails(data2);
+                        console.log(data2)
+                        // setReviews(data2)
+                        let reviewstemp = [];
+                        for (let i = 0; i < data2.length; i++) {
+                            console.log(data2[i])
+                            reviewstemp.push(data2[i])
+                        }
+                        console.log(reviewstemp)
 
+                        setReviews(reviewstemp)
                     
-                }).catch=(error) => {
-                console.log(error)
-            }
-                    
-                }).catch=(error) => {
+                    }).catch=(error) => {
+                    console.log(error)
+                }
+                        
+                    }).catch=(error) => {
                 console.log(error)
             }
             }).catch=(error) => {
@@ -136,7 +148,17 @@ export default function Jobseeker() {
             }
         
         
-        }, [])
+    }, [])
+    console.log(reviews)
+    const search = async (data2) => {
+        let reviewstemp = [];
+        for (let i = 0; i < data2.length; i++){
+                            console.log(data2[i])
+                            reviewstemp.push(data2[i])
+                        }
+
+    setReviews(reviewstemp)
+}
 
     return (
         <div>
@@ -294,7 +316,19 @@ export default function Jobseeker() {
                 
                 <Card style={{ width: 500 }}>
                     <CardContent>
-                        <Typography variant='h6'>Reviews</Typography>
+                                <Typography variant='h6'>Reviews</Typography>
+                                {/* <ReviewUserCard reviews={reviews}></ReviewUserCard> */}
+                                
+                                {reviews.length === 0 ? <div></div> :
+                                    <Grid container style={{ flexDirection: "column" }} >
+                                        {reviews.map(details => (
+                                            <Grid style={{
+                                                maxWidth: 500
+                                            }} item md={3} key={reviews.review_id}>
+                                                <ReviewUserCard reviews={details} />
+                                            </Grid>
+                                        ))}
+                                    </Grid>}
                     </CardContent>
                 </Card>
                 </div>

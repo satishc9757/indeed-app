@@ -91,7 +91,7 @@ app.use(passport.initialize());
 // app.use(passport_res.initialize());
 app.use("/api/", indexRouter);
 app.use("/api/employer", employerRouter);
-app.use("/api/company", companyRouter)
+app.use("/api/company", companyRouter);
 app.use("/api/jobseeker", jobseekerRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/chats", chatRouter);

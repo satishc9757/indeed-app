@@ -3,8 +3,8 @@ import axios from 'axios';
 import backendServer from "../../webConfig";
 
 export default function ImageUpload(props){
-    // const ID = sessionStorage.getItem('emp_company_id'); gittt
-    const ID = 2
+    const ID = sessionStorage.getItem('emp_company_id'); 
+    // const ID = 2 gittt
     const handleClose = props.handleClose
     const setRestProfile= props.setRestProfile
     console.log( ID)

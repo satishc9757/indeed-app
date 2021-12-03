@@ -8,7 +8,7 @@ async function handle_request(msg, callback) {
   console.log("message",msg)
   //console.log(Reviews);
   try {
-    let sql = 'SELECT * FROM company_reviews WHERE review_company_id= '+msg+' and review_is_featured=true';
+    let sql = 'SELECT * FROM company_reviews WHERE review_company_id= '+msg+' and review_is_featured=1';
     await connection.con.query(sql, (err, results)=>{
       if(err){
         console.log("error ",err)
@@ -16,7 +16,7 @@ async function handle_request(msg, callback) {
       }
       else{
         console.log("results",results)
-          callback(null, results);
+          callback(null, JSON.stringify(results));
       }
   })
 

@@ -7,6 +7,7 @@ async function handle_request(msg, callback) {
         var sql = "SELECT * FROM login_details where user_email='"+msg.email+"'";
 
         await connection.con.query(sql, async (err, results)=>{
+            console.log(err, results);
             if(err){
                 callback(null, []);
             }
