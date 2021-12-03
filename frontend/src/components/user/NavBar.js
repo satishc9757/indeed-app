@@ -89,7 +89,7 @@ class NavBar extends Component {
                     <Link to="/login">Upload Resume</Link>
                   </Button>
                 )}
-              </div>
+              {/* </div>
             )}
             {!("user-type" in sessionStorage) ? (
               <div>
@@ -120,7 +120,8 @@ class NavBar extends Component {
                   <Link to="/">SignOut</Link>
                 </Button>
               </div>
-            )}
+            )} */}
+
           </Toolbar>
         </AppBar>
       </Box>

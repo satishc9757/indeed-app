@@ -82,19 +82,27 @@ class LandingPage extends Component {
     });
   };
 
-  renderJobCard = (job, index) => {
-    const oneDay = 24 * 60 * 60 * 1000;
-    const currentDate = new Date();
-    const jobDate = new Date(job.job_created_at); //job_created_at should be in mm/dd/yyyy format
-    const diffDays = Math.round(Math.abs((currentDate - jobDate) / oneDay));
-    const selectedStyle =
-      this.state.selectedJobIndex == index
-        ? {
-            backgroundColor: "lightgrey",
-            borderLeftColor: "#2557a7",
-            borderLeftWidth: "thick",
-          }
-        : null;
+
+    async componentDidMount(){
+        this.setState({searchResultText: "Popular companies near you" });
+
+        const seeker_id = sessionStorage.getItem("job-seeker-id"); //to be fetched from cookie
+
+        var response = await axios.get(`${backendServer}/jobseeker?seeker_id=${seeker_id}`);
+        console.log("profile data : "+JSON.stringify(response.data));
+        await this.setState({
+            profileData: response.data[0]
+        });
+        console.log("profileData from state : "+this.state.profileData);
+    }
+
+    renderJobCard = (job, index) => {
+        const oneDay = 24 * 60 * 60 * 1000;
+        const currentDate = new Date();
+        const jobDate = new Date(job.job_created_at); //job_created_at should be in mm/dd/yyyy format
+        const diffDays = Math.round(Math.abs((currentDate - jobDate) / oneDay));
+        const selectedStyle = (this.state.selectedJobIndex == index) ? {backgroundColor:"lightgrey", borderLeftColor:"#2557a7", borderLeftWidth: "thick"} : null;
+
 
     return (
       <div>
@@ -127,47 +135,54 @@ class LandingPage extends Component {
     );
   };
 
-  render() {
-    return (
-      <div>
-        <Box>
-          <Grid container spacing={2} style={{ margin: "2% 0%" }}>
-            <Grid item sm={2} />
-            <Grid item sm={3}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                required
-                onChange={this.onChange}
-                name="search"
-                id="search"
-                label="Search"
-              />
-            </Grid>
-            <Grid item sm={3}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                onChange={this.onChange}
-                name="location"
-                id="location"
-                label="Search by location"
-              />
-            </Grid>
-            <Grid item sm={2}>
-              <Button
-                size="large"
-                color="primary"
-                variant="contained"
-                margin="normal"
-                onClick={this.search}
-              >
-                Find jobs
-              </Button>
-            </Grid>
-          </Grid>
 
-          {this.state.results.length === 0 && (
+ 
+    
+
+         
+
+
+    render() {
+
+
+        return (
+            <div>
+
+            <Box>
+                <Grid container spacing={2} style={{'margin':'2% 0%'}}>
+                    <Grid item sm={2}/>
+                    <Grid item sm={3}>
+                        <TextField
+                        variant = "outlined"
+                        fullWidth
+                        required
+                        onChange = {this.onChange}
+                        name="search"
+                        id="search"
+                        label="Search"/>
+                    </Grid>
+                    <Grid item sm={3}>
+                        <TextField
+                        variant = "outlined"
+                        fullWidth
+                        onChange = {this.onChange}
+                        name="location"
+                        id="location"
+                        label="Search by location"/>
+                    </Grid>
+                    <Grid item sm={2}>
+                        <Button
+                        size="large"
+                        color="primary"
+                        variant="contained"
+                        margin="normal"
+                        onClick={this.search}
+                        >
+                            Find jobs
+                        </Button>
+                    </Grid>
+
+ {this.state.results.length === 0 && (
             <div>
               <Grid container>
                 <Grid item sm={4} />
@@ -187,7 +202,7 @@ class LandingPage extends Component {
                       </Link>{" "}
                       - It only takes a few seconds
                     </div>
-                  )}
+                )}
                 </Grid>
               </Grid>
               <br />
@@ -204,21 +219,18 @@ class LandingPage extends Component {
             this.state.results.jobCards.length > 0 && (
               <div>
                 <Container>
-                  <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                      <Stack spacing={2}>
-                        {this.state.results.jobCards.map(this.renderJobCard)}
-                      </Stack>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <JobDetailsCard
-                        job={
-                          this.state.results.jobCards[
-                            this.state.selectedJobIndex
-                          ]
-                        }
-                      />
-                    </Grid>
+        <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                        <Stack spacing={2}>
+                            {this.state.results.jobCards.map(this.renderJobCard)}
+                        </Stack>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <JobDetailsCard job={this.state.results.jobCards[this.state.selectedJobIndex]}
+                                            profileData={this.state.profileData}/>
+                        </Grid>
+   </Grid>
+                    
                   </Grid>
                 </Container>
 
