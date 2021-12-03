@@ -34,6 +34,7 @@ import JobDetailsCard from './components/landingpage/JobDetailsCard'
 import Applicants from './pages/employer/applicants';
 import JobPostings from './pages/employer/jobPostings';
 import JobStats from './pages/employer/jobStats';
+import Reviews from './pages/admin/reviews';
 import SalaryReviewTabCard from './components/Reviews/SalaryReviewTabCard'
 import SalaryReviewColumn from './components/Reviews/SalaryReviewColumn'
 import ReviewTab from './components/Reviews/ReviewTab'
@@ -80,6 +81,7 @@ class App extends Component {
               <Route exact path="/jobPostings" element={<JobPostings/>} />
               <Route exact path="/employer/jobPostings" element={<JobPostings/>} />
               <Route exact path="/employer/jobstats" element={<JobStats/>} />
+              <Route exact path="/admin/reviews" element={<Reviews/>} />
               <Route exact path="/salaryReviewsTab" element={<SalayReviewsTab />} />
               <Route exact path="/companyReviewsTab" element={<ReviewTab />} />
               <Route exact path="/companyReviewsCard" element={<ReviewCard />} />
