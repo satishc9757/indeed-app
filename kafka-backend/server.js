@@ -75,13 +75,16 @@ const delete_resume = require("./services/jobseeker/delete_resume");
 const getSavedJobs = require("./services/jobSeeker/getSavedJobs");
 const appliedJobs = require("./services/jobSeeker/getAppliedJobs");
 const addReviews = require("./services/jobSeeker/addReviews");
-const get_emp = require("./services/employer/getEmployerProfile");
-const MarkReviewAsInappropriate = require("./services/admin/markReviewAsInappropriate");
-const GetAllReviews = require("./services/admin/getAllReviews");
-const getReviews = require("./services/jobSeeker/getReviews");
-const add_salary_review = require("./services/salary_reviews/add_salary_review");
-const add_review = require("./services/company/add_review");
-const get_reviews = require("./services/company/get_reviews");
+const get_emp = require("./services/employer/getEmployerProfile")
+const MarkReviewAsInappropriate = require('./services/admin/markReviewAsInappropriate');
+const MarkReviewAsAppropriate = require('./services/admin/markReviewAsAppropriate');
+const GetAllCompanies = require('./services/admin/getAllCompanies');
+const GetAllReviews = require('./services/admin/getAllReviews');
+const getReviews  = require('./services/jobSeeker/getReviews');
+const add_salary_review = require ('./services/salary_reviews/add_salary_review')
+const add_review = require('./services/company/add_review')
+const get_reviews = require('./services/company/get_reviews')
+
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -160,34 +163,16 @@ handleTopicRequest("update_jobseeker_profile", update_jobseeker);
 handleTopicRequest("get_saved_jobs", getSavedJobs);
 handleTopicRequest("get_applied_jobs", appliedJobs);
 handleTopicRequest("add_reviews", addReviews);
-handleTopicRequest(
-  "admin.markReviewAsInappropriate",
-  MarkReviewAsInappropriate
-);
+handleTopicRequest("admin.markReviewAsInappropriate", MarkReviewAsInappropriate);
+handleTopicRequest("admin.markReviewAsAppropriate", MarkReviewAsAppropriate);
 handleTopicRequest("admin.getAllCompanies", GetAllCompanies);
 handleTopicRequest("admin.getAllReviews", GetAllReviews);
 handleTopicRequest("admin.getNumberOfReviewsPerDay", GetNumberOfReviewsPerDay);
-handleTopicRequest(
-  "admin.getTopFiveMostReviewedCompanies",
-  GetTopFiveMostReviewedCompanies
-);
-handleTopicRequest(
-  "admin.getTopFiveCompaniesAvgRating",
-  GetTopFiveCompaniesAvgRating
-);
-handleTopicRequest(
-  "admin.getTopFiveSeekersAccpReviews",
-  GetTopFiveSeekersAccpReviews
-);
+handleTopicRequest("admin.getTopFiveMostReviewedCompanies", GetTopFiveMostReviewedCompanies);
+handleTopicRequest("admin.getTopFiveCompaniesAvgRating", GetTopFiveCompaniesAvgRating);
+handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpReviews);
 handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
 handleTopicRequest("get_reviews", getReviews);
-// handleTopicRequest("admin.getAllReviews", GetAllReviews);
-// handleTopicRequest("admin.getNumberOfReviewsPerDay", GetNumberOfReviewsPerDay);
-// handleTopicRequest("admin.getTopFiveMostReviewedCompanies", GetTopFiveMostReviewedCompanies);
-// handleTopicRequest("admin.getTopFiveCompaniesAvgRating", GetTopFiveCompaniesAvgRating);
-// handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpReviews);
-// handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
-// handleTopicRequest("get_reviews", get_reviews);
 handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
 handleTopicRequest("company.getAllCompanies", getCompanies);
 handleTopicRequest("get_emp_profile", get_emp);

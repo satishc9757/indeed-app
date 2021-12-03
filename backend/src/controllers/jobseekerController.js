@@ -298,7 +298,7 @@ exports.updateJobseekerResume = async function (req, res) {
 
 
 exports.updateJobseekerCover = async function (req, res) {
-  console.log("inside update resume" , req.params)
+  console.log("inside update cover" , req.params)
   await profileImgUpload(req, res, async(error) => {
         console.log('requestOkokok', req.file);
         if (error) {
@@ -312,8 +312,8 @@ exports.updateJobseekerCover = async function (req, res) {
             } else {
                 // If Success
                 const imageLocation = req.file.location;// Save the file name into database into profile model
-                const ID = req.file.ID;
-                res.status(200).end({'location':ID});
+                const ID = req.file.location;
+                res.status(200).end(ID);
             }
         }
     })
