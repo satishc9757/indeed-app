@@ -58,7 +58,7 @@ class JobStats extends Component {
         this.setState({searchResultText: "Popular companies near you" });
         const compId = sessionStorage.getItem("emp_company_id");
         console.log(compId)  //hardcoded for now
-        const compId = sessionStorage.getItem("compId");
+        // const compId = sessionStorage.getItem("compId");
         // let comp = 3;
             // parseInt(compId)
         // console.log(compId)  //hardcoded for now
