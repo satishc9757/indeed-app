@@ -278,6 +278,16 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
+      {
+        topic: "getSalariesByJobTitleLocation",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "vote_review",
+        partitions: 1,
+        replicationFactor: 1,
+      },
     ],
     (err) => {
       if (err) {

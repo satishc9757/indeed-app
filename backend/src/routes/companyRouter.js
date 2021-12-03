@@ -1,5 +1,5 @@
 const companyController = require('../controllers/companyController');
-
+const { checkAuth } = require("../Utils/passport");
 var express = require('express');
 var router = express.Router();
 
@@ -20,4 +20,8 @@ router.post('/addSalaryReview',companyController.addSalaryReview)
 router.get('/JobTitleByDept', companyController.getTitleByDepts);
 router.post('/addEmployeeReview',companyController.addEmployeeReview);
 router.get('/getReviewsByCompId',companyController.getReviewsByCompId)
+
+router.post('/photos',companyController.uploadPhotos)
+
+router.post('/voteReview', companyController.voteReview);
 module.exports = router;

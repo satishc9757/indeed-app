@@ -12,7 +12,7 @@ function auth(){
     };
     passport.use(
         new JwtStrategy(opts, (jwt_payload, callback) => {
-            const user_id = jwt_payload._id;
+            const user_id = jwt_payload.user_id;
             let sql = "SELECT * FROM login_details WHERE user_id="+user_id+";"
             connection.con.query(sql, (err, results)=>{
                 if(err){

@@ -12,20 +12,20 @@ const COMPANY_IMAGE_PATH = "images/company";
 //         cb(null, file.originalname);
 //     },
 // });
-
+const { checkAuth } = require("../Utils/passport");
 var express = require("express");
 var router = express.Router();
 
-router.get("/job", employerController.getJobDetailsById);
-router.post("/job", employerController.createJobPosting);
-router.put("/job", employerController.updateJobPosting);
-router.post("/application/status", employerController.updateApplicationStatus);
-router.get("/reviews", employerController.getReviewsByCompanyId);
-router.get("/reviewsWithKafka", employerController.getReviewsByCompanyIdKafka);
-router.get("/", employerController.getEmployerProfile);
-router.get("/reviewsWithSQLCaching", employerController.getReviewsByCompanyIdSQLCaching);
-router.get("/reviewsWithSQLCachingAndKafka", employerController.getReviewsByCompanyIdSQLCachingKafka);
-router.get("/applications", employerController.getJobApplicationsByJobId);
-router.post("/updateProfile", employerController.updateEmployerDetails);
+router.get("/job", checkAuth, employerController.getJobDetailsById);
+router.post("/job", checkAuth, employerController.createJobPosting);
+router.put("/job", checkAuth, employerController.updateJobPosting);
+router.post("/application/status",checkAuth, employerController.updateApplicationStatus);
+router.get("/reviews", checkAuth, employerController.getReviewsByCompanyId);
+router.get("/reviewsWithKafka",checkAuth, employerController.getReviewsByCompanyIdKafka);
+router.get("/", checkAuth, employerController.getEmployerProfile);
+router.get("/reviewsWithSQLCaching", checkAuth, employerController.getReviewsByCompanyIdSQLCaching);
+router.get("/reviewsWithSQLCachingAndKafka", checkAuth, employerController.getReviewsByCompanyIdSQLCachingKafka);
+router.get("/applications", checkAuth, employerController.getJobApplicationsByJobId);
+router.post("/updateProfile", checkAuth, employerController.updateEmployerDetails);
 
 module.exports = router;
