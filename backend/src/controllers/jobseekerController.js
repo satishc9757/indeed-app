@@ -296,6 +296,37 @@ exports.updateJobseekerResume = async function (req, res) {
     // })
 };
 
+
+exports.updateJobseekerCover = async function (req, res) {
+  console.log("inside update resume" , req.params)
+  await profileImgUpload(req, res, async(error) => {
+        console.log('requestOkokok', req.file);
+        if (error) {
+            console.log('errors', error);
+            res.json({ error: error });
+        } else {
+            //  If File not found
+            if (req.file === undefined) {
+                //console.log( 'Error: No File Selected!' );
+                return res.status(500).json({ error: error });
+            } else {
+                // If Success
+                const imageLocation = req.file.location;// Save the file name into database into profile model
+                const ID = req.file.ID;
+                res.status(200).end({'location':ID});
+            }
+        }
+    })
+    // await kafka.make_request("update_resume", req, (err, resp) => {
+    //     if (err || !resp) {
+    //         console.log(err);
+    //         return err.status(500).json({ error: err });
+    //     }
+    //     res.send(resp);
+    // })
+};
+
+
 exports.deleteJobseekerResume = async function (req, res) {
   console.log("inside delete resume");
   await kafka.make_request("delete_resume", req.query, (err, resp) => {
