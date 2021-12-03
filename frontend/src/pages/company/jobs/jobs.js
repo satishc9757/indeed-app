@@ -163,7 +163,7 @@ class Jobs extends Component {
             <div>
                 <Typography
                         variant="h4">
-                        {this.state.company_name} Jobs
+                        Jobs
                 </Typography>
                 {/* SEARCH PANEL */}
                 <Grid container spacing={2} style={{'margin':'2%'}}>
