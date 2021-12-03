@@ -16,7 +16,7 @@ const ReviewCard = (props) => {
   const [update,setupdated]=useState(false)
   
 
-  function update_helpful(helpful,not_helpful){
+  async function update_helpful(helpful,not_helpful){
     let data={
       helpful:helpful,
       not_helpful:not_helpful,
@@ -24,7 +24,7 @@ const ReviewCard = (props) => {
       review_id:props.review.review_id
     }
   
-  
+    axios.defaults.headers.common.authorization = await localStorage.getItem("token");
     axios.post(process.env.REACT_APP_BACKEND+"api/company/voteReview",data).then(response=>{
                 
         if(response.status === 200)

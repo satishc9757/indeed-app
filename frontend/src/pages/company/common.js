@@ -49,10 +49,12 @@ export default function Common() {
             const tab = new URLSearchParams(search).get('tab');
             
             let Company_ID = 2;
+            axios.defaults.headers.common.authorization = await localStorage.getItem("token");
             var response = await axios.get(`${backendServer}/company/companyDetails?compId=${Company_ID}`);
 
             console.log(JSON.stringify(response.data[0])+"-----");
             await setCompanyDetails(response)
+            axios.defaults.headers.common.authorization = await localStorage.getItem("token");
             var reviews = await axios.get(`${backendServer}/company/getFeaturedReviews?compId=${Company_ID}`);
             await console.log("reviews ", reviews.data);
             for (var idx = 0; idx<reviews.data.length; idx++){

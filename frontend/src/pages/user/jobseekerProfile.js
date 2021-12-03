@@ -50,10 +50,11 @@ export default function Jobseeker() {
     const [reviews, setReviews] = React.useState([])
     const [initials, setInitials] = React.useState([])
 const navigate = useNavigate();
-    const downloadResume = () => {
+    const downloadResume = async() => {
         // let seekerID = 2
         let seekerID = sessionStorage.getItem("job-seeker-id");
         console.log("download resume")
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         axios.get(`${backendServer}/jobseeker/resume?seeker_id=${sessionStorage.getItem("job-seeker-id")}`)
             .then(response => {
                 console.log(response)
@@ -62,7 +63,7 @@ const navigate = useNavigate();
             }
     }
      
-    const updateProfile = () => {
+    const updateProfile = async() => {
         // let seekerID = 2
         let seekerID = sessionStorage.getItem("job-seeker-id");
         let data = {"seeker_id":sessionStorage.getItem("job-seeker-id"),
@@ -70,6 +71,7 @@ const navigate = useNavigate();
             "seeker_email": seekerEmail,
             "seeker_contact":seekerContact
         }
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         axios.post(`${backendServer}/jobseeker`,data)
             .then(response => {
                 console.log(response)
@@ -79,9 +81,10 @@ const navigate = useNavigate();
         
     }
 
-    const deleteResume = () => {
+    const deleteResume = async() => {
         // let seekerID = 2
         let seekerID = sessionStorage.getItem("job-seeker-id");
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         axios.post(`${backendServer}/jobseeker/resume/delete?seeker_id=${sessionStorage.getItem("job-seeker-id")}`)
             .then(response => {
                 console.log(response)
@@ -102,6 +105,7 @@ const navigate = useNavigate();
             setReviews([])
             let seekerID = sessionStorage.getItem("job-seeker-id");
             // let seekerID =2
+            axios.defaults.headers.common.authorization = await localStorage.getItem("token");
             axios.get(`${backendServer}/jobseeker?seeker_id=${seekerID}`)
                 .then(response => {
                     let data = response.data[0];

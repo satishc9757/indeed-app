@@ -65,6 +65,7 @@ class Applicants extends Component{
     }
 
     getapplicants = async()=>{
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         var response = await axios.get(`${backendServer}/employer/applications?jobId=${sessionStorage.getItem("applicants-job-id")}`);
         await this.setState({
             applicants:response.data
@@ -93,7 +94,7 @@ class Applicants extends Component{
             "app_id":row._id,
             "app_status": this.state.application_status
         }
-
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         var res = await axios.post(`${backendServer}/employer/application/status`,data);
         await this.getapplicants();
         await this.setState({

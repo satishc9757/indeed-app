@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import backendServer from "../../../webConfig";
 import axios from 'axios'
 import FeaturedReviewCard from './FeaturedReviewCard';
 import ReviewCard from './ReviewCard'
@@ -26,11 +27,11 @@ const ReviewsTab = () => {
     const department_list = []
     
     var result={}
-    useEffect(()=>{
+    useEffect(async()=>{
       console.log("-------called--------")
 
-      
-      axios.get(`http://localhost:8000/api/company/getReviewsByCompId?compId=1`).then(response=>{
+      axios.defaults.headers.common.authorization = await localStorage.getItem("token");
+      axios.get(`${backendServer}/company/getReviewsByCompId?compId=1`).then(response=>{
                 
         if(response.status === 200)
         {

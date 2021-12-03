@@ -28,13 +28,14 @@ const SalayReviewsTab = (props) => {
 
     const department_list = []
     var result={}
-    useEffect(()=>{
+    useEffect(async()=>{
       console.log("data--------------------->",props.CompanyDetails.data[0])
       
       //setcompid(props.CompanyDetails.data[0].comp_id)
       //setcompName(props.CompanyDetails.data[0].comp_name)
       
       console.log("here are your props",comp_id,comp_name)
+      axios.defaults.headers.common.authorization = await localStorage.getItem("token");
       axios.get(process.env.REACT_APP_BACKEND+`api/company/JobTitleByDept?compId=${comp_id}`).then(response=>{
                 
         if(response.status === 200)
