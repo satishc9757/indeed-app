@@ -4,7 +4,6 @@ var connection = new require("./kafka/Connection");
 //var Books = require('./services/books.js');
 // var JobPostingsData = require("./services/employer/JobPostingsData");
 
-
 const { mongoConnectionURL } = require("./database/mongoConnection");
 const mongoose = require("mongoose");
 
@@ -75,6 +74,7 @@ const delete_resume = require("./services/jobseeker/delete_resume");
 const getSavedJobs = require("./services/jobSeeker/getSavedJobs");
 const appliedJobs = require("./services/jobSeeker/getAppliedJobs");
 const addReviews = require("./services/jobSeeker/addReviews");
+
 const get_emp = require("./services/employer/getEmployerProfile")
 const MarkReviewAsInappropriate = require('./services/admin/markReviewAsInappropriate');
 const MarkReviewAsAppropriate = require('./services/admin/markReviewAsAppropriate');
@@ -83,10 +83,16 @@ const getReviews  = require('./services/company/get_reviews');
 const add_salary_review = require ('./services/salary_reviews/add_salary_review')
 const add_review = require('./services/company/add_review')
 const get_reviews = require('./services/company/get_reviews')
+
 const GetSalariesByJobTitleLocation = require('./services/jobSeeker/getSalariesByJobTitleLocation')
-
-
+const MarkPhotoAsInappropriate = require('./services/admin/markPhotoAsInappropriate');
+const MarkPhotoAsAppropriate = require('./services/admin/markPhotoAsAppropriate');
+const GetAllPhotos = require('./services/admin/getAllPhotos');
 const vote_review = require('./services/company/mark_helpful')
+const saveJobs = require("./services/jobSeeker/saveJobs");
+const get_photos= require('./services/company/getPhotos')
+
+
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
   var consumer = connection.getConsumer(topic_name);
@@ -161,7 +167,7 @@ handleTopicRequest("update_resume", update_resume);
 handleTopicRequest("delete_resume", delete_resume);
 handleTopicRequest("get_jobseeker_profile", get_jobseeker);
 handleTopicRequest("update_jobseeker_profile", update_jobseeker);
-// handleTopicRequest("save_jobs", saveJobs);
+handleTopicRequest("save_jobs", saveJobs);
 handleTopicRequest("get_saved_jobs", getSavedJobs);
 handleTopicRequest("get_applied_jobs", appliedJobs);
 handleTopicRequest("add_reviews", addReviews);
@@ -179,6 +185,10 @@ handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
 handleTopicRequest("company.getAllCompanies", getCompanies);
 handleTopicRequest("get_emp_profile", get_emp);
 handleTopicRequest("add_employee_review", add_review);
+
 handleTopicRequest("getSalariesByJobTitleLocation", GetSalariesByJobTitleLocation);
 handleTopicRequest("vote_review",vote_review );
-
+handleTopicRequest("admin.markPhotoAsInappropriate", MarkPhotoAsInappropriate);
+handleTopicRequest("admin.markPhotoAsAppropriate", MarkPhotoAsAppropriate);
+handleTopicRequest("admin.getAllPhotos", GetAllPhotos);
+handleTopicRequest("get_photos", get_photos);

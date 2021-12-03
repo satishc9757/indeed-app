@@ -48,17 +48,18 @@ class JobDetailsCard extends Component {
         // companyAvgRating: 4.3,
         appliedForJob: false,
         openLogin: false,
-        openCoverLetterModal: false
+        openCoverLetterModal: false,
+        job_reviews: 0,
     }
 
     handleSaveAction = async () => {
        //const backendServer = "http://localhost:8000/api"//just for local testing
+       const job_seeker_id =  sessionStorage.getItem("job-seeker-id");
+       if(!this.state.jobSaved && job_seeker_id){
 
-       if(!this.state.jobSaved){
-            const jobSeekerId = "61a081696d73d01739a267ef" // should be fecthed from cookie or session
             let payload = {jobId: this.state._id};
             axios.defaults.headers.common.authorization = await localStorage.getItem("token");
-            var response = await axios.post(`${backendServer}/jobseeker/jobs?jobSeekerId=${jobSeekerId}`, payload);
+            var response = await axios.post(`${backendServer}/jobseeker/jobs?jobSeekerId=${job_seeker_id}`, payload);
             console.log("response: "+JSON.stringify(response.data));
             await this.setState({jobSaved: true})
         }
@@ -148,6 +149,17 @@ class JobDetailsCard extends Component {
             </Dialog>)
     }
 
+    async componentDidMount(){
+
+
+        // var response = await axios.get(`${backendServer}/company/getReviewsByCompId?compId=${this.props.job.job_company_id}`);
+        // const reviewsCount = await response.data.count;
+        // console.log("reviewsCount : "+ response.data);
+        // await this.setState({
+        //     job_reviews: reviewsCount
+        // });
+    }
+
     render() {
 
         const applyButton = this.state.appliedForJob ? <Button  disabled variant="contained">Applied</Button> :  <Button onClick={this.handleApplyJob} variant="contained">Apply</Button>
@@ -161,7 +173,8 @@ class JobDetailsCard extends Component {
                 component="img"
                 alt="green iguana"
                 height="140"
-                image={this.state.job_company_image_link}
+                // image={this.state.job_company_image_link}
+                image={"https://uber-eats-store-0144.s3.us-east-2.amazonaws.com/images/others/pwc_bg.jpeg"}
             />
 
             <CardContent >
@@ -176,7 +189,9 @@ class JobDetailsCard extends Component {
 
                 <Grid container spacing={2}>
                     <Grid item xs={2}>
-                        <Link href="/common" onClick={()=>{sessionStorage.setItem("comp_id",this.props.job.job_company_id);sessionStorage.setItem("comp_name",this.props.job.job_company_name)}} >{this.props.job.job_company_name}</Link>
+                        <Link href="/common" onClick={()=>{sessionStorage.setItem("emp_company_id",this.props.job.job_company_id);sessionStorage.setItem("job_company_name",this.props.job.job_company_name)}} >{this.props.job.job_company_name}</Link>
+
+
                     </Grid>
                     <Grid item xs={4}>
                         <Rating name="read-only"

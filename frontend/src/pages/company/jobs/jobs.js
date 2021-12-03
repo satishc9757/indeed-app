@@ -9,6 +9,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import axios from 'axios';
+import backendServer from "../../../webConfig";
 
 class Jobs extends Component {
 
@@ -125,6 +126,18 @@ class Jobs extends Component {
 
     }
 
+    async componentDidMount(){
+        let job_company_id = sessionStorage.getItem("job_company_id");
+        console.log("called from browser")
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
+        const response = await axios.get(`${backendServer}/company/jobsByPages?compId=${job_company_id}&page=${this.state.page}&limit=${this.state.limit}`);
+        console.log("jobs data : "+JSON.stringify(response.data));
+        await this.setState({
+            jobs: response.data.jobPostings,
+            totalpage: Number(response.data.totalPages),
+            page: Number(response.data.currentPage)
+        });
+      }
 
     renderJobCard = (job, index) => {
         const oneDay = 24 * 60 * 60 * 1000;
@@ -163,7 +176,7 @@ class Jobs extends Component {
             <div>
                 <Typography
                         variant="h4">
-                        {this.state.company_name} Jobs
+                        Jobs
                 </Typography>
                 {/* SEARCH PANEL */}
                 <Grid container spacing={2} style={{'margin':'2%'}}>

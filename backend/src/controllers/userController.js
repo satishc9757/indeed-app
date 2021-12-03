@@ -20,7 +20,7 @@ exports.login = async function (req, res) {
     try {
         kafka.make_request("login", req.body, async(err, resp) => {
             console.log("resp",resp);
-            if (err || !resp) {
+            if (err ) {
               console.log(err);
                 res
                 .status(500)
@@ -38,7 +38,7 @@ exports.login = async function (req, res) {
                 });
                 res
                 .status(200)
-                .json({token: "jwt "+token});
+                .json({token: "jwt "+token, res: resp});
             }
         });
         

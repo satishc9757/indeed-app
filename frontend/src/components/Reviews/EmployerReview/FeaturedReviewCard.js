@@ -54,7 +54,7 @@ return (
     <div className="col-sm">
 
     </div>
-    <div className="col-sm-3">
+    <div className="">
     <Card sx={{ maxWidth: 600 }}>
     <table>
         

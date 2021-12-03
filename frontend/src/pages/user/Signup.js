@@ -14,9 +14,18 @@ export default function Signup() {
   const [role, setRole] = useState("");
   const navigate = useNavigate();
 
+
+
+
   const dispatch = useDispatch();
 
   const next = () => {
+    const email_val = /^\S+@\S+\.\S+$/
+        if (!email_val.test(email)){
+            console.log('email')
+            alert('Invalid Email ID')
+            return;
+        }
     dispatch(getFirstPageData({ email, password, role }));
     if (role === "jobseeker") {
       navigate("/jobseekersignup");
@@ -31,10 +40,10 @@ export default function Signup() {
         style={{
           backgroundColor: "#F3F2F1",
           width: "100vw",
-          height: "100vh",
+          // height: "100vh",
           justifyContent: "center",
           alignItems: "center",
-          paddingTop: "10%",
+          paddingTop: "1%",
         }}
       >
         <center>
@@ -44,7 +53,7 @@ export default function Signup() {
           <div
             style={{
               backgroundColor: "#FFFFFF",
-              height: "60vh",
+              // height: "60vh",
               width: "26vw",
               borderRadius: "10px",
             }}
@@ -134,6 +143,7 @@ export default function Signup() {
                     <Button
                       variant="contained"
                       fullWidth
+                      type="submit"
                       sx={{ mt: 3, mb: 2 }}
                       onClick={next}
                     >

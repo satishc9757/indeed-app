@@ -4,26 +4,22 @@ const mongoose = require("mongoose");
 
 async function handle_request(msg, callback) {
   console.log("msg from save jobs", msg);
-  console.log(mongoose.connection.readyState);
+
   const jobId = msg.jobId;
   const jobSeekerId = msg.jobSeekerId;
   try {
     const seeker = await jobSeeker.findOne({
-      seeker_id: jobSeekerId,
+      _id: jobSeekerId,
     });
 
-    if (
-      seeker &&
-      seeker.seeker_job_saved &&
-      seeker.seeker_job_saved.length > 0
-    ) {
+    if (seeker.seeker_job_saved && seeker.seeker_job_saved.length > 0) {
       if (
         !seeker.seeker_job_saved.find((s) => {
           return s === jobId;
         })
       ) {
         const updatedJobSeeker = await jobSeeker.updateOne(
-          { seeker_id: jobSeekerId },
+          { _id: jobSeekerId },
           {
             $push: {
               seeker_job_saved: jobId,
@@ -38,7 +34,7 @@ async function handle_request(msg, callback) {
       }
     } else {
       const updatedJobSeeker = await jobSeeker.updateOne(
-        { seeker_id: jobSeekerId },
+        { _id: jobSeekerId },
         {
           $push: {
             seeker_job_saved: jobId,
