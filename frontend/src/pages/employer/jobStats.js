@@ -51,12 +51,15 @@ class JobStats extends Component {
     async componentDidMount(){
         this.setState({searchResultText: "Popular companies near you" });
         const compId = sessionStorage.getItem("compId");
-        console.log(compId)  //hardcoded for now
+        // let comp = 3;
+            // parseInt(compId)
+        // console.log(compId)  //hardcoded for now
         var response = await axios.get(`${backendServer}/company/jobStats?compId=${compId}`);
-        console.log(response)
+        console.log(response.data)
         await this.setState({
             jobStats: response.data
         });
+        console.log(this.state.jobStats)
     }
 
 
