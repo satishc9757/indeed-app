@@ -99,20 +99,18 @@ exports.getJobRoleDetailsByCompanyID = async function (req,res){
 
 
 exports.getJobsByCompanyId = async function (req, res) {
-
+  console.log("here ",req.query);
     kafka.make_request("company.getCompanyJobPostings", req.query, (err, results) => {
       if (err){
         res
         .status(500)
         .send(JSON.stringify({ message: "Something went wrong!", err }));
 
-      } else if(results.response_code == 200){
-
-          res.send(JSON.stringify(results.response_data));
-      } else {
+      }
+      else {
           res
-          .status(500)
-          .send(JSON.stringify({ message: "Something went wrong!", err }));
+          .status(200)
+          .send(JSON.stringify(results.response_data));
       }
     });
 
@@ -211,7 +209,7 @@ exports.uploadCompanyProfilePicture = async function (req, res) {
       } else {
         // If Success
         const imageLocation = req.file.location;// Save the file name into database into profile model
-        const ID = req.file.ID;
+        const ID = req.file.ID;pro
                 
         const query = "UPDATE company_details set comp_profile_location='" + imageLocation + "' where comp_id= " + compID;
         connection.con.query(query, (err, results) => {
