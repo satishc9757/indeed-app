@@ -106,9 +106,9 @@ class CompanyReviews extends Component {
                         <Grid container spacing={2}>
                             <Grid item xs={1}>
                                 <Avatar
-                                    alt="Company Logo"
+                                    alt={"Company Logo"}
                                     //src={company.comp_logo}
-                                    src="https://uber-eats-store-0144.s3.us-east-2.amazonaws.com/images/others/adobe_log.png"
+                                    src={company.comp_profile_location}
                                     sx={{ width: 56, height: 56 }}
                                 />
 

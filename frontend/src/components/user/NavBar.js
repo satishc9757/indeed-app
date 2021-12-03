@@ -102,14 +102,15 @@ class NavBar extends Component {
                 }
                 {!('user-type' in sessionStorage)?(
                     <div>
-                        <Button>
-                            Sign in
-                        </Button>
+                        
 
                         <Button><Link to="/employer">
                             Employers / Post Job
                             </Link></Button>
-                        <Button>
+                <Button>
+                  <Button>
+                            Sign in
+                        </Button>
                             <Link to="/login">
                                 Login
                             </Link>
