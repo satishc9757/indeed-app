@@ -9,7 +9,7 @@ import ReviewsPanel from './ReviewsPanel';
 import ReviewAutoComplete from './ReviewAutoComplete';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
-const ReviewsTab = () => {
+const ReviewsTab = (props) => {
     const [userid,setuserid]=useState(1)
     const [company,setcompany]=useState("ABC")
     const [role,setrole]=useState("software engineer intern")
@@ -22,15 +22,119 @@ const ReviewsTab = () => {
     const [updated,setupdated]=useState(false)
     const [current,setcurrent]=useState([])
     const [main,setmain]=useState([])
-    
+    const [comp_id,setcompid]=useState(2)
+    const [comp_name,setcompName]=useState("Adidas")
+    const [user_type,set_user_type]=useState("employer") 
+    const [btndisable,setbtndisable]=useState(user_type!="employer"?true:false)
+    const [fullupdate,setfullupdate]=useState(false)
+    const [featured,setisfeatured]=useState({})
+      
     const department_list = []
     var result={}
-  useEffect(() => {
-      let compId = sessionStorage.getItem('compId')
-      axios.get(`http://localhost:8000/api/company/getReviewsByCompId?compId=${compId}`).then(response=>{
+    
+    console.log("here is the props",props.CompanyDetails)
+    function remove_featured_review(review_id,rating){
+      console.log("from remove",review_id,rating,fullupdate)
+      console.log("here is the featured list",featured)
+     
+        let data={
+          review_status:false,
+          review_id:review_id
+        }
+        axios.post(process.env.REACT_APP_BACKEND+"api/company/updateFeaturedReview",data).then((response)=>{
+    
+          if(response.status === 200)
+          {
+              console.log("updated successfully",fullupdate)
+              setfullupdate(!fullupdate);
+          }
+          else{
+                console.log("Something went wrong")
+          }
+    
+        })
+        
+      }
+      
+    
+    
+    
+    
+    
+    
+    
+    function add_featured_review(review_id,rating){
+      console.log("from add",review_id,rating)
+      console.log("error",featured,fullupdate)
+
+
+      
+      let featured_count=0
+      if(featured.length>3 || review_id in featured){
+        console.log("Cannot be added1")
+        return
+      }
+    
+    
+      if (rating<2.5 && featured.length<=3){
+        console.log("Can be added2")
+        return
+      }
+      else{  
+      for(const [key, val] of Object.entries(featured)) {
+        if (featured[key]>2.5){
+          featured_count=featured_count+1
+        }
+      }
+      if (featured_count>=3){
+        console.log("cannot be added3")
+      }
+      else{
+        console.log("can be added4")
+        let data={
+          review_status:true,
+          review_id:review_id
+        }
+        axios.post(process.env.REACT_APP_BACKEND+"api/company/updateFeaturedReview",data).then((response)=>{
+    
+          if(response.status === 200)
+          {
+              console.log("updated successfully")
+    
+          }
+          else{
+                console.log("Something went wrong")
+          }
+    
+        })
+    
+      }
+      console.log("update is here",fullupdate)
+      setfullupdate(!fullupdate)
+    
+    }
+
+    
+    }
+    
+
+
+
+
+    useEffect(()=>{
+      /*
+      let compdetails=props.CompanyDetails.data[0]
+      console.log("data------------------------>",props.CompanyDetails.data[0])
+      
+      setcompid(compdetails.comp_id)
+      setcompName(compdetails.comp_name)
+      */
+
+      axios.get(process.env.REACT_APP_BACKEND+`api/company/getReviewsByCompId?compId=${comp_id}`).then(response=>{
                 
         if(response.status === 200)
         {
+          let featured={}
           let result=[]
           
           for(let  i of response.data){
@@ -38,18 +142,26 @@ const ReviewsTab = () => {
                 continue
             }
             if(i["review_user_id"]==userid){
-              if(i["review_is_featured"]==0)
-                {result.unshift(<FeaturedReviewCard review={i}/>)}
+              if(i["review_is_featured"]==1)
+              {
+                
+                featured[i["review_id"]]=i["review_company_rating"]
+                  
+                result.unshift(<FeaturedReviewCard review={i}  btn={btndisable} remove_featured_review={remove_featured_review}  />)}
               else
-                { result.unshift(<ReviewCard review={i} />)}
+                { result.unshift(<ReviewCard review={i} btn={btndisable} add_featured_review={add_featured_review}  />)}
             }
-            else if(i["review_is_featured"]==0){
-                    result.push(<FeaturedReviewCard review={i}/>)
+            else if(i["review_is_featured"]==1){
+              featured[i["review_id"]]=i["review_company_rating"]
+                        
+              result.push(<FeaturedReviewCard review={i} btn={btndisable} remove_featured_review={remove_featured_review}/>)
             }
             else{
-              result.push(<ReviewCard review={i} />)
+              result.push(<ReviewCard review={i} btn={btndisable} add_featured_review={add_featured_review} />)
             }
           }
+          setisfeatured(featured)
+          
           setoriginal(result)
           setcurrent(JSON.parse(JSON.stringify(result)))
           
@@ -62,7 +174,7 @@ const ReviewsTab = () => {
 })
 
 
-    },[userid]);
+    },[fullupdate]);
 
 
 
@@ -100,12 +212,11 @@ function applysort(bases){
     
   }
   else{
-    temp.sort((a, b) => (Date.parse(a["review_is_helplful"]) > Date.parse(b["review_is_helpful"])) ? 1 : -1)
+    temp.sort((a,b) => (a["found_helpful"] > b["found_helpful"]) ? 1 : -1 )
   }
   console.log(original,current)
   setupdated(!updated)
 }
-
 
     return (
         <div>
@@ -119,7 +230,7 @@ function applysort(bases){
           <Grid item xs zeroMinWidth textAlign="left">
          
           
-                <ReviewAutoComplete data={salaries} dept_list={department_list} applyfilter = {applyfilter} sort = {applysort} setdept={setdeptfilter}/>
+                <ReviewAutoComplete comp_name={comp_name} comp_id={comp_id} data={salaries} dept_list={department_list} applyfilter = {applyfilter} sort = {applysort} setdept={setdeptfilter}/>
                 
                 
           </Grid>

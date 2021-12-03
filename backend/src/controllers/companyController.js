@@ -145,7 +145,7 @@ exports.getJobsByCompanyId = async function (req, res) {
     const review_details = req.body;
   
     kafka.make_request("update_featured_review_status", review_details, (err, results) => {
-      console.log(results)
+      console.log("here are your resulst------------>",results)
       if (err){
         res
         .status(500)
@@ -406,7 +406,7 @@ exports.getCompanies = async function (req, res) {
         .status(500)
         .send(JSON.stringify({ message: "Something went wrong!", err }));
 
-      } else if(results.affectedRows >0){
+      } else if(results){
 
           res.status(200).send("Added successfully");
       } else {

@@ -13,7 +13,7 @@ export default function AutoCompleteSearchBox(props) {
     const [place,setplace]=useState("all")
     
     const [selectedOptions, setSelectedOptions] = useState([]);
-
+    //console.log("props in autosearch",props)
     const handleChange = (event, value) => {setplace(value);console.log("value",value)};
     const handleJobChange = (event, value) => {setcategory(value.category);settitle(value.salary_job_title)};
     const handleSearch=()=>{
@@ -31,7 +31,7 @@ export default function AutoCompleteSearchBox(props) {
   return (<div className="container" style={{display:"flex",alignItems:"center",justifyContent:"center", background:"#faf9f8"}}>
       
       <table>
-      <tr><h3> <b>How much does {"company"} pay for {"role"}</b> </h3></tr>
+      <tr><h3> <b>How much does {props.comp_name} pay for {"role"}</b> </h3></tr>
         <td>
       <label><b>Jobs</b></label>
     <Autocomplete
@@ -72,7 +72,7 @@ export default function AutoCompleteSearchBox(props) {
 </td>
 <td>
   <br />
-<SalaryModal department_list={props.dept_list} />
+<SalaryModal department_list={props.dept_list} btn={props.btn} />
 </td>
 </table>   </div>
   

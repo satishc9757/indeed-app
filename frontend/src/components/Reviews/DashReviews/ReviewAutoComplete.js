@@ -13,7 +13,7 @@ export default function ReviewAutoComplete(props) {
 
     const handleChange = (event, value) => {setplace(value);console.log("value",value)};
     const handleJobChange = (event, value) => {setcategory(value.category);settitle(value.salary_job_title)};
-
+    console.log(props)
     let opts=[]
     for(let i=0;i<=5;i+=0.5){
         opts.push(i)
@@ -33,7 +33,7 @@ export default function ReviewAutoComplete(props) {
   return (<div className="container" style={{display:"flex",alignItems:"center",justifyContent:"center", background:"#faf9f8"}}>
       
       <table>
-      <tr><td><ReviewModal style={{float:"right",marginTop:"0.9rem"}} /></td></tr>
+      <tr><td><ReviewModal comp_name={props.comp_name} comp_id={props.comp_id}  style={{float:"right",marginTop:"0.9rem"}} /></td></tr>
       <div style={{}}> 
         <td>
 <label><b>Filter By Ratings</b></label>

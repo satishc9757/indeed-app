@@ -9,11 +9,43 @@ import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-
-
-
-
+import {useState} from 'react'
+import axios from 'axios'
 const ReviewCard = (props) => {
+
+  const [update,setupdated]=useState(false)
+  
+
+  function update_helpful(helpful,not_helpful){
+    let data={
+      helpful:helpful,
+      not_helpful:not_helpful,
+      review_company_id:props.review.review_company_id,
+      review_id:props.review.review_id
+    }
+  
+  
+    axios.post(process.env.REACT_APP_BACKEND+"api/company/voteReview",data).then(response=>{
+                
+        if(response.status === 200)
+        {
+         
+          console.log("updated successfully");
+       
+        }
+        else if(response.status === 202)
+        {
+          console.log("faced some issue");
+        }
+  
+  })
+  
+  }
+  
+
+
+
+
   const bull = (
     <Box
       component="span"
@@ -35,7 +67,7 @@ return (
     <td style={{justifyContent:"center"}}>
     <Typography sx={{fontSize:23}} style={{padding:"0px",margin:"0px"}}>
         &nbsp;&nbsp;<b>{props.review.review_company_rating}</b>
-        
+        <br />
         <Rating name="read-only" defaultValue={props.review.review_company_rating} precision={0.5} readOnly size="small" style={{color:"#aa4069"}} />
       </Typography>
       
@@ -47,7 +79,7 @@ return (
         <b>{props.review.review_title}</b>
       </Typography>
       <Typography sx={{ fontSize:12 }} color="text.secondary">
-        Software Engineer Intern (Former Employee)- Santa Clara, CA  - April,2017
+      {props.review.review_date.split('T')[0]},
       </Typography>
       <Typography variant="body2">
        {props.review.review_content}
@@ -71,12 +103,24 @@ return (
       <br />
       <Typography sx={{ fontSize:12 }} color="text.secondary">
         Was this review helpful? <br />
-        <Button variant="contained" size="small" color="inherit" style={{padding:"0px"}}>
-             Yes
+        <Button variant="contained" size="small" disabled={update==true || !props.btn ?true:false} color="inherit" style={{padding:"0px"}} onClick={()=>{setupdated(true);props.review.found_helpful=props.review.found_helpful+1;update_helpful(1,0)}}>
+             Yes-{props.review.found_helpful}
         </Button>
         &nbsp;&nbsp;&nbsp;
-        <Button variant="contained" size="small" color="inherit" style={{padding:"0px"}}>
-             No
+        <Button variant="contained" size="small" color="inherit" disabled={update==true || !props.btn?true:false} style={{padding:"0px"}} onClick={()=>{setupdated(true);props.review.found_not_helpful=props.review.found_not_helpful+1;update_helpful(0,1)}}>
+             No-{props.review.found_not_helpful}
+        </Button>
+        
+      </Typography>
+      <br />
+      <Typography sx={{ fontSize:12 }} color="text.secondary">
+          Feature this review?<br />
+        <Button variant="contained" size="small" color="inherit" style={{padding:"0px"}} disabled={props.btn} onClick={(e,v)=>props.add_featured_review(props.review.review_id,props.review.review_company_rating)}>
+            Add as featured review
+        </Button>
+        &nbsp;&nbsp;&nbsp;
+        <Button variant="contained" size="small" color="inherit" style={{padding:"0px"}} disabled>
+        Remove as featured review
         </Button>
         
       </Typography>

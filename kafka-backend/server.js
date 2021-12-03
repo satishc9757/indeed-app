@@ -32,7 +32,7 @@ initDBConnection().then(async () => {
 });
 
 // const add_featured_review = require('./services/employer/add_featured_review')
-// const get_featured_reviews = require('./services/employer/get_featured_reviews')
+
 //const update_featured_review_status = require('./services/company/update_featured_review_status')
 // const remove_featured_review = require('./services/employer/remove_featured_review')
 const companyReviews = require("./services/company/getreviews");
@@ -78,7 +78,6 @@ const addReviews = require("./services/jobSeeker/addReviews");
 const get_emp = require("./services/employer/getEmployerProfile")
 const MarkReviewAsInappropriate = require('./services/admin/markReviewAsInappropriate');
 const MarkReviewAsAppropriate = require('./services/admin/markReviewAsAppropriate');
-const GetAllCompanies = require('./services/admin/getAllCompanies');
 const GetAllReviews = require('./services/admin/getAllReviews');
 const getReviews  = require('./services/jobSeeker/getReviews');
 const add_salary_review = require ('./services/salary_reviews/add_salary_review')
@@ -120,7 +119,7 @@ handleTopicRequest("get_reviews",getReviews);
 //handleTopicRequest("company.getreviews", companyReviews);
 // handleTopicRequest("add_featured_review", add_featured_review);
 // handleTopicRequest("update_featured_review_status", update_featured_review_status);
-// handleTopicRequest("get_featured_reviews", get_featured_reviews);
+ 
 // handleTopicRequest("remove_featured_review", remove_featured_review);
 handleTopicRequest("update_email", updateEmail);
 handleTopicRequest("login", login);

@@ -17,6 +17,8 @@ export default function SalaryModal(props) {
   const [title, set_title] = useState();
   const [summary, set_summary] = useState();
   const [pros, set_pros] = useState();
+  const [city, set_city] = useState();
+  const [state, set_state] = useState();
   const [cons, set_cons] = useState();
   const [prep, set_prep] = useState();
   const [ceorating, setceorating] = useState(0);
@@ -40,11 +42,13 @@ export default function SalaryModal(props) {
             pros:pros,
             cons:cons,
             prep:prep,   
-            companyid:companyid,
+            companyid:props.comp_id,
             userid:userid,
-            ceo:ceorating
+            ceo:ceorating,
+            city:city,
+            state:state
      }
-     axios.post("http://localhost:8000/api/company/addEmployeeReview",add_data).then(response=>{
+     axios.post(process.env.REACT_APP_BACKEND+"api/company/addEmployeeReview",add_data).then(response=>{
                 
       if(response.status === 200)
       {
@@ -68,9 +72,10 @@ export default function SalaryModal(props) {
   const handleClose = () => {
     setOpen(false);
   };
+  console.log("modal props----------------->",props)
   return (
     <div>
-         <b style={{fontSize:"30px"}}>{"IBM"} employees review</b>
+         <b style={{fontSize:"30px"}}>{props.comp_name} employees review</b>
       <Button variant="outlined" onClick={handleClickOpen} style={{float:"right",marginTop:"1rem"}}>
         Review this Company
       </Button>
@@ -109,6 +114,24 @@ export default function SalaryModal(props) {
             multiline
             sx={{width:"100%"}}            
             onChange={(e,v)=>set_pros(e.target.value)}
+        
+        />
+        <br />
+        <br /><TextField
+            label="City"
+            placeholder="City"
+            multiline
+            sx={{width:"100%"}}            
+            onChange={(e,v)=>set_city(e.target.value)}
+        
+        />
+        <br />
+        <br /><TextField
+            label="State"
+            placeholder="State"
+            multiline
+            sx={{width:"100%"}}            
+            onChange={(e,v)=>set_state(e.target.value)}
         
         />
         <br />

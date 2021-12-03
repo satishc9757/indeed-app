@@ -10,10 +10,8 @@ import AutoCompleteSearchBox from './AutoCompleteSearch'
 import SalaryReviewsPanel from './SalaryReviewsPanel';
 import SalaryPanel from './SalaryPanel';
 
-const SalayReviewsTab = () => {
+const SalayReviewsTab = (props) => {
   
-    const [company,setcompany]=useState("ABC")
-    const [role,setrole]=useState("software engineer intern")
     const [salaries,setsalaries]=useState([])
     const [original,setoriginal]=useState([])
     const [departments,setdepts]=useState([])
@@ -23,11 +21,21 @@ const SalayReviewsTab = () => {
     const [updated,setupdated]=useState(false)
     const [current,setcurrent]=useState([])
     const [mainlist,setmain]=useState([])
+    const [comp_id,setcompid]=useState(props.CompanyDetails.data[0].comp_id)
+    const [comp_name,setcompName]=useState(props.CompanyDetails.data[0].comp_name)
+    const [usertype,setusertype]=useState("employer")
+    const [btndisable,setbtndisable]=useState(usertype!="employer"?true:false)
+
     const department_list = []
     var result={}
     useEffect(()=>{
-
-      axios.get("http://localhost:8000/api/company/JobTitleByDept?compId=Comp1").then(response=>{
+      console.log("data--------------------->",props.CompanyDetails.data[0])
+      
+      //setcompid(props.CompanyDetails.data[0].comp_id)
+      //setcompName(props.CompanyDetails.data[0].comp_name)
+      
+      console.log("here are your props",comp_id,comp_name)
+      axios.get(process.env.REACT_APP_BACKEND+`api/company/JobTitleByDept?compId=${comp_id}`).then(response=>{
                 
         if(response.status === 200)
         {
@@ -42,7 +50,6 @@ const SalayReviewsTab = () => {
           setdepts(result)
           let curr=[]
           for(const [key, val] of Object.entries(result)) {
-            console.log("calling again")
             curr.push(<SalaryReviewsPanel dept={key} data={val} />)
             department_list.push(key)
           }
@@ -70,7 +77,6 @@ function applyfilter(dept,title,place){
     console.log("applyfilter",dept,title,place)
     let current = departments[dept]
     let temp=original
-    console.log("original is here",temp)
     
     for(let i of current){
       if(i["salary_job_title"]==title){
@@ -79,9 +85,7 @@ function applyfilter(dept,title,place){
          
           let need=[]
           need.push(i)
-          console.log("here is the date we are passing",need)
           temp.unshift(<SalaryReviewsPanel dept={"Search"} data={need} />)
-          console.log("different after adding",temp)
           setupdated(!updated)
     
           
@@ -90,7 +94,14 @@ function applyfilter(dept,title,place){
       }
     }
 }
-console.log("original after adding the search criteria",original)
+//console.log("original after adding the search criteria",comp_name,comp_id)
+
+
+
+
+
+
+
 
 
     return (
@@ -105,7 +116,7 @@ console.log("original after adding the search criteria",original)
           <Grid item xs zeroMinWidth textAlign="left">
             
           
-                <AutoCompleteSearchBox data={salaries} dept_list={department_list} applyfilter = {applyfilter} setdept={setdeptfilter}/>
+                <AutoCompleteSearchBox  btn = {btndisable} comp_name={comp_name} data={salaries} dept_list={department_list} applyfilter = {applyfilter} setdept={setdeptfilter}/>
                 
                 
           </Grid>

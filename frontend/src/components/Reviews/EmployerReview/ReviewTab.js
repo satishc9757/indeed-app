@@ -24,9 +24,12 @@ const ReviewsTab = () => {
     const [featured,setisfeatured]=useState({})
     const [fullupdate,setfullupdate]=useState(false)
     const department_list = []
+    
     var result={}
     useEffect(()=>{
       console.log("-------called--------")
+
+      
       axios.get(`http://localhost:8000/api/company/getReviewsByCompId?compId=1`).then(response=>{
                 
         if(response.status === 200)

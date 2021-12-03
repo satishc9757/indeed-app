@@ -1,20 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-import FeaturedReviewCard from './components/Reviews/DashReviews/FeaturedReviewCard'
-import AutoCompleteSearch from './components/Reviews/SalaryReviews/AutoCompleteSearch'
-import SalayReviewsTab from './components/Reviews/SalaryReviews/SalayReviewsTab'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import SalayReviewsTab from "./components/Reviews/SalaryReviews/SalayReviewsTab";
+///import "bootstrap/dist/css/bootstrap.css";
+//import "bootstrap/dist/js/bootstrap.js";
 import EmployerReviewsTab from './components/Reviews/EmployerReview/ReviewTab'
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/js/bootstrap.js";
-import React, { Component } from 'react'
-import './App.css'
 
-
-/*
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js';
-*/
 //redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
@@ -71,7 +62,6 @@ class App extends Component {
               <Route exact path="/companyreviews" element={<CompanyReviews/>} />
               <Route exact path="/employer" element={<EmployerHome/>} />
               <Route exact path="/jobs" element={<JobPosted/>} />
-              <Route exact path="/autoComplete" element={<AutoCompleteSearch />} />
               <Route exact path="/reviewsTab" element={<SalayReviewsTab />} />
               <Route
                 exact
@@ -99,8 +89,6 @@ class App extends Component {
                 element={<JobPostings />}
               />
               <Route exact path="/employer/jobstats" element={<JobStats />} />
-              <Route exact path="/analytics" element={<Analytics />} />
-              <Route exact path="/admin/reviews" element={<Reviews/>} />
               <Route
                 exact
                 path="/salaryReviewsTab"

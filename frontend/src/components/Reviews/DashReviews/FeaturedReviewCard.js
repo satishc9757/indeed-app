@@ -33,7 +33,7 @@ function update_helpful(helpful,not_helpful){
     }
 
 
-    axios.post("http://localhost:8000/api/company/voteReview",data).then(response=>{
+    axios.post(process.env.REACT_APP_BACKEND+"api/company/voteReview",data).then(response=>{
                 
         if(response.status === 200)
         {
@@ -73,7 +73,7 @@ return (
         <b>{props.review.review_title}</b>
       </Typography>
       <Typography sx={{ fontSize:12 }} color="text.secondary">
-        Software Engineer Intern (Former Employee)- Santa Clara, CA  - April,2017
+      {props.review.review_date.split('T')[0]}
       </Typography>
       <Typography variant="body2" color="#007aff" style={{background:"#eef1fe"}}>
         
@@ -103,12 +103,24 @@ return (
       <br />
       <Typography sx={{ fontSize:12 }} color="text.secondary">
         Was this review helpful? <br />
-        <Button variant="contained" size="small" disabled={update==true?true:false} color="inherit" style={{padding:"0px"}} onClick={()=>{setupdated(true);props.review.found_helpful=props.review.found_helpful+1;update_helpful(1,0)}}>
+        <Button variant="contained" size="small" disabled={update==true || ! props.btn ?true:false} color="inherit" style={{padding:"0px"}} onClick={()=>{setupdated(true);props.review.found_helpful=props.review.found_helpful+1;update_helpful(1,0)}}>
              Yes-{props.review.found_helpful}
         </Button>
         &nbsp;&nbsp;&nbsp;
-        <Button variant="contained" size="small" color="inherit" disabled={update==true?true:false} style={{padding:"0px"}} onClick={()=>{setupdated(true);props.review.found_not_helpful=props.review.found_not_helpful+1;update_helpful(0,1)}}>
+        <Button variant="contained" size="small" color="inherit" disabled={update==true || !props.btn?true:false} style={{padding:"0px"}} onClick={()=>{setupdated(true);props.review.found_not_helpful=props.review.found_not_helpful+1;update_helpful(0,1)}}>
              No-{props.review.found_not_helpful}
+        </Button>
+        
+      </Typography>
+      <br />
+      <Typography sx={{ fontSize:12 }} color="text.secondary">
+          Feature this review?<br />
+        <Button variant="contained" size="small" color="inherit" style={{padding:"0px"}} disabled>
+            Add as featured review
+        </Button>
+        &nbsp;&nbsp;&nbsp;
+        <Button variant="contained" size="small" color="inherit" style={{padding:"0px"}}  disabled={props.btn}  onClick={()=>{props.remove_featured_review(props.review.review_id,props.review.review_company_rating)}}>
+        Remove as featured review
         </Button>
         
       </Typography>
