@@ -45,7 +45,8 @@ const singleFileUploadHandler = async() => {
                     
                     let fileName = response.data;
                     
-                    console.log( 'fileName', fileName );
+                    console.log('fileName', fileName);
+                    alert("Uploaded suuccessfully!");
                     handleClose();
                     return (fileName)
                     

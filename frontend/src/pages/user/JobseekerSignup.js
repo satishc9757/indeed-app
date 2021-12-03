@@ -37,25 +37,25 @@ export default function JobseeekerSignup() {
   };
 
   return (
-    <div style={{ backgroundColor: "#F3F2F1", height: "100vh" }}>
+    <div style={{ backgroundColor: "#F3F2F1" }}>
       <div
         style={{
           backgroundColor: "#F3F2F1",
           width: "100vw",
-          height: "100vh",
+          
           justifyContent: "center",
           alignItems: "center",
-          paddingTop: "7%",
+          paddingTop: "2%",
         }}
       >
         <center>
           <div style={{ textAlign: "center", paddingBottom: "1%" }}>
-            <img src={logo} alt="Profile" width="115" height="40" />
+            <img src={logo} alt="Profile" width="115"  />
           </div>
           <div
             style={{
               backgroundColor: "#FFFFFF",
-              height: "65vh",
+              
               width: "30vw",
               borderRadius: "10px",
             }}

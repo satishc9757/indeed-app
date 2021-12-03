@@ -2,20 +2,21 @@ import React, { Component, useState } from 'react';
 import axios from 'axios';
 import backendServer from "../../webConfig";
 
-export default function ImageUpload(props){
-    const ID = sessionStorage.getItem('emp_company_id'); 
+
+export default function ImageUpload(props) {
+    const ID = sessionStorage.getItem('emp_company_id');
     // const ID = 2 gittt
     const handleClose = props.handleClose
-    const setRestProfile= props.setRestProfile
-    console.log( ID)
+    console.log(ID)
     const [selectedFile, setSelectedFile] = useState(null)
-    
 
-    const singleFileChangedHandler = ( event ) => {
+ const singleFileChangedHandler = ( event ) => {
         setSelectedFile( event.target.files[0]);
     }
 
-    const singleFileUploadHandler = async() => {
+
+
+    const singleFileUploadHandler = () => {
         console.log('inside image function')
         const data = new FormData();// If file selected
         if ( {selectedFile} ) 
