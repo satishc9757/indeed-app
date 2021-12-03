@@ -12,11 +12,7 @@ async function handle_request(msg, callback) {
       _id: jobSeekerId,
     });
 
-    if (
-      seeker &&
-      seeker.seeker_job_saved &&
-      seeker.seeker_job_saved.length > 0
-    ) {
+    if (seeker.seeker_job_saved && seeker.seeker_job_saved.length > 0) {
       if (
         !seeker.seeker_job_saved.find((s) => {
           return s === jobId;
