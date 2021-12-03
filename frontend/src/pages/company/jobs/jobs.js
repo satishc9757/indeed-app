@@ -127,7 +127,7 @@ class Jobs extends Component {
     }
 
     async componentDidMount(){
-        let job_company_id = sessionStorage.getItem("job_company_id");
+        let job_company_id = sessionStorage.getItem("emp_company_id");
         console.log("called from browser")
         axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         const response = await axios.get(`${backendServer}/company/jobsByPages?compId=${job_company_id}&page=${this.state.page}&limit=${this.state.limit}`);

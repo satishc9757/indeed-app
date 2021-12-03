@@ -44,7 +44,7 @@ class CompanyReviews extends Component {
     }
 
     setCompanyDetails = (company) => {
-        sessionStorage.setItem("job_company_id", company.comp_id);
+        sessionStorage.setItem("emp_company_id", company.comp_id);
         sessionStorage.setItem("job_company_name", company.comp_name);
     }
 
