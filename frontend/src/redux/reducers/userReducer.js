@@ -1,4 +1,4 @@
-import { GET_MESSAGES, SET_MESSAGE_SENDER_ID, SET_MESSAGE_SENDER_NAME, POST_MESSAGE } from '../types'
+import { GET_MESSAGES, SET_MESSAGE_SENDER_ID, SET_MESSAGE_SENDER_NAME, POST_MESSAGE, GET_SALARIES_BY_TITLE_LOC } from '../types'
 
 const initialState = {
     authenticatedUser : {
@@ -8,7 +8,8 @@ const initialState = {
     authenticated : false,
     messages : [],
     msg_sender_id : '',
-    msg_sender_name : ''
+    msg_sender_name : '',
+    searchSalariesTitleLoc : {}
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -39,6 +40,12 @@ export default function(state = initialState , action){
                     ...state.messages,
                     action.payload
                 ]
+            }
+
+        case GET_SALARIES_BY_TITLE_LOC:
+            return {
+                ...state,
+                searchSalariesTitleLoc : action.payload
             }
 
         default : 
