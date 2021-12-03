@@ -21,6 +21,12 @@ export default function JobseeekerSignup() {
   const signupDetails = useSelector((state) => state.signUp);
 
   const signup = () => {
+    const email_val = /^\S+@\S+\.\S+$/
+        if (!email_val.test(email)){
+            console.log('email')
+            alert('Invalid Email ID')
+            return;
+        }
     //Call SignUp API here
     axios.post(`${backendServer}/signup`, {
       name: name,
@@ -96,6 +102,7 @@ export default function JobseeekerSignup() {
                       type="email"
                       name="email"
                       autoComplete="email"
+                      defaultValue={signupDetails.email}
                       onChange={(e) => {
                         setEmail(e.target.value);
                       }}

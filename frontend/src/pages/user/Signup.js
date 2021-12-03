@@ -14,9 +14,18 @@ export default function Signup() {
   const [role, setRole] = useState("");
   const navigate = useNavigate();
 
+
+
+
   const dispatch = useDispatch();
 
   const next = () => {
+    const email_val = /^\S+@\S+\.\S+$/
+        if (!email_val.test(email)){
+            console.log('email')
+            alert('Invalid Email ID')
+            return;
+        }
     dispatch(getFirstPageData({ email, password, role }));
     if (role === "jobseeker") {
       navigate("/jobseekersignup");
@@ -134,6 +143,7 @@ export default function Signup() {
                     <Button
                       variant="contained"
                       fullWidth
+                      type="submit"
                       sx={{ mt: 3, mb: 2 }}
                       onClick={next}
                     >
