@@ -31,10 +31,10 @@ export default function Signup() {
         style={{
           backgroundColor: "#F3F2F1",
           width: "100vw",
-          height: "100vh",
+          // height: "100vh",
           justifyContent: "center",
           alignItems: "center",
-          paddingTop: "10%",
+          paddingTop: "1%",
         }}
       >
         <center>
@@ -44,7 +44,7 @@ export default function Signup() {
           <div
             style={{
               backgroundColor: "#FFFFFF",
-              height: "60vh",
+              // height: "60vh",
               width: "26vw",
               borderRadius: "10px",
             }}

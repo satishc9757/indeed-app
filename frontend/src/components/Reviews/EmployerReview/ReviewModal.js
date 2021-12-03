@@ -25,7 +25,7 @@ export default function SalaryModal(props) {
   const [userid, set_userid] = useState(1);
 
 
-  
+  console.log(props)
   var user="User1"
 
 
@@ -72,7 +72,7 @@ export default function SalaryModal(props) {
   };
   return (
     <div>
-         <b style={{fontSize:"30px"}}>{"IBM"} employees review</b>
+         <b style={{fontSize:"30px"}}>Employee reviews</b>
       <Button variant="outlined" onClick={handleClickOpen} style={{float:"right",marginTop:"1rem"}}>
         Review this Company
       </Button>

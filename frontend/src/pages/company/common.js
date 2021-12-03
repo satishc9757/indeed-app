@@ -48,14 +48,19 @@ export default function Common() {
         async function fetchDetails(){
             const tab = new URLSearchParams(search).get('tab');
             
-            let Company_ID = 2;
+
+            
             axios.defaults.headers.common.authorization = await localStorage.getItem("token");
+
+            let Company_ID = sessionStorage.getItem('emp_company_id');
             var response = await axios.get(`${backendServer}/company/companyDetails?compId=${Company_ID}`);
 
             console.log(JSON.stringify(response.data[0])+"-----");
-            await setCompanyDetails(response)
-            axios.defaults.headers.common.authorization = await localStorage.getItem("token");
+            await setCompanyDetails(response.data[0])
+            await console.log(companyDetails)
+
             var reviews = await axios.get(`${backendServer}/company/getFeaturedReviews?compId=${Company_ID}`);
+            
             await console.log("reviews ", reviews.data);
             for (var idx = 0; idx<reviews.data.length; idx++){
                 await featuredReviews.push(reviews.data[idx]);
@@ -102,12 +107,13 @@ export default function Common() {
                         }}
                         variant="rounded"
                     // src="/static/images/avatar/1.jpg"
+                        src={companyDetails.comp_profile_location}
                     />
 
                 </Grid>
                 <Grid item>
                     <Typography
-                        variant="h5">Company Name</Typography>
+                        variant="h5">{companyDetails.comp_name}</Typography>
                 </Grid>
             </Grid>
             <br />
@@ -120,7 +126,7 @@ export default function Common() {
                 <Tab label="Why Join Us" to='/common?tab=join' component={Link} />
                 <Tab label="Reviews" to='/common?tab=reviews' component={Link} />
                 <Tab label="Salaries" to='/common?tab=salaries' component={Link}/>
-                <Tab label="Benefits" to='/common?tab=benefits' component={Link}/>
+                {/* <Tab label="Benefits" to='/common?tab=benefits' component={Link}/> */}
                 <Tab label="Photos" to='/common?tab=photos' component={Link} />
                 <Tab label="Jobs" to='/common?tab=jobs' component={Link} />
             </Tabs>

@@ -78,7 +78,7 @@ export default function ReviewUserCard(reviews) {
                 </Card>
             </div>
 
-            <div className="col-sm">
+            <div >
 
 
 
