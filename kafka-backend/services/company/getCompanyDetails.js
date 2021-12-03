@@ -3,11 +3,13 @@ const JobPostingsModel = require("../../models/JobPostingsModel");
 async function handle_request(msg, callback) {
 
     const compId = msg.compId;
+    console.log("compid ",compId);
 
     try{
         let sql = 'SELECT * FROM company_details WHERE comp_id= '+ compId +';'
 
         await connection.con.query(sql, (err, results)=>{
+            console.log("err ", err, results)
             if(err){
                 callback(null, []);
             }

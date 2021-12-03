@@ -59,10 +59,22 @@ class NavBar extends Component {
                     {(sessionStorage.getItem("user-type")==="employer")?(
                         <div>
                             <Button>
+                                <Link to="/employer/jobPostings">
+                                    Create Job Post
+                                </Link>
+                            </Button>
+                            <Button>
                                 <Link to="/jobs">Jobs</Link>
                             </Button>
                             <Button>
-                                Messages
+                                <Link to="/conversations">
+                                    Messages
+                                </Link>
+                            </Button>
+                            <Button>
+                                <Link to="/employer/jobstats">
+                                    Job Stats
+                                </Link>
                             </Button>
                         </div>
                     ):(
