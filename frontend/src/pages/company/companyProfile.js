@@ -1,12 +1,25 @@
-import { Button, Card, CardContent, Container, Grid, Link, List, ListItem, ListItemIcon, Modal, TextField, Typography } from "@material-ui/core";
+import {  Button, Card, CardContent, Container, Grid, IconButton, Link, List, ListItem, ListItemIcon, Modal, TextField, Typography } from "@material-ui/core";
 import React, { useEffect } from "react";
 import backendServer from "../../webConfig";
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Avatar from '@mui/material/Avatar';
+import ImageUpload from "./uploadProfile";
 import NavBar from "../../components/user/NavBar";
 import Box from '@mui/material/Box';
 import { ListItemButton, ListItemText, Stack } from "@mui/material";
 const axios = require('axios');
 
-
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function CompanyProfile () {
     const [firstName, setFirstName] = React.useState([]);
@@ -14,7 +27,7 @@ export default function CompanyProfile () {
     const [role, setRole] = React.useState('');
     const [state, setState] = React.useState('');
     const [city, setCity] = React.useState('');
-
+const [profile, setProfile] = React.useState('');
     const [country, setCountry] = React.useState('');
     const [webSite, setWebsite] = React.useState('');
     const [companySize, setCompanySize] = React.useState('');
@@ -26,10 +39,12 @@ export default function CompanyProfile () {
     const [mission, setMission] = React.useState('');
     const [visison, setVision] = React.useState('');
     const [CEO, setCEO] = React.useState('');
-
+    const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
     const updateProfile = () => {
-        let emp_id=5
+        let emp_id=sessionStorage.getItem("emp-id")
         let data = {
             "emp_id": emp_id,
             "emp_name": firstName + ' ' + lastName,
@@ -47,8 +62,12 @@ export default function CompanyProfile () {
         
     }
 
+
+    const uploadProfile = () => {
+        
+    }
     const updateCompany = () => {
-        let companyID = 2
+        let companyID = sessionStorage.getItem("emp-company-id")
         console.log(lastName)
         let data = {
             "comp_id": companyID,
@@ -74,43 +93,35 @@ export default function CompanyProfile () {
     }
 
 
-    useEffect(() => {
-        let compId = 2;
-        let empID = 5;
-        axios.get(`${backendServer}/employer?empID=${empID}`)
-            .then(response => {
-                let data = response.data[0];
-                let name = data.emp_name.split(" ")
-                setFirstName(name[0])
-                setLastName(name[1])
-                setRole(data.emp_role)
-                setCity(data.emp_city)
-                setState(data.emp_state)
-                setCountry(data.emp_country)
-               
-                
-                axios.get(`${backendServer}/company/companyDetails?compId=${compId}`)
-                    .then(response => {
-                        let data1 = response.data[0];
-                        console.log(data1)
-                        setWebsite(data1.comp_website)
-                        setCompanySize(data1.comp_size)
-                        setCompanyType(data1.comp_type)
-                        // setIndustry()
-                        setCEO(data1.comp_ceo)
-                        setFounded(data1.comp_founded)
-                        setHeadquarters(data1.comp_headquarters)
-                        setMission(data1.comp_mission)
-                        setVision(data1.comp_mission)
-                        setRevenue(data1.comp_revenue)
-                        
-               
-                    }).catch = (error) => {
-                        console.log(error)
-                    }
-            })
+    useEffect(async () => {
+        let compId = sessionStorage.getItem("emp_company_id");
+        let empID = sessionStorage.getItem("emp-id");
+        var response = await axios.get(`${backendServer}/employer?empID=${empID}`);
+        let data = await response.data[0];
+        console.log("data ", data);
+        let name = await data.emp_name.split(" ")
+        await setFirstName(name[0]);
+        await setLastName(name[1]);
+        await setRole(data.emp_role);
+        await setCity(data.emp_city);
+        await setState(data.emp_state);
+        await setCountry(data.emp_country);
         
-        }, [])
+        let data1 = await axios.get(`${backendServer}/company/companyDetails?compId=${compId}`);
+        data1 = await data1.data[0];
+        console.log("response ",response, data1)
+        setWebsite(data1.comp_website)
+        setCompanySize(data1.comp_size)
+        setCompanyType(data1.comp_type)
+        setProfile(data1.comp_profile_location)
+        setCEO(data1.comp_ceo)
+        setFounded(data1.comp_founded)
+        setHeadquarters(data1.comp_headquarters)
+        setMission(data1.comp_mission)
+        setVision(data1.comp_mission)
+        setRevenue(data1.comp_revenue)
+        
+        }, [profile, handleClose])
 
 
     
@@ -125,6 +136,31 @@ export default function CompanyProfile () {
                 flexDirection: "column",
                 alignContent:"center"
             }}>
+                <Stack direction="row" spacing={2}>
+                    <IconButton onClick={handleOpen} >
+                        <Avatar sx={{ width: 70, height: 70, backgroundColor: "midnightblue" }}
+                            src={profile}
+                    onClick={uploadProfile}
+                    
+                    >Google</Avatar>
+                    </IconButton>
+
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                        >
+                        <Box sx={style}>
+                            <ImageUpload handleClose= {handleClose} />
+                        </Box>
+                        </Modal>
+                    
+                    <Typography variant="h4"> Google </Typography>
+                    
+                    
+                </Stack>
+                <br/>
                 <Card style={{ width: 500 }}>
                     <CardContent >
                         <Typography variant='h6'>Contact Information</Typography>

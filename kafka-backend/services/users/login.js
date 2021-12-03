@@ -7,6 +7,7 @@ async function handle_request(msg, callback) {
         var sql = "SELECT * FROM login_details where user_email='"+msg.email+"'";
 
         await connection.con.query(sql, async (err, results)=>{
+            console.log(err, results);
             if(err){
                 callback(null, []);
             }
@@ -21,6 +22,7 @@ async function handle_request(msg, callback) {
                     "user_email":results[0].user_email,
                     "user_type":results[0].user_type
                     }
+                    console.log("user object ",userObj);
                     callback(null, userObj);
                 }
                 else{

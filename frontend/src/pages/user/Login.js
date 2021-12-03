@@ -21,20 +21,19 @@ export default function Login() {
       password:password
 
     })
+    console.log("data ",data.data)
     if(data.data){
       sessionStorage.setItem("user-type",data.data.user_type);
       sessionStorage.setItem("user-email",data.data.user_email);
+      if(data.data.user_type==="jobseeker"){
+        sessionStorage.setItem("job-seeker-id", data.data.user_id);
+        navigate("/");
+      }
+      else{
+        sessionStorage.setItem("emp-id",data.data.user_id);
+        navigate("/employer")
+      }
     }
-    if(data.data.user_type==="jobseeker"){
-      sessionStorage.setItem("job-seeker-id", data.data.user_id);
-      navigate("/");
-    }
-    else{
-      sessionStorage.setItem("emp-id",data.data.user_id);
-      navigate("/employer")
-    }
-   
-
   }
 
   return (
@@ -81,6 +80,7 @@ export default function Login() {
                       required
                       fullWidth
                       id="email"
+                      type="email"
                       label="Email Address"
                       name="email"
                       autoComplete="email"
@@ -94,6 +94,7 @@ export default function Login() {
                       required
                       fullWidth
                       id="password"
+                      type="password"
                       label="Password"
                       name="password"
                       autoComplete="password"
