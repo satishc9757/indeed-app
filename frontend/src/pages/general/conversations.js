@@ -72,6 +72,11 @@ const styles = (theme) => ({
     },
     head : {
         borderBottom : '1px solid #b8b6b4',
+    },
+    display : {
+        overflowX: 'scroll',
+        overflowY: 'scroll',
+        height : window.innerHeight - 200,
     }
 })
 
@@ -194,7 +199,7 @@ class conversations extends Component {
                                     </Grid>
                                 </Grid>
                                 :
-                                <Grid container item direction="column" xs={12}>
+                                <Grid container item direction="column" xs={12} className={classes.display}>
                                     {this.displayMessages()}
                                 </Grid>
                             }
