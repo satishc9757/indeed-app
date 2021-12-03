@@ -438,3 +438,28 @@ exports.getSalariesByJobTitleLocation = async function (req, res) {
       .send(JSON.stringify({ message: "Something went wrong!", error: err }));
   }
 };
+exports.deleteSavedJobs = async function (req, res) {
+  try {
+    kafka.make_request(
+      "delete_saved_jobs",
+      { ...req.body, jobSeekerId: req.query.jobSeekerId },
+      (err, resp) => {
+        if (err || !resp) {
+          console.log("err", err);
+          res
+            .status(500)
+            .send(
+              JSON.stringify({ message: "Something went wrong!", error: err })
+            );
+        } else {
+          res.status(200).end(JSON.stringify(resp));
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .send(JSON.stringify({ message: "Something went wrong!", error: err }));
+  }
+};

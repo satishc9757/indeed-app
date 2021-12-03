@@ -41,7 +41,7 @@ export default function Analytics() {
   };
 
   useEffect(() => {
-    axios.defaults.headers.common.authorization = await localStorage.getItem("token");
+    axios.defaults.headers.common.authorization = localStorage.getItem("token");
     axios
       .get(`${backendServer}/admin/getTopFiveMostReviewedCompanies`)
       .then((res) => {

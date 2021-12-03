@@ -83,7 +83,8 @@ const add_salary_review = require("./services/salary_reviews/add_salary_review")
 const add_review = require("./services/company/add_review");
 const get_reviews = require("./services/company/get_reviews");
 const GetSalariesByJobTitleLocation = require("./services/jobSeeker/getSalariesByJobTitleLocation");
-
+const saveJobs = require("./services/jobSeeker/saveJobs");
+const deleteSavedJobs = require("./services/jobSeeker/deleteSavedJobs");
 const vote_review = require("./services/company/mark_helpful");
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -194,3 +195,4 @@ handleTopicRequest(
   GetSalariesByJobTitleLocation
 );
 handleTopicRequest("vote_review", vote_review);
+handleTopicRequest("delete_saved_jobs", deleteSavedJobs);

@@ -288,6 +288,16 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
+      {
+        topic: "admin.markReviewAsAppropriate",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "delete_saved_jobs",
+        partitions: 1,
+        replicationFactor: 1,
+      },
     ],
     (err) => {
       if (err) {
