@@ -24,6 +24,6 @@ router.post("/update/email", jobseekerController.updateEmail);
 router.get("/appliedJobs", jobseekerController.getAppliedJobs);
 router.get("/getSalariesByJobTitleLocation", jobseekerController.getSalariesByJobTitleLocation);
 
-
+router.post("/email", jobseekerController.updateEmail);
 
 module.exports = router;

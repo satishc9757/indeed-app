@@ -30,6 +30,11 @@ class AdminNavBar extends Component {
               </Button>
             </div>
             <div>
+              <Button>
+                <Link to="/companieslist">Companies</Link>
+              </Button>
+            </div>
+            <div>
               <Button onClick={this.signOut}>
                 <Link to="/">SignOut</Link>
               </Button>
