@@ -12,7 +12,7 @@ router.get('/jobsByPages', checkAuth, companyController.getJobsByCompanyIdWithPa
 router.get('/getFeaturedReviews', checkAuth, companyController.getFeaturedReviewsByCompId);
 router.post('/updateFeaturedReview', checkAuth, companyController.updateFeaturedReviewStatus);
 router.get('/jobstats', checkAuth, companyController.getJobStatsByCompanyId);
-router.get('/companies', checkAuth, companyController.getCompanies)
+router.get('/companies', companyController.getCompanies)
 router.post('/profile', checkAuth, companyController.uploadCompanyProfilePicture)
 router.get('/search', checkAuth, companyController.getCompaniesBySearchQuery);
 router.get('/avgSalByDept', checkAuth, companyController.getAvgSalaryByDeptId);
