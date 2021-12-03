@@ -17,8 +17,9 @@ import Autocomplete from '@mui/material/Autocomplete';
 export default function SalaryModal(props) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(new Date('2014-08-18T21:11:54'));
-  const [userid,setuserid]=useState("User1")
-  const [companyid,setcompanyid]=useState("Comp1")
+  const [userid,setuserid]=useState(sessionStorage.getItem("user-email"))
+  const [companyid,setcompanyid]=useState(sessionStorage.getItem("comp_id"))
+  const [company_name,setcompany_name]=useState(sessionStorage.getItem("comp_name"))
   const [salary_end_date,setenddata]=useState()
   const [salary_job_loc,setjobloc]=useState()
   const [salary_job_title,setjobtitle]=useState()
@@ -93,7 +94,7 @@ export default function SalaryModal(props) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle style={{textAlign:"center"}}>Add your salary review</DialogTitle>
         <DialogContent>
-          
+          {window.scrollTo(0, 0)}
           <TextField
             autoFocus
             margin="dense"
@@ -104,7 +105,8 @@ export default function SalaryModal(props) {
             fullWidth
             variant="standard"
             required
-            value={companyid}
+            defaultValue={company_name}
+            value={company_name}
             disabled
             onChange={(e,v)=>{setcompanyid(e.target.value);console.log("------------------->",e.target.value)}}
           />
@@ -113,7 +115,7 @@ export default function SalaryModal(props) {
             <Autocomplete
     disablePortal
     id="combo-box-demo"
-    options={props.department_list}
+    options={["sales","marketing","engineering","technology"]}
   
    
     getOptionLabel={(option) => option}

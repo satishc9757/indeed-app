@@ -189,9 +189,9 @@ class JobDetailsCard extends Component {
 
                 <Grid container spacing={2}>
                     <Grid item xs={2}>
-                            <Link
-                                onClick={sessionStorage.setItem('emp_company_id',this.props.job.job_company_id)}
-                                href="/common" >{this.props.job.job_company_name}</Link>
+                        <Link href="/common" onClick={()=>{sessionStorage.setItem("emp_company_id",this.props.job.job_company_id);sessionStorage.setItem("job_company_name",this.props.job.job_company_name)}} >{this.props.job.job_company_name}</Link>
+
+
                     </Grid>
                     <Grid item xs={4}>
                         <Rating name="read-only"

@@ -22,17 +22,17 @@ const ReviewsTab = (props) => {
     const [updated,setupdated]=useState(false)
     const [current,setcurrent]=useState([])
     const [main,setmain]=useState([])
-    const [comp_id,setcompid]=useState(2)
-    const [comp_name,setcompName]=useState("Adidas")
-    const [user_type,set_user_type]=useState("employer") 
-    const [btndisable,setbtndisable]=useState(user_type!="employer"?true:false)
+    const [comp_id,setcompid]=useState(sessionStorage.getItem("comp_id"))
+    const [comp_name,setcompName]=useState(sessionStorage.getItem("company_name"))
+    const [usertype,set_user_type]=useState(sessionStorage.getItem("user-type")) 
+    const [btndisable,setbtndisable]=useState(usertype!="employer"?true:false)
     const [fullupdate,setfullupdate]=useState(false)
     const [featured,setisfeatured]=useState({})
       
     const department_list = []
     var result={}
     
-    console.log("here is the props",props.CompanyDetails)
+    
     function remove_featured_review(review_id,rating){
       console.log("from remove",review_id,rating,fullupdate)
       console.log("here is the featured list",featured)

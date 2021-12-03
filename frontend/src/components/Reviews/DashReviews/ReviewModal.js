@@ -22,9 +22,12 @@ export default function SalaryModal(props) {
   const [cons, set_cons] = useState();
   const [prep, set_prep] = useState();
   const [ceorating, setceorating] = useState(0);
-  const [companyid, set_companyid] = useState(1);
-  const [userid, set_userid] = useState(1);
-
+  const [userid,setuserid]=useState(sessionStorage.getItem("job-seeker-id"))
+  const [companyid,setcompanyid]=useState(sessionStorage.getItem("emp_company_id"))
+  const [company_name,setcompany_name]=useState(sessionStorage.getItem("job_company_name"))
+  const [user_type,set_user_type]=useState(sessionStorage.getItem("user-type")) 
+  const [btndisable,setbtndisable]=useState(user_type=="employer"?true:false)
+  
 
   
   var user="User1"
@@ -76,8 +79,9 @@ export default function SalaryModal(props) {
   console.log("modal props----------------->",props)
   return (
     <div>
-         <b style={{fontSize:"30px"}}> Employees review</b>
-      <Button variant="outlined" onClick={handleClickOpen} style={{float:"right",marginTop:"1rem"}}>
+         <b style={{fontSize:"30px"}}>{props.comp_name} employees review</b>
+      <Button variant="outlined" onClick={handleClickOpen} style={{float:"right",marginTop:"1rem"}} disabled={btndisable}>
+
         Review this Company
       </Button>
       <Dialog open={open} onClose={handleClose}  >
