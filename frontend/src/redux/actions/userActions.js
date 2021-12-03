@@ -2,6 +2,7 @@ import { GET_MESSAGES, POST_MESSAGE, GET_SALARIES_BY_TITLE_LOC} from '../types'
 import axios from 'axios'
 
 export const getChatMessages = (id) => (dispatch) => {
+    axios.defaults.headers.common.authorization = localStorage.getItem("token");
     axios.get(`chats/getChatMessage?id=${id}`)
         .then(res => {
             console.log("in getChatMessage userAction")
@@ -17,6 +18,7 @@ export const getChatMessages = (id) => (dispatch) => {
 }
 
 export const addChatMessage = (msgDetails) => (dispatch) => {
+    axios.defaults.headers.common.authorization = localStorage.getItem("token");
     axios.post(`chats/addChatMessage`, msgDetails)
         .then(res => {
             console.log("in addChatMessage userAction")
@@ -32,6 +34,7 @@ export const addChatMessage = (msgDetails) => (dispatch) => {
 }
 
 export const getSalariesByJobTitleLocation = (searchDetails, history) => (dispatch) => {
+    axios.defaults.headers.common.authorization = localStorage.getItem("token");
     axios.get(`jobseeker/getSalariesByJobTitleLocation?job_title=${searchDetails.job_title}&job_location=${searchDetails.job_location}`)
         .then(res => {
 

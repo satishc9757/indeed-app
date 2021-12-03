@@ -12,6 +12,7 @@ class EmployerHome extends Component {
 
     async componentDidMount(){
         if("user-type" in sessionStorage && sessionStorage.getItem("user-type")==="employer"){
+            axios.defaults.headers.common.authorization = await localStorage.getItem("token");
             var response = await axios.get(`${backendServer}/getCompanyId?id=${sessionStorage.getItem("emp-id")}`);
             console.log("data", response);
             sessionStorage.setItem('emp_company_id', response.data.id)

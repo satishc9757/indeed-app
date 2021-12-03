@@ -33,7 +33,7 @@ export default function SalaryModal(props) {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleSubmit=()=>{
+  const handleSubmit=async ()=>{
     console.log("here----------->",companyid)
     let  add_data={
             rating:rating,
@@ -48,6 +48,7 @@ export default function SalaryModal(props) {
             city:city,
             state:state
      }
+     axios.defaults.headers.common.authorization = await localStorage.getItem("token");
      axios.post(process.env.REACT_APP_BACKEND+"api/company/addEmployeeReview",add_data).then(response=>{
                 
       if(response.status === 200)

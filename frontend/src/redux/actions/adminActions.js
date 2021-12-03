@@ -2,6 +2,7 @@ import { GET_ALL_REVIEWS, MARK_REVIEW_APPROPRIATE, MARK_REVIEW_INAPPROPRIATE} fr
 import axios from 'axios'
 
 export const getAllReviews = () => (dispatch) => {
+    axios.defaults.headers.common.authorization = localStorage.getItem("token");
     axios.get(`getAllReviews`)
         .then(res => {
             console.log("in getAllReviews userAction")
@@ -17,6 +18,7 @@ export const getAllReviews = () => (dispatch) => {
 }
 
 export const markReviewAsAppropriate = (review_id) => (dispatch) => {
+    axios.defaults.headers.common.authorization = localStorage.getItem("token");
     axios.get(`markReviewAsAppropriate?review_id=${review_id}`)
         .then(res => {
             console.log("in markReviewAsAppropriate userAction")
@@ -32,6 +34,7 @@ export const markReviewAsAppropriate = (review_id) => (dispatch) => {
 }
 
 export const markReviewAsInappropriate = (review_id) => (dispatch) => {
+    axios.defaults.headers.common.authorization = localStorage.getItem("token");
     axios.get(`markReviewAsInappropriate?review_id=${review_id}`)
         .then(res => {
             console.log("in markReviewAsInappropriate userAction")

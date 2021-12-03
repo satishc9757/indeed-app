@@ -41,6 +41,7 @@ const ReviewsTab = (props) => {
           review_status:false,
           review_id:review_id
         }
+        axios.defaults.headers.common.authorization = localStorage.getItem("token");
         axios.post(process.env.REACT_APP_BACKEND+"api/company/updateFeaturedReview",data).then((response)=>{
     
           if(response.status === 200)
@@ -95,6 +96,7 @@ const ReviewsTab = (props) => {
           review_status:true,
           review_id:review_id
         }
+        axios.defaults.headers.common.authorization = localStorage.getItem("token");
         axios.post(process.env.REACT_APP_BACKEND+"api/company/updateFeaturedReview",data).then((response)=>{
     
           if(response.status === 200)
@@ -129,7 +131,7 @@ const ReviewsTab = (props) => {
       setcompid(compdetails.comp_id)
       setcompName(compdetails.comp_name)
       */
-
+      axios.defaults.headers.common.authorization = localStorage.getItem("token");
       axios.get(process.env.REACT_APP_BACKEND+`api/company/getReviewsByCompId?compId=${comp_id}`).then(response=>{
                 
         if(response.status === 200)

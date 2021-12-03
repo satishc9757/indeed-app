@@ -101,6 +101,7 @@ onSelect = async(e)=>{
 
 onFetch = async(e)=>{
     let job_company_id = sessionStorage.getItem("emp_company_id");
+    axios.defaults.headers.common.authorization = await localStorage.getItem("token");
     const response = await axios.get(`${backendServer}/company/jobsByPages?compId=${job_company_id}&page=${this.state.page}&limit=${this.state.limit}`);
     console.log("jobs data : "+JSON.stringify(response.data));
     await this.setState({
@@ -149,6 +150,7 @@ handleJobCardClick = (event, jobIndex) => {
 
     let payload = {...data,  job_company_id : job_company_id, job_company_name: job_company_name};
     console.log("payload : "+JSON.stringify(payload));
+    axios.defaults.headers.common.authorization = await localStorage.getItem("token");
     var response = await axios.post(`${backendServer}/employer/job`, payload);
     console.log("response: "+JSON.stringify(response.data));
     // await this.setState({jobSaved: true})
@@ -194,6 +196,7 @@ handleJobCardClick = (event, jobIndex) => {
   async componentDidMount(){
     let job_company_id = 1;
     console.log("called from browser")
+    axios.defaults.headers.common.authorization = await localStorage.getItem("token");
     const response = await axios.get(`${backendServer}/company/jobsByPages?compId=${job_company_id}&page=${this.state.page}&limit=${this.state.limit}`);
     console.log("jobs data : "+JSON.stringify(response.data));
     await this.setState({

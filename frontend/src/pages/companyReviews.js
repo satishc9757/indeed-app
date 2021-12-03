@@ -48,7 +48,7 @@ class CompanyReviews extends Component {
         this.setState({searchResultText: "Popular companies near you" });
 
         let locationText = "San Jose"; //to be fetched from cookie
-
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         var response = await axios.get(`${backendServer}/company/search?locaitonSearchText=${locationText}`);
         await this.setState({
             companies: response.data
@@ -61,7 +61,7 @@ class CompanyReviews extends Component {
         let locationText = this.state.locaitonSearchText;
         this.setState({searchResultText: 'Search results for Company "'+companyText+'" and  Location "'+locationText+'" '});
 
-        const backendServer = "http://localhost:8000/api"//just for local testing
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         var response = await axios.get(`${backendServer}/company/search?companySearchText=${companyText}&locaitonSearchText=${locationText}`);
         await this.setState({
             companies: response.data

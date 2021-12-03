@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import axios from 'axios'
 import CardContent from '@mui/material/CardContent';
-
+import backendServer from "../../../webConfig";
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -24,7 +24,7 @@ const FeaturedReviewCard = (props) => {
       
     </Box>
   );
-function update_helpful(helpful,not_helpful){
+async function update_helpful(helpful,not_helpful){
     let data={
       helpful:helpful,
       not_helpful:not_helpful,
@@ -32,8 +32,8 @@ function update_helpful(helpful,not_helpful){
       review_id:props.review.review_id
     }
 
-
-    axios.post("http://localhost:8000/api/company/voteReview",data).then(response=>{
+    axios.defaults.headers.common.authorization = await localStorage.getItem("token");
+    axios.post(`${backendServer}/company/voteReview`,data).then(response=>{
                 
         if(response.status === 200)
         {
