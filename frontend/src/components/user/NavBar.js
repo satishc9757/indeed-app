@@ -51,16 +51,22 @@ class NavBar extends Component {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="relative" color="transparent">
           <Toolbar>
+            
             <img src={logo} alt="Profile" width="110" height="30" />
 
             {sessionStorage.getItem("user-type") === "employer" ? (
-              <div>
+              <div style={{display:"flex"}}>
                 <Button>
                   <Link to="/employer/jobPostings">Create Job Post</Link>
                 </Button>
                 <Button>
                   <Link to="/jobs">Jobs</Link>
                 </Button>
+                
+              <Button>
+                <Link to="/common">Company</Link>
+              </Button>
+          
                 <Button>
                   <Link to="/conversations">Messages</Link>
                 </Button>

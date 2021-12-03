@@ -84,7 +84,7 @@ const getReviews  = require('./services/jobSeeker/getReviews');
 const add_salary_review = require ('./services/salary_reviews/add_salary_review')
 const add_review = require('./services/company/add_review')
 const get_reviews = require('./services/company/get_reviews')
-
+const get_photos= require('./services/company/getPhotos')
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -177,3 +177,4 @@ handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
 handleTopicRequest("company.getAllCompanies", getCompanies);
 handleTopicRequest("get_emp_profile", get_emp);
 handleTopicRequest("add_employee_review", add_review);
+handleTopicRequest("get_photos", get_photos);

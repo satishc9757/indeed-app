@@ -21,5 +21,6 @@ router.get('/JobTitleByDept', companyController.getTitleByDepts);
 router.post('/addEmployeeReview',companyController.addEmployeeReview);
 router.get('/getReviewsByCompId', companyController.getReviewsByCompId)
 router.post('/photos',companyController.uploadPhotos)
+router.get('/photos',companyController.getPhotos)
 
 module.exports = router;

@@ -93,6 +93,17 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+        topic: "get_photos",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "admin.markReviewAsAppropriate",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      
+      {
         topic: "save_jobs",
         partitions: 1,
         replicationFactor: 1,

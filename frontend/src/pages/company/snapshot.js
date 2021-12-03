@@ -89,7 +89,7 @@ export default function Snapshot({CompanyDetails},{featuredReviews}) {
                         width="150"
                         height="200"
 
-                        // src={dp}
+                        src={CompanyDetails.comp_profile_location}
                         alt="dp"></img>
 
                 </Grid>

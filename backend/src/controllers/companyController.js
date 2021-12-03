@@ -198,7 +198,7 @@ const profileImgUpload = multer({
 
 exports.uploadPhotos = async function (req, res) {
   let compID = req.query.compId;
-  profileImgUpload( req, res, ( error ) => {
+  profileImgUpload( req, res, async( error ) => {
 		console.log( 'file', req.file );
 		if( error ){
 			console.log( 'errors', error );
@@ -211,19 +211,22 @@ exports.uploadPhotos = async function (req, res) {
       } else {
         
         const imageLocation = req.file.location;// Save the file name into database 
-        console.log(imageLocation)
+        console.log(imageLocation + "okokookokokokokkokokok" + compID)
+
+
 
         const photos = new Photos ({ "comp_id": compID,
                     "comp_photos": imageLocation
         })
-          photos.save().then(doc => {
+          photos.save().then(respo => {
                     console.log("Success photos============" + photos)
-                    let res={
+                    let data={
                         message: "Success",
                         res: photos
                     }
-                    res.status(200).end("Photos Added!");
-                }).catch(error => {
+            res.end(JSON.stringify(data));
+          }).catch(error => {
+                  console.log(error)
                     return res.status(500).json({ error: error });
                 })
 
@@ -282,6 +285,28 @@ return res.status(500).json({ error: error });
 
 
 
+  exports.getPhotos = async function (req, res) {
+    const compId = req.query.compId;
+  
+    kafka.make_request("get_photos", compId, (err, results) => {
+
+      console.log("resutls from kafka",results)
+
+  
+      if (err){
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+  
+
+      } 
+      else{
+          res.send(results);
+      }
+    });
+  
+  
+  };
   exports.getFeaturedReviewsByCompId = async function (req, res) {
     const compId = req.query.compId;
   
