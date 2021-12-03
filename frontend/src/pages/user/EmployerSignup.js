@@ -19,7 +19,7 @@ export default function JobseeekerSignup() {
   const signupDetails = useSelector((state) => state.signUp);
 
   const [name, setName] = useState("");
-  const [email, setEmail] = useState(signupDetails.email);
+  const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [type, setType] = useState("");
   const [city, setCity] = useState("");
