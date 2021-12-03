@@ -89,17 +89,22 @@ class NavBar extends Component {
               </div>
             )}
 
-            {'user-type' in sessionStorage && sessionStorage.getItem("user-type") !== "employer" ? (
-              <Button>
-                <Link to="/upload">Upload Resume</Link>
-              </Button>
-            ) : (
+            {'user-type' in sessionStorage?(
+              <div>
+              {sessionStorage.getItem("user-type") !== "employer" &&
+                <Button>
+                  <Link to="/upload">Upload Resume</Link>
+                </Button>
+              }
+              </div>
+              ):(
               <div>
                   <Button>
                     <Link to="/login">Upload Resume</Link>
                   </Button>
-              </div>
-            )}
+               </div>
+              )
+            }
             {!("user-type" in sessionStorage) ? (
               <div>
                 <Button>
