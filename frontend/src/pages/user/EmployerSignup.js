@@ -129,7 +129,7 @@ export default function JobseeekerSignup() {
                       type="email"
                       label="Email Address"
                       name="email"
-                      defaultValue={signupDetails.email}
+                      value={signupDetails.email}
                       autoComplete="email"
                       onChange={(e) => {
                         setEmail(e.target.value);
