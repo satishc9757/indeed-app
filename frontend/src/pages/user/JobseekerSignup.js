@@ -10,7 +10,7 @@ import axios from "axios";
 
 export default function JobseeekerSignup() {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(signupDetails.email);
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
