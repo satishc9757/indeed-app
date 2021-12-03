@@ -33,12 +33,14 @@ import JobDetailsCard from "./components/landingpage/JobDetailsCard";
 import Applicants from "./pages/employer/applicants";
 import JobPostings from "./pages/employer/jobPostings";
 import JobStats from "./pages/employer/jobStats";
+import Reviews from './pages/admin/reviews';
 import Analytics from "./pages/admin/Analytics";
 import SalaryReviewTabCard from "./components/Reviews/SalaryReviewTabCard";
 import SalaryReviewColumn from "./components/Reviews/SalaryReviewColumn";
 import ReviewTab from "./components/Reviews/ReviewTab";
 import ReviewCard from "./components/Reviews/ReviewCard";
 import CompanyReviews from "./pages/companyReviews";
+
 const theme = createTheme({
   pallete: {
     primary: {
@@ -117,6 +119,7 @@ class App extends Component {
               />
               <Route exact path="/employer/jobstats" element={<JobStats />} />
               <Route exact path="/analytics" element={<Analytics />} />
+              <Route exact path="/admin/reviews" element={<Reviews/>} />
               <Route
                 exact
                 path="/salaryReviewsTab"
