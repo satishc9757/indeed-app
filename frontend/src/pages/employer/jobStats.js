@@ -11,34 +11,36 @@ import backendServer from '../../webConfig';
 class JobStats extends Component {
 
     state = {
-            jobStats:[{
-                        job_title: "Software Enginer Intern",
-                        job_location: [{
-                            city: "San Jose",
-                            street:"7th Street",
-                            state: "CA",
-                            country: "USA",
-                            zipcode: "95126",
-                        }],
-                        job_created_at: "01-Dec-2020",
-                        applicants_applied: 2,
-                        applicants_selected: 2,
-                        applicants_rejected: 4
-                    },
-                    {
-                        job_title: "Software Analyst",
-                        job_location: [{
-                            city: "San Jose",
-                            street:"7th Street",
-                            state: "CA",
-                            country: "USA",
-                            zipcode: "95126",
-                        }],
-                        job_created_at: "01-Nov-2020",
-                        applicants_applied: 4,
-                        applicants_selected: 3,
-                        applicants_rejected: 8
-                    },]
+            jobStats:[
+                // {
+                //         job_title: "Software Enginer Intern",
+                //         job_location: [{
+                //             city: "San Jose",
+                //             street:"7th Street",
+                //             state: "CA",
+                //             country: "USA",
+                //             zipcode: "95126",
+                //         }],
+                //         job_created_at: "01-Dec-2020",
+                //         applicants_applied: 2,
+                //         applicants_selected: 2,
+                //         applicants_rejected: 4
+                //     },
+                //     {
+                //         job_title: "Software Analyst",
+                //         job_location: [{
+                //             city: "San Jose",
+                //             street:"7th Street",
+                //             state: "CA",
+                //             country: "USA",
+                //             zipcode: "95126",
+                //         }],
+                //         job_created_at: "01-Nov-2020",
+                //         applicants_applied: 4,
+                //         applicants_selected: 3,
+                //         applicants_rejected: 8
+                //     },
+                ]
     }
 
     onFieldChange = (e) =>{
@@ -50,6 +52,8 @@ class JobStats extends Component {
 
     async componentDidMount(){
         this.setState({searchResultText: "Popular companies near you" });
+        const compId = sessionStorage.getItem("emp_company_id");
+        console.log(compId)  //hardcoded for now
         const compId = sessionStorage.getItem("compId");
         // let comp = 3;
             // parseInt(compId)

@@ -72,6 +72,19 @@ class LandingPage extends Component {
         });
     }
 
+    async componentDidMount(){
+        this.setState({searchResultText: "Popular companies near you" });
+
+        const seeker_id = sessionStorage.getItem("job-seeker-id"); //to be fetched from cookie
+
+        var response = await axios.get(`${backendServer}/jobseeker?seeker_id=${seeker_id}`);
+        console.log("profile data : "+JSON.stringify(response.data));
+        await this.setState({
+            profileData: response.data[0]
+        });
+        console.log("profileData from state : "+this.state.profileData);
+    }
+
     renderJobCard = (job, index) => {
         const oneDay = 24 * 60 * 60 * 1000;
         const currentDate = new Date();
@@ -113,19 +126,19 @@ class LandingPage extends Component {
         );
     }
 
-        
+
     render() {
 
 
-        return (  
+        return (
             <div>
-            
-            <Box> 
+
+            <Box>
                 <Grid container spacing={2} style={{'margin':'2% 0%'}}>
                     <Grid item sm={2}/>
                     <Grid item sm={3}>
                         <TextField
-                        variant = "outlined" 
+                        variant = "outlined"
                         fullWidth
                         required
                         onChange = {this.onChange}
@@ -135,7 +148,7 @@ class LandingPage extends Component {
                     </Grid>
                     <Grid item sm={3}>
                         <TextField
-                        variant = "outlined" 
+                        variant = "outlined"
                         fullWidth
                         onChange = {this.onChange}
                         name="location"
@@ -146,7 +159,7 @@ class LandingPage extends Component {
                         <Button
                         size="large"
                         color="primary"
-                        variant="contained" 
+                        variant="contained"
                         margin="normal"
                         onClick={this.search}
                         >
@@ -194,7 +207,8 @@ class LandingPage extends Component {
                         </Stack>
                         </Grid>
                         <Grid item xs={6}>
-                            <JobDetailsCard job={this.state.results.jobCards[this.state.selectedJobIndex]}/>
+                            <JobDetailsCard job={this.state.results.jobCards[this.state.selectedJobIndex]}
+                                            profileData={this.state.profileData}/>
                         </Grid>
                     </Grid>
 
