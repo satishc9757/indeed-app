@@ -8,13 +8,21 @@ async function handle_request(msg, callback) {
     try{
         let sql = 'SELECT * FROM company_details WHERE comp_id= '+ compId +';'
 
-        await connection.con.query(sql, (err, results)=>{
+        await connection.con.query(sql, async(err, results)=>{
             console.log("err ", err, results)
             if(err){
                 callback(null, []);
             }
             else{
-                callback(null, results);
+                sql = 'UPDATE company_details SET count ='+results[0]['count']+1+' WHERE comp_id='+compId+';'
+                await connection.con.query(sql,(error, res)=>{
+                    if(error){
+                        callback(null, [])
+                    }
+                    else{   
+                        callback(null, results);
+                    }
+                })
             }
         })
 

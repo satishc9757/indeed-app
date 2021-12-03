@@ -57,6 +57,7 @@ class JobDetailsCard extends Component {
        if(!this.state.jobSaved){
             const jobSeekerId = "61a081696d73d01739a267ef" // should be fecthed from cookie or session
             let payload = {jobId: this.state._id};
+            axios.defaults.headers.common.authorization = await localStorage.getItem("token");
             var response = await axios.post(`${backendServer}/jobseeker/jobs?jobSeekerId=${jobSeekerId}`, payload);
             console.log("response: "+JSON.stringify(response.data));
             await this.setState({jobSaved: true})
