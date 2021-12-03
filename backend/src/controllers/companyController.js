@@ -23,6 +23,7 @@ const s3 = new aws.S3({
 
 exports.getCompanyDetailsByCompanyID = async function (req,res){
     let compId = req.query.compId;
+    console.log("comp_id ", req.query);
     try {
         kafka.make_request("company_details", req.query, (err, resp) => {
             if (err || !resp) {
