@@ -3,7 +3,7 @@ const { checkAuth } = require("../Utils/passport");
 var express = require('express');
 var router = express.Router();
 
-router.get('/companyDetails', checkAuth, companyController.getCompanyDetailsByCompanyID);
+router.get('/companyDetails', companyController.getCompanyDetailsByCompanyID);
 router.post('/companyDetails', checkAuth, companyController.updateCompanyDetailsByCompanyID);
 router.get('/getJobRole', checkAuth, companyController.getJobRoleDetailsByCompanyID);
 router.get('/company', checkAuth, companyController.getCompanyDetailsByCompanyID);
@@ -19,7 +19,7 @@ router.get('/avgSalByDept', checkAuth, companyController.getAvgSalaryByDeptId);
 router.post('/addSalaryReview', checkAuth, companyController.addSalaryReview)
 router.get('/JobTitleByDept', checkAuth, companyController.getTitleByDepts);
 router.post('/addEmployeeReview', checkAuth, companyController.addEmployeeReview);
-router.get('/getReviewsByCompId', checkAuth, companyController.getReviewsByCompId)
+router.get('/getReviewsByCompId', companyController.getReviewsByCompId)
 
 router.post('/photos',companyController.uploadPhotos)
 

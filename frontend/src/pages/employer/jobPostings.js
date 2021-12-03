@@ -192,7 +192,7 @@ handleJobCardClick = (event, jobIndex) => {
 
 
   async componentDidMount(){
-    let job_company_id = 1;
+    let job_company_id = sessionStorage.getItem("emp_company_id");
     console.log("called from browser")
     const response = await axios.get(`${backendServer}/company/jobsByPages?compId=${job_company_id}&page=${this.state.page}&limit=${this.state.limit}`);
     console.log("jobs data : "+JSON.stringify(response.data));

@@ -43,12 +43,17 @@ class CompanyReviews extends Component {
         });
     }
 
+    setCompanyDetails = (company) => {
+        sessionStorage.setItem("job_company_id", company.comp_id);
+        sessionStorage.setItem("job_company_name", company.comp_name);
+    }
 
     async componentDidMount(){
         this.setState({searchResultText: "Popular companies near you" });
 
         let locationText = "San Jose"; //to be fetched from cookie
 
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         var response = await axios.get(`${backendServer}/company/search?locaitonSearchText=${locationText}`);
         await this.setState({
             companies: response.data
@@ -61,7 +66,7 @@ class CompanyReviews extends Component {
         let locationText = this.state.locaitonSearchText;
         this.setState({searchResultText: 'Search results for Company "'+companyText+'" and  Location "'+locationText+'" '});
 
-        const backendServer = "http://localhost:8000/api"//just for local testing
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         var response = await axios.get(`${backendServer}/company/search?companySearchText=${companyText}&locaitonSearchText=${locationText}`);
         await this.setState({
             companies: response.data
@@ -90,7 +95,7 @@ class CompanyReviews extends Component {
                 <Card
                     // style={selectedStyle}
                     variant="outlined"
-                    onClick={(event) => this.handleJobCardClick(event, index)}
+                    // onClick={(event) => this.handleJobCardClick(event, index)}
                     >
                     <CardContent>
                         {/* <Typography variant="h5" component="div">
@@ -124,13 +129,13 @@ class CompanyReviews extends Component {
                                         readOnly />
                             </Grid>
                             <Grid item xs={2}>
-                                <Link href="/common?tab=reviews">Reviews</Link>
+                                <Link href="/common?tab=reviews" onClick={() => this.setCompanyDetails(company)} >Reviews</Link>
                             </Grid>
                             <Grid item xs={2}>
-                                <Link href="/common?tab=salaries">Salaries</Link>
+                                <Link href="/common?tab=salaries" onClick={() => this.setCompanyDetails(company)} >Salaries</Link>
                             </Grid>
                             <Grid item xs={2}>
-                                <Link href="/common?tab=jobs">Jobs</Link>
+                                <Link href="/common?tab=jobs" onClick={() => this.setCompanyDetails(company)}>Jobs</Link>
                             </Grid>
                         </Grid>
                     </CardContent>
