@@ -84,8 +84,7 @@ const getReviews  = require('./services/jobSeeker/getReviews');
 const add_salary_review = require ('./services/salary_reviews/add_salary_review')
 const add_review = require('./services/company/add_review')
 const get_reviews = require('./services/company/get_reviews')
-
-
+const vote_review = require('./services/company/mark_helpful')
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
   var consumer = connection.getConsumer(topic_name);
@@ -117,7 +116,8 @@ function handleTopicRequest(topic_name, fname) {
 }
 
 handleTopicRequest("company.getreviews", get_reviews);
-handleTopicRequest("get_reviews", getReviews);
+handleTopicRequest("get_reviews",getReviews);
+//handleTopicRequest("company.getreviews", companyReviews);
 // handleTopicRequest("add_featured_review", add_featured_review);
 // handleTopicRequest("update_featured_review_status", update_featured_review_status);
 // handleTopicRequest("get_featured_reviews", get_featured_reviews);
@@ -176,4 +176,6 @@ handleTopicRequest("get_reviews", getReviews);
 handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
 handleTopicRequest("company.getAllCompanies", getCompanies);
 handleTopicRequest("get_emp_profile", get_emp);
-handleTopicRequest("add_employee_review", add_review);
+handleTopicRequest("add_employee_review",add_review );
+handleTopicRequest("vote_review",vote_review );
+

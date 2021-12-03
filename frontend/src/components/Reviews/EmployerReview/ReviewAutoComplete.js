@@ -1,10 +1,7 @@
 import React,{useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import Box from '@mui/material/Box';
-import SalaryModal  from './SalaryModal';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
+
 import Button from '@mui/material/Button';
 import ReviewModal from './ReviewModal'
 export default function ReviewAutoComplete(props) {
@@ -37,7 +34,7 @@ export default function ReviewAutoComplete(props) {
   return (<div className="container" style={{display:"flex",alignItems:"center",justifyContent:"center", background:"#faf9f8"}}>
       
       <table>
-      <tr><td><ReviewModal style={{float:"right",marginTop:"0.9rem"}} /></td></tr>
+
       <div style={{}}> 
         <td>
 <label><b>Filter By Ratings</b></label>

@@ -71,6 +71,7 @@ function applyfilter(dept,title,place){
     let current = departments[dept]
     let temp=original
     console.log("original is here",temp)
+    
     for(let i of current){
       if(i["salary_job_title"]==title){
         if (place!="" || place==i["salary_job_location"])
@@ -88,8 +89,6 @@ function applyfilter(dept,title,place){
         }
       }
     }
-    
-
 }
 console.log("original after adding the search criteria",original)
 

@@ -151,7 +151,7 @@ exports.getJobsByCompanyId = async function (req, res) {
         .status(500)
         .send(JSON.stringify({ message: "Something went wrong!", err }));
   
-      } else if(results.response_code == 200){
+      } else if(results){
   
           res.send(JSON.stringify(results.response_data));
       } else {
@@ -430,7 +430,7 @@ exports.getCompanies = async function (req, res) {
         .status(500)
         .send(JSON.stringify({ message: "Something went wrong!", err }));
   
-      } else if(results.length>0){
+      } else if(results){
   
           res.send(JSON.stringify(results));
       } else {
@@ -442,4 +442,28 @@ exports.getCompanies = async function (req, res) {
   
   
   };
+
+  exports.voteReview = async function (req, res) {
+      
+    kafka.make_request("vote_review", req.body, (err, results) => {
+
+      console.log("response--------------->",results)
+      if (err){
+        res
+        .status(500)
+        .send(JSON.stringify({ message: "Something went wrong!", err }));
+  
+      } else if(results){
+  
+          res.send(JSON.stringify(results));
+      } else {
+          res
+          .status(500)
+          .send(JSON.stringify({ message: "Something went wrong!", err }));
+      }
+    });
+  
+  
+  };
+
 

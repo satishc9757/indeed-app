@@ -1,11 +1,20 @@
 import React, { Component } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import FeaturedReviewCard from "./components/Reviews/FeaturedReviewCard";
-import AutoCompleteSearch from "./components/Reviews/AutoCompleteSearch";
-import SalayReviewsTab from "./components/Reviews/SalayReviewsTab";
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import FeaturedReviewCard from './components/Reviews/DashReviews/FeaturedReviewCard'
+import AutoCompleteSearch from './components/Reviews/SalaryReviews/AutoCompleteSearch'
+import SalayReviewsTab from './components/Reviews/SalaryReviews/SalayReviewsTab'
+import EmployerReviewsTab from './components/Reviews/EmployerReview/ReviewTab'
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
+import React, { Component } from 'react'
+import './App.css'
+
+
+/*
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+*/
 //redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
@@ -17,29 +26,24 @@ import Signup from "./pages/user/Signup";
 import UploadResume from "./pages/general/uploadResume";
 import Snapshot from "./pages/company/snapshot";
 import Jobseeker from "./pages/user/jobseekerProfile";
-import Salaries from "./pages/general/salaries";
-import JobPosted from "./pages/employer/jobPosted";
+import Salaries from './pages/general/salaries'
+import JobPosted from './pages/employer/jobPosted';
 import JobseeekerSignup from "./pages/user/JobseekerSignup";
 import EmployerSignup from "./pages/user/EmployerSignup";
-import Common from "./pages/company/common";
-import CompanyProfile from "./pages/company/companyProfile";
-import CompanyList from "./pages/admin/companyList";
-import Conversations from "./pages/general/conversations";
-import { ThemeProvider } from "@material-ui/styles";
-import { createTheme } from "@mui/material/styles";
-import { blue } from "@mui/material/colors";
-import EmployerHome from "./pages/employer/employerHome";
-import JobDetailsCard from "./components/landingpage/JobDetailsCard";
-import Applicants from "./pages/employer/applicants";
-import JobPostings from "./pages/employer/jobPostings";
-import JobStats from "./pages/employer/jobStats";
-import Reviews from './pages/admin/reviews';
-import Analytics from "./pages/admin/Analytics";
-import SalaryReviewTabCard from "./components/Reviews/SalaryReviewTabCard";
-import SalaryReviewColumn from "./components/Reviews/SalaryReviewColumn";
-import ReviewTab from "./components/Reviews/ReviewTab";
-import ReviewCard from "./components/Reviews/ReviewCard";
-import CompanyReviews from "./pages/companyReviews";
+import Common from './pages/company/common';
+import CompanyProfile from './pages/company/companyProfile'
+import CompanyList from './pages/admin/companyList'
+import Conversations from './pages/general/conversations'
+import { ThemeProvider} from '@material-ui/styles'
+import { createTheme} from '@mui/material/styles'
+import { blue } from '@mui/material/colors';
+import EmployerHome from './pages/employer/employerHome';
+import JobDetailsCard from './components/landingpage/JobDetailsCard'
+import Applicants from './pages/employer/applicants';
+import JobPostings from './pages/employer/jobPostings';
+import JobStats from './pages/employer/jobStats';
+import CompanyReviews from './pages/companyReviews';
+import ReviewTab from './components/Reviews/DashReviews/ReviewTab'
 
 const theme = createTheme({
   pallete: {
@@ -56,41 +60,18 @@ class App extends Component {
         <Router>
           <div>
             <Routes>
-              <Route exact path="/" element={<Home />} />
-              <Route exact path="/login" element={<Login />} />
-              <Route exact path="/signup" element={<Signup />} />
-              <Route path="/upload" element={<UploadResume />} />
-              <Route exact path="/common" element={<Common />} />
-              <Route exact path="/jobseeker" element={<Jobseeker />} />
-              <Route exact path="/salaries" element={<Salaries />} />
-              <Route exact path="/jobdetails" element={<JobDetailsCard />} />
-              <Route
-                exact
-                path="/companyreviews"
-                element={<CompanyReviews />}
-              />
-              <Route exact path="/employer" element={<EmployerHome />} />
-              <Route exact path="/jobs" element={<JobPosted />} />
-              <Route
-                exact
-                path="/reviewCard"
-                element={<FeaturedReviewCard />}
-              />
-              <Route
-                exact
-                path="/autoComplete"
-                element={<AutoCompleteSearch />}
-              />
-              <Route
-                exact
-                path="/salaryTab"
-                element={<SalaryReviewTabCard />}
-              />
-              <Route
-                exact
-                path="/addSalaryCol"
-                element={<SalaryReviewColumn />}
-              />
+              <Route exact path="/" element={<Home/>}/>
+              <Route exact path="/login" element={<Login/>} />
+              <Route exact path="/signup" element={<Signup/>} />
+              <Route path="/upload" element={<UploadResume/>} />
+              <Route exact path="/common" element={<Common/>} />
+              <Route exact path="/jobseeker" element={<Jobseeker/>} />
+              <Route exact path="/salaries" element={<Salaries/>} />
+              <Route exact path="/jobdetails" element={<JobDetailsCard/>} />
+              <Route exact path="/companyreviews" element={<CompanyReviews/>} />
+              <Route exact path="/employer" element={<EmployerHome/>} />
+              <Route exact path="/jobs" element={<JobPosted/>} />
+              <Route exact path="/autoComplete" element={<AutoCompleteSearch />} />
               <Route exact path="/reviewsTab" element={<SalayReviewsTab />} />
               <Route
                 exact
@@ -126,11 +107,7 @@ class App extends Component {
                 element={<SalayReviewsTab />}
               />
               <Route exact path="/companyReviewsTab" element={<ReviewTab />} />
-              <Route
-                exact
-                path="/companyReviewsCard"
-                element={<ReviewCard />}
-              />
+              <Route exact path="/employerReviewTab" element={<EmployerReviewsTab />} />
             </Routes>
           </div>
         </Router>

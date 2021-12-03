@@ -100,7 +100,7 @@ function applysort(bases){
     
   }
   else{
-    temp.sort((a,b) => (a.review_date > b.review_date) ? 1 : ((b.review_date > a.review_date) ? -1 : 0))
+    temp.sort((a, b) => (Date.parse(a["review_is_helplful"]) > Date.parse(b["review_is_helpful"])) ? 1 : -1)
   }
   console.log(original,current)
   setupdated(!updated)
