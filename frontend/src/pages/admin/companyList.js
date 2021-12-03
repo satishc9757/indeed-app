@@ -13,7 +13,8 @@ export default function CompanyList() {
     const [searchvalue, setSearch] = React.useState([]);
     const [searchResult, setSearchResult] = React.useState([]);
      const navigate = useNavigate();
-    useEffect(() => {
+    useEffect(async() => {
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         axios.get(`${backendServer}/admin/getAllCompanies`)
             .then(response => {
                 let data = response.data;

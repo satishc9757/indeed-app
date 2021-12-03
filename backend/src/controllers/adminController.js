@@ -34,6 +34,29 @@ exports.markReviewAsInappropriate = async function (req, res) {
     }
 };
 
+exports.markReviewAsAppropriate = async function (req, res) {
+    try {
+        kafka.make_request("admin.markReviewAsAppropriate", req.query, (err, resp) => {
+            if (err || !resp) {
+              console.log(err);
+                res
+                .status(500)
+                .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
+            }
+            else{
+                res
+                .status(200)
+                .end(JSON.stringify(resp));
+            }
+        });
+        
+    } catch (err) {
+        res
+        .status(500)
+        .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
+    }
+};
+
 exports.getAllReviews = async function (req,res){
     try {
         kafka.make_request("admin.getAllReviews", req.query, (err, resp) => {

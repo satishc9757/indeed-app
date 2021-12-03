@@ -40,7 +40,7 @@ export default function SalaryModal(props) {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleSubmit=()=>{
+  const handleSubmit=async()=>{
     console.log("here----------->",companyid)
     let  add_data={
        salary_user_id:userid,
@@ -61,7 +61,8 @@ export default function SalaryModal(props) {
 
 
      }
-     axios.post("http://localhost:8000/api/company/addSalaryReview",add_data).then(response=>{
+     axios.defaults.headers.common.authorization = await localStorage.getItem("token");
+     axios.post(process.env.REACT_APP_BACKEND+"api/company/addSalaryReview",add_data).then(response=>{
                 
       if(response.status === 200)
       {
@@ -86,7 +87,7 @@ export default function SalaryModal(props) {
   };
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} disabled={props.btn}>
         Add a Salary
       </Button>
       <Dialog open={open} onClose={handleClose}>

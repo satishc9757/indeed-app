@@ -24,6 +24,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import backendServer from "../../webConfig";
 
+
 class LandingPage extends Component {
   constructor(props) {
     super(props);
@@ -65,6 +66,7 @@ class LandingPage extends Component {
   search = async (e) => {
     console.log("called search");
     let location = this.state.location || "";
+    axios.defaults.headers.common.authorization = await localStorage.getItem("token");
     var response = await axios.get(
       `${backendServer}/jobseeker/search?searchQuery=${this.state.search}&location=${location}&page=${this.state.page}&limit=${this.state.limit}`
     );
@@ -83,18 +85,20 @@ class LandingPage extends Component {
   };
 
   async componentDidMount() {
-    this.setState({ searchResultText: "Popular companies near you" });
+    const seeker_id = sessionStorage.getItem("job-seeker-id");
+    if(seeker_id){
+        //const seeker_id = sessionStorage.getItem("job-seeker-id");; //to be fetched from cookie
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
+        var response = await axios.get(
+          `${backendServer}/jobseeker?seeker_id=${seeker_id}`
+        );
+        console.log("profile data : " + JSON.stringify(response.data));
+        await this.setState({
+          profileData: response.data[0],
+        });
+        console.log("profileData from state : " + this.state.profileData);
+    }
 
-    const seeker_id = sessionStorage.getItem("job-seeker-id"); //to be fetched from cookie
-
-    var response = await axios.get(
-      `${backendServer}/jobseeker?seeker_id=${seeker_id}`
-    );
-    console.log("profile data : " + JSON.stringify(response.data));
-    await this.setState({
-      profileData: response.data[0],
-    });
-    console.log("profileData from state : " + this.state.profileData);
   }
 
   renderJobCard = (job, index) => {
@@ -182,42 +186,37 @@ class LandingPage extends Component {
             </Grid>
           </Grid>
 
-          {this.state.results.length === 0 && (
-            <div>
-              <Grid container>
-                <Grid item sm={4} />
-                <Grid item sm={6}>
-                  {"user-id" in sessionStorage && (
-                    <div>
-                      <Link to="/upload" underline="none">
-                        Post Your Resume
-                      </Link>
-                      - It only takes a few seconds
-                    </div>
-                  )}
-                  {!("user-id" in sessionStorage) && (
-                    <div>
-                      <Link to="/login" underline="none">
-                        Post Your Resume
-                      </Link>{" "}
-                      - It only takes a few seconds
-                    </div>
-                  )}
-                </Grid>
-              </Grid>
-              <br />
-              <Grid container>
-                <Grid item sm={5} />
-                <Grid item sm={6}>
-                  Employers: <Link to="/employer">Post a job</Link>
-                </Grid>
-              </Grid>
-            </div>
-          )}
-          {/* JOBS PANEL */}
-          {"jobCards" in this.state.results &&
-            this.state.results.jobCards.length > 0 && (
-              <div>
+                {this.state.results.length===0 &&
+                <div>
+                    <Grid container>
+                        <Grid item sm={4}/>
+                        <Grid item sm={6}>
+                            {'job-seeker-id' in sessionStorage &&
+                                <div><Link to="/upload" underline="none">
+                                    Post Your Resume
+                                </Link>- It only takes a few seconds</div>}
+                            {!('job-seeker-id' in sessionStorage) &&
+                                <div>
+                                <Link to="/login" underline="none">
+                                Post Your Resume
+                                </Link> - It only takes a few seconds</div>}
+                        </Grid>
+                    </Grid>
+                    <br/>
+                    <Grid container>
+                        <Grid item sm={5}/>
+                        <Grid item sm={6}>
+                            Employers: <Link to="/"
+                                underline="none">
+                                Post a job
+                            </Link>
+                        </Grid>
+                    </Grid>
+                </div>
+                }
+                {/* JOBS PANEL */}
+                {'jobCards' in this.state.results && this.state.results.jobCards.length>0 &&
+                (<div>
                 <Container>
                   <Grid container spacing={2}>
                     <Grid item xs={6}>

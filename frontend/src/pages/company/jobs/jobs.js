@@ -1,4 +1,4 @@
-
+import backendServer from "../../../webConfig";
 import { Avatar, Container, Grid, Paper, Tab, Typography, TextField, Button, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { Card, CardActions, CardContent, IconButton, Pagination, Stack } from "@mui/material";
 import { grey } from "@mui/material/colors";
@@ -113,8 +113,8 @@ class Jobs extends Component {
     }
 
     onSearch = async () => {
-        const backendServer = "http://localhost:8000/api"//just for local testing
         let location = this.state.locationSearchText||'';
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         var response = await axios.get(`${backendServer}/jobseeker/search?searchQuery=${this.state.jobTitleSearchText}&location=${location}&page=${this.state.page}&limit=${this.state.limit}`);
         console.log("jobs data : "+JSON.stringify(response.data));
         await this.setState({

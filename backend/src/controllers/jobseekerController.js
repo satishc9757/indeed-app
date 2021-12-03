@@ -310,32 +310,33 @@ exports.updateJobseekerResume = async function (req, res) {
 };
 
 exports.updateJobseekerCover = async function (req, res) {
-  console.log("inside update resume", req.params);
-  await profileImgUpload(req, res, async (error) => {
-    console.log("requestOkokok", req.file);
-    if (error) {
-      console.log("errors", error);
-      res.json({ error: error });
-    } else {
-      //  If File not found
-      if (req.file === undefined) {
-        //console.log( 'Error: No File Selected!' );
-        return res.status(500).json({ error: error });
-      } else {
-        // If Success
-        const imageLocation = req.file.location; // Save the file name into database into profile model
-        const ID = req.file.ID;
-        res.status(200).end({ location: ID });
-      }
-    }
-  });
-  // await kafka.make_request("update_resume", req, (err, resp) => {
-  //     if (err || !resp) {
-  //         console.log(err);
-  //         return err.status(500).json({ error: err });
-  //     }
-  //     res.send(resp);
-  // })
+
+  console.log("inside update cover" , req.params)
+  await profileImgUpload(req, res, async(error) => {
+        console.log('requestOkokok', req.file);
+        if (error) {
+            console.log('errors', error);
+            res.json({ error: error });
+        } else {
+            //  If File not found
+            if (req.file === undefined) {
+                //console.log( 'Error: No File Selected!' );
+                return res.status(500).json({ error: error });
+            } else {
+                // If Success
+                const imageLocation = req.file.location;// Save the file name into database into profile model
+                const ID = req.file.location;
+                res.status(200).end(ID);
+            }
+        }
+    })
+    // await kafka.make_request("update_resume", req, (err, resp) => {
+    //     if (err || !resp) {
+    //         console.log(err);
+    //         return err.status(500).json({ error: err });
+    //     }
+    //     res.send(resp);
+    // })
 };
 
 exports.deleteJobseekerResume = async function (req, res) {
@@ -373,7 +374,29 @@ exports.getReviews = async function (req, res) {
 
 exports.updateEmail = async function (req, res) {
   try {
-    kafka.make_request("update_email", req.body, (err, resp) => {
+    kafka.make_request("update_email", req.body, (error, resp) => {
+      console.log(error+"----------"+ resp)
+      if (error || !resp) {
+        console.log(error);
+        res
+          .status(500)
+          .send(
+            JSON.stringify({ message: "Something went wrong!", error: error })
+          );
+      } else {
+        res.status(200).json(resp);
+      }
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .send(JSON.stringify({ message: "Something went wrong!", error: err }));
+  }
+};
+
+exports.getAppliedJobs = async function (req, res) {
+  try {
+    kafka.make_request("get_applied_jobs", req.query, (err, resp) => {
       if (err || !resp) {
         console.log(err);
         res
@@ -392,9 +415,9 @@ exports.updateEmail = async function (req, res) {
   }
 };
 
-exports.getAppliedJobs = async function (req, res) {
+exports.getSalariesByJobTitleLocation = async function (req, res) {
   try {
-    kafka.make_request("get_applied_jobs", req.query, (err, resp) => {
+    kafka.make_request("getSalariesByJobTitleLocation", req.query, (err, resp) => {
       if (err || !resp) {
         console.log(err);
         res

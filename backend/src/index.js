@@ -8,7 +8,8 @@ const cookieParser = require("cookie-parser");
 const { connect } = require("mongoose");
 const FRONTEND_URL = "http://localhost:3000";
 // const FRONTEND_URL = "http://3.15.147.196:3000"
-const { auth, passport } = require("./jwt/passport");
+const passport = require("passport");
+// const { auth, passport } = require("./jwt/passport");
 // const {passport_res} = require('./jwt/res_passport');
 //listening
 
@@ -19,7 +20,7 @@ app.use("/static/images", express.static(image_dir));
 
 //use cors to allow cross origin resource sharing
 app.use(cors({ origin: FRONTEND_URL, credentials: true }));
-
+app.use(passport.initialize());
 //use express session to maintain session data
 app.use(
   session({

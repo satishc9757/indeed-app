@@ -6,14 +6,17 @@ import { Container, Grid, Tab, Tabs } from "@material-ui/core";
 import Snapshot from './snapshot';
 import JoinUs from "./joinus";
 import Jobs from "./jobs/jobs";
+import ReviewsTab from '../../components/Reviews/DashReviews/ReviewTab'
+import SalaryTab from '../../components/Reviews/SalaryReviews/SalayReviewsTab'
 import JobPosted from "../employer/jobPosted";
 import {Link, useLocation} from "react-router-dom";
 import { Box } from "@mui/system";
 import backendServer from "../../webConfig";
+import Photos from "../../components/company/Photos";
 const axios = require('axios');
 
 export default function Common() {
-    const [tabValue, setTabValue] = React.useState(0);
+    const [tabValue, setTabValue] = React.useState();
     const [tabResult, setTabResult] = React.useState('snapshot');
 
     const [companyDetails, setCompanyDetails] = useState('');
@@ -46,10 +49,12 @@ export default function Common() {
             const tab = new URLSearchParams(search).get('tab');
             
             let Company_ID = 2;
+            axios.defaults.headers.common.authorization = await localStorage.getItem("token");
             var response = await axios.get(`${backendServer}/company/companyDetails?compId=${Company_ID}`);
 
             console.log(JSON.stringify(response.data[0])+"-----");
             await setCompanyDetails(response)
+            axios.defaults.headers.common.authorization = await localStorage.getItem("token");
             var reviews = await axios.get(`${backendServer}/company/getFeaturedReviews?compId=${Company_ID}`);
             await console.log("reviews ", reviews.data);
             for (var idx = 0; idx<reviews.data.length; idx++){
@@ -68,16 +73,16 @@ export default function Common() {
             // }
     }, [search])
 
-    
+    console.log("here are the company details",companyDetails)
     const TabContent = () => {
         console.log(tabResult)
         if (tabResult === "snapshot") return <Snapshot CompanyDetails={companyDetails} featuredReviews={featuredReviews} />
         else if (tabResult === "join") return <JoinUs CompanyDetails={companyDetails} />
-        // else if (tabResult === "reviews") return </>
-        // else if (tabResult === "salary") return </>
+        else if (tabResult === "reviews") return <ReviewsTab CompanyDetails={companyDetails} />
+        else if (tabResult === "salaries") return <SalaryTab CompanyDetails={companyDetails}/>
         else if (tabResult === "jobs") return <Jobs/>
         // else if (tabResult==="benefits") return </>
-        //else if (tabResult==="photos") return </>
+        else if (tabResult==="photos") return <Photos/>
         else return <Snapshot CompanyDetails={companyDetails} />
         }
 

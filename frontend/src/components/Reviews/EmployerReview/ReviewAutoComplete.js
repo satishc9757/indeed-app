@@ -1,12 +1,10 @@
 import React,{useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import Box from '@mui/material/Box';
-import SalaryModal  from './SalaryModal';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
+
 import Button from '@mui/material/Button';
-export default function AutoCompleteSearchBox(props) {
+import ReviewModal from './ReviewModal'
+export default function ReviewAutoComplete(props) {
     const top100Films=props.data
     const [title,settitle]=useState()
     const [category,setcategory]=useState()
@@ -16,6 +14,11 @@ export default function AutoCompleteSearchBox(props) {
 
     const handleChange = (event, value) => {setplace(value);console.log("value",value)};
     const handleJobChange = (event, value) => {setcategory(value.category);settitle(value.salary_job_title)};
+
+    let opts=[]
+    for(let i=0;i<=5;i+=0.5){
+        opts.push(i)
+    }
     const handleSearch=()=>{
         props.applyfilter(category,title,place)
     }
@@ -31,34 +34,21 @@ export default function AutoCompleteSearchBox(props) {
   return (<div className="container" style={{display:"flex",alignItems:"center",justifyContent:"center", background:"#faf9f8"}}>
       
       <table>
-      <tr><h3> <b>How much does {"company"} pay for {"role"}</b> </h3></tr>
+
+      <div style={{}}> 
         <td>
-      <label><b>Jobs</b></label>
-    <Autocomplete
-    id="grouped-demo"
-    
-    options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
-    groupBy={(option) => option.firstLetter}
-    getOptionLabel={(option) => option.salary_job_title}
-    sx={{ width: 300}}
-    style={{background:"white"}}
-    size="small"
-    onChange={handleJobChange}
-    renderInput={(params) => <TextField {...params} />}
-    />
-    <br />
-</td><td>
-<label><b>Place</b></label>
+<label><b>Filter By Ratings</b></label>
 <Autocomplete
     disablePortal
     id="combo-box-demo"
-    options={locations}
+    options={opts}
   
    
     getOptionLabel={(option) => option}
     sx={{ width: 300 }}
-    onChange={handleChange}
+    onChange={(e,v)=>{props.applyfilter(e.target.value)}}
     size="small"
+    onChange={(e,v)=>{props.applyfilter(v)}}
     style={{background:"white"}}
     renderInput={(params) => <TextField {...params}/>}
 
@@ -66,14 +56,18 @@ export default function AutoCompleteSearchBox(props) {
 </td>
 <td>
   <br />
-<Button variant="outlined" onClick={handleSearch}>
-        Search
+<Button variant="outlined" onClick={()=>props.sort("date")}>
+        Sort by Date
       </Button>
 </td>
 <td>
   <br />
-<SalaryModal department_list={props.dept_list} />
+  <Button variant="outlined" onClick={()=>props.sort("rating")}>
+  Sort by Rating
+      </Button>
 </td>
+</div>
+
 </table>   </div>
   
   );
