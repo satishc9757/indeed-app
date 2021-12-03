@@ -14,7 +14,7 @@ import Photos from "../../components/company/Photos";
 const axios = require('axios');
 
 export default function Common() {
-    const [tabValue, setTabValue] = React.useState(0);
+    const [tabValue, setTabValue] = React.useState();
     const [tabResult, setTabResult] = React.useState('snapshot');
 
     const [companyDetails, setCompanyDetails] = useState('');

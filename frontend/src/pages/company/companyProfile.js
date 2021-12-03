@@ -158,7 +158,7 @@ const [profile, setProfile] = React.useState('');
         setFounded(data1.comp_founded)
         setHeadquarters(data1.comp_headquarters)
         setMission(data1.comp_mission)
-        setVision(data1.comp_mission)
+        // setVision(data1.comp_mission)
         setRevenue(data1.comp_revenue)
 
         
@@ -284,10 +284,10 @@ const [profile, setProfile] = React.useState('');
                         onChange={e=>setMission(e.target.value)}
                             variant="outlined" />
                         
-                        <Typography variant='subtitle1'>Vision</Typography>
+                        {/* <Typography variant='subtitle1'>Vision</Typography>
                         <TextField fullWidth id="outlined-basic" label="" value={visison}
                         onChange={e=>setVision(e.target.value)}
-                            variant="outlined" />
+                            variant="outlined" /> */}
                         
                         <Typography variant='subtitle1'>CEO Name</Typography>
                         <TextField fullWidth id="outlined-basic" label="" value={CEO}

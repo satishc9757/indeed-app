@@ -362,13 +362,14 @@ exports.getReviews = async function (req, res) {
 
 exports.updateEmail = async function (req, res) {
   try {
-    kafka.make_request("update_email", req.body, (err, resp) => {
-      if (err || !resp) {
-        console.log(err);
+    kafka.make_request("update_email", req.body, (error, resp) => {
+      console.log(error+"----------"+ resp)
+      if (error || !resp) {
+        console.log(error);
         res
           .status(500)
           .send(
-            JSON.stringify({ message: "Something went wrong!", error: err })
+            JSON.stringify({ message: "Something went wrong!", error: error })
           );
       } else {
         res.status(200).json(resp);
