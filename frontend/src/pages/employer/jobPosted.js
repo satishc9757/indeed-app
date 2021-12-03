@@ -21,7 +21,6 @@ class JobPosted extends Component {
     }
 
     async componentDidMount(){
-        
         var response = await axios.get(`${backendServer}/company/jobs?compId=${sessionStorage.getItem('emp_company_id')}`)
         console.log("response",response);
         await this.setState({
@@ -61,12 +60,9 @@ class JobPosted extends Component {
                         {job.job_location[0].city}, {job.job_location[0].state}, {job.job_company_rating || ""} . Remote
                         </Typography>
                         <Typography>
-                            Compensation: {job.job_salary_details} [Full Time]
-                        </Typography>
-                        <Typography>
                             Description: {job.job_what_you_need}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography color="text.secondary" style={{ fontWeight: 600 }}>
                             Applicants applied: {job.job_applicants}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
