@@ -1,20 +1,20 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
 let jobSeekersSchema = new mongoose.Schema({
-    seeker_id: {type: Number, required: true},
-    seeker_name: {type: String, required: true},
-    seeker_email: {type: String, required: true},
-    seeker_city: {type: String, required: false},
-    seeker_state: { type: String, required: false },
-    seeker_country: {type: String, required: true},
-    seeker_age: {type: Number, required: false},
-    seeker_contact: {type: String, required: false},
-    seeker_resume_location: {type: String, required: false},
-    seeker_job_applied: {type: Array, required: false},
-    seeker_job_saved: {type: Array, required: false},
-    seeker_created_at: {type: Date, required: false},
+  seeker_id: { type: Number, required: true },
+  seeker_name: { type: String, required: true },
+  seeker_email: { type: String, required: true },
+  seeker_city: { type: String, required: false },
+  seeker_state: { type: String, required: false },
+  seeker_country: { type: String, required: true },
+  seeker_age: { type: Number, required: false },
+  seeker_contact: { type: String, required: false },
+  seeker_resume_location: { type: String, required: false },
+  seeker_job_applied: { type: Array, required: false },
+  seeker_job_saved: { type: Array, required: false },
+  seeker_created_at: { type: Date, required: false },
 });
 
-const jobSeekersModel = mongoose.model('jobseekers', jobSeekersSchema);
+const jobSeekersModel = mongoose.model("jobseekers", jobSeekersSchema);
 module.exports = jobSeekersModel;
