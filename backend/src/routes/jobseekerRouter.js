@@ -22,7 +22,4 @@ router.get("/search", jobseekerController.getSearch);
 router.post("/application", jobseekerController.createJobApplication);
 router.post("/update/email", jobseekerController.updateEmail);
 router.get("/appliedJobs", jobseekerController.getAppliedJobs);
-
-
-
 module.exports = router;
