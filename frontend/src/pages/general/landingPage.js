@@ -24,6 +24,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import backendServer from "../../webConfig";
 
+
 class LandingPage extends Component {
   constructor(props) {
     super(props);
@@ -83,18 +84,20 @@ class LandingPage extends Component {
   };
 
   async componentDidMount() {
-    this.setState({ searchResultText: "Popular companies near you" });
+    const seeker_id = sessionStorage.getItem("job-seeker-id");
+    if(seeker_id){
+        //const seeker_id = sessionStorage.getItem("job-seeker-id");; //to be fetched from cookie
 
-    const seeker_id = sessionStorage.getItem("job-seeker-id"); //to be fetched from cookie
+        var response = await axios.get(
+          `${backendServer}/jobseeker?seeker_id=${seeker_id}`
+        );
+        console.log("profile data : " + JSON.stringify(response.data));
+        await this.setState({
+          profileData: response.data[0],
+        });
+        console.log("profileData from state : " + this.state.profileData);
+    }
 
-    var response = await axios.get(
-      `${backendServer}/jobseeker?seeker_id=${seeker_id}`
-    );
-    console.log("profile data : " + JSON.stringify(response.data));
-    await this.setState({
-      profileData: response.data[0],
-    });
-    console.log("profileData from state : " + this.state.profileData);
   }
 
   renderJobCard = (job, index) => {

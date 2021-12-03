@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
+import { Button, Dialog } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { IconButton, Link } from '@material-ui/core';
 // import {Link} from 'react-router-dom';
@@ -16,6 +16,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Grid, Rating } from '@mui/material';
 import backendServer from '../../webConfig';
 import axios from 'axios';
+import Modal from '@mui/material/Modal';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
 
 class JobDetailsCard extends Component {
 
@@ -43,6 +46,7 @@ class JobDetailsCard extends Component {
         // jobSaved: false,
         // companyAvgRating: 4.3,
         appliedForJob: false,
+        openLogin: false
     }
 
     handleSaveAction = async () => {
@@ -77,33 +81,60 @@ class JobDetailsCard extends Component {
         // const job_seeker_gender = "";
         // const job_seeker_cover_letter_link = "";
         // const job_seeker_resume_link = "";
-        console.log("from props : "+JSON.stringify(this.props.profileData));
-        const payload = {
-            app_job_id: this.props.job._id,
-            app_job_seeker_id: job_seeker_id,
-            app_name: this.props.profileData.seeker_name,
-            app_email: this.props.profileData.seeker_email,
-            //app_gender: this.props.profileData.seeker_name,
-            app_street: this.props.profileData.seeker_name,
-            app_city: this.props.profileData.seeker_city,
-            app_state: this.props.profileData.seeker_state,
-            //app_zipcode: this.props.profileData.seeker_name,
-            app_country: this.props.profileData.seeker_country,
-            app_resume_link: this.props.profileData.seeker_resume_location,
-            //app_cover_letter_link: this.props.profileData.seeker_name
+        if(job_seeker_id && this.props.profileData){
+            console.log("from props : "+JSON.stringify(this.props.profileData));
+            const payload = {
+                app_job_id: this.props.job._id,
+                app_job_seeker_id: job_seeker_id,
+                app_name: this.props.profileData.seeker_name,
+                app_email: this.props.profileData.seeker_email,
+                //app_gender: this.props.profileData.seeker_name,
+                app_street: this.props.profileData.seeker_name,
+                app_city: this.props.profileData.seeker_city,
+                app_state: this.props.profileData.seeker_state,
+                //app_zipcode: this.props.profileData.seeker_name,
+                app_country: this.props.profileData.seeker_country,
+                app_resume_link: this.props.profileData.seeker_resume_location,
+                //app_cover_letter_link: this.props.profileData.seeker_name
+            }
+
+            console.log("payload : "+JSON.stringify(payload));
+            var response = await axios.post(`${backendServer}/jobseeker/application`, payload);
+            console.log("response: "+JSON.stringify(response.data));
+            if(response.status === 200){
+                this.setState({appliedForJob: true});
+            }
+        } else {
+            console.log("hostory push "+JSON.stringify(this.props));
+            this.setState({openLogin: true});
         }
 
-        console.log("payload : "+JSON.stringify(payload));
-        var response = await axios.post(`${backendServer}/jobseeker/application`, payload);
-        console.log("response: "+JSON.stringify(response.data));
-        if(response.status === 200){
-            this.setState({appliedForJob: true});
-        }
+
+
+    }
+
+    closeLoginModal = () => {
+        this.setState({openLogin: false});
+    }
+
+    loginModal = () => {
+        return (
+            <Dialog open={this.state.openLogin} onClose={this.closeLoginModal}>
+            {/* <DialogTitle style={{textAlign:"center"}}>New Job Posting</DialogTitle> */}
+            <DialogContent>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                    Please login first. <Link href="/login">Login</Link>
+                </Typography>
+            </DialogContent>
+            <DialogActions>
+                    <Button onClick={this.closeLoginModal}>Cancel</Button>
+            </DialogActions>
+            </Dialog>)
     }
 
     render() {
 
-
+        const applyButton = this.state.appliedForJob ? <Button  disabled variant="contained">Applied</Button> :  <Button onClick={this.handleApplyJob} variant="contained">Apply</Button>
         const favIcon = this.state.jobSaved ? <FavoriteIcon /> : <FavoriteBorderIcon />;
         const undoButton = this.state.jobSaved ? <Button onClick={this.handleUndoAction}>Undo</Button> : null;
 
@@ -151,7 +182,7 @@ class JobDetailsCard extends Component {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button onClick={this.handleApplyJob} variant="contained">Apply</Button>
+                {applyButton}
                 <Button onClick={this.handleSaveAction} variant="contained" color="grey">
                     {favIcon}
                 </Button>
@@ -202,6 +233,9 @@ class JobDetailsCard extends Component {
                 </Typography>
 
             </CardContent>
+
+                {this.loginModal()}
+
             </Card>
         )
     }
