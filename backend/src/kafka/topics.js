@@ -233,7 +233,6 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
-
       {
         topic: "admin.getTopFiveCompaniesAvgRating",
         partitions: 1,

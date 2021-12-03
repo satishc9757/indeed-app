@@ -9,6 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import NavBar from "../components/user/NavBar";
 import axios from 'axios';
+import backendServer from "../webConfig";
 
 class CompanyReviews extends Component {
 
@@ -48,7 +49,6 @@ class CompanyReviews extends Component {
 
         let locationText = "San Jose"; //to be fetched from cookie
 
-        const backendServer = "http://localhost:8000/api"//just for local testing
         var response = await axios.get(`${backendServer}/company/search?locaitonSearchText=${locationText}`);
         await this.setState({
             companies: response.data

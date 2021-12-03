@@ -158,6 +158,7 @@ class NavBar extends Component {
                 <Button onClick={this.signOut}>SignOut</Button>
               </div>
             )} */}
+
           </Toolbar>
         </AppBar>
       </Box>
