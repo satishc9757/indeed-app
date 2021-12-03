@@ -19,7 +19,10 @@ router.get('/avgSalByDept', companyController.getAvgSalaryByDeptId);
 router.post('/addSalaryReview',companyController.addSalaryReview)
 router.get('/JobTitleByDept', companyController.getTitleByDepts);
 router.post('/addEmployeeReview',companyController.addEmployeeReview);
+
 router.get('/getReviewsByCompId', companyController.getReviewsByCompId)
 router.post('/photos',companyController.uploadPhotos)
+
+router.post('/voteReview', companyController.voteReview);
 
 module.exports = router;
