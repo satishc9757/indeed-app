@@ -27,42 +27,44 @@ export default function CompanyList() {
 
     const search = async () => {
         let searchResultTemp = [];
+        let tempSession=[]
         for (var i = 0; i < companyDetails.length; i++){
             if (companyDetails[i].comp_name.includes(searchvalue)) {
                 console.log(companyDetails[i])
-                
+                tempSession.push(companyDetails[i])
+                // const temp = createCompanyObj(companyDetails[i].comp_name);
                 searchResultTemp.push(companyDetails[i].comp_name);
             }
             
         }
+        sessionStorage.setItem("obj", JSON.stringify(tempSession))
         setSearchResult(searchResultTemp);
-        console.log(searchResult.length)
-}
+        
+    }
+    const createCompanyObj = (obj) => {
+        return {
+            comp_name: obj.comp_name,
+            comp_id: obj.comp_id
+        }
+    }
     
-    // const search = async () => {
-    //     setSearchResult([])
-    //     console.log(companyDetails.length)
-    //     for (var i = 0; i < companyDetails.length; i++){
-    //         console.log(companyDetails[i])
-    //         let company = companyDetails[i].comp_name
-    //         console.log(company)
-    //         if (company.includes(searchvalue)) {
-    //             console.log(company)
-    //             let a = searchResult
-    //             a.push(company)
-    //             console.log(a)
-    //             setSearchResult(a)
-    //             console.log(searchResult)
-    //         }
-            
-    //     }
-               
-    // }
-
 
     const openReviews = (value) => {
         console.log(value)
         sessionStorage.setItem("compId", value)
+           navigate('/employer/jobstats')  
+    }
+    
+    const openSearchReviews = (value) => {
+        console.log(value)
+        let details = JSON.parse(sessionStorage.getItem("obj"))
+        console.log(details)
+        for (let i = 0; i < details.length; i++){
+            if (details[i].comp_name === value) {
+                sessionStorage.setItem("compId", details[i].comp_id)
+            }
+        }
+        // sessionStorage.setItem("compId", value)
            navigate('/employer/jobstats')  
     }
 
@@ -110,52 +112,6 @@ export default function CompanyList() {
                 </Grid>
 
 
-                
-                <div >
-                    {companyDetails.map(details => (
-                        <Card
-                            style={{ width: "600" }}
-                            key={details.comp_id}
-                            variant="outlined"
-                            // onClick={(event) => this.handleJobCardClick(event, index)}
-                        >
-                            <CardContent>
-                                <Grid container spacing={3} style={{alignItems:"center"}}>
-                                    <Grid item  >
-                                        <Avatar
-                                            alt="Company Logo"
-                                            //src={company.comp_logo}
-                                            src="https://uber-eats-store-0144.s3.us-east-2.amazonaws.com/images/others/adobe_log.png"
-                                            sx={{ width: 56, height: 56 }}
-                                        />
-
-                                    </Grid>
-                                    <Grid item xs={2}>
-                                        <Link href="/common?tab=snapshot">{details.comp_name}</Link>
-                                    </Grid>
-                                    <Grid item xs={3}>
-                                        <Rating name="read-only"
-                                            size="small"
-                                            value={details.comp_avg_rating}
-                                            defaultValue={2.5} precision={0.5}
-                                            readOnly />
-                                    </Grid>
-                                    <Grid item xs={3}>
-                                        <Link href="/common?tab=reviews">Reviews</Link>
-                                    </Grid>
-                                    <Grid item xs={3}>
-                                        <Link href="/employer/jobstats">Stats</Link>
-                                    </Grid>
-                                    
-                                </Grid>
-                            </CardContent>
-
-                        </Card>
-                    ))}
-                    </div>
-                
-
-
                 {searchResult.length === 0 ? <div></div> :
                     <div>
                     <Typography variant="h5"> Search Result</Typography>
@@ -167,7 +123,7 @@ export default function CompanyList() {
                 {searchResult.map(details=>(
                     <div>
                         <ListItem  disablePadding>
-                            <ListItemButton onClick={(e)=>openReviews(e.target.value)}>
+                            <ListItemButton onClick={(e)=>openSearchReviews(details)}>
                                 <ListItemText primary={details} />
                             </ListItemButton>
                         </ListItem>

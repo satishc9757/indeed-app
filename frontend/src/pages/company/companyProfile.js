@@ -1,7 +1,6 @@
 import {  Button, Card, CardContent, Container, Grid, IconButton, Link, List, ListItem, ListItemIcon, Modal, TextField, Typography } from "@material-ui/core";
 import React, { useEffect } from "react";
 import backendServer from "../../webConfig";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Avatar from '@mui/material/Avatar';
 import ImageUpload from "./uploadProfile";
 import NavBar from "../../components/user/NavBar";
@@ -44,7 +43,7 @@ const [profile, setProfile] = React.useState('');
   const handleClose = () => setOpen(false);
 
     const updateProfile = () => {
-        let emp_id=5
+        let emp_id=sessionStorage.setItem('emp-id')
         let data = {
             "emp_id": emp_id,
             "emp_name": firstName + ' ' + lastName,
@@ -59,18 +58,16 @@ const [profile, setProfile] = React.useState('');
             }).catch=(error) => {
                 console.log(error)
             }
-        
     }
-
 
     const uploadProfile = () => {
         
     }
     const updateCompany = () => {
-        let companyID = 2
+        let compId = sessionStorage.getItem('emp-company-id')
         console.log(lastName)
         let data = {
-            "comp_id": companyID,
+            "comp_id": compId,
             "comp_name": city,
             "comp_size": companySize,
             "comp_type": companyType,
@@ -94,8 +91,10 @@ const [profile, setProfile] = React.useState('');
 
 
     useEffect(() => {
-        let compId = 2;
-        let empID = 5;
+        // let compId = 2;
+        // let empID = 5;
+        let compId = sessionStorage.getItem('emp_company_id')
+        let empID = sessionStorage.getItem('emp-id')
         axios.get(`${backendServer}/employer?empID=${empID}`)
             .then(response => {
                 let data = response.data[0];
@@ -129,7 +128,7 @@ const [profile, setProfile] = React.useState('');
                     }
             })
         
-        }, [profile, handleClose])
+        }, [profile, open])
 
 
     
