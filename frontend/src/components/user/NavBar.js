@@ -134,7 +134,7 @@ class NavBar extends Component {
                         <Button onClick={this.signOut}><Link to="/">SignOut</Link></Button>
                     </div>
                 )}
-              </div>
+              {/* </div>
             )}
             {!("user-type" in sessionStorage) ? (
               <div>
@@ -157,7 +157,7 @@ class NavBar extends Component {
                 </Link>
                 <Button onClick={this.signOut}>SignOut</Button>
               </div>
-            )}
+            )} */}
           </Toolbar>
         </AppBar>
       </Box>
