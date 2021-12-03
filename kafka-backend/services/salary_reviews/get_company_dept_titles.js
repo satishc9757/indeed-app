@@ -6,7 +6,7 @@ async function handle_request(msg, callback) {
     
 
     try{
-        let sql = 'SELECT distinct(salary_job_title),avg(salary_pay) as avg_salary,category,salary_job_location FROM salary_reviews WHERE salary_company_id= '+compId+' group by category,salary_job_title';
+        let sql = 'SELECT distinct(salary_job_title),avg(salary_pay) as avg_salary,category,salary_job_location FROM salary_reviews WHERE salary_company_id= "'+compId+'" group by category,salary_job_title';
         
         await connection.con.query(sql, (err, results)=>{
             console.log(results)

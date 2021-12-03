@@ -61,7 +61,7 @@ export default function SalaryModal(props) {
 
 
      }
-     axios.post(process.env.REACT_APP_BACKEND+"api/company/addSalaryReview",add_data).then(response=>{
+     axios.post("http://localhost:8000/api/company/addSalaryReview",add_data).then(response=>{
                 
       if(response.status === 200)
       {
@@ -86,7 +86,7 @@ export default function SalaryModal(props) {
   };
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen} disabled={props.btn}>
+      <Button variant="outlined" onClick={handleClickOpen}>
         Add a Salary
       </Button>
       <Dialog open={open} onClose={handleClose}>

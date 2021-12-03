@@ -1,7 +1,10 @@
 import React,{useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-
+import Box from '@mui/material/Box';
+import SalaryModal  from './SalaryModal';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import ReviewModal from './ReviewModal'
 export default function ReviewAutoComplete(props) {
@@ -9,11 +12,12 @@ export default function ReviewAutoComplete(props) {
     const [title,settitle]=useState()
     const [category,setcategory]=useState()
     const [place,setplace]=useState("all")
+    
     const [selectedOptions, setSelectedOptions] = useState([]);
 
     const handleChange = (event, value) => {setplace(value);console.log("value",value)};
     const handleJobChange = (event, value) => {setcategory(value.category);settitle(value.salary_job_title)};
-    console.log(props)
+
     let opts=[]
     for(let i=0;i<=5;i+=0.5){
         opts.push(i)
@@ -33,7 +37,7 @@ export default function ReviewAutoComplete(props) {
   return (<div className="container" style={{display:"flex",alignItems:"center",justifyContent:"center", background:"#faf9f8"}}>
       
       <table>
-      <tr><td><ReviewModal comp_name={props.comp_name} comp_id={props.comp_id}  style={{float:"right",marginTop:"0.9rem"}} /></td></tr>
+      <tr><td><ReviewModal style={{float:"right",marginTop:"0.9rem"}} /></td></tr>
       <div style={{}}> 
         <td>
 <label><b>Filter By Ratings</b></label>
@@ -55,8 +59,8 @@ export default function ReviewAutoComplete(props) {
 </td>
 <td>
   <br />
-<Button variant="outlined" onClick={()=>props.sort("helpful")}>
-        Sort by Helpfulness
+<Button variant="outlined" onClick={()=>props.sort("date")}>
+        Sort by Date
       </Button>
 </td>
 <td>
