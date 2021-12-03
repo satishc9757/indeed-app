@@ -91,7 +91,7 @@ const createKafkaTopics = () => {
         topic: "updateCompanyDetails",
         partitions: 1,
         replicationFactor: 1,
-      }, 
+      },
       {
         topic: "save_jobs",
         partitions: 1,
@@ -187,7 +187,7 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
-      
+
       {
         topic: "search",
         partitions: 1,
@@ -232,7 +232,7 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
-      
+
       {
         topic: "admin.getAllCompanies",
         partitions: 1,
