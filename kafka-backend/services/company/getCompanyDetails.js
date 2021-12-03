@@ -14,7 +14,7 @@ async function handle_request(msg, callback) {
                 callback(null, []);
             }
             else{
-                sql = 'UPDATE company_details SET count ='+results[0]['count']+1+' WHERE comp_id='+compId+';'
+//                 sql = 'UPDATE company_details SET count ='+results[0]['count']+1+' WHERE comp_id='+compId+';'
                 // await connection.con.query(sql,(error, res)=>{
                 //     if(error){
                 //         callback(null, [])
