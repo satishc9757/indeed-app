@@ -85,9 +85,11 @@ const add_review = require('./services/company/add_review')
 const get_reviews = require('./services/company/get_reviews')
 
 const GetSalariesByJobTitleLocation = require('./services/jobSeeker/getSalariesByJobTitleLocation')
+const MarkPhotoAsInappropriate = require('./services/admin/markPhotoAsInappropriate');
+const MarkPhotoAsAppropriate = require('./services/admin/markPhotoAsAppropriate');
+const GetAllPhotos = require('./services/admin/getAllPhotos');
 const vote_review = require('./services/company/mark_helpful')
 const saveJobs = require("./services/jobSeeker/saveJobs");
-
 const get_photos= require('./services/company/getPhotos')
 
 
@@ -186,6 +188,7 @@ handleTopicRequest("add_employee_review", add_review);
 
 handleTopicRequest("getSalariesByJobTitleLocation", GetSalariesByJobTitleLocation);
 handleTopicRequest("vote_review",vote_review );
-
+handleTopicRequest("admin.markPhotoAsInappropriate", MarkPhotoAsInappropriate);
+handleTopicRequest("admin.markPhotoAsAppropriate", MarkPhotoAsAppropriate);
+handleTopicRequest("admin.getAllPhotos", GetAllPhotos);
 handleTopicRequest("get_photos", get_photos);
-

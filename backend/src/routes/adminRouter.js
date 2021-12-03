@@ -12,5 +12,8 @@ router.get('/getTopFiveMostReviewedCompanies',checkAuth, adminController.getTopF
 router.get('/getTopFiveCompaniesAvgRating',checkAuth, adminController.getTopFiveCompaniesAvgRating);
 router.get('/getTopFiveSeekersAccpReviews', checkAuth, adminController.getTopFiveSeekersAccpReviews);
 router.get('/getTopTenCEORating', checkAuth,adminController.getTopTenCEORating);
+router.get('/markPhotoAsInappropriate', adminController.markPhotoAsInappropriate); 
+router.get('/markPhotoAsAppropriate', adminController.markPhotoAsAppropriate); 
+router.get('/getAllPhotos', adminController.getAllPhotos);
 
 module.exports = router;

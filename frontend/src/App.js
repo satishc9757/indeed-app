@@ -35,6 +35,8 @@ import JobPostings from './pages/employer/jobPostings';
 import JobStats from './pages/employer/jobStats';
 import CompanyReviews from './pages/companyReviews';
 import ReviewTab from './components/Reviews/DashReviews/ReviewTab'
+import Reviews from './pages/admin/reviews'
+import Photos from './pages/admin/photos'
 
 const theme = createTheme({
   pallete: {
@@ -96,6 +98,8 @@ class App extends Component {
               />
               <Route exact path="/companyReviewsTab" element={<ReviewTab />} />
               <Route exact path="/employerReviewTab" element={<EmployerReviewsTab />} />
+              <Route exact path="/admin/reviews" element={<Reviews />} />
+              <Route exact path="/admin/photos" element={<Photos />} />
             </Routes>
           </div>
         </Router>
