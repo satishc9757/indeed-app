@@ -20,28 +20,29 @@ import axios from 'axios';
 class JobDetailsCard extends Component {
 
     state = {
-        _id:"619c40485cc9d329b4f41e3d",
-        job_company_id: "Comp1",
-        job_title: "Software Engineer Intern",
-        job_company_name: "PWC",
-        job_company_image_link: "https://uber-eats-store-0144.s3.us-east-2.amazonaws.com/images/others/pwc_bg.jpeg",
-        job_industry: "Information Technology",
-        job_location: {
-            city: "San Jose",
-            street:"7th Street",
-            state: "CA",
-            country: "USA",
-            zipcode: "95126",
-        },
-        job_work_type: "Internship",
-        job_salary_details: "$50/hour",
-        job_compensation: 50,
-        job_what_you_do: "As an Intern / Trainee, you'll work as part of a team of problem solvers, helping to solve complex business issues from strategy to execution. PwC Professional skills and responsibilities for this management level.",
-        job_what_you_love: "Our team helps multinational clients manage their mobile workforce by developing effective expatriate management solutions. You’ll be assisting our team manage business processes through expatriate software implementation, systems redesign and integration with enterprise Human Resources/Payroll solutions such as PeopleSoft, Workday, SAP and Human Resources Access.",
-        job_what_you_need: "Understanding of advanced programming concepts and object oriented design patterns, emphasizing data structures and algorithms.",
-        job_reviews: 8138,
-        jobSaved: false,
-        companyAvgRating: 4.3,
+        // _id:"619c40485cc9d329b4f41e3d",
+        // job_company_id: "Comp1",
+        // job_title: "Software Engineer Intern",
+        // job_company_name: "PWC",
+        // job_company_image_link: "https://uber-eats-store-0144.s3.us-east-2.amazonaws.com/images/others/pwc_bg.jpeg",
+        // job_industry: "Information Technology",
+        // job_location: {
+        //     city: "San Jose",
+        //     street:"7th Street",
+        //     state: "CA",
+        //     country: "USA",
+        //     zipcode: "95126",
+        // },
+        // job_work_type: "Internship",
+        // job_salary_details: "$50/hour",
+        // job_compensation: 50,
+        // job_what_you_do: "As an Intern / Trainee, you'll work as part of a team of problem solvers, helping to solve complex business issues from strategy to execution. PwC Professional skills and responsibilities for this management level.",
+        // job_what_you_love: "Our team helps multinational clients manage their mobile workforce by developing effective expatriate management solutions. You’ll be assisting our team manage business processes through expatriate software implementation, systems redesign and integration with enterprise Human Resources/Payroll solutions such as PeopleSoft, Workday, SAP and Human Resources Access.",
+        // job_what_you_need: "Understanding of advanced programming concepts and object oriented design patterns, emphasizing data structures and algorithms.",
+        // job_reviews: 8138,
+        // jobSaved: false,
+        // companyAvgRating: 4.3,
+        appliedForJob: false,
     }
 
     handleSaveAction = async () => {
@@ -62,6 +63,42 @@ class JobDetailsCard extends Component {
             this.setState({jobSaved: false})
         }
 
+    }
+
+    handleApplyJob = async () => {
+        const job_seeker_id =  sessionStorage.getItem("job-seeker-id");//FETCH from session!!!
+        // const job_seeker_name = ""; //FETCH from session!!!
+        // const job_seeker_email = ""; //FETCH from session!!!
+        // const job_seeker_street = "";
+        // const job_seeker_city = "";
+        // const job_seeker_state = "";
+        // const job_seeker_country = "";
+        // const job_seeker_zipcode = "";
+        // const job_seeker_gender = "";
+        // const job_seeker_cover_letter_link = "";
+        // const job_seeker_resume_link = "";
+        console.log("from props : "+JSON.stringify(this.props.profileData));
+        const payload = {
+            app_job_id: this.props.job._id,
+            app_job_seeker_id: job_seeker_id,
+            app_name: this.props.profileData.seeker_name,
+            app_email: this.props.profileData.seeker_email,
+            //app_gender: this.props.profileData.seeker_name,
+            app_street: this.props.profileData.seeker_name,
+            app_city: this.props.profileData.seeker_city,
+            app_state: this.props.profileData.seeker_state,
+            //app_zipcode: this.props.profileData.seeker_name,
+            app_country: this.props.profileData.seeker_country,
+            app_resume_link: this.props.profileData.seeker_resume_location,
+            //app_cover_letter_link: this.props.profileData.seeker_name
+        }
+
+        console.log("payload : "+JSON.stringify(payload));
+        var response = await axios.post(`${backendServer}/jobseeker/application`, payload);
+        console.log("response: "+JSON.stringify(response.data));
+        if(response.status === 200){
+            this.setState({appliedForJob: true});
+        }
     }
 
     render() {
@@ -96,7 +133,7 @@ class JobDetailsCard extends Component {
                     </Grid>
                     <Grid item xs={4}>
                         <Rating name="read-only"
-                                value={this.props.job.job_reviews}
+                                value={this.props.job.job_company_rating}
                                 size="small"
                                 defaultValue={2.5} precision={0.5}
                                 readOnly />
@@ -114,7 +151,7 @@ class JobDetailsCard extends Component {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button variant="contained">Apply</Button>
+                <Button onClick={this.handleApplyJob} variant="contained">Apply</Button>
                 <Button onClick={this.handleSaveAction} variant="contained" color="grey">
                     {favIcon}
                 </Button>

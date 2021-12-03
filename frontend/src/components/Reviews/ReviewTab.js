@@ -25,9 +25,9 @@ const ReviewsTab = () => {
     
     const department_list = []
     var result={}
-    useEffect(()=>{
-
-      axios.get("http://localhost:8000/api/company/getReviewsByCompId?compId=1").then(response=>{
+  useEffect(() => {
+      let compId = sessionStorage.getItem('compId')
+      axios.get(`http://localhost:8000/api/company/getReviewsByCompId?compId=${compId}`).then(response=>{
                 
         if(response.status === 200)
         {
@@ -62,7 +62,7 @@ const ReviewsTab = () => {
 })
 
 
-    },[]);
+    },[userid]);
 
 
 
