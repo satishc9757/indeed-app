@@ -16,7 +16,7 @@ export default function ImageUpload(props) {
 
 
 
-    const singleFileUploadHandler = () => {
+    const singleFileUploadHandler = async () => {
         console.log('inside image function')
         const data = new FormData();// If file selected
         if ( {selectedFile} ) 
