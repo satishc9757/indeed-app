@@ -5,7 +5,7 @@ var router = express.Router();
 const { checkAuth } = require("../Utils/passport");
 // router.get("/search", jobseekerController.getSearchByTitleorLocation);
 router.get("/search/company", checkAuth, jobseekerController.getSearchByCompanyName);
-router.post("/jobs", checkAuth, jobseekerController.saveJobs);
+router.post("/jobs", jobseekerController.saveJobs);
 router.get("/jobs", checkAuth, jobseekerController.getSavedJobs);
 router.post("/reviews", checkAuth, jobseekerController.addReviews);
 router.get("/reviews", checkAuth, jobseekerController.getReviews);

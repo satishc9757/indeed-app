@@ -80,6 +80,10 @@ class NavBar extends Component {
                 <Button>
                   <Link to="/">Find jobs</Link>
                 </Button>
+               <Button>
+                  <Link to="/companyreviews">Company reviews</Link>
+                </Button>
+
                 {/* <Button>Company reviews</Button>
                 <Button>Find salaries</Button> */}
               </div>
