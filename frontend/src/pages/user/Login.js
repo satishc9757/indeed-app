@@ -1,4 +1,4 @@
-import { useState } from "react"; 
+import { useState } from "react";
 import { Button, Grid, TextField } from "@mui/material";
 import logo from "../../media/IndeedLogo.png";
 import { Box } from "@mui/system";
@@ -7,37 +7,36 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-
-  const login = async ()=>{
+  const login = async () => {
     //Call Login API here
-    const data = await axios.post(`${backendServer}/login`,{
-     
-      email:email,
-      password:password
-
-    })
-    console.log("data ",data.data)
-    if(data.data){
-      sessionStorage.setItem("user-type",data.data.user_type);
-      sessionStorage.setItem("user-email",data.data.user_email);
-      if(data.data.user_type==="jobseeker"){
+    const data = await axios.post(`${backendServer}/login`, {
+      email: email,
+      password: password,
+    });
+    console.log("data ", data.data);
+    if (data.data) {
+      sessionStorage.setItem("user-type", data.data.user_type);
+      sessionStorage.setItem("user-email", data.data.user_email);
+      if (data.data.user_type === "jobseeker") {
         sessionStorage.setItem("job-seeker-id", data.data.user_id);
         navigate("/");
-      }
-      else{
-        sessionStorage.setItem("emp-id",data.data.user_id);
-        navigate("/employer")
+      } else if (data.data.user_type === "employer") {
+        sessionStorage.setItem("emp-id", data.data.user_id);
+        navigate("/employer");
+      } else if (data.data.user_type === "admin") {
+        navigate("/analytics");
+      } else {
+        navigate("/");
       }
     }
-  }
+  };
 
   return (
-    <div style={{ backgroundColor: "#F3F2F1",  height: "100vh" }}>
+    <div style={{ backgroundColor: "#F3F2F1", height: "100vh" }}>
       <div
         style={{
           backgroundColor: "#F3F2F1",
@@ -58,7 +57,6 @@ export default function Login() {
               height: "45vh",
               width: "26vw",
               borderRadius: "10px",
-              
             }}
           >
             <div
@@ -104,11 +102,12 @@ export default function Login() {
                     />
                   </Grid>
                   <Grid item xs={12} style={{ margin: "10px" }}>
-                    <Button 
-                    variant="contained" 
-                    fullWidth
-                    sx={{mt:3,mb:2}}
-                    onClick={login}>
+                    <Button
+                      variant="contained"
+                      fullWidth
+                      sx={{ mt: 3, mb: 2 }}
+                      onClick={login}
+                    >
                       Login
                     </Button>
                     <Grid container justifyContent="flex-end">

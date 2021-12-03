@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Grid, TextField } from "@mui/material";
@@ -5,7 +6,7 @@ import logo from "../../media/IndeedLogo.png";
 import { Box } from "@mui/system";
 import backendServer from "../../webConfig";
 import getFirstPageData from "../../redux/actions/signupAction";
-import {useDispatch} from 'react-redux'
+import { useDispatch } from "react-redux";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -43,7 +44,7 @@ export default function Signup() {
           <div
             style={{
               backgroundColor: "#FFFFFF",
-              height: "55vh",
+              height: "60vh",
               width: "26vw",
               borderRadius: "10px",
             }}
