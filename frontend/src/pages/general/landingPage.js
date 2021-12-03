@@ -212,7 +212,7 @@ class LandingPage extends Component {
                 }
                 {/* JOBS PANEL */}
                 {'jobCards' in this.state.results && this.state.results.jobCards.length>0 &&
-                <div>
+                (<div>
                 <Container>
                   <Grid container spacing={2}>
                     <Grid item xs={6}>
