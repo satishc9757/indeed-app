@@ -3,7 +3,7 @@ import { Card, CardActions, CardContent, IconButton, Link, Rating, Stack } from 
 import { grey } from "@mui/material/colors";
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-
+import ReviewUserCard from "../user/reviewCard";
 import NavBar from "../../components/user/NavBar";
 import axios from 'axios';
 import backendServer from '../../webConfig';
@@ -11,6 +11,10 @@ import backendServer from '../../webConfig';
 class JobStats extends Component {
 
     state = {
+
+        reviews:[],
+        
+
             jobStats:[
                 // {
                 //         job_title: "Software Enginer Intern",
@@ -41,6 +45,7 @@ class JobStats extends Component {
                 //         applicants_rejected: 8
                 //     },
                 ]
+
     }
 
     onFieldChange = (e) =>{
@@ -48,7 +53,6 @@ class JobStats extends Component {
             [e.target.name]: e.target.value
         });
     }
-
 
     async componentDidMount(){
         this.setState({searchResultText: "Popular companies near you" });
@@ -64,6 +68,16 @@ class JobStats extends Component {
             jobStats: response.data
         });
         console.log(this.state.jobStats)
+
+        var response2 = await axios.get(`${backendServer}/company/getReviewsByCompId?compId=${compId}`);
+        console.log(response2.data)
+        
+        await this.setState({
+            reviews: response2.data
+        });
+        console.log(this.state.reviews)
+
+
     }
 
 
@@ -124,6 +138,27 @@ class JobStats extends Component {
                 {/* JOBS PANEL */}
                 <br/>
                 <Container maxWidth="md">
+
+                    {sessionStorage.getItem("user-type") === "admin" ?
+                    <Card style={{ width: 500 }}>
+                    <CardContent>
+                                <Typography variant='h6'>Reviews</Typography>
+                                {/* <ReviewUserCard reviews={reviews}></ReviewUserCard> */}
+                                
+                                {this.state.reviews.length === 0 ? <div></div> :
+                                    <Grid container style={{ flexDirection: "column" }} >
+                                        {this.state.reviews.map(details => (
+                                            <Grid style={{
+                                                maxWidth: 500
+                                            }} item md={3} key={this.state.reviews.review_id}>
+                                                <ReviewUserCard reviews={details} />
+                                                <br/>
+                                            </Grid>
+                                        ))}
+                                    </Grid>}
+                    </CardContent>
+                        </Card> : <div></div>}
+                    <br/>
                         <Typography variant="h6" component="div">
                             <b>Job Statistics for last year</b>
                         </Typography>
@@ -134,8 +169,8 @@ class JobStats extends Component {
 
                         <Stack spacing={2}>
                             {this.state.jobStats.map(this.renderJobCard)}
-                        </Stack>
-
+                    </Stack>
+                    
 
                 </Container>
 

@@ -149,6 +149,8 @@ export default function Jobseeker() {
         
         
     }, [])
+
+    
     console.log(reviews)
     const search = async (data2) => {
         let reviewstemp = [];
@@ -246,7 +248,7 @@ export default function Jobseeker() {
                                 <ArticleIcon style={{ width: 44, height: 64 }} />
                             </Grid>
                             <Grid item xs={8}>
-                                Name_Resume
+                                        {firstName }_Resume
                             </Grid>
                             <Grid item >
                                 <MoreVertIcon onClick={handleResumeOpen }/>
@@ -326,6 +328,7 @@ export default function Jobseeker() {
                                                 maxWidth: 500
                                             }} item md={3} key={reviews.review_id}>
                                                 <ReviewUserCard reviews={details} />
+                                                <br/>
                                             </Grid>
                                         ))}
                                     </Grid>}
