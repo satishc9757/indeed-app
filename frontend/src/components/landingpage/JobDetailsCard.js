@@ -55,6 +55,7 @@ class JobDetailsCard extends Component {
        if(!this.state.jobSaved){
             const jobSeekerId = "61a081696d73d01739a267ef" // should be fecthed from cookie or session
             let payload = {jobId: this.state._id};
+            axios.defaults.headers.common.authorization = await localStorage.getItem("token");
             var response = await axios.post(`${backendServer}/jobseeker/jobs?jobSeekerId=${jobSeekerId}`, payload);
             console.log("response: "+JSON.stringify(response.data));
             await this.setState({jobSaved: true})
@@ -98,18 +99,17 @@ class JobDetailsCard extends Component {
                 //app_cover_letter_link: this.props.profileData.seeker_name
             }
 
-            console.log("payload : "+JSON.stringify(payload));
-            var response = await axios.post(`${backendServer}/jobseeker/application`, payload);
-            console.log("response: "+JSON.stringify(response.data));
-            if(response.status === 200){
-                this.setState({appliedForJob: true});
-            }
-        } else {
-            console.log("hostory push "+JSON.stringify(this.props));
-            this.setState({openLogin: true});
-        }
-
-
+          console.log("payload : "+JSON.stringify(payload));
+          axios.defaults.headers.common.authorization = await localStorage.getItem("token");
+          var response = await axios.post(`${backendServer}/jobseeker/application`, payload);
+          console.log("response: "+JSON.stringify(response.data));
+          if(response.status === 200){
+              this.setState({appliedForJob: true});
+          }
+          } else {
+              console.log("hostory push "+JSON.stringify(this.props));
+              this.setState({openLogin: true});
+          }
 
     }
 

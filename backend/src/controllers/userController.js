@@ -5,18 +5,20 @@
 
 const Login = require("../models/LoginDetailsModel");
 const employer = require("../models/EmployerModel");
-
+const jwt = require('jsonwebtoken');
+const secret = "CMPE273"
 var kafka = require('../kafka/client');
 // const jwt = require('jsonwebtoken');
 // const { secret } = require('../jwt/config');
 // const { auth } = require("../jwt/passport");
 // auth();
 
+
 exports.login = async function (req, res) {
     console.log("login details ", req.body)
     req.query
     try {
-        kafka.make_request("login", req.body, (err, resp) => {
+        kafka.make_request("login", req.body, async(err, resp) => {
             console.log("resp",resp);
             if (err || !resp) {
               console.log(err);
@@ -25,9 +27,18 @@ exports.login = async function (req, res) {
                 .send(JSON.stringify({ message: 'Something went wrong!', error: err }));
             }
             else{
+                const payload = {
+                    user_id: resp.user_id,
+                    email: resp.user_email,
+                    user_type: resp.user_type
+                }
+
+                const token = await jwt.sign(payload, secret,{
+                    expiresIn: 10000000,
+                });
                 res
                 .status(200)
-                .end(JSON.stringify(resp));
+                .json({token: "jwt "+token});
             }
         });
         

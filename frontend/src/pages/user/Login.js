@@ -5,6 +5,7 @@ import { Box } from "@mui/system";
 import backendServer from "../../webConfig";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -13,21 +14,25 @@ export default function Login() {
 
   const login = async () => {
     //Call Login API here
-    const data = await axios.post(`${backendServer}/login`, {
+    const response = await axios.post(`${backendServer}/login`, {
       email: email,
       password: password,
     });
-    console.log("data ", data.data);
-    if (data.data) {
-      sessionStorage.setItem("user-type", data.data.user_type);
-      sessionStorage.setItem("user-email", data.data.user_email);
-      if (data.data.user_type === "jobseeker") {
-        sessionStorage.setItem("job-seeker-id", data.data.user_id);
+    const tokenArray = await response.data.token.split(" ");
+    console.log("token array ", tokenArray);
+    await localStorage.setItem("token", response.data.token);
+    let decodedToken = await jwt_decode(tokenArray[1]);
+    await console.log("decodedtoken ", decodedToken);
+    if (decodedToken) {
+      sessionStorage.setItem("user-type", decodedToken.user_type);
+      sessionStorage.setItem("user-email", decodedToken.email);
+      if (decodedToken.user_type === "jobseeker") {
+        sessionStorage.setItem("job-seeker-id", decodedToken.user_id);
         navigate("/");
-      } else if (data.data.user_type === "employer") {
-        sessionStorage.setItem("emp-id", data.data.user_id);
+      } else if (decodedToken.user_type === "employer") {
+        sessionStorage.setItem("emp-id", decodedToken.user_id);
         navigate("/employer");
-      } else if (data.data.user_type === "admin") {
+      } else if (decodedToken.user_type === "admin") {
         navigate("/analytics");
       } else {
         navigate("/");
