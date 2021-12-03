@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import backendServer from "../../webConfig";
 import axios from "axios";
@@ -9,6 +10,21 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Grid, List, ListItem, ListItemText } from "@mui/material";
 import AdminNavBar from "./AdminNavbar";
+import { CardMedia } from "@mui/material";
+import logo from "../../media/download.png";
+import Chart from "chart.js/auto";
+import {
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar,
+  BarChart,
+  Bar,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+} from "recharts";
 
 export default function Analytics() {
   const [topReviewdCompanies, setTopReviewdCompanies] = useState([]);
@@ -16,15 +32,13 @@ export default function Analytics() {
   const [topSeekersAccpReviews, setTopSeekersAccpReviews] = useState([]);
   const [topCeoRating, setTopCeoRating] = useState([]);
   const [reviewsDay, setReviewsDay] = useState([]);
-
+  const [barchartlist, setbarchartlist] = useState([]);
   const cardStyle = {
     display: "block",
     width: "500px",
-    height: "300px",
+    height: "400px",
     margin: "50px",
   };
-
-  
 
   useEffect(() => {
     axios
@@ -47,6 +61,14 @@ export default function Analytics() {
       setTopCeoRating(res.data);
     });
     axios.get(`${backendServer}/admin/getNumberOfReviewsPerDay`).then((res) => {
+      let temp = [];
+      for (let i of res.data) {
+        temp.push({
+          name: i["review_date"],
+          rate: i["count_of_total_reviews"],
+        });
+      }
+      setbarchartlist(temp);
       setReviewsDay(res.data);
     });
   }, []);
@@ -65,13 +87,17 @@ export default function Analytics() {
             Top 5 Mostly Reviewed Companies
           </h4>
           <CardContent>
-            
             <List>
-
               {topReviewdCompanies.map((company) => {
-               
                 return (
                   <ListItem>
+                    <CardMedia
+                      style={{ width: "50px", height: "50px" }}
+                      component="img"
+                      sx={{ width: 151 }}
+                      image={logo}
+                      alt="Live from space album cover"
+                    />
                     <ListItemText
                       primary={company.comp_name}
                       secondary={`${company.count_of_total_reviews} reviews posted`}
@@ -92,6 +118,13 @@ export default function Analytics() {
               {topCompaniesAvRating.map((company) => {
                 return (
                   <ListItem>
+                    <CardMedia
+                      style={{ width: "50px", height: "50px" }}
+                      component="img"
+                      sx={{ width: 151 }}
+                      image={logo}
+                      alt="Live from space album cover"
+                    />
                     <ListItemText
                       primary={company.comp_name}
                       secondary={company.avg_company_ratings.toFixed(1)}
@@ -124,7 +157,14 @@ export default function Analytics() {
           <br />
           <h4 style={{ textAlign: "center" }}>Number of Reviews per Day </h4>
           <CardContent>
-            <List>
+            <BarChart width={450} height={270} barSize={20} data={barchartlist}>
+              <CartesianGrid strokeDasharray="2 2" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="rate" fill="#80cbc4" />
+            </BarChart>
+            {/* <List>
               {reviewsDay.map((review) => {
                 return (
                   <ListItem>
@@ -135,7 +175,7 @@ export default function Analytics() {
                   </ListItem>
                 );
               })}
-            </List>
+            </List> */}
           </CardContent>
         </Card>
       </Grid>

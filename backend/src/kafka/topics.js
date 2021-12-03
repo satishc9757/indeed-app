@@ -48,7 +48,7 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
-       topic: "get_emp_profile",
+        topic: "get_emp_profile",
         partitions: 1,
         replicationFactor: 1,
       },
@@ -91,7 +91,7 @@ const createKafkaTopics = () => {
         topic: "updateCompanyDetails",
         partitions: 1,
         replicationFactor: 1,
-      }, 
+      },
       {
         topic: "save_jobs",
         partitions: 1,
@@ -187,7 +187,7 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
-      
+
       {
         topic: "search",
         partitions: 1,
@@ -207,7 +207,8 @@ const createKafkaTopics = () => {
         topic: "update_featured_review_status",
         partitions: 1,
         replicationFactor: 1,
-      },{
+      },
+      {
         topic: "company.getCompanyJobPostingsWithPagination",
         partitions: 1,
         replicationFactor: 1,
@@ -232,19 +233,19 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
-      
+
       {
         topic: "admin.getTopFiveCompaniesAvgRating",
         partitions: 1,
         replicationFactor: 1,
       },
       {
-        topic:'admin.getTopFiveMostReviewedCompanies',
+        topic: "admin.getTopFiveMostReviewedCompanies",
         partitions: 1,
         replicationFactor: 1,
       },
       {
-        topic:'admin.markReviewAsInappropriate',
+        topic: "admin.markReviewAsInappropriate",
         partitions: 1,
         replicationFactor: 1,
       },
@@ -273,8 +274,11 @@ const createKafkaTopics = () => {
         partitions: 1,
         replicationFactor: 1,
       },
-      
-      
+      {
+        topic: "admin.markReviewAsInappropriate",
+        partitions: 1,
+        replicationFactor: 1,
+      },
     ],
     (err) => {
       if (err) {
