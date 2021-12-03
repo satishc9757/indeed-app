@@ -38,7 +38,7 @@ class uploadResume extends Component {
             console.log("reaching here", this.state.selectedFile, this.state.selectedFile.name);
             form_data.append('profileImage', this.state.selectedFile, this.state.selectedFile.name);
             console.log(form_data.get('profileImage') )
-
+            axios.defaults.headers.common.authorization = await localStorage.getItem("token");
             await axios.post(`${backendServer}/jobseeker/resume/${sessionStorage.getItem('user-id')}`, form_data, {
                 headers: {
                 'accept': 'application/json',

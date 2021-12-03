@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid'
 import LinkedCameraIcon from '@mui/icons-material/LinkedCamera'
 import { Modal } from '@material-ui/core'
 import { Box } from '@mui/system'
+import axios from 'axios';
+import backendServer from '../../webConfig';
 import ImageUpload from '../../pages/company/uploadProfile'
 import PhotosUpload from '../../pages/company/uploadPhotos'
 const styles = (theme) => ({
@@ -50,16 +52,20 @@ const style1 = {
 };
 class Photos extends Component {
     state = {
-//         const [open, setOpen] = React.useState(false);
-//   const handleOpen = () => setOpen(true);
-//   const handleClose = () => setOpen(false);
+        photos:[],
+
         open:false
     }
     
-    // handleOpen = () => {
+    async componentDidMount(){
+        var response = await axios.get(`${backendServer}/company/photos?compId=${sessionStorage.getItem('emp_company_id')}`)
         
-    //         this.setState({open: true})
-    // }
+        await this.setState({
+            photos: response.data
+        })
+        console.log(this.state.photos)
+    }
+    
     render() {
         const handleOpen = () => {
         
@@ -78,9 +84,9 @@ class Photos extends Component {
             return photo.appropriate === true
         })
 
-        let displayPhotos = appropriatePhotos.map(({url}) => (
+        let displayPhotos = this.state.photos.map((data) => (
             <Grid item xs={3}>
-                <div className={classes.img} style={{backgroundImage: `url(${url})`}}>
+                <div className={classes.img} style={{backgroundImage: `url(${data.comp_photos})`}}>
                 </div>
             </Grid>
         ))

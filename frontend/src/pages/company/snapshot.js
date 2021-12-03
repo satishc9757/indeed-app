@@ -89,7 +89,7 @@ export default function Snapshot({CompanyDetails},{featuredReviews}) {
                         width="150"
                         height="200"
 
-                        // src={dp}
+                        src={CompanyDetails.comp_profile_location}
                         alt="dp"></img>
 
                 </Grid>
@@ -115,12 +115,12 @@ export default function Snapshot({CompanyDetails},{featuredReviews}) {
                             </Item></div>
                         </Box>
                     </Stack>
-                    <Box sx={{display: 'flex'}}>
+                    {/* <Box sx={{display: 'flex'}}>
                         <div ><Item>
                             <Typography variant='h6'>Industry</Typography>
                             <Typography >{CompanyDetails.comp_ceo}</Typography>
                         </Item></div>
-                    </Box>
+                    </Box> */}
                     
                 </Grid>
             </Grid>

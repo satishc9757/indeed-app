@@ -62,13 +62,14 @@ class JobStats extends Component {
         // let comp = 3;
             // parseInt(compId)
         // console.log(compId)  //hardcoded for now
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         var response = await axios.get(`${backendServer}/company/jobStats?compId=${compId}`);
         console.log(response.data)
         await this.setState({
             jobStats: response.data
         });
         console.log(this.state.jobStats)
-
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         var response2 = await axios.get(`${backendServer}/company/getReviewsByCompId?compId=${compId}`);
         console.log(response2.data)
         

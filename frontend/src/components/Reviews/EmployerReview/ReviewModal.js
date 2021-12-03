@@ -5,6 +5,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import backendServer from "../../../webConfig";
 import axios from 'axios'
 import {useState} from 'react'
 import Rating from '@mui/material/Rating';
@@ -24,14 +25,14 @@ export default function SalaryModal(props) {
   const [userid, set_userid] = useState(1);
 
 
-  
+  console.log(props)
   var user="User1"
 
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleSubmit=()=>{
+  const handleSubmit= async()=>{
     console.log("here----------->",companyid)
     let  add_data={
             rating:rating,
@@ -44,7 +45,8 @@ export default function SalaryModal(props) {
             userid:userid,
             ceo:ceorating
      }
-     axios.post("http://localhost:8000/api/company/addEmployeeReview",add_data).then(response=>{
+     axios.defaults.headers.common.authorization = await localStorage.getItem("token");
+     axios.post(`${backendServer}/company/addEmployeeReview`,add_data).then(response=>{
                 
       if(response.status === 200)
       {
@@ -70,7 +72,7 @@ export default function SalaryModal(props) {
   };
   return (
     <div>
-         <b style={{fontSize:"30px"}}>{"IBM"} employees review</b>
+         <b style={{fontSize:"30px"}}>Employee reviews</b>
       <Button variant="outlined" onClick={handleClickOpen} style={{float:"right",marginTop:"1rem"}}>
         Review this Company
       </Button>

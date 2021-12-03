@@ -23,6 +23,7 @@ export default function EmailModal({ seekerEmail }, { handleEmailClose }) {
             "seeker_id": id
         }
         console.log(body)
+        axios.defaults.headers.common.authorization = localStorage.getItem("token");
         axios.post(`${backendServer}/jobseeker/email`,body)
             .then(response => {
                 console.log(response)

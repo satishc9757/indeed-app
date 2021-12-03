@@ -18,6 +18,12 @@ export default function Login() {
       email: email,
       password: password,
     });
+    console.log(response.data.res)
+    if (response.data.res === "No such User exists") {
+      alert(response.data.res)
+    } else if (response.data.res === "Incorrect Password") {
+       alert(response.data.res)
+    }else{
     const tokenArray = await response.data.token.split(" ");
     console.log("token array ", tokenArray);
     await localStorage.setItem("token", response.data.token);
@@ -38,6 +44,7 @@ export default function Login() {
         navigate("/");
       }
     }
+  }
   };
 
   return (

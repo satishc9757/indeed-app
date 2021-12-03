@@ -52,16 +52,22 @@ class NavBar extends Component {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="relative" color="transparent">
           <Toolbar>
+            
             <img src={logo} alt="Profile" width="110" height="30" />
 
             {sessionStorage.getItem("user-type") === "employer" ? (
-              <div>
+              <div style={{display:"flex"}}>
                 <Button>
                   <Link to="/employer/jobPostings">Create Job Post</Link>
                 </Button>
                 <Button>
                   <Link to="/jobs">Jobs</Link>
                 </Button>
+                
+              <Button>
+                <Link to="/common">Company</Link>
+              </Button>
+          
                 <Button>
                   <Link to="/conversations">Messages</Link>
                 </Button>
@@ -74,25 +80,24 @@ class NavBar extends Component {
                 <Button>
                   <Link to="/">Find jobs</Link>
                 </Button>
-                <Button>
+               <Button>
                   <Link to="/companyreviews">Company reviews</Link>
                 </Button>
-                <Button>Find salaries</Button>
+
+                {/* <Button>Company reviews</Button>
+                <Button>Find salaries</Button> */}
               </div>
             )}
 
-            {sessionStorage.getItem("user-type") !== "employer" ? (
+            {'user-type' in sessionStorage && sessionStorage.getItem("user-type") !== "employer" ? (
               <Button>
                 <Link to="/upload">Upload Resume</Link>
               </Button>
             ) : (
               <div>
-                {sessionStorage.getItem("user-type") !== "employer" && (
                   <Button>
                     <Link to="/login">Upload Resume</Link>
                   </Button>
-
-                )}
               </div>
             )}
             {!("user-type" in sessionStorage) ? (

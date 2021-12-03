@@ -2,27 +2,28 @@ import React, { Component, useState } from 'react';
 import axios from 'axios';
 import backendServer from "../../webConfig";
 
-export default function ImageUpload(props){
-    const ID = sessionStorage.getItem('emp_company_id'); 
+
+export default function ImageUpload(props) {
+    const ID = sessionStorage.getItem('emp_company_id');
     // const ID = 2 gittt
     const handleClose = props.handleClose
-    const setRestProfile= props.setRestProfile
-    console.log( ID)
+    console.log(ID)
     const [selectedFile, setSelectedFile] = useState(null)
-    
 
-    const singleFileChangedHandler = ( event ) => {
+ const singleFileChangedHandler = ( event ) => {
         setSelectedFile( event.target.files[0]);
     }
 
-    const singleFileUploadHandler = () => {
+
+
+    const singleFileUploadHandler = async () => {
         console.log('inside image function')
         const data = new FormData();// If file selected
         if ( {selectedFile} ) 
             {
                 
                 data.append( 'profileImage', selectedFile, selectedFile.name );
-                
+            axios.defaults.headers.common.authorization = await localStorage.getItem("token");   
             axios.post( `${backendServer}/company/profile?compId=${ID}`, data, {
                 headers: {
                     'accept': 'application/json',

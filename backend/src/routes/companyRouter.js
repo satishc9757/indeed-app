@@ -5,24 +5,23 @@ var router = express.Router();
 
 router.get('/companyDetails', companyController.getCompanyDetailsByCompanyID);
 router.post('/companyDetails', checkAuth, companyController.updateCompanyDetailsByCompanyID);
-router.get('/getJobRole', checkAuth, companyController.getJobRoleDetailsByCompanyID);
-router.get('/company', checkAuth, companyController.getCompanyDetailsByCompanyID);
-router.get('/jobs', checkAuth,  companyController.getJobsByCompanyId);
-router.get('/jobsByPages', checkAuth, companyController.getJobsByCompanyIdWithPagination);
-router.get('/getFeaturedReviews', checkAuth, companyController.getFeaturedReviewsByCompId);
+router.get('/getJobRole', companyController.getJobRoleDetailsByCompanyID);
+router.get('/company', companyController.getCompanyDetailsByCompanyID);
+router.get('/jobs', companyController.getJobsByCompanyId);
+router.get('/jobsByPages', companyController.getJobsByCompanyIdWithPagination);
+router.get('/getFeaturedReviews', companyController.getFeaturedReviewsByCompId);
 router.post('/updateFeaturedReview', checkAuth, companyController.updateFeaturedReviewStatus);
-router.get('/jobstats', checkAuth, companyController.getJobStatsByCompanyId);
-router.get('/companies', checkAuth, companyController.getCompanies)
+router.get('/jobstats', companyController.getJobStatsByCompanyId);
+router.get('/companies',companyController.getCompanies)
 router.post('/profile', checkAuth, companyController.uploadCompanyProfilePicture)
-router.get('/search', checkAuth, companyController.getCompaniesBySearchQuery);
-router.get('/avgSalByDept', checkAuth, companyController.getAvgSalaryByDeptId);
+router.get('/search', companyController.getCompaniesBySearchQuery);
+router.get('/avgSalByDept', companyController.getAvgSalaryByDeptId);
 router.post('/addSalaryReview', checkAuth, companyController.addSalaryReview)
-router.get('/JobTitleByDept', checkAuth, companyController.getTitleByDepts);
+router.get('/JobTitleByDept', companyController.getTitleByDepts);
 router.post('/addEmployeeReview', checkAuth, companyController.addEmployeeReview);
 router.get('/getReviewsByCompId', companyController.getReviewsByCompId)
+router.post('/photos', checkAuth, companyController.uploadPhotos)
+router.get('/photos',companyController.getPhotos)
 
-router.post('/photos',companyController.uploadPhotos)
-
-router.post('/voteReview', companyController.voteReview);
 
 module.exports = router;

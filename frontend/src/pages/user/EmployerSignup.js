@@ -33,7 +33,6 @@ export default function JobseeekerSignup() {
     axios.get(`${backendServer}/company/companies`).then((res) => {
       setCompanies(res.data);
     });
-    navigate("/login");
   }, []);
 
   const [company, setCompany] = useState([]);
@@ -49,6 +48,12 @@ export default function JobseeekerSignup() {
   };
 
   const signup = () => {
+    const email_val = /^\S+@\S+\.\S+$/
+        if (!email_val.test(email)){
+            console.log('email')
+            alert('Invalid Email ID')
+            return;
+        }
     //Call signup API here
     axios.post(`${backendServer}/signup`, {
       name: name,
@@ -62,6 +67,7 @@ export default function JobseeekerSignup() {
       company_id: company,
       password: signupDetails.password,
     });
+    navigate("/login");
   };
 
   return (
@@ -70,7 +76,7 @@ export default function JobseeekerSignup() {
         style={{
           backgroundColor: "#F3F2F1",
           width: "100vw",
-          height: "100vh",
+          
           justifyContent: "center",
           alignItems: "center",
           paddingTop: "4%",
@@ -83,7 +89,7 @@ export default function JobseeekerSignup() {
           <div
             style={{
               backgroundColor: "#FFFFFF",
-              height: "88vh",
+              
               width: "30vw",
               borderRadius: "10px",
             }}
@@ -123,6 +129,7 @@ export default function JobseeekerSignup() {
                       type="email"
                       label="Email Address"
                       name="email"
+                      defaultValue={signupDetails.email}
                       autoComplete="email"
                       onChange={(e) => {
                         setEmail(e.target.value);

@@ -42,7 +42,7 @@ const [profile, setProfile] = React.useState('');
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-    const updateProfile = () => {
+    const updateProfile = async() => {
 
         let emp_id=sessionStorage.getItem("emp-id")
 
@@ -54,6 +54,7 @@ const [profile, setProfile] = React.useState('');
             "emp_country": country,
             "emp_role": role
         }
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         axios.post(`${backendServer}/employer/updateProfile`,data)
             .then(response => {
                 console.log(response)
@@ -65,7 +66,7 @@ const [profile, setProfile] = React.useState('');
     const uploadProfile = () => {
         
     }
-    const updateCompany = () => {
+    const updateCompany = async() => {
 
         let compId = sessionStorage.getItem('emp-company-id')
 
@@ -84,6 +85,7 @@ const [profile, setProfile] = React.useState('');
             "comp_about": ""
 
         }
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         axios.post(`${backendServer}/company/companyDetails`,data)
             .then(response => {
                 console.log(response)
@@ -136,6 +138,7 @@ const [profile, setProfile] = React.useState('');
     useEffect(async () => {
         let compId = sessionStorage.getItem("emp_company_id");
         let empID = sessionStorage.getItem("emp-id");
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         var response = await axios.get(`${backendServer}/employer?empID=${empID}`);
         let data = await response.data[0];
         console.log("data ", data);
@@ -146,7 +149,7 @@ const [profile, setProfile] = React.useState('');
         await setCity(data.emp_city);
         await setState(data.emp_state);
         await setCountry(data.emp_country);
-        
+        axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         let data1 = await axios.get(`${backendServer}/company/companyDetails?compId=${compId}`);
         data1 = await data1.data[0];
         console.log("response ",response, data1)

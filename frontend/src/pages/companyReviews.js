@@ -52,7 +52,6 @@ class CompanyReviews extends Component {
         this.setState({searchResultText: "Popular companies near you" });
 
         let locationText = "San Jose"; //to be fetched from cookie
-
         axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         var response = await axios.get(`${backendServer}/company/search?locaitonSearchText=${locationText}`);
         await this.setState({

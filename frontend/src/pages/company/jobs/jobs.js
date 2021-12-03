@@ -1,4 +1,4 @@
-
+import backendServer from "../../../webConfig";
 import { Avatar, Container, Grid, Paper, Tab, Typography, TextField, Button, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { Card, CardActions, CardContent, IconButton, Pagination, Stack } from "@mui/material";
 import { grey } from "@mui/material/colors";
@@ -176,7 +176,7 @@ class Jobs extends Component {
             <div>
                 <Typography
                         variant="h4">
-                        {this.state.company_name} Jobs
+                        Jobs
                 </Typography>
                 {/* SEARCH PANEL */}
                 <Grid container spacing={2} style={{'margin':'2%'}}>

@@ -13,14 +13,14 @@ export default function PhotosUpload(props) {
 const singleFileChangedHandler = ( event ) => {
         setSelectedFile( event.target.files[0]);
     }
-const singleFileUploadHandler = () => {
+const singleFileUploadHandler = async() => {
         console.log('inside image function')
         const data = new FormData();// If file selected
         if ( {selectedFile} ) 
             {
                 
                 data.append( 'profileImage', selectedFile, selectedFile.name );
-                
+            axios.defaults.headers.common.authorization = await localStorage.getItem("token");
             axios.post( `${backendServer}/company/photos?compId=${ID}`, data, {
                 headers: {
                     'accept': 'application/json',
@@ -45,7 +45,8 @@ const singleFileUploadHandler = () => {
                     
                     let fileName = response.data;
                     
-                    console.log( 'fileName', fileName );
+                    console.log('fileName', fileName);
+                    alert("Uploaded suuccessfully!");
                     handleClose();
                     return (fileName)
                     

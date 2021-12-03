@@ -13,19 +13,19 @@ router.get("/reviews", checkAuth, jobseekerController.getReviews);
 //router.get("/search", jobseekerController.getSearchByTitleorLocation);
 // router.get("/search/company", jobseekerController.getSearchByCompanyName);
 
-router.get("/", checkAuth, jobseekerController.getJobseekerProfile);
+router.get("/",  jobseekerController.getJobseekerProfile);
 router.post("/", checkAuth, jobseekerController.updateJobseekerProfile);
-router.get("/resume", checkAuth, jobseekerController.getJobseekerResume);
+router.get("/resume",  jobseekerController.getJobseekerResume);
 router.post("/resume/:seeker_id", checkAuth, jobseekerController.updateJobseekerResume);
 router.post("/coverletter", checkAuth, jobseekerController.updateJobseekerCover);
 router.post("/resume/delete", checkAuth, jobseekerController.deleteJobseekerResume);
-router.get("/search", jobseekerController.getSearch);
+router.get("/search",  jobseekerController.getSearch);
 router.post("/application", checkAuth, jobseekerController.createJobApplication);
 router.post("/update/email", checkAuth, jobseekerController.updateEmail);
-router.get("/appliedJobs", checkAuth, jobseekerController.getAppliedJobs);
+router.get("/appliedJobs", jobseekerController.getAppliedJobs);
 
 router.get("/getSalariesByJobTitleLocation", jobseekerController.getSalariesByJobTitleLocation);
 
-router.post("/email", jobseekerController.updateEmail);
+router.post("/email",checkAuth, jobseekerController.updateEmail);
 
 module.exports = router;

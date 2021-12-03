@@ -66,6 +66,7 @@ class LandingPage extends Component {
   search = async (e) => {
     console.log("called search");
     let location = this.state.location || "";
+    // axios.defaults.headers.common.authorization = await localStorage.getItem("token");
     var response = await axios.get(
       `${backendServer}/jobseeker/search?searchQuery=${this.state.search}&location=${location}&page=${this.state.page}&limit=${this.state.limit}`
     );
@@ -87,7 +88,7 @@ class LandingPage extends Component {
     const seeker_id = sessionStorage.getItem("job-seeker-id");
     if(seeker_id){
         //const seeker_id = sessionStorage.getItem("job-seeker-id");; //to be fetched from cookie
-
+        // axios.defaults.headers.common.authorization = await localStorage.getItem("token");
         var response = await axios.get(
           `${backendServer}/jobseeker?seeker_id=${seeker_id}`
         );
@@ -205,7 +206,7 @@ class LandingPage extends Component {
                     <Grid container>
                         <Grid item sm={5}/>
                         <Grid item sm={6}>
-                            Employers: <Link to="/"
+                            Employers: <Link to="/employer"
                                 underline="none">
                                 Post a job
                             </Link>
