@@ -1,13 +1,14 @@
 const connection = require("../../database/mysqlConnection");
 
 async function handle_request(msg, callback) {
-  const companyId = msg.companyId;
+  const jobSeekerId = msg.jobSeekerId;
   try {
-    let sql = `SELECT * FROM company_reviews WHERE review_company_id='${companyId}';`;
+    let sql = "SELECT * FROM company_reviews"
     await connection.con.query(sql, (err, results) => {
       if (err) {
         callback(null, []);
       } else {
+        console.log("results ",results);
         callback(null, results);
       }
     });

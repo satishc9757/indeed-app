@@ -32,22 +32,35 @@ initDBConnection().then(async () => {
   await global.DB.sync({ alter: false });
 });
 
-const companyReviews = require("./services/company/getreviews");
+
 // const add_featured_review = require('./services/employer/add_featured_review')
 // const get_featured_reviews = require('./services/employer/get_featured_reviews')
 //const update_featured_review_status = require('./services/company/update_featured_review_status')
 // const remove_featured_review = require('./services/employer/remove_featured_review')
+const JobPostingData = require("./services/employer/getJobPosting");
+const CompanyJobPostings = require("./services/company/getJobPostings");
+const GetAllCompanies = require("./services/admin/getAllCompanies");
+const GetNumberOfReviewsPerDay = require("./services/admin/getNumberOfReviewsPerDay");
+const GetTopFiveMostReviewedCompanies = require("./services/admin/getTopFiveMostReviewedCompanies");
+const GetTopFiveCompaniesAvgRating = require("./services/admin/getTopFiveCompaniesAvgRating");
+const GetTopFiveSeekersAccpReviews = require("./services/admin/getTopFiveSeekersAccpReviews");
+const GetTopTenCEORating = require("./services/admin/getTopTenCEORating");
+const CompanySearchQuery = require("./services/company/companySearchQuery");
+const getCompanies = require("./services/company/getCompanies");
 const updateEmail = require("./services/jobseeker/update_email");
 const login = require('./services/users/login');
 const signup = require('./services/users/signup');
+// const companyReviews = require('./services/company/getreviews')
+const get_featured_reviews = require('./services/company/get_featured_reviews')
+const update_featured_review_status = require('./services/company/update_featured_review_status')
+const get_avg_salary_by_dept = require('./services/salary_reviews/get_avg_salaries_by_dept')
+const get_company_dept_titles_list = require('./services/salary_reviews/get_company_dept_titles')
 const update_employer = require('./services/employer/update_employer_details')
 const searchQuery = require('./services/jobSeeker/searchQuery')
 const companyDetails = require('./services/company/getCompanyDetails');
 const updateCompanyDetails = require('./services/company/updateCompanyDetails');
 const CreateJobPosting = require('./services/employer/createJobPosting');
 const UpdateJobPosting = require('./services/employer/updateJobPosting');
-const JobPostingData = require('./services/employer/getJobPosting');
-const CompanyJobPostings = require('./services/company/getJobPostings');
 const CompanyJobPostingsWithPagination = require('./services/company/getJobPostingsWithPagination');
 const CreateJobApplication = require('./services/jobSeeker/createJobApplication');
 const UpdateApplicationStatus = require('./services/employer/updateApplicationStatus');
@@ -68,14 +81,10 @@ const MarkReviewAsInappropriate = require('./services/admin/markReviewAsInapprop
 const MarkReviewAsAppropriate = require('./services/admin/markReviewAsAppropriate');
 const GetAllCompanies = require('./services/admin/getAllCompanies');
 const GetAllReviews = require('./services/admin/getAllReviews');
-const GetNumberOfReviewsPerDay = require('./services/admin/getNumberOfReviewsPerDay');
-const GetTopFiveMostReviewedCompanies = require('./services/admin/getTopFiveMostReviewedCompanies');
-const GetTopFiveCompaniesAvgRating = require('./services/admin/getTopFiveCompaniesAvgRating');
-const GetTopFiveSeekersAccpReviews = require('./services/admin/getTopFiveSeekersAccpReviews');
-const GetTopTenCEORating = require('./services/admin/getTopTenCEORating');
 const getReviews  = require('./services/jobSeeker/getReviews');
-const CompanySearchQuery = require('./services/company/companySearchQuery');
-
+const add_salary_review = require ('./services/salary_reviews/add_salary_review')
+const add_review = require('./services/company/add_review')
+const get_reviews = require('./services/company/get_reviews')
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -107,7 +116,8 @@ function handleTopicRequest(topic_name, fname) {
   });
 }
 
-handleTopicRequest("company.getreviews", companyReviews);
+handleTopicRequest("company.getreviews", get_reviews);
+handleTopicRequest("get_reviews",getReviews);
 // handleTopicRequest("add_featured_review", add_featured_review);
 // handleTopicRequest("update_featured_review_status", update_featured_review_status);
 // handleTopicRequest("get_featured_reviews", get_featured_reviews);
@@ -115,6 +125,11 @@ handleTopicRequest("company.getreviews", companyReviews);
 handleTopicRequest("update_email", updateEmail);
 handleTopicRequest("login", login);
 handleTopicRequest("signup", signup);
+handleTopicRequest("update_featured_review_status", update_featured_review_status);
+handleTopicRequest("get_featured_reviews", get_featured_reviews);
+handleTopicRequest("get_avg_salary_by_dept", get_avg_salary_by_dept);
+handleTopicRequest("get_company_dept_titles_list", get_company_dept_titles_list);
+handleTopicRequest("add_salary_review", add_salary_review);
 handleTopicRequest("update_employer_details", update_employer);
 handleTopicRequest("search", searchQuery);
 handleTopicRequest("company_details", companyDetails);
@@ -150,4 +165,6 @@ handleTopicRequest("admin.getTopFiveSeekersAccpReviews", GetTopFiveSeekersAccpRe
 handleTopicRequest("admin.getTopTenCEORating", GetTopTenCEORating);
 handleTopicRequest("get_reviews", getReviews);
 handleTopicRequest("company.companySearchQuery", CompanySearchQuery);
+handleTopicRequest("company.getAllCompanies", getCompanies);
 handleTopicRequest("get_emp_profile", get_emp);
+handleTopicRequest("add_employee_review",add_review );

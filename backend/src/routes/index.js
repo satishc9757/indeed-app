@@ -6,6 +6,7 @@ router.get("/", function (res, res) {
     res.send("Hello from Indeed backend!");
 });
 
-router.get("/login", userController.login);
+router.post("/login", userController.login);
 router.post("/signup", userController.signup);
+router.get("/getCompanyId", userController.getCompanyId);
 module.exports = router;

@@ -12,6 +12,42 @@ import logo from '../../media/IndeedLogo.png'
 
 class NavBar extends Component {
 
+    constructor(props){
+        super(props);
+        this.state={
+            route: [],
+            notLoggedIn:false
+        }
+    }
+    async componentDidMount(){
+        // let type = sessionStorage.getItem("user_type");
+        let type="jobseeker"
+        if (type === "employer") {
+            this.setState({
+                route: "/companyProfile"
+            })
+        } else if (type === "jobseeker") {
+            this.setState({
+                route: "/jobseeker"
+            })
+        }
+    }
+    
+
+    // constructor(props){
+    //     this.state={
+    //         notLoggedIn:false
+    //     }
+    // }
+
+
+    signOut = async(e)=>{
+        await sessionStorage.clear();
+        await this.setState({
+            notLoggedIn:true
+        })
+    }
+
     render(){
         return (
             <Box sx={{ flexGrow: 1 }}>
@@ -20,42 +56,74 @@ class NavBar extends Component {
                 
                 <img src={logo} alt="Profile" width="110" height="30"/>
 
-                <Button>
-                    <Link to="/">Find jobs</Link>
-                </Button>
-                <Button>
-                    Company reviews
-                </Button>
-
-                <Button>
-                    Find salaries
-                </Button>
-
-                <Button>
-                    {'userId' in sessionStorage &&
-                    <Link to="/upload">Upload Resume</Link>}
-                    {! ('userId' in sessionStorage) && 
-                        <Link to="/login">Upload Resume</Link>
-                        
+                    {(sessionStorage.getItem("user-type")==="employer")?(
+                        <div>
+                            <Button>
+                                <Link to="/jobs">Jobs</Link>
+                            </Button>
+                            <Button>
+                                Messages
+                            </Button>
+                        </div>
+                    ):(
+                        <div>
+                            <Button>
+                                <Link to="/">Find jobs</Link>
+                            </Button>
+                            <Button>
+                                Company reviews
+                            </Button>
+                            <Button>
+                                Find salaries
+                            </Button>
+                        </div>
+                    )
                     }
-                </Button>
 
-                <Button>
-                    Sign in
-                </Button>
-
-                <Button>
-                    Employers / Post Job
+                
+                {sessionStorage.getItem("user-type")!=="employer"? (
+                    <Button><Link to="/upload">Upload Resume</Link></Button>
+                ):(
+                    <div>
+                        {sessionStorage.getItem("user-type")!=="employer" &&
+                        <Button><Link to="/login">Upload Resume</Link></Button>}
+                    </div>
+                )
+                }
+                {!('user-type' in sessionStorage)?(
+                    <div>
+                        <Button>
+                            Sign in
                         </Button>
-                <Link to='/jobseeker'>
-                    <IconButton>
-                        <PersonIcon/>
-                    </IconButton>
-                </Link>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    Login
-                </Typography>
-                <Button color="inherit"></Button>
+
+                        <Button><Link to="/employer">
+                            Employers / Post Job
+                            </Link></Button>
+                        <Button>
+                            <Link to="/login">
+                                Login
+                            </Link>
+                        </Button>
+                        <Button color="inherit"></Button>
+                    </div>
+                ):(
+                    <div>
+                        {sessionStorage.getItem("user-type")==="jobseeker"? (
+                            <Link to='/jobseeker'>
+                                <IconButton>
+                                    <PersonIcon/>
+                                </IconButton>
+                            </Link>
+                        ):(
+                            <Link to='/companyprofile'>
+                                <IconButton>
+                                    <PersonIcon/>
+                                </IconButton>
+                            </Link>
+                        )}
+                        <Button onClick={this.signOut}><Link to="/">SignOut</Link></Button>
+                    </div>
+                )}
             </Toolbar>
             </AppBar>
             </Box>

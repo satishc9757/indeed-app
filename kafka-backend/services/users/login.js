@@ -21,6 +21,7 @@ async function handle_request(msg, callback) {
                     "user_email":results[0].user_email,
                     "user_type":results[0].user_type
                     }
+                    console.log("user object ",userObj);
                     callback(null, userObj);
                 }
                 else{

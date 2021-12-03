@@ -12,6 +12,12 @@ router.get('/jobsByPages', companyController.getJobsByCompanyIdWithPagination);
 router.get('/getFeaturedReviews', companyController.getFeaturedReviewsByCompId);
 router.post('/updateFeaturedReview', companyController.updateFeaturedReviewStatus);
 router.get('/jobstats', companyController.getJobStatsByCompanyId);
+router.get('/companies',companyController.getCompanies)
+router.post('/profile', companyController.uploadCompanyProfilePicture)
 router.get('/search', companyController.getCompaniesBySearchQuery);
-
+router.get('/avgSalByDept', companyController.getAvgSalaryByDeptId);
+router.post('/addSalaryReview',companyController.addSalaryReview)
+router.get('/JobTitleByDept', companyController.getTitleByDepts);
+router.post('/addEmployeeReview',companyController.addEmployeeReview);
+router.get('/getReviewsByCompId',companyController.getReviewsByCompId)
 module.exports = router;

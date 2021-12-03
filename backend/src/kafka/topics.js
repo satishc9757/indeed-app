@@ -1,5 +1,5 @@
 const kafka = require("kafka-node");
-var host="localhost"
+var host = "localhost";
 const createKafkaTopics = () => {
   const client = new kafka.KafkaClient({
     kafkaHost: "localhost:9092",
@@ -38,7 +38,12 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
-       topic: "remove_featured_review",
+        topic: "add_employee_review",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "remove_featured_review",
         partitions: 1,
         replicationFactor: 1,
       },
@@ -53,7 +58,6 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
-
         topic: "get_resume",
         partitions: 1,
         replicationFactor: 1,
@@ -69,7 +73,7 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
-       topic: "update_resume",
+        topic: "update_resume",
         partitions: 1,
         replicationFactor: 1,
       },
@@ -77,7 +81,8 @@ const createKafkaTopics = () => {
         topic: "job_role",
         partitions: 1,
         replicationFactor: 1,
-      }, {
+      },
+      {
         topic: "company_details",
         partitions: 1,
         replicationFactor: 1,
@@ -91,8 +96,14 @@ const createKafkaTopics = () => {
         topic: "save_jobs",
         partitions: 1,
         replicationFactor: 1,
-      }, {
+      },
+      {
         topic: "delete_resume",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "add_employee_review",
         partitions: 1,
         replicationFactor: 1,
       },
@@ -100,7 +111,8 @@ const createKafkaTopics = () => {
         topic: "update_jobseeker_profile",
         partitions: 1,
         replicationFactor: 1,
-      },{
+      },
+      {
         topic: "jobseeker.createJobApplication",
         partitions: 1,
         replicationFactor: 1,
@@ -109,9 +121,9 @@ const createKafkaTopics = () => {
         topic: "get_jobseeker_profile",
         partitions: 1,
         replicationFactor: 1,
-      },{
-
-       topic: "employer.createJobPosting",
+      },
+      {
+        topic: "employer.createJobPosting",
         partitions: 1,
         replicationFactor: 1,
       },
@@ -141,7 +153,6 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
-
         topic: "employer.getJobApplications",
         partitions: 1,
         replicationFactor: 1,
@@ -172,12 +183,23 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+        topic: "get_avg_salary_by_dept",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      
+      {
         topic: "search",
         partitions: 1,
         replicationFactor: 1,
       },
       {
         topic: "company.companySearchQuery",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "get_company_dept_titles_list",
         partitions: 1,
         replicationFactor: 1,
       },
@@ -191,12 +213,28 @@ const createKafkaTopics = () => {
         replicationFactor: 1,
       },
       {
+        topic: "add_salary_review",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
+        topic: "company.getAllCompanies",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      {
         topic: "update_email",
         partitions: 1,
         replicationFactor: 1,
       },
       {
         topic: "get_applied_jobs",
+        partitions: 1,
+        replicationFactor: 1,
+      },
+      
+      {
+        topic: "admin.getAllCompanies",
         partitions: 1,
         replicationFactor: 1,
       }

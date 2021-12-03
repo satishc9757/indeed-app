@@ -10,7 +10,7 @@ let EmployersSchema = new mongoose.Schema({
     emp_state: {type: String, required: false},
     emp_country: {type: String, required: false},
     emp_contact: {type: String, required: false},
-    emp_company_id: {type: Number, required: true},
+    emp_company_id: {type: Number, required: false},
     emp_created_on: {type: Date, required: false},
     emp_updated_on: {type: Date, required: false},
 });
