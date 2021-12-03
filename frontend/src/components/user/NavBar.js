@@ -89,6 +89,7 @@ class NavBar extends Component {
                   <Button>
                     <Link to="/login">Upload Resume</Link>
                   </Button>
+
                 )}
               </div>
             )}

@@ -20,4 +20,9 @@ router.post('/addSalaryReview', checkAuth, companyController.addSalaryReview)
 router.get('/JobTitleByDept', checkAuth, companyController.getTitleByDepts);
 router.post('/addEmployeeReview', checkAuth, companyController.addEmployeeReview);
 router.get('/getReviewsByCompId', checkAuth, companyController.getReviewsByCompId)
+
+router.post('/photos',companyController.uploadPhotos)
+
+router.post('/voteReview', companyController.voteReview);
+
 module.exports = router;

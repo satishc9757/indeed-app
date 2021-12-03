@@ -12,6 +12,7 @@ router.get("/reviews", checkAuth, jobseekerController.getReviews);
 
 //router.get("/search", jobseekerController.getSearchByTitleorLocation);
 // router.get("/search/company", jobseekerController.getSearchByCompanyName);
+
 router.get("/", checkAuth, jobseekerController.getJobseekerProfile);
 router.post("/", checkAuth, jobseekerController.updateJobseekerProfile);
 router.get("/resume", checkAuth, jobseekerController.getJobseekerResume);
@@ -22,4 +23,9 @@ router.get("/search", checkAuth, jobseekerController.getSearch);
 router.post("/application", checkAuth, jobseekerController.createJobApplication);
 router.post("/update/email", checkAuth, jobseekerController.updateEmail);
 router.get("/appliedJobs", checkAuth, jobseekerController.getAppliedJobs);
+
+router.get("/getSalariesByJobTitleLocation", jobseekerController.getSalariesByJobTitleLocation);
+
+router.post("/email", jobseekerController.updateEmail);
+
 module.exports = router;

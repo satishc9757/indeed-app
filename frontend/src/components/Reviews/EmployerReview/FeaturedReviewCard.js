@@ -1,19 +1,21 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
-
+import axios from 'axios'
 import CardContent from '@mui/material/CardContent';
 
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import {useState} from 'react'
 
 
 
-
-const ReviewCard = (props) => {
+const FeaturedReviewCard = (props) => {
+  
+  const [update,setupdated]=useState(false)
   const bull = (
     <Box
       component="span"
@@ -22,7 +24,31 @@ const ReviewCard = (props) => {
       
     </Box>
   );
+function update_helpful(helpful,not_helpful){
+    let data={
+      helpful:helpful,
+      not_helpful:not_helpful,
+      review_company_id:props.review.review_company_id,
+      review_id:props.review.review_id
+    }
 
+
+    axios.post("http://localhost:8000/api/company/voteReview",data).then(response=>{
+                
+        if(response.status === 200)
+        {
+         
+          console.log("updated successfully");
+       
+        }
+        else if(response.status === 202)
+        {
+          console.log("faced some issue");
+        }
+
+})
+
+}
 return (
     <div className="container" style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
     <div className="col-sm">
@@ -35,8 +61,8 @@ return (
     <td style={{justifyContent:"center"}}>
     <Typography sx={{fontSize:23}} style={{padding:"0px",margin:"0px"}}>
         &nbsp;&nbsp;<b>{props.review.review_company_rating}</b>
-        
-        <Rating name="read-only" defaultValue={props.review.review_company_rating} precision={0.5} readOnly size="small" style={{color:"#aa4069"}} />
+        <br />
+        <Rating name="read-only" value={props.review.review_company_rating}  precision={0.5} readOnly size="small" style={{color:"#aa4069"}} />
       </Typography>
       
     </td>
@@ -48,6 +74,12 @@ return (
       </Typography>
       <Typography sx={{ fontSize:12 }} color="text.secondary">
         Software Engineer Intern (Former Employee)- Santa Clara, CA  - April,2017
+      </Typography>
+      <Typography variant="body2" color="#007aff" style={{background:"#eef1fe"}}>
+        
+        <p style={{margin:"0px",color:"#164081",padding:"0px"}}><b style={{color:"#164081"}}>Indeed Featured review</b></p>
+        <p style={{margin:"0px",color:"#164081",padding:"0px"}}>The most useful review selected by Indeed</p>
+        
       </Typography>
       <Typography variant="body2">
        {props.review.review_content}
@@ -70,13 +102,13 @@ return (
       </Typography>
       <br />
       <Typography sx={{ fontSize:12 }} color="text.secondary">
-        Was this review helpful? <br />
-        <Button variant="contained" size="small" color="inherit" style={{padding:"0px"}}>
-             Yes
+          Feature this review?<br />
+        <Button variant="contained" size="small" color="inherit" style={{padding:"0px"}} disabled>
+            Add as featured review
         </Button>
         &nbsp;&nbsp;&nbsp;
-        <Button variant="contained" size="small" color="inherit" style={{padding:"0px"}}>
-             No
+        <Button variant="contained" size="small" color="inherit" style={{padding:"0px"}} onClick={()=>{props.remove_featured_review(props.review.review_id,props.review.review_company_rating)}}>
+        Remove as featured review
         </Button>
         
       </Typography>
@@ -96,7 +128,7 @@ return (
 )
 }
 
-export default ReviewCard
+export default FeaturedReviewCard
 
 
 

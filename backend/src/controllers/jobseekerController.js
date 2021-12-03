@@ -362,7 +362,29 @@ exports.getReviews = async function (req, res) {
 
 exports.updateEmail = async function (req, res) {
   try {
-    kafka.make_request("update_email", req.body, (err, resp) => {
+    kafka.make_request("update_email", req.body, (error, resp) => {
+      console.log(error+"----------"+ resp)
+      if (error || !resp) {
+        console.log(error);
+        res
+          .status(500)
+          .send(
+            JSON.stringify({ message: "Something went wrong!", error: error })
+          );
+      } else {
+        res.status(200).json(resp);
+      }
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .send(JSON.stringify({ message: "Something went wrong!", error: err }));
+  }
+};
+
+exports.getAppliedJobs = async function (req, res) {
+  try {
+    kafka.make_request("get_applied_jobs", req.query, (err, resp) => {
       if (err || !resp) {
         console.log(err);
         res
@@ -381,9 +403,9 @@ exports.updateEmail = async function (req, res) {
   }
 };
 
-exports.getAppliedJobs = async function (req, res) {
+exports.getSalariesByJobTitleLocation = async function (req, res) {
   try {
-    kafka.make_request("get_applied_jobs", req.query, (err, resp) => {
+    kafka.make_request("getSalariesByJobTitleLocation", req.query, (err, resp) => {
       if (err || !resp) {
         console.log(err);
         res
