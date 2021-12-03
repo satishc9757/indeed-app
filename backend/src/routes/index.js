@@ -11,5 +11,5 @@ router.get("/", function (res, res) {
 
 router.post("/login", userController.login);
 router.post("/signup", userController.signup);
-router.get("/getCompanyId", checkAuth, userController.getCompanyId);
+router.get("/getCompanyId", userController.getCompanyId);
 module.exports = router;

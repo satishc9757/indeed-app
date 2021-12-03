@@ -50,7 +50,7 @@ export default function Common() {
             
 
             
-            axios.defaults.headers.common.authorization = await localStorage.getItem("token");
+            // axios.defaults.headers.common.authorization = await localStorage.getItem("token");
 
             let Company_ID = sessionStorage.getItem('emp_company_id');
             var response = await axios.get(`${backendServer}/company/companyDetails?compId=${Company_ID}`);
