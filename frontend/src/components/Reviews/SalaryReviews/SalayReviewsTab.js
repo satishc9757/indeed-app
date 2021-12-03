@@ -21,10 +21,10 @@ const SalayReviewsTab = (props) => {
     const [updated,setupdated]=useState(false)
     const [current,setcurrent]=useState([])
     const [mainlist,setmain]=useState([])
-    const [comp_id,setcompid]=useState(props.CompanyDetails.data[0].comp_id)
-    const [comp_name,setcompName]=useState(props.CompanyDetails.data[0].comp_name)
-    const [usertype,setusertype]=useState("employer")
-    const [btndisable,setbtndisable]=useState(usertype!="employer"?true:false)
+    const [comp_id,setcompid]=useState(sessionStorage.getItem("comp_id"))
+    const [comp_name,setcompName]=useState(sessionStorage.getItem("company_name"))
+    const [usertype,set_user_type]=useState(sessionStorage.getItem("user-type")) 
+    const [btndisable,setbtndisable]=useState(usertype=="employer"?true:false)
 
     const department_list = []
     var result={}
