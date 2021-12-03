@@ -3,7 +3,8 @@ const adminController = require('../controllers/adminController');
 var express = require('express');
 var router = express.Router();
 
-router.get('/markReviewAsInappropriate', adminController.markReviewAsInappropriate); //test later
+router.get('/markReviewAsInappropriate', adminController.markReviewAsInappropriate); 
+router.get('/markReviewAsAppropriate', adminController.markReviewAsAppropriate); 
 router.get('/getAllCompanies', adminController.getAllCompanies);
 router.get('/getAllReviews', adminController.getAllReviews);
 router.get('/getNumberOfReviewsPerDay', adminController.getNumberOfReviewsPerDay);

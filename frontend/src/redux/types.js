@@ -9,3 +9,6 @@ export const POST_MESSAGE = 'POST_MESSAGE'
 //company reducer types 
 
 //admin reducer types 
+export const GET_ALL_REVIEWS = 'GET_ALL_REVIEWS'
+export const MARK_REVIEW_APPROPRIATE = 'MARK_REVIEW_APPROPRIATE'
+export const MARK_REVIEW_INAPPROPRIATE = 'MARK_REVIEW_INAPPROPRIATE'
