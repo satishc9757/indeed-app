@@ -7,6 +7,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
+import store from '../../redux/store'
+import { SET_AUTHENTICATED_USER, SET_AUTHENTICATED_EMPLOYER, SET_AUTHENTICATED_ADMIN } from '../../redux/types'
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,12 +36,24 @@ export default function Login() {
       sessionStorage.setItem("user-type", decodedToken.user_type);
       sessionStorage.setItem("user-email", decodedToken.email);
       if (decodedToken.user_type === "jobseeker") {
+        store.dispatch({
+          type : SET_AUTHENTICATED_USER,
+          payload : decodedToken
+      })
         sessionStorage.setItem("job-seeker-id", decodedToken.user_id);
         navigate("/");
       } else if (decodedToken.user_type === "employer") {
+        store.dispatch({
+            type : SET_AUTHENTICATED_EMPLOYER,
+            payload : decodedToken
+        })
         sessionStorage.setItem("emp-id", decodedToken.user_id);
         navigate("/employer");
       } else if (decodedToken.user_type === "admin") {
+        store.dispatch({
+            type : SET_AUTHENTICATED_ADMIN,
+            payload : decodedToken
+        })
         navigate("/analytics");
       } else {
         navigate("/");

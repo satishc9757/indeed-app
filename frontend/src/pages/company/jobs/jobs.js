@@ -9,7 +9,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import axios from 'axios';
-import backendServer from "../../../webConfig";
 
 class Jobs extends Component {
 

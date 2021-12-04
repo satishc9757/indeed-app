@@ -13,6 +13,9 @@ import {Link, useLocation} from "react-router-dom";
 import { Box } from "@mui/system";
 import backendServer from "../../webConfig";
 import Photos from "../../components/company/Photos";
+import store from '../../redux/store'
+import { SET_SELECTED_COMPANY} from '../../redux/types'
+
 const axios = require('axios');
 
 export default function Common() {
@@ -56,6 +59,12 @@ export default function Common() {
             var response = await axios.get(`${backendServer}/company/companyDetails?compId=${Company_ID}`);
 
             console.log(JSON.stringify(response.data[0])+"-----");
+
+            store.dispatch({
+                type : SET_SELECTED_COMPANY,
+                payload : response.data[0]
+            })
+
             await setCompanyDetails(response.data[0])
             await console.log(companyDetails)
 

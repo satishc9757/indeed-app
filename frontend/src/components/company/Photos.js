@@ -10,6 +10,8 @@ import axios from 'axios';
 import backendServer from '../../webConfig';
 import ImageUpload from '../../pages/company/uploadProfile'
 import PhotosUpload from '../../pages/company/uploadPhotos'
+import store from '../../redux/store'
+
 const styles = (theme) => ({
     ...theme.spread,
     img : {
@@ -63,7 +65,6 @@ class Photos extends Component {
         await this.setState({
             photos: response.data
         })
-        console.log(this.state.photos)
     }
     
     render() {
@@ -78,13 +79,13 @@ class Photos extends Component {
     
         const { classes } = this.props
         const { comp_name } = this.props.company.selectedCompany
-        const { photos } = this.props.company.selectedCompany
+        const { photos } = this.state
 
-        const appropriatePhotos = photos.filter(photo => {
-            return photo.appropriate === true
+        const appropriatePhotos = photos !== undefined && photos.filter(photo => {
+            return photo.inappropriate === 0
         })
 
-        let displayPhotos = this.state.photos.map((data) => (
+        let displayPhotos = appropriatePhotos && appropriatePhotos.map((data) => (
             <Grid item xs={3}>
                 <div className={classes.img} style={{backgroundImage: `url(${data.comp_photos})`}}>
                 </div>

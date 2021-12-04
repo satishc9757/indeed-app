@@ -1,50 +1,32 @@
-import { } from '../types'
+import {SET_AUTHENTICATED_EMPLOYER , SET_SELECTED_COMPANY} from '../types'
 
 const initialState = {
 
-    selectedCompany : {
-        comp_name : 'Google',
-        photos : [
-            {
-                url : "https://www.indeed.com/cmp/_s/photos/6e7b40121fbb5e2f-l-1bqthbi6fb86l8i2",
-                appropriate : true
-            },
-            {
-                url : "https://www.indeed.com/cmp/_s/photos/6e7b40121fbb5e2f-l-1bqthbi6fb86l8i2",
-                appropriate : true
-            },
-            {
-                url : "https://www.indeed.com/cmp/_s/photos/6e7b40121fbb5e2f-l-1bqthbi6fb86l8i2",
-                appropriate : false
-            },
-            {
-                url : "https://www.indeed.com/cmp/_s/photos/6e7b40121fbb5e2f-l-1bqthbi6fb86l8i2",
-                appropriate : true
-            },
-            {
-                url : "https://www.indeed.com/cmp/_s/photos/6e7b40121fbb5e2f-l-1bqthbi6fb86l8i2",
-                appropriate : true
-            },
-            {
-                url : "https://www.indeed.com/cmp/_s/photos/6e7b40121fbb5e2f-l-1bqthbi6fb86l8i2",
-                appropriate : false
-            },
-            {
-                url : "https://www.indeed.com/cmp/_s/photos/6e7b40121fbb5e2f-l-1bqthbi6fb86l8i2",
-                appropriate : true
-            },
-            {
-                url : "https://www.indeed.com/cmp/_s/photos/6e7b40121fbb5e2f-l-1bqthbi6fb86l8i2",
-                appropriate : true
-            },
-        ]
+    selectedCompany : {},
+    authenticatedEmployer: {
+        user_id : 12,
+        email : 'user5@gmail.com',
+        user_type : "employer"
     },
-    signUpData: {}
+    authenticated : false
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function(state = initialState , action){
     switch(action.type){
+        case SET_AUTHENTICATED_EMPLOYER :
+            return {
+                ...state,
+                authenticatedEmployer : action.payload,
+                authenticated : true
+            }
+
+        case SET_SELECTED_COMPANY :
+            return {
+                ...state,
+                selectedCompany : action.payload,
+            }
+
         default :
             return {
                 ...state
