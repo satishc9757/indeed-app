@@ -1,6 +1,7 @@
-import { GET_ALL_REVIEWS, MARK_REVIEW_APPROPRIATE, MARK_REVIEW_INAPPROPRIATE,GET_ALL_PHOTOS, MARK_PHOTO_APPROPRIATE, MARK_PHOTO_INAPPROPRIATE} from '../types'
+import { SET_AUTHENTICATED_ADMIN, GET_ALL_REVIEWS, MARK_REVIEW_APPROPRIATE, MARK_REVIEW_INAPPROPRIATE,GET_ALL_PHOTOS, MARK_PHOTO_APPROPRIATE, MARK_PHOTO_INAPPROPRIATE} from '../types'
 
 const initialState = {
+    authenticatedAdmin : {},
     authenticated : false,
     reviews : {},
     photos : {},
@@ -9,6 +10,13 @@ const initialState = {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function(state = initialState , action){
     switch(action.type){
+
+        case SET_AUTHENTICATED_ADMIN:
+            return {
+                ...state,
+                authenticatedAdmin : action.payload,
+                authenticated : true
+            }
 
         case GET_ALL_REVIEWS:
             return {
