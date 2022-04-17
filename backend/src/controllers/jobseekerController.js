@@ -16,8 +16,8 @@ const Jobseeker = require("../models/JobSeekersModel");
 // auth();
 
 const s3 = new aws.S3({
-  accessKeyId: "AKIAXUKC3TYXKYCP3T44",
-  secretAccessKey: "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",
+  accessKeyId: "",
+  secretAccessKey: "",
   Bucket: "indeed-bucket-273",
 });
 
